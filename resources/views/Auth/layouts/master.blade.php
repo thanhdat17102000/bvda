@@ -24,9 +24,9 @@
 </head>
 
 <body>
-    @include('components.header')
+    @include('Auth.components.header')
     @yield('content')
-    @include('components.footer')
+    @include('Auth.components.footer')
     <!--=======================Javascript============================-->
     <!--=== All Vendor Js ===-->
     <script src="{{URL::asset('js/vendor.js')}}"></script>

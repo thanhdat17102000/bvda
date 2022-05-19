@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('Auth.layouts.master')
 @section('title')
     Đăng nhập
 @endsection
