@@ -23,11 +23,11 @@
                                         </ul>
                                     </li>
                                     <li class="language">
-                                        <img src="{{URL::asset('img/icon/en.png')}}" alt="flag">Tiếng Việt
+                                        <img src="{{URL::asset('Auth/img/icon/en.png')}}" alt="flag">Tiếng Việt
                                         <i class="fa fa-angle-down"></i>
                                         <ul class="dropdown-list">
-                                            <li><a href="#"><img src="{{URL::asset('img/icon/en.png')}}" alt="flag">tiếng Việt</a></li>
-                                            <li><a href="#"><img src="{{URL::asset('img/icon/en.png')}}" alt="flag"> tiếng Anh</a></li>
+                                            <li><a href="#"><img src="{{URL::asset('Auth/img/icon/en.png')}}" alt="flag">tiếng Việt</a></li>
+                                            <li><a href="#"><img src="{{URL::asset('Auth/img/icon/en.png')}}" alt="flag"> tiếng Anh</a></li>
                                         </ul>
                                     </li>
                                 </ul>
