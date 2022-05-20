@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
 Route::get('/productdetails', function(){
@@ -28,3 +28,10 @@ Route::get('/register', function(){
 Route::get('/profile', function(){
     return view('Auth.account.profile');
 });
+Route::get('/compare', function(){
+    return view('Auth.home-compare.compare');
+});
+Route::get('/', function(){
+    return view('Auth.home-compare.home_page');
+}
+);
