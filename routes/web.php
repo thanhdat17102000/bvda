@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/cart', function () {
+    return view('Auth.cart.cart');
+});
+Route::get('/checkout', function () {
+    return view('Auth.checkout.checkout');
+});
+Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
 Route::get('/productdetails', function(){
@@ -31,3 +37,10 @@ Route::get('/profile', function(){
 Route::get('/blog', function(){
     return view('Auth.blog.tintuc');
 });
+Route::get('/compare', function(){
+    return view('Auth.home-compare.compare');
+});
+Route::get('/', function(){
+    return view('Auth.home-compare.home_page');
+}
+);
