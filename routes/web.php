@@ -34,6 +34,9 @@ Route::get('/register', function(){
 Route::get('/profile', function(){
     return view('Auth.account.profile');
 });
+Route::get('/blog', function(){
+    return view('Auth.blog.tintuc');
+});
 Route::get('/compare', function(){
     return view('Auth.home-compare.compare');
 });
