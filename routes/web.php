@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/cart', function () {
+    return view('Auth.cart.cart');
+});
+Route::get('/checkout', function () {
+    return view('Auth.checkout.checkout');
+});
 Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
