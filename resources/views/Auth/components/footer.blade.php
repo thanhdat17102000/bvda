@@ -26,12 +26,13 @@
                         <h5 class="widget-title">Hạng mục</h5>
                         <div class="widget-body">
                             <ul class="useful-link">
-                                <li><a href="#">Ecommerce</a></li>
-                                <li><a href="#">Shopify</a></li>
-                                <li><a href="#">Prestashop</a></li>
-                                <li><a href="#">Opencart</a></li>
-                                <li><a href="#">Magento</a></li>
-                                <li><a href="#">Jigoshop</a></li>
+                                <!-- <li><a href="#">Ecommerce</a></li> -->
+                                <li><a href="/blog">Tin Khuyến Mãi</a></li>
+                                <li><a href="/product_list">Hợp Tác</a></li>
+                                <li><a href="/profile">CSKH</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/contact_us"></a>Tuyển Dụng</li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -44,12 +45,11 @@
                         <h5 class="widget-title">Thông tin</h5>
                         <div class="widget-body">
                             <ul class="useful-link">
-                                <li><a href="#">Trang chủ</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Returns & Exchanges</a></li>
-                                <li><a href="#">Shipping & Delivery</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="/">Trang chủ</a></li>
+                                <li><a href="#">Giới Thiệu</a></li>
+                                <li><a href="#">Chính Sách Đổi Trả</a></li>
+                                <li><a href="#">Vận Chuyển</a></li>
+                                <li><a href="#">Chính Sách Bảo Mật</a></li>
                             </ul>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                 <li><a href="#">Đơn hàng</a></li>
                                 <li><a href="#">Hướng dẫn chọn size</a></li>
                                 <li><a href="#">Đánh giá</a></li>
-                                <li><a href="#">Liên lạc</a></li>
+                                
                             </ul>
                         </div>
                     </div>

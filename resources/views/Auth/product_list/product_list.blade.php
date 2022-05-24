@@ -162,7 +162,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="assets/img/product/product-1.jpg" alt="">
+                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -174,9 +174,9 @@
                                                 <span class="price-old"><del>$70.00</del></span>
                                             </div>
                                             <div class="product-action-link">
-                                                <a href="#" data-toggle="tooltip" title="Yên Thích"><i
+                                                <a href="/wishlist" data-toggle="tooltip" title="Yên Thích"><i
                                                         class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
+                                                <a href="/cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
                                                         class="ion-bag"></i></a>
                                                 <a href="#" data-toggle="modal" data-target="#quick_view"> <span
                                                         data-toggle="tooltip" title="Xem Nhanh"><i
@@ -190,7 +190,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="assets/img/product/product-1.jpg" alt="product thumb">
+                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb">
                                             </a>
                                         </div>
                                         <div class="product-content-list">
@@ -222,7 +222,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="assets/img/product/product-2.jpg" alt="">
+                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -250,7 +250,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="assets/img/product/product-2.jpg" alt="product thumb">
+                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb">
                                             </a>
                                         </div>
                                         <div class="product-content-list">
@@ -282,7 +282,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="assets/img/product/product-3.jpg" alt="">
+                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -310,7 +310,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="assets/img/product/product-3.jpg" alt="product thumb">
+                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb">
                                             </a>
                                         </div>
                                         <div class="product-content-list">
@@ -371,20 +371,20 @@
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product thumb" />
+                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product thumb" />
+                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product thumb" />
+                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product thumb" />
+                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img1.jpg"
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-1.jpg')}}"
                                             alt="" /></div>
                                     <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img2.jpg"
                                             alt="" /></div>

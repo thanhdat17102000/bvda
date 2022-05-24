@@ -1,6 +1,6 @@
 @extends('Auth.layouts.master')
 @section('title')
-    SO SÁNH
+    TRANG CHỦ
 @endsection
 @section('content')
 <main>
@@ -30,7 +30,7 @@
                                         <h5 class="slide-subtitle">Xem nhiều!</h5>
                                         <h2 class="slide-title">Top trending</h2>
                                         <p class="slide-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidid</p>
-                                        <a href="shop.html" class="btn btn-hero">XEM NGAY</a>
+                                        <a href="/product_list" class="btn btn-hero">XEM NGAY</a>
                                     </div>
                                 </div>
                             </div>
@@ -122,10 +122,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -145,10 +145,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -168,10 +168,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -191,10 +191,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -282,10 +282,10 @@
                                             <span><i class="ion-android-star"></i></span>
                                         </div>
                                         <div class="product-link-2">
-                                            <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                            <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                                title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -314,10 +314,10 @@
                                             <span><i class="ion-android-star"></i></span>
                                         </div>
                                         <div class="product-link-2">
-                                            <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                            <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                                title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
                                     </div>
                                 </div>
