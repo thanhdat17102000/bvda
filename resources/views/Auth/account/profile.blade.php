@@ -115,10 +115,10 @@
                                                         <table class="table table-bordered">
                                                             <thead class="thead-light">
                                                             <tr>
-                                                                <th>Product</th>
-                                                                <th>Date</th>
-                                                                <th>Expire</th>
-                                                                <th>Download</th>
+                                                                <th>Sản phẩm</th></th>
+                                                                <th>Ngày đặt hàng</th>
+                                                                <th>Trạng thái</th>
+                                                                <th>Chi tiết đơn hàng</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>

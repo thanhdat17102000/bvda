@@ -42,5 +42,7 @@ Route::get('/compare', function(){
 });
 Route::get('/', function(){
     return view('Auth.home-compare.home_page');
-}
-);
+});
+Route::get('/lien-he', function(){
+    return view('Auth.contact.contact');
+});
