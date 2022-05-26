@@ -58,7 +58,7 @@
                                                     <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
                                                         <ul class="dropdown">
                                                             <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
+                                                            <li><a href="/product_list">shop list right sidebar</a></li>
                                                             <li><a href="shop-list-full-width.html">shop list full width</a></li>
                                                         </ul>
                                                     </li>
