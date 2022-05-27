@@ -13,8 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth
-Route::get('/', function () {
+Route::get('/product_list', function () {
+    return view('Auth.product_list.product_list');
+});
+Route::get('/wishlist', function () {
+    return view('Auth.wishlist.wishlist');
+});
+Route::get('/cart', function () {
+    return view('Auth.cart.cart');
+});
+Route::get('/checkout', function () {
+    return view('Auth.checkout.checkout');
+});
+Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
 Route::get('/productdetails', function () {
@@ -38,3 +49,15 @@ Route::get('/admintrator', function () {
 Route::get('/admintrator/user', function () {
     return view('Admin.user.user');
 })->name('user');
+Route::get('/blog', function () {
+    return view('Auth.blog.tintuc');
+});
+Route::get('/compare', function () {
+    return view('Auth.home-compare.compare');
+});
+Route::get(
+    '/',
+    function () {
+        return view('Auth.home-compare.home_page');
+    }
+);

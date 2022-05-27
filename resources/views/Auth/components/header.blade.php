@@ -59,23 +59,23 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="index.html">Trang chủ<i class="fa fa-angle-down"></i></a>
+                                            <li class="active"><a href="/">Trang chủ</a>
                                             </li>
-                                            <li><a href="shop.html">Cửa hàng <i class="fa fa-angle-down"></i></a>
+                                            <li><a href="/product_list">Cửa hàng <i class="fa fa-angle-down"></i> </a>
                                                 <ul class="dropdown">
                                                     <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
                                                     </li>
                                                     <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
                                                         <ul class="dropdown">
                                                             <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
+                                                            <li><a href="/product_list">shop list right sidebar</a></li>
                                                             <li><a href="shop-list-full-width.html">shop list full width</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
                                             </li>
-                                            <li><a href="blog-left-sidebar.html">Tin tức <i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
+                                            <li><a href="/blog">Tin tức </a>
+                                                <!-- <ul class="dropdown">
                                                     <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
                                                     <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
                                                     <li><a href="blog-grid-full-width.html">blog grid no sidebar</a></li>
@@ -83,7 +83,7 @@
                                                     <li><a href="blog-details-audio.html">blog details audio</a></li>
                                                     <li><a href="blog-details-video.html">blog details video</a></li>
                                                     <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
-                                                </ul>
+                                                </ul> -->
                                             </li>
                                             <li><a href="contact-us.html">Liên hệ</a></li>
                                             <li><a href="contact-us.html">Về chúng tôi</a></li>
@@ -179,7 +179,7 @@
                 <!-- search box start -->
                 <div class="search-box-offcanvas">
                     <form>
-                        <input type="text" placeholder="Search Here...">
+                        <input type="text" placeholder="Tìm Kiếm...">
                         <button class="search-btn"><i class="ion-ios-search-strong"></i></button>
                     </form>
                 </div>
