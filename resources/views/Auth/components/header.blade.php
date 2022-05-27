@@ -66,7 +66,7 @@
                                             </li>
                                             <li><a href="/blog">Tin tức</a>
                                             </li>
-                                            <li><a href="#">Liên hệ</a></li>
+                                            <li><a href="/lien-he">Liên hệ</a></li>
                                             <li><a href="#">Về chúng tôi</a></li>
                                         </ul>
                                     </nav>

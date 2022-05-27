@@ -6,7 +6,7 @@
 <!-- main wrapper start -->
 <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -36,7 +36,7 @@
                                 <div class="blog-post-item mb-30">
                                     <div class="blog-thumb">
                                         <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-1.jpg" alt="blog thumb">
+                                            <img src="{{URL::asset('Auth/img/blog/blog-1.jpg')}}" alt="blog thumb">
                                         </a>
                                     </div>
                                     <div class="blog-content">
@@ -58,7 +58,7 @@
                                 <div class="blog-post-item mb-30">
                                     <div class="blog-thumb">
                                         <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-2.jpg" alt="blog thumb">
+                                            <img src="{{URL::asset('Auth/img/blog/blog-2.jpg')}}" alt="blog thumb">
                                         </a>
                                     </div>
                                     <div class="blog-content">
@@ -81,7 +81,7 @@
                                 <div class="blog-post-item mb-30">
                                     <div class="blog-thumb">
                                         <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-3.jpg" alt="blog thumb">
+                                            <img src="{{URL::asset('Auth/img/blog/blog-3.jpg')}}" alt="blog thumb">
                                         </a>
                                     </div>
                                     <div class="blog-content">
@@ -104,7 +104,7 @@
                                 <div class="blog-post-item mb-30">
                                     <div class="blog-thumb">
                                         <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog-4.jpg" alt="blog thumb">
+                                            <img src="{{URL::asset('Auth/img/blog/blog-4.jpg')}}" alt="blog thumb">
                                         </a>
                                     </div>
                                     <div class="blog-content">
