@@ -51,7 +51,7 @@
                                         <ul>
                                             <li class="active"><a href="/">Trang chủ</a>
                                             </li>
-                                            <li><a href="">Cửa hàng <i class="fa fa-angle-down"></i></a>
+                                            <li><a href="/product_list">Cửa hàng <i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown">
                                                     <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
                                                     </li>

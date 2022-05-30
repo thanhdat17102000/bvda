@@ -5,7 +5,7 @@
 @section('content')
 <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="breadcrumb-area bg-img" data-bg="assets/Auth/img/banner/breadcrumb-banner.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -45,7 +45,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-1.jpg')}}" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('Auth/img/product/product-1.jpg')}}" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="#">Giày nam</a></td>
                                             <td class="pro-price"><span>500.000đ</span></td>
                                             <td class="pro-quantity">
@@ -55,7 +55,7 @@
                                             <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-2.jpg')}}" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('Auth/img/product/product-2.jpg')}}" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="#">Giày nữ</a></td>
                                             <td class="pro-price"><span>500.000đ</span></td>
                                             <td class="pro-quantity">
@@ -65,7 +65,7 @@
                                             <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-3.jpg')}}" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('Auth/img/product/product-3.jpg')}}" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="#">Giày gay</a></td>
                                             <td class="pro-price"><span>500.000đ</span></td>
                                             <td class="pro-quantity">
@@ -77,7 +77,7 @@
                                             <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-4.jpg')}}" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('Auth/img/product/product-4.jpg')}}" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="#">Giày vip</a></td>
                                             <td class="pro-price"><span>500.000đ</span></td>
                                             <td class="pro-quantity">

@@ -39,10 +39,10 @@
                                             <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
                                                 Dashboad</a>
                                             <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng</a>
-                                            <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Lịch sử mua hàng</a>
                                             <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i> Thanh toán</a>
                                             <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i> Địa chỉ</a>
                                             <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Chi tiết tài khoản</a>
+                                            <a href="#download" data-toggle="tab"><i class="fa fa-key" aria-hidden="true"></i></i>Đổi mật khẩu</a>
                                             <a href="login-register.html"><i class="fa fa-sign-out"></i> Đăng xuất</a>
                                         </div>
                                     </div>
@@ -110,34 +110,33 @@
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="download" role="tabpanel">
                                                 <div class="myaccount-content">
-                                                    <h3>Downloads</h3>
-                                                    <div class="myaccount-table table-responsive text-center">
-                                                        <table class="table table-bordered">
-                                                            <thead class="thead-light">
-                                                            <tr>
-                                                                <th>Sản phẩm</th></th>
-                                                                <th>Ngày đặt hàng</th>
-                                                                <th>Trạng thái</th>
-                                                                <th>Chi tiết đơn hàng</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Haven - Free Real Estate PSD Template</td>
-                                                                    <td>Aug 22, 2018</td>
-                                                                    <td>Yes</td>
-                                                                    <td><a href="#" class="btn "><i class="fa fa-cloud-download"></i> Download File</a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>HasTech - Profolio Business Template</td>
-                                                                    <td>Sep 12, 2018</td>
-                                                                    <td>Never</td>
-                                                                    <td><a href="#" class="btn "><i class="fa fa-cloud-download"></i> Download File</a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                        <form action="#">
+                                                            <fieldset>
+                                                                <legend>Đổi mật khẩu</legend>
+                                                                <div class="single-input-item">
+                                                                    <label for="current-pwd" class="required">Mật khẩu hiện tại</label>
+                                                                    <input type="password" id="current-pwd" placeholder="Current Password" />
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="single-input-item">
+                                                                            <label for="new-pwd" class="required">Mật khẩu mới</label>
+                                                                            <input type="password" id="new-pwd" placeholder="New Password" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="single-input-item">
+                                                                            <label for="confirm-pwd" class="required">Xác nhận mật khẩu</label>
+                                                                            <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </fieldset>
+                                                            <div class="single-input-item">
+                                                                <button class="check-btn sqr-btn ">Lưu</button>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                </div>
                                             </div>
                                             <!-- Single Tab Content End -->
             
@@ -193,27 +192,6 @@
                                                                 <label for="email" class="required">Địa chỉ email</label>
                                                                 <input type="email" id="email" placeholder="Email Address" />
                                                             </div>
-                                                            <fieldset>
-                                                                <legend>Đổi mật khẩu</legend>
-                                                                <div class="single-input-item">
-                                                                    <label for="current-pwd" class="required">Mật khẩu hiện tại</label>
-                                                                    <input type="password" id="current-pwd" placeholder="Current Password" />
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <div class="single-input-item">
-                                                                            <label for="new-pwd" class="required">Mật khẩu mới</label>
-                                                                            <input type="password" id="new-pwd" placeholder="New Password" />
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="single-input-item">
-                                                                            <label for="confirm-pwd" class="required">Xác nhận mật khẩu</label>
-                                                                            <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </fieldset>
                                                             <div class="single-input-item">
                                                                 <button class="check-btn sqr-btn ">Lưu</button>
                                                             </div>
