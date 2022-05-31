@@ -49,6 +49,10 @@ Route::get('/admintrator', function () {
 Route::get('/admintrator/user', function () {
     return view('Admin.user.user');
 })->name('user');
+Route::get('/admintrator/blog', function () {
+    return view('Admin.blog.blog-list');
+});
+
 Route::get('/blog', function () {
     return view('Auth.blog.tintuc');
 });

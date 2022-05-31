@@ -35,7 +35,6 @@
         <div class="col-12">
             <div class="card-box">
                 <h4 class="mt-0 header-title">Danh sách khách hàng</h4>
-
                 <table id="datatable" class="table table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
