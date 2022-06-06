@@ -77,6 +77,12 @@
                         <li><a href="layouts-sidebar-sm.html">Thêm</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route('order')}}">
+                        <i class="mdi mdi-page-layout-sidebar-left"></i>
+                        <span> Quản lý đơn hàng </span>
+                    </a>
+                </li>
 
             </ul>
 

@@ -61,3 +61,6 @@ Route::get(
         return view('Auth.home-compare.home_page');
     }
 );
+Route::get('admintrator/order', function(){
+    return view('Admin.order.list');
+})->name('order');
