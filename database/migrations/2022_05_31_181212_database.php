@@ -96,7 +96,7 @@ class Database extends Migration
             $table->increments('id');
             $table->integer('m_id_parent');
             $table->string('m_title',255);
-            $table->integer('m_index');
+            $table->integer('m_index')->default(0);
         });
         Schema::create('t_product', function (Blueprint $table) {
             $table->increments('id');
