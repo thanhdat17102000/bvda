@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,4 @@ Route::get(
         return view('Auth.home-compare.home_page');
     }
 );
-Route::get('admintrator/order', function(){
-    return view('Admin.order.list');
-})->name('order');
+Route::get('admintrator/order', [AdminOrderController::class, 'list'])->name('order');
