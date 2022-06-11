@@ -18,12 +18,14 @@
             //     return;
             // }
             var categoryIdParent = $("#admin-category-add-parent").val();
+            var categoryIndex = $("#admin-category-add-index").val();
             $.ajax({
                 url: "category_add",
                 type: "post",
                 data: {
                     categoryTitle: categoryTitle,
-                    categoryIdParent: categoryIdParent
+                    categoryIdParent: categoryIdParent,
+                    categoryIndex: categoryIndex,
                 },
                 beforeSend: function () {
                     $(".btn.btn-close").click();
@@ -70,7 +72,7 @@
                 var renderItems = function (items, space = "") {
                     var html = "";
                     items.forEach(function (item) {
-                        var itemActions = "<span class='float-right'><i class='fa fa-pencil-alt item-edit-btn text-primary' title='Sửa danh mục'></i>&nbsp;&nbsp;<i class='fa fa-trash item-delete-btn ml-2 mr-2 text-danger' title='Xóa danh mục'></i></span>";
+                        var itemActions = "<span class='float-right'><a href='/admintrator/category/" + item.id + "/edit'><i class='fa fa-pencil-alt item-edit-btn text-primary' title='Sửa danh mục'></i></a>&nbsp;&nbsp;<i class='fa fa-trash item-delete-btn ml-2 mr-2 text-danger' title='Xóa danh mục'></i></span>";
                         itemActions += "<div class='clear_both'></div>";
                         html += "<li class='list-group-item mt-2' data-id='" + item.id + "'>" + item.m_title + itemActions + "</li>";
 
@@ -91,15 +93,20 @@
                 $("#admin-category-list-content .item-delete-btn").click(function () {
                     var idCategory = $(this).parents(".list-group-item").data('id');
                     $('#sa-params').click();
-                    $('.btn.btn-confirm-delete').bind('click', function() {  
+                    $('.btn.btn-confirm-delete').bind('click', function() {
                         self.delete(idCategory);
                       });
-                    
+
                 });
-                $("#admin-category-list-content .item-edit-btn").click(function () {
-                    var idCategory = $(this).parents(".list-group-item").data('id');
-                    self.loadFormEdit(idCategory);
-                });
+                //edit
+                // $("#admin-category-list-content .item-edit-btn").click(function () {
+
+
+                // });
+                // $("#admin-category-list-content .item-edit-btn").click(function () {
+                //     var idCategory = $(this).parents(".list-group-item").data('id');
+                //     self.loadFormEdit(idCategory);
+                // });
             }
         };
         this.delete = function (idCategory) {
@@ -122,7 +129,7 @@
                 error: function () {
                     alert("Có lỗi xảy ra, vui lòng thử lại sau");
                 }
-            });    
+            });
         };
         this.loadFormEdit = function (idCategory) {
             $.ajaxSetup({

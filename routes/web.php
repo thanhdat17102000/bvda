@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,18 +48,25 @@ use App\Http\Controllers\DashboardController;
 
 // Admin
 Route::group(['prefix' => 'admintrator'], function () {
+    //dashboard
     Route::resource('/',DashboardController::class);
     Route::resource('dashboard',DashboardController::class);
-
-    //Category
-    Route::resource('category',CategoryController::class);
-    //CategoryAjax
-    Route::post('category_add',[CategoryController::class,'add']);
-    Route::get('category_loadlist',[CategoryController::class,'loadlist']);
+    //ajax category
+    Route::get('category', [CategoryController::class, 'index'])->name('category-admin');
     Route::post('category_delete',[CategoryController::class,'delete']);
-    Route::post('category_loadDetail',[CategoryController::class,'loadDetail']);
+    //category
+    Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
+    Route::post('category/add', [CategoryController::class, 'postAddCategory']);
+    Route::get('category/{id}/edit', [CategoryController::class, 'getEditCategory'])->name('category-edit-admin');
+    Route::post('category/{id}/edit', [CategoryController::class, 'postEditCategory']);
+    Route::get('category_loadlist',[CategoryController::class,'loadlist']);
+    //contact
+    Route::get('contact', [ContactController::class, 'getContact'])->name('contact-admin');
+    Route::get('contact/{id}/edit', [ContactController::class, 'getEditContact'])->name('contact-edit-admin');
+    Route::post('contact/{id}/edit', [ContactController::class, 'postEditContact']);
+    Route::delete('contact/{id}/delete', [ContactController::class, 'getDeleteContact'])->name('contact-delete-admin');
 });
-Route::group(['prefix' => '/'], function (){
-
-});
+Route::get('/', [HomeController::class, 'index'])->name('home-auth');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
+Route::post('/contact', [ContactController::class, 'postMessage']);
 
