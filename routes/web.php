@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,52 +16,61 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/product_list', function () {
-    return view('Auth.product_list.product_list');
-});
-Route::get('/wishlist', function () {
-    return view('Auth.wishlist.wishlist');
-});
-Route::get('/cart', function () {
-    return view('Auth.cart.cart');
-});
+// Route::get('/product_list', function () {
+//     return view('Auth.product_list.product_list');
+// });
+// Route::get('/wishlist', function () {
+//     return view('Auth.wishlist.wishlist');
+// });
+// Route::get('/cart', function () {
+//     return view('Auth.cart.cart');
+// });
 Route::get('/checkout', function () {
     return view('Auth.checkout.checkout');
 });
-Route::get('/profile', function () {
-    return view('Auth.account.profile');
-});
-Route::get('/productdetails', function () {
-    return view('Auth.product_details.productdetails');
-});
-Route::get('/login', function () {
-    return view('Auth.account.login');
-});
-Route::get('/register', function () {
-    return view('Auth.account.register');
-});
-Route::get('/profile', function () {
-    return view('Auth.account.profile');
-});
+// Route::get('/profile', function () {
+//     return view('Auth.account.profile');
+// });
+// Route::get('/productdetails', function () {
+//     return view('Auth.product_details.productdetails');
+// });
+// Route::get('/login', function () {
+//     return view('Auth.account.login');
+// });
+// Route::get('/register', function () {
+//     return view('Auth.account.register');
+// });
+// Route::get('/profile', function () {
+//     return view('Auth.account.profile');
+// });
 
 // Admin
+Route::group(['prefix' => 'admintrator'], function () {
+    Route::resource('/',DashboardController::class);
+    Route::resource('dashboard',DashboardController::class);
 
-Route::get('/admintrator', function () {
-    return view('Admin.dashboard.dashboard');
-})->name('dashboard');
-Route::get('/admintrator/user', function () {
-    return view('Admin.user.user');
-})->name('user');
-Route::get('/blog', function () {
-    return view('Auth.blog.tintuc');
+    //Category
+    Route::resource('category',CategoryController::class);
+    //CategoryAjax
+    Route::post('category_add',[CategoryController::class,'add']);
+    Route::get('category_loadlist',[CategoryController::class,'loadlist']);
+    Route::post('category_delete',[CategoryController::class,'delete']);
+    Route::post('category_loadDetail',[CategoryController::class,'loadDetail']);
 });
-Route::get('/compare', function () {
-    return view('Auth.home-compare.compare');
+Route::group(['prefix' => '/'], function (){
+
 });
+// <<<<<<< HEAD
 Route::get(
     '/',
     function () {
         return view('Auth.home-compare.home_page');
     }
 );
-Route::get('admintrator/order', [AdminOrderController::class, 'list'])->name('order');
+//Order
+Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
+Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
+Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+// =======
+
+// >>>>>>> 62bec3c9d008b607517f42a0d0f15cb3c099a7e5
