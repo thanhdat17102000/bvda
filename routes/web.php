@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,19 +44,6 @@ Route::get('/register', function () {
 Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
-
-// Admin
-
-Route::get('/admintrator', function () {
-    return view('Admin.dashboard.dashboard');
-})->name('dashboard');
-Route::get('/admintrator/user', function () {
-    return view('Admin.user.user');
-})->name('user');
-Route::get('/admintrator/blog', function () {
-    return view('Admin.blog.blog-list');
-});
-
 Route::get('/blog', function () {
     return view('Auth.blog.tintuc');
 });
@@ -68,3 +59,27 @@ Route::get('/', function(){
 Route::get('/lien-he', function(){
     return view('Auth.contact.contact');
 });
+
+// Admin
+// Admin
+Route::group(['prefix' => 'admintrator'], function () {
+    Route::resource('/',DashboardController::class);
+    Route::resource('dashboard',DashboardController::class);
+
+    //Category
+    Route::resource('category',CategoryController::class);
+    //CategoryAjax
+    Route::post('category_add',[CategoryController::class,'add']);
+    Route::get('category_loadlist',[CategoryController::class,'loadlist']);
+    Route::post('category_delete',[CategoryController::class,'delete']);
+    Route::post('category_loadDetail',[CategoryController::class,'loadDetail']);
+    // Post
+    Route::resource('/post', PostController::class);
+    Route::get('create-post', [PostController::class,'createPost']);
+});
+// User routes
+Route::group(['prefix' => 'user'], function (){
+    Route::resource('/', UserController::class);
+});
+// Post routes
+Route::group(['prefix'])
