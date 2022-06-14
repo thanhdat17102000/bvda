@@ -65,6 +65,12 @@ Route::group(['prefix' => 'admintrator'], function () {
     Route::get('contact/{id}/edit', [ContactController::class, 'getEditContact'])->name('contact-edit-admin');
     Route::post('contact/{id}/edit', [ContactController::class, 'postEditContact']);
     Route::delete('contact/{id}/delete', [ContactController::class, 'getDeleteContact'])->name('contact-delete-admin');
+
+
+    Route::resources([
+        'product' => App\Http\Controllers\productController::class,
+        
+    ]);
 });
 Route::get('/', [HomeController::class, 'index'])->name('home-auth');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');

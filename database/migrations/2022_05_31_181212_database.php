@@ -103,6 +103,7 @@ class Database extends Migration
             $table->increments('id');
             $table->unsignedInteger('m_id_category');
             $table->string('m_product_name',255);
+            $table->string('m_product_slug',255);
             $table->string('m_short_description',255);
             $table->text('m_description');
             $table->json('m_picture');

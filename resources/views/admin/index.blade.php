@@ -203,6 +203,17 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Sản phẩm </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                    <li><a href="{{ route('product.index') }}">Xem sản phẩm</a></li>
+                                    <li><a href="{{ route('product.create') }}">Thêm sản phẩm</a></li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="{{ route("contact-admin") }}" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Phản hồi </span>
