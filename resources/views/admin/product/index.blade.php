@@ -160,9 +160,9 @@
                                         <div class="collapse" id="collapseExample" style="">
                                             <div class="card-box">
                                                 @if(json_decode($dt->m_picture))
-                                                @foreach(json_decode($dt->m_picture) as $picture)
-                                                    <img src="{{asset('uploads')}}/{{$picture}}" alt="" width="100px" height="100px">
-                                                @endforeach
+                                                    @foreach(json_decode($dt->m_picture) as $picture)
+                                                        <img src="{{asset('uploads')}}/{{$picture}}" alt="" width="100px" height="100px">
+                                                    @endforeach
                                                 @endif
                                             </div>
                                         </div>

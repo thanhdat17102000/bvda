@@ -18,7 +18,12 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Tên sản phẩm</label>
                 <div class="col-sm-10" style="">
-                <input type="text" class="form-control" name="m_product_name" placeholder="Nhập tên sản phẩm">
+                    <input type="text" class="form-control" name="m_product_name" placeholder="Nhập tên sản phẩm">
+                    @error('m_product_name')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -34,38 +39,67 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Giá gốc</label>
                 <div class="col-sm-10" style="">
-                    <input type="text" class="form-control" name="m_price" placeholder="Nhập giá sản phẩm">
+                    <input type="number" class="form-control" name="m_price" placeholder="Nhập giá sản phẩm">
+                    @error('m_price')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Giá ưu đãi</label>
                 <div class="col-sm-10" style="">
-                    <input type="text" class="form-control" name="m_original_price" placeholder="Nhập giá ưu đãi sản phẩm">
+                    <input type="number" class="form-control" name="m_original_price" placeholder="Nhập giá ưu đãi sản phẩm">
+                    @error('m_original_price')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Số lượng tồn kho</label>
                 <div class="col-sm-10" style="">
-                    <input type="text" class="form-control" name="m_buy" placeholder="Nhập số lượng tồn kho">
+                    <input type="number" class="form-control" name="m_buy" placeholder="Nhập số lượng tồn kho">
+                    @error('m_buy')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Hình ảnh sản phẩm</label>
                 <div class="col-sm-10" style="">
                     <input type="file" name="file_upload[]" class="form-control" placeholder="Nhập hình ảnh sản phẩm" multiple>
+                    @error('file_upload')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Mô tả ngắn</label>
                 <div class="col-sm-10">
                     <textarea class="ckeditor form-control" name="m_short_description" placeholder="Nhập mô tả ngắn sản phẩm"></textarea>
+                    @error('m_short_description')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
                 <div class="col-sm-10">
-                <textarea class="ckeditor form-control" name="m_description" placeholder="Nhập mô tả sản phẩm"></textarea>
-                
+                    <textarea class="ckeditor form-control" name="m_description" placeholder="Nhập mô tả sản phẩm"></textarea>
+                    @error('m_description')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -78,7 +112,7 @@
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="m_status" value="1">
+                        <input class="form-check-input" type="radio" name="m_status" value="1" checked>
                         <label class="form-check-label" for="flexRadioDefault2">
                             Hiện
                         </label>

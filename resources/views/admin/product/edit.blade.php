@@ -18,7 +18,12 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Tên sản phẩm</label>
                 <div class="col-sm-10" style="">
-                <input type="text" class="form-control" name="m_product_name" value="{{$updated->m_product_name}}" placeholder="Nhập tên sản phẩm">
+                    <input type="text" class="form-control" name="m_product_name" value="{{$updated->m_product_name}}" placeholder="Nhập tên sản phẩm">
+                    @error('m_product_name')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -38,18 +43,33 @@
                 <label for="" class="col-sm-2 col-form-label">Giá gốc</label>
                 <div class="col-sm-10" style="">
                     <input type="text" class="form-control" name="m_price" value="{{$updated->m_price}}" placeholder="Nhập giá sản phẩm">
+                    @error('m_price')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Giá ưu đãi</label>
                 <div class="col-sm-10" style="">
                     <input type="text" class="form-control" name="m_original_price" value="{{$updated->m_original_price}}" placeholder="Nhập giá ưu đãi sản phẩm">
+                    @error('m_original_price')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Số lượng tồn kho</label>
                 <div class="col-sm-10" style="">
                     <input type="text" class="form-control" name="m_buy" value="{{$updated->m_buy}}"  placeholder="Nhập số lượng tồn kho">
+                    @error('m_buy')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
@@ -61,19 +81,33 @@
                             <img src="{{asset('uploads')}}/{{$picture}}"width="100px" height="100px" style="margin:5px">
                         @endforeach
                     @endif
+                    @error('file_upload')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Mô tả ngắn</label>
                 <div class="col-sm-10">
                     <textarea class="ckeditor form-control" name="m_short_description" placeholder="Nhập mô tả ngắn sản phẩm">{!!$updated->m_short_description!!}</textarea>
+                    @error('m_short_description')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
                 <div class="col-sm-10">
-                <textarea class="ckeditor form-control" name="m_description" placeholder="Nhập mô tả sản phẩm">{!!$updated->m_short_description!!}</textarea>
-                
+                    <textarea class="ckeditor form-control" name="m_description" placeholder="Nhập mô tả sản phẩm">{!!$updated->m_short_description!!}</textarea>
+                    @error('m_description')
+                        <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
+                            <li class="parsley-required">{{$message}}</li>
+                        </ul>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">

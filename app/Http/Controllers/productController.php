@@ -46,6 +46,27 @@ class productController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'm_product_name' => 'required|unique:t_product',
+            'm_short_description' => 'required|max:255',
+            'm_description' => 'required',
+            'file_upload' => 'required|max:2048',
+            'm_price' => 'required',
+            'm_original_price' => 'required',
+            'm_buy' => 'required',
+        ],
+        [
+            'm_product_name.required' => 'Tên sản phẩm không để trống',
+            'm_short_description.required' => 'mô tả ngắn không để trống',
+            'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
+            'm_description.required' => 'mô tả không để trống',
+            'file_upload.required' => 'hình ảnh không để trống',
+            'file_upload.max' => 'hình ảnh tối đa là 2000kb',
+            'm_price.required' => 'giá gốc không được để trống',
+            'm_original_price.required' => 'giá khuyến mãi không được để trống',
+            'm_buy.required' => 'số lượng tồn kho không được để trống',
+            'm_product_name.unique' => 'Tên sản phẩm này đã có trong CSDL',
+        ]);
         $create = new product();
         $create->m_product_name = $request->m_product_name;
         $create->m_id_category = $request->m_id_category;
@@ -115,6 +136,25 @@ class productController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'm_product_name' => 'required',
+            'm_short_description' => 'required|max:255',
+            'm_description' => 'required',
+            'file_upload' => 'max:2048',
+            'm_price' => 'required',
+            'm_original_price' => 'required',
+            'm_buy' => 'required',
+        ],
+        [
+            'm_product_name.required' => 'Tên sản phẩm không để trống',
+            'm_short_description.required' => 'mô tả ngắn không để trống',
+            'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
+            'm_description.required' => 'mô tả không để trống',
+            'file_upload.max' => 'hình ảnh tối đa là 2000kb',
+            'm_price.required' => 'giá gốc không được để trống',
+            'm_original_price.required' => 'giá khuyến mãi không được để trống',
+            'm_buy.required' => 'số lượng tồn kho không được để trống',
+        ]);
         $updated = product::find($id);
         $updated->m_product_name = $request->m_product_name;
         $updated->m_id_category = $request->m_id_category;
