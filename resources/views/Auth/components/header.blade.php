@@ -52,16 +52,20 @@
                                             <li class="active"><a href="/">Trang chủ</a>
                                             </li>
                                             <li><a href="/product_list">Cửa hàng <i class="fa fa-angle-down"></i></a>
+
+                                            <li><a href="/product_list">Danh mục <i class="fa fa-angle-down"></i> </a>
                                                 <ul class="dropdown">
-                                                    <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
-                                                    </li>
-                                                    <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="/product_list">shop list right sidebar</a></li>
-                                                            <li><a href="shop-list-full-width.html">shop list full width</a></li>
-                                                        </ul>
-                                                    </li>
+                                                    @foreach($categories as $category)
+                                                        <li><a href="#">{{$category->m_title}}<i class="fa fa-angle-right"></i></a>
+                                                        @if (count($category->children) > 0)
+                                                            <ul class="dropdown">
+                                                                @foreach ($category->children as $sub)
+                                                                    <li><a href="shop-list-left-sidebar.html">{{$sub->m_title}}</a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                             <li><a href="/blog">Tin tức</a>

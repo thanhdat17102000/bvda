@@ -11,19 +11,22 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
 
-        
         <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
-        
+
         <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
-        
+
         <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
         <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
+<<<<<<< HEAD
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         
+=======
+        @stack('css')
+>>>>>>> b4e97afd858044ca2ec246ebb471d533cc755f2b
 
     </head>
 
@@ -53,7 +56,7 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                                Nowak <i class="mdi mdi-chevron-down"></i> 
+                                Nowak <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -127,7 +130,7 @@
                     <li>
                         <h4 class="page-title-main">{{$data['title']}}</h4>
                     </li>
-        
+
                 </ul>
 
             </div>
@@ -150,25 +153,25 @@
                                     <i class="fe-user mr-1"></i>
                                     <span>My Account</span>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-settings mr-1"></i>
                                     <span>Settings</span>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-lock mr-1"></i>
                                     <span>Lock Screen</span>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fe-log-out mr-1"></i>
                                     <span>Logout</span>
                                 </a>
-    
+
                             </div>
                         </div>
                         <p class="text-muted">Admin Head</p>
@@ -201,12 +204,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route("category.index") }}" >
+                                <a href="{{ route("category-admin") }}" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Danh mục </span>
                                 </a>
                             </li>
                             <li>
+<<<<<<< HEAD
                                 <a href="/admintrator/user" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Người dùng</span>
@@ -216,6 +220,11 @@
                                 <a href="/admintrator/post" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Bài viết</span>
+=======
+                                <a href="{{ route("contact-admin") }}" >
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Phản hồi </span>
+>>>>>>> b4e97afd858044ca2ec246ebb471d533cc755f2b
                                 </a>
                             </li>
                         </ul>
@@ -268,16 +277,16 @@
                         <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
                         <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
                     </div>
-    
+
                     <div class="mb-2">
                         <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css" 
+                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
                             data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
                         <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
                     </div>
-    
+
                     <div class="mb-2">
                         <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
                     </div>
@@ -290,7 +299,7 @@
                         <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png" class="img-fluid img-thumbnail" alt="">
                     </div>
                     <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css" 
+                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
                             data-appStyle="{{ asset('admin/assets/css') }}/app-dark-rtl.min.css" />
                         <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
                     </div>
@@ -320,8 +329,14 @@
         <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
 
         <script src="{{ asset('admin/assets/libs')}}/sweetalert2/sweetalert2.min.js"></script>
+
         <script src="{{ asset('admin/assets/js')}}/pages/sweet-alerts.init.js"></script>
 
         <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script>
+
+        <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
+
+        @stack('scripts')
+
     </body>
 </html>

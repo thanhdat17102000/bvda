@@ -19,6 +19,8 @@ class CategoryModel extends Model
     const FIELD_TITLE = 'm_title';
     const FIELD_INDEX = 'm_index';
 
+    public $timestamps = false;
+
     public function getAllCategory($idParent = 0) {
         $list = [];
         $currentList = DB::table('t_category')
@@ -26,7 +28,7 @@ class CategoryModel extends Model
                 ->orderBy(self::FIELD_INDEX,'ASC')
                 ->orderBy(self::FIELD_ID,'ASC')
                 ->get();
-                
+
         //$currentList=(array)$currentList;
         if ($currentList != false) {
             foreach ($currentList as $currentItem) {
@@ -35,5 +37,16 @@ class CategoryModel extends Model
             }
         }
         return $list;
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'm_id_parent', 'id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'm_id_parent');
+
     }
 }
