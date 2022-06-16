@@ -102,184 +102,178 @@ Thanh toán
                 </div>
             </div>
             <div class="row">
-                <!-- Checkout Billing Details -->
-                <div class="col-lg-6">
-                    <div class="checkout-billing-details-wrap">
-                        <h4 class="checkout-title">Thông tin liên hệ</h4>
-                        <div class="billing-form-wrap">
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="single-input-item">
-                                            <label for="f_name" class="required">Họ</label>
-                                            <input type="text" id="f_name" placeholder="Nhập họ" required />
+                <form action="{{ route('order.store') }}" method="POST">
+                    @csrf
+                    <!-- Checkout Billing Details -->
+                    <div class="col-md-6 float-left" style="width: 600px;">
+                        <div class="checkout-billing-details-wrap">
+                            <h4 class="checkout-title">Thông tin liên hệ</h4>
+                            <div class="billing-form-wrap">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="single-input-item">
+                                                <label for="m_name" class="required">Họ và tên</label>
+                                                <input type="text" id="m_name" name="m_name" placeholder="Nhập họ và tên" required />
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="single-input-item">
-                                            <label for="l_name" class="required">Tên</label>
-                                            <input type="text" id="l_name" placeholder="Nhập tên" required />
-                                        </div>
+                                    <div class="single-input-item">
+                                        <label for="email" class="required">Email</label>
+                                        <input type="email" id="email" name="m_email" placeholder="Nhập email" required />
                                     </div>
-                                </div>
 
-                                <div class="single-input-item">
-                                    <label for="email" class="required">Email</label>
-                                    <input type="email" id="email" placeholder="Nhập email" required />
-                                </div>
+                                    <div class="single-input-item">
+                                        <label for="com-name">Số điện thoại</label>
+                                        <input type="text" id="com-name" name="m_phone" placeholder="Nhập số điện thoại" />
+                                    </div>
 
-                                <div class="single-input-item">
-                                    <label for="com-name">Số điện thoại</label>
-                                    <input type="text" id="com-name" placeholder="Nhập số điện thoại" />
-                                </div>
+                                    <div class="single-input-item">
+                                        <label for="country" class="required">Tỉnh/Thành phố</label>
+                                        <select name="country nice-select" id="country">
+                                            <option value="Vietnam">Việt Nam</option>
+                                            <option value="Albania">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                            <option value="Armenia">Armenia</option>
+                                            <option value="Bangladesh">Bangladesh</option>
+                                            <option value="India">India</option>
+                                            <option value="Pakistan">Pakistan</option>
+                                            <option value="England">England</option>
+                                            <option value="London">London</option>
+                                            <option value="London">London</option>
+                                            <option value="Chaina">China</option>
+                                        </select>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <label for="country" class="required">Quận/Huyện</label>
+                                        <select name="country nice-select" id="country">
+                                            <option value="Vietnam">Việt Nam</option>
+                                            <option value="Albania">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                            <option value="Armenia">Armenia</option>
+                                            <option value="Bangladesh">Bangladesh</option>
+                                            <option value="India">India</option>
+                                            <option value="Pakistan">Pakistan</option>
+                                            <option value="England">England</option>
+                                            <option value="London">London</option>
+                                            <option value="London">London</option>
+                                            <option value="Chaina">China</option>
+                                        </select>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <label for="country" class="required">Xã phường</label>
+                                        <select name="country nice-select" id="country">
+                                            <option value="Vietnam">Việt Nam</option>
+                                            <option value="Albania">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                            <option value="Armenia">Armenia</option>
+                                            <option value="Bangladesh">Bangladesh</option>
+                                            <option value="India">India</option>
+                                            <option value="Pakistan">Pakistan</option>
+                                            <option value="England">England</option>
+                                            <option value="London">London</option>
+                                            <option value="London">London</option>
+                                            <option value="Chaina">China</option>
+                                        </select>
+                                    </div>
 
-                                <div class="single-input-item">
-                                    <label for="country" class="required">Tỉnh/Thành phố</label>
-                                    <select name="country nice-select" id="country">
-                                        <option value="Vietnam">Việt Nam</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="Armenia">Armenia</option>
-                                        <option value="Bangladesh">Bangladesh</option>
-                                        <option value="India">India</option>
-                                        <option value="Pakistan">Pakistan</option>
-                                        <option value="England">England</option>
-                                        <option value="London">London</option>
-                                        <option value="London">London</option>
-                                        <option value="Chaina">China</option>
-                                    </select>
-                                </div>
-                                <div class="single-input-item">
-                                    <label for="country" class="required">Quận/Huyện</label>
-                                    <select name="country nice-select" id="country">
-                                        <option value="Vietnam">Việt Nam</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="Armenia">Armenia</option>
-                                        <option value="Bangladesh">Bangladesh</option>
-                                        <option value="India">India</option>
-                                        <option value="Pakistan">Pakistan</option>
-                                        <option value="England">England</option>
-                                        <option value="London">London</option>
-                                        <option value="London">London</option>
-                                        <option value="Chaina">China</option>
-                                    </select>
-                                </div>
-                                <div class="single-input-item">
-                                    <label for="country" class="required">Xã phường</label>
-                                    <select name="country nice-select" id="country">
-                                        <option value="Vietnam">Việt Nam</option>
-                                        <option value="Albania">Albania</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="Armenia">Armenia</option>
-                                        <option value="Bangladesh">Bangladesh</option>
-                                        <option value="India">India</option>
-                                        <option value="Pakistan">Pakistan</option>
-                                        <option value="England">England</option>
-                                        <option value="London">London</option>
-                                        <option value="London">London</option>
-                                        <option value="Chaina">China</option>
-                                    </select>
-                                </div>
+                                    <div class="single-input-item">
+                                        <label for="street-address" class="required mt-20">Địa chỉ</label>
+                                        <input type="text" id="street-address" name="m_address" placeholder="Nhập địa chỉ" required />
+                                    </div>
 
-                                <div class="single-input-item">
-                                    <label for="street-address" class="required mt-20">Địa chỉ</label>
-                                    <input type="text" id="street-address" placeholder="Nhập địa chỉ" required />
-                                </div>
-
-                                <div class="single-input-item">
-                                    <h5 class="text-center">Thông tin bổ sung</h5>
-                                    <label for="ordernote">Ghi chú đơn hàng của bạn</label>
-                                    <textarea name="ordernote" id="ordernote" cols="30" rows="3" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
-                                </div>
-                            </form>
+                                    <div class="single-input-item">
+                                        <h5 class="text-center">Thông tin bổ sung</h5>
+                                        <label for="m_note">Ghi chú đơn hàng của bạn</label>
+                                        <textarea name="m_note" id="ordernote" cols="30" rows="3" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Order Summary Details -->
-                <div class="col-lg-6">
-                    <div class="order-summary-details">
-                        <h4 class="checkout-title">Đơn hàng của bạn</h4>
-                        <div class="order-summary-content">
-                            <!-- Order Summary Table -->
-                            <div class="order-summary-table table-responsive text-center">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Sản phẩm</th>
-                                            <th>Thành tiền</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="product-details.html">Giày nam <strong> × 1</strong></a>
-                                            </td>
-                                            <td>500.000đ</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="product-details.html">Giày nữ <strong> × 4</strong></a>
-                                            </td>
-                                            <td>500.000đ</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="product-details.html">Giày gay <strong> × 2</strong></a>
-                                            </td>
-                                            <td>500.000đ</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td>Phí vận chuyển</td>
-                                            <td><strong>30.000đ</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Giảm giá</td>
-                                            <td><strong>30.000đ</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tổng tiền thanh toán</td>
-                                            <td><strong>$470</strong></td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- Order Payment Method -->
-                            <div class="order-payment-method">
-                                <div class="single-payment-method show">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
-                                            <label class="custom-control-label" for="cashon">Trả tiền mặt khi nhận hàng</label>
+                    <!-- Order Summary Details -->
+                    <div class="col-md-6 float-right">
+                        <div class="order-summary-details">
+                            <h4 class="checkout-title">Đơn hàng của bạn</h4>
+                            <div class="order-summary-content">
+                                <!-- Order Summary Table -->
+                                <div class="order-summary-table table-responsive text-center">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="product-details.html">Giày nam <strong> × 1</strong></a>
+                                                </td>
+                                                <td>500.000đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="product-details.html">Giày nữ <strong> × 4</strong></a>
+                                                </td>
+                                                <td>500.000đ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="product-details.html">Giày gay <strong> × 2</strong></a>
+                                                </td>
+                                                <td>500.000đ</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>Phí vận chuyển</td>
+                                                <td><strong>30.000đ</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Giảm giá</td>
+                                                <td><strong>30.000đ</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tổng tiền thanh toán</td>
+                                                <td><strong>$470</strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!-- Order Payment Method -->
+                                <div class="order-payment-method">
+                                    <div class="single-payment-method show">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
+                                                <label class="custom-control-label" for="cashon">Trả tiền mặt khi nhận hàng</label>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-details" data-method="cash">
+                                            <p>Bạn đặt hàng và thanh toán sau khi nhân viên bưu điện đưa hàng đến nơi và thu tiền tận nhà bạn.</p>
                                         </div>
                                     </div>
-                                    <div class="payment-method-details" data-method="cash">
-                                        <p>Bạn đặt hàng và thanh toán sau khi nhân viên bưu điện đưa hàng đến nơi và thu tiền tận nhà bạn.</p>
-                                    </div>
-                                </div>
-                                <div class="single-payment-method">
-                                    <div class="payment-method-name">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="directbank" name="paymentmethod" value="bank" class="custom-control-input" />
-                                            <label class="custom-control-label" for="directbank">Chuyển khoản ngân hàng</label>
+                                    <div class="single-payment-method">
+                                        <div class="payment-method-name">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="directbank" name="paymentmethod" value="bank" class="custom-control-input" />
+                                                <label class="custom-control-label" for="directbank">Chuyển khoản ngân hàng</label>
+                                            </div>
+                                        </div>
+                                        <div class="payment-method-details" data-method="bank">
+                                            <p>Make your payment directly into our bank account. Please use your Order
+                                                ID as the payment reference. Your order will not be shipped until the
+                                                funds have cleared in our account..</p>
                                         </div>
                                     </div>
-                                    <div class="payment-method-details" data-method="bank">
-                                        <p>Make your payment directly into our bank account. Please use your Order
-                                            ID as the payment reference. Your order will not be shipped until the
-                                            funds have cleared in our account..</p>
+
+                                    <div class="summary-footer-area">
+
+                                        <button type="submit" class="btn btn-sqr">ĐẶT HÀNG</button>
                                     </div>
-                                </div>
-
-                                <div class="summary-footer-area">
-
-                                    <button type="submit" class="btn btn-sqr">ĐẶT HÀNG</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

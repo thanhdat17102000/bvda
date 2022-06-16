@@ -18,6 +18,8 @@
         <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
         <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
         @stack('css')
 
@@ -196,6 +198,7 @@
                                     <span> Thống kê </span>
                                 </a>
                             </li>
+                            
                             <li>
                                 <a href="{{ route("category-admin") }}" >
                                     <i class="mdi mdi-view-dashboard"></i>
@@ -203,6 +206,9 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('order') }}" >
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Quản lý đơn hàng </span>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Sản phẩm </span>

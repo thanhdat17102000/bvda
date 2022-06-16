@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -27,9 +28,9 @@ use App\Http\Controllers\ContactController;
 // Route::get('/cart', function () {
 //     return view('Auth.cart.cart');
 // });
-// Route::get('/checkout', function () {
-//     return view('Auth.checkout.checkout');
-// });
+Route::get('/checkout', function () {
+    return view('Auth.checkout.checkout');
+});
 // Route::get('/profile', function () {
 //     return view('Auth.account.profile');
 // });
@@ -72,6 +73,17 @@ Route::group(['prefix' => 'admintrator'], function () {
         
     ]);
 });
+// <<<<<<< HEAD
+Route::get(
+    '/',
+    function () {
+        return view('Auth.home-compare.home_page');
+    }
+);
+Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
+Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
+Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+// =======
 Route::get('/', [HomeController::class, 'index'])->name('home-auth');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
 Route::post('/contact', [ContactController::class, 'postMessage']);
