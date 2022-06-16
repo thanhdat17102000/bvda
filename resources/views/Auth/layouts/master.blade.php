@@ -35,5 +35,5 @@
     <!--=== Active Js ===-->
     <script src="{{URL::asset('js/active.js')}}"></script>
 </body>
-    
+
 </html>

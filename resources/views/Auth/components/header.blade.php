@@ -61,6 +61,22 @@
                                         <ul>
                                             <li class="active"><a href="/">Trang chủ</a>
                                             </li>
+
+                                            <li><a href="/product_list">Danh mục <i class="fa fa-angle-down"></i> </a>
+                                                <ul class="dropdown">
+                                                    @foreach($categories as $category)
+                                                        <li><a href="#">{{$category->m_title}}<i class="fa fa-angle-right"></i></a>
+                                                        @if (count($category->children) > 0)
+                                                            <ul class="dropdown">
+                                                                @foreach ($category->children as $sub)
+                                                                    <li><a href="shop-list-left-sidebar.html">{{$sub->m_title}}</a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
                                             <li><a href="/product_list">Cửa hàng <i class="fa fa-angle-down"></i> </a>
                                                 <ul class="dropdown">
                                                     <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
@@ -85,7 +101,7 @@
                                                     <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
                                                 </ul> -->
                                             </li>
-                                            <li><a href="contact-us.html">Liên hệ</a></li>
+                                            <li><a href="{{route('contact-auth')}}">Liên hệ</a></li>
                                             <li><a href="contact-us.html">Về chúng tôi</a></li>
                                         </ul>
                                     </nav>

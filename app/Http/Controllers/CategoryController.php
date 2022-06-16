@@ -2,45 +2,23 @@
 
 namespace App\Http\Controllers;
 use App\Models\CategoryModel;
+use App\Http\Requests\PostCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
-{   
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    public function index()
-    {
+{
+    public function index() {
         $data = [
             'title' => 'Danh Mục',
             'action'=> 'category'
         ];
-        return view('admin.category',compact('data'));
+        return view('admin.category.index',compact('data'));
     }
 
-    public function add()
-    {
-        $Category= new CategoryModel();
-        $result = [
-            'status' => 'OK',
-            'msg' => 'Tải danh mục thành công',
-            'data' => [],
-        ];
-
-        $Category->insert(array(
-            $Category::FIELD_TITLE => $_POST['categoryTitle'],
-            $Category::FIELD_ID_PARENT => $_POST['categoryIdParent']
-            
-        ));
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
-    }
-    public function loadlist(){
+    public function loadlist() {
         $Category= new CategoryModel();
         $result = [
             'status' => 'OK',
@@ -53,14 +31,15 @@ class CategoryController extends Controller
         }
         else{
             $result = [
-                'status' => 'NG',
+                'status' => 'OK',
                 'msg' => 'Tải danh sách category không thành công',
                 'data' => [],
             ];
         }
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
-    public function delete(){
+
+    public function delete() {
         $Category= new CategoryModel();
         $result = [
             'status' => 'OK',
@@ -68,79 +47,45 @@ class CategoryController extends Controller
             'data' => [],
         ];
         $Category->where($Category::FIELD_ID,$_POST['idCategory'])->delete();
+        $Category->where($Category::FIELD_ID_PARENT,$_POST['idCategory'])->delete();
         echo json_encode($result, JSON_UNESCAPED_UNICODE);
     }
-    public function loadDetail(){
-        $Category= new CategoryModel();
-        $result = [
-            'status' => 'OK',
-            'msg' => 'Tải Form category thành công',
-            'data' => [],
+
+    public function getAddCategory() {
+        $data = [
+            'title' => 'Danh mục',
+            'action'=> 'category'
         ];
-
-        $result['data']=$Category->find($_POST['idCategory']);
-
-        
-            // $result = [
-            //     'status' => 'NG',
-            //     'msg' => 'Tải Form category không thành công',
-            //     'data' => [],
-            // ];
-        echo json_encode($result, JSON_UNESCAPED_UNICODE);
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $categorySelect = CategoryModel::where('m_id_parent', 0)->get();
+        return view('admin.category.add', compact('data', 'categorySelect'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function postAddCategory(PostCategoryRequest $request) {
+        $request->validated();
+        CategoryModel::insert([
+            'm_title' => $request->name,
+            'm_id_parent' => $request->parent,
+            'm_index' => $request->index,
+        ]);
+        return redirect()->route('category-admin')->with('alert_success', 'Thêm mới danh mục thành công.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function getEditCategory($id) {
+        $category = CategoryModel::where('id', $id)->first();
+        $categorySelect = CategoryModel::where('m_id_parent', 0)->get();
+        $data = [
+            'title' => 'Danh mục',
+            'action'=> 'category'
+        ];
+        return view('admin.category.edit', compact('category', 'data', 'categorySelect'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function postEditCategory(UpdateCategoryRequest $request, $id) {
+        CategoryModel::where('id', $id)->update([
+            'm_title' => $request->name,
+            'm_id_parent' => $request->parent,
+            'm_index' => $request->index,
+        ]);
+        return redirect()->route('category-admin')->with('alert_success', 'Sửa danh mục thành công.');
     }
 }
