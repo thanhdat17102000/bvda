@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -7,7 +8,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-
+use GuzzleHttp\Middleware;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +67,10 @@ Route::get('/lien-he', function(){
 
 // Admin
 // Admin
-Route::group(['prefix' => 'admintrator'], function () {
+Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], function () {
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
     //dashboard
-    Route::resource('/',DashboardController::class);
+    // Route::resource('/',DashboardController::class);
     Route::resource('dashboard',DashboardController::class);
     //ajax category
     Route::get('category', [CategoryController::class, 'index'])->name('category-admin');
@@ -76,13 +79,17 @@ Route::group(['prefix' => 'admintrator'], function () {
     // Post
     Route::resource('/post', PostController::class);
     Route::get('create-post', [PostController::class,'createPost']);
+    // User
+    Route::resources([
+        'product' => App\Http\Controllers\productController::class,
+        'user' => App\Http\Controllers\userController::class,
+    ]);
+    Route::post('doi-matkhau-admin',[App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
+    Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
 });
-// User routes
-Route::group(['prefix' => 'user'], function (){
-    Route::resource('/', UserController::class);
-});
+
 // Post routes
-Route::group(['prefix'], function(){
+    Route::group(['prefix'=> 'contact'], function(){
     //category
     Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
     Route::post('category/add', [CategoryController::class, 'postAddCategory']);
@@ -94,14 +101,28 @@ Route::group(['prefix'], function(){
     Route::get('contact/{id}/edit', [ContactController::class, 'getEditContact'])->name('contact-edit-admin');
     Route::post('contact/{id}/edit', [ContactController::class, 'postEditContact']);
     Route::delete('contact/{id}/delete', [ContactController::class, 'getDeleteContact'])->name('contact-delete-admin');
+    // Route::resources('user' => App\Http\Controllers\userController::class,)
 
-
-    Route::resources([
-        'product' => App\Http\Controllers\productController::class,
-        
-    ]);
+    // Route::resources([
+    //     'product' => App\Http\Controllers\productController::class,
+    //     'user' => App\Http\Controllers\userController::class,
+    // ]);
 });
+Route::get(
+    '/',
+    function () {
+        return view('Auth.home-compare.home_page');
+    }
+);
+Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
+Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
+Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+// 
 Route::get('/', [HomeController::class, 'index'])->name('home-auth');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
 Route::post('/contact', [ContactController::class, 'postMessage']);
 
+
+\Illuminate\Support\Facades\Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

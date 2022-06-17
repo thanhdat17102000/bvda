@@ -110,7 +110,7 @@ class Database extends Migration
             $table->double('m_price');
             $table->double('m_original_price');
             $table->integer('m_buy');
-            $table->integer('m_view');
+            $table->integer('m_view')->default(1);
             $table->boolean('m_status')->default(0);
             $table->timestamps();
             $table->foreign('m_id_category')->references('id')->on('t_category');

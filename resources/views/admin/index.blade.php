@@ -18,15 +18,13 @@
         <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
         <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
-<<<<<<< HEAD
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         
-=======
-        @stack('css')
->>>>>>> b4e97afd858044ca2ec246ebb471d533cc755f2b
 
     </head>
 
@@ -66,7 +64,7 @@
                             </div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="/admintrator/user" class="dropdown-item notify-item">
                                 <i class="fe-user"></i>
                                 <span>My Account</span>
                             </a>
@@ -145,11 +143,11 @@
                     <div class="user-box text-center">
                         <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                         <div class="dropdown">
-                            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"  aria-expanded="false">Nowak Helme</a>
+                            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"  aria-expanded="false">Nguyệt Võ</a>
                             <div class="dropdown-menu user-pro-dropdown">
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="/admintrator/user" class="dropdown-item notify-item">
                                     <i class="fe-user mr-1"></i>
                                     <span>My Account</span>
                                 </a>
@@ -203,6 +201,7 @@
                                     <span> Thống kê </span>
                                 </a>
                             </li>
+                            
                             <li>
                                 <a href="{{ route("category-admin") }}" >
                                     <i class="mdi mdi-view-dashboard"></i>
@@ -210,8 +209,6 @@
                                 </a>
                             </li>
                             <li>
-<<<<<<< HEAD
-<<<<<<< HEAD
                                 <a href="/admintrator/user" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Người dùng</span>
@@ -221,8 +218,9 @@
                                 <a href="/admintrator/post" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Bài viết</span>
-=======
-=======
+                                <a href="{{ route('order') }}" >
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Quản lý đơn hàng </span>
                                 <a href="javascript: void(0);">
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Sản phẩm </span>
@@ -234,11 +232,9 @@
                                 </ul>
                             </li>
                             <li>
->>>>>>> daaf3e71b3def35e1387b829a49d5c8145a19f25
                                 <a href="{{ route("contact-admin") }}" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Phản hồi </span>
->>>>>>> b4e97afd858044ca2ec246ebb471d533cc755f2b
                                 </a>
                             </li>
                         </ul>
