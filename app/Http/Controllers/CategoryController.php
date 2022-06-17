@@ -56,7 +56,7 @@ class CategoryController extends Controller
             'title' => 'Danh mục',
             'action'=> 'category'
         ];
-        $categorySelect = CategoryModel::all();
+        $categorySelect = CategoryModel::where('m_id_parent', 0)->get();
         return view('admin.category.add', compact('data', 'categorySelect'));
     }
 
@@ -72,7 +72,7 @@ class CategoryController extends Controller
 
     public function getEditCategory($id) {
         $category = CategoryModel::where('id', $id)->first();
-        $categorySelect = CategoryModel::all();
+        $categorySelect = CategoryModel::where('m_id_parent', 0)->get();
         $data = [
             'title' => 'Danh mục',
             'action'=> 'category'

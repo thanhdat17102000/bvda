@@ -211,6 +211,7 @@
                             </li>
                             <li>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a href="/admintrator/user" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Người dùng</span>
@@ -221,6 +222,19 @@
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Bài viết</span>
 =======
+=======
+                                <a href="javascript: void(0);">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Sản phẩm </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                    <li><a href="{{ route('product.index') }}">Xem sản phẩm</a></li>
+                                    <li><a href="{{ route('product.create') }}">Thêm sản phẩm</a></li>
+                                </ul>
+                            </li>
+                            <li>
+>>>>>>> daaf3e71b3def35e1387b829a49d5c8145a19f25
                                 <a href="{{ route("contact-admin") }}" >
                                     <i class="mdi mdi-view-dashboard"></i>
                                     <span> Phản hồi </span>
