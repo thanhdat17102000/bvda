@@ -6,7 +6,7 @@
 <!-- main wrapper start -->
 <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -108,7 +108,7 @@
                             <div class="sidebar-single">
                                 <div class="sidebar-banner">
                                     <a href="#">
-                                        <img src="assets/img/banner/banner_left.jpg" alt="">
+                                        <img src="{{URL::asset('Auth/img/banner/banner_left.jpg')}}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -190,7 +190,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb">
+                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb">
                                             </a>
                                         </div>
                                         <div class="product-content-list">
@@ -222,7 +222,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -250,7 +250,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb">
+                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb">
                                             </a>
                                         </div>
                                         <div class="product-content-list">
@@ -282,7 +282,7 @@
                                     <div class="product-item mb-53">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                             </a>
                                         </div>
                                         <div class="product-content">
@@ -310,7 +310,7 @@
                                     <div class="product-list-item mb-30">
                                         <div class="product-thumb">
                                             <a href="product-details.html">
-                                                <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb">
+                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb">
                                             </a>
                                         </div>
                                         <div class="product-content-list">
@@ -371,26 +371,26 @@
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
                                     </div>
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-1.jpg')}}"
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-1.jpg')}}"
                                             alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img2.jpg"
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/Auth/img/product/product-details-img2')}}.jpg"
                                             alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img3.jpg"
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/Auth/img/product/product-details-img3')}}.jpg"
                                             alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img4.jpg"
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/Auth/img/product/product-details-img4')}}.jpg"
                                             alt="" /></div>
                                 </div>
                             </div>

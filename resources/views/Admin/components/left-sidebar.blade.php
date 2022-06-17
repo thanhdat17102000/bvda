@@ -78,10 +78,15 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{route('order')}}">
+                    <a href="javascript: void(0);">
                         <i class="mdi mdi-page-layout-sidebar-left"></i>
-                        <span> Quản lý đơn hàng </span>
+                        <span> Bài viết </span>
+                        <span class="menu-arrow"></span>
                     </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li><a href="#">Danh sách bài viết</a></li>
+                        <li><a href="layouts-sidebar-sm.html">Thêm</a></li>
+                    </ul>
                 </li>
 
             </ul>
