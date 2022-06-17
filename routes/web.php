@@ -88,7 +88,6 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
     Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
 });
 
-// Post routes
     Route::group(['prefix'=> 'contact'], function(){
     //category
     Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
