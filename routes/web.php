@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth'
 Route::post('/contact', [ContactController::class, 'postMessage']);
 
 
-\Illuminate\Support\Facades\Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
