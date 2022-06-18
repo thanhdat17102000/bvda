@@ -70,7 +70,7 @@ class productController extends Controller
         $create = new product();
         $create->m_product_name = $request->m_product_name;
         $create->m_id_category = $request->m_id_category;
-        $create->m_product_slug = \Str::slug($request->m_product_name).'.html';
+        $create->m_product_slug = Str::slug($request->m_product_name).'.html';
         $create->m_short_description = $request->m_short_description;
         $create->m_description = $request->m_description;
         $create->m_price = $request->m_price;
