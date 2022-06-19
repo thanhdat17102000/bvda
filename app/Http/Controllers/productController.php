@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\CategoryModel;
+use Illuminate\Support\Str;
 
 class productController extends Controller
 {
@@ -158,7 +159,7 @@ class productController extends Controller
         $updated = product::find($id);
         $updated->m_product_name = $request->m_product_name;
         $updated->m_id_category = $request->m_id_category;
-        $updated->m_product_slug = \Str::slug($request->m_product_name).'.html';
+        $updated->m_product_slug = Str::slug($request->m_product_name).'.html';
         $updated->m_short_description = $request->m_short_description;
         $updated->m_description = $request->m_description;
         $updated->m_price = $request->m_price;
@@ -207,7 +208,7 @@ class productController extends Controller
         $deleteimg = json_decode($delete->m_picture);
         $length = count($deleteimg);
         for ($i = 0; $i < $length; $i++) {
-           $path = public_path("uploads/".$deleteimg[$i]);
+            $path = public_path("uploads/".$deleteimg[$i]);
             if(file_exists($path)){
                 unlink($path);
             }

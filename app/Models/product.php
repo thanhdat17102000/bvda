@@ -13,7 +13,18 @@ class product extends Model
         'created_at',
         'updated_at',
     ];
-    protected $fillable = ['id','m_id_category','m_product_name','m_product_slug','m_short_description','m_description','m_picture','m_price','m_original_price','m_buy','m_view','m_status','created_at','updated_at'];
+    protected $fillable = [
+        'id','m_id_category',
+        'm_product_name',
+        'm_product_slug',
+        'm_short_description',
+        'm_description',
+        'm_picture','m_price',
+        'm_original_price',
+        'm_buy','m_view',
+        'm_status',
+        'created_at',
+        'updated_at'];
 
 
     public function showdanhmuc(){

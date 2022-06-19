@@ -5,7 +5,7 @@
 @section('content')
 <main>
     <!-- breadcrumb area start -->
-    <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('img/banner/breadcrumb-banner.jpg')}}">
+    <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -36,23 +36,23 @@
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="" />
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt=""/>
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt=""/>
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt=""/>
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt=""/>
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt=""/>
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt=""/>
                                     </div>
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt="" /></div>
                                 </div>
                             </div>
                             <div class="col-lg-7">
@@ -138,7 +138,7 @@
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque.</p>
                                                 <div class="review-description">
                                                     <div class="tab-thumb">
-                                                        <img src="{{URL::asset('img/about/services.jpg')}}" alt="">
+                                                        <img src="{{URL::asset('Auth/img/about/services.jpg')}}" alt="">
                                                     </div>
                                                     <div class="tab-des">
                                                         <h3>Thông tin sản phẩm :</h3>
@@ -174,7 +174,7 @@
                                                 <h5>1 bình luận: <span>Chaz Kangeroo Hoodies</span></h5>
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
-                                                        <img src="{{URL::asset('img/about/avatar.jpg')}}" alt="">
+                                                        <img src="{{URL::asset('Auth/img/about/avatar.jpg')}}" alt="">
                                                     </div>
                                                     <div class="review-box">
                                                         <div class="ratings">
@@ -255,7 +255,7 @@
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                                    <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content">
@@ -280,7 +280,7 @@
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-2.jpg')}}" alt="">
+                                                    <img src="{{URL::asset('Auth/img/product/product-2.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content">
@@ -305,7 +305,7 @@
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-3.jpg')}}" alt="">
+                                                    <img src="{{URL::asset('Auth/img/product/product-3.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content">
@@ -330,7 +330,7 @@
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-4.jpg')}}" alt="">
+                                                    <img src="{{URL::asset('Auth/img/product/product-4.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content">
@@ -355,7 +355,7 @@
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-5.jpg')}}" alt="">
+                                                    <img src="{{URL::asset('Auth/img/product/product-5.jpg')}}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-content">
@@ -402,23 +402,23 @@
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="product thumb" />
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt="product thumb"/>
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt="product thumb"/>
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt="product thumb"/>
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt="product thumb"/>
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt="product thumb"/>
+                                        <img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt="product thumb"/>
                                     </div>
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt="" /></div>
                                 </div>
                             </div>
                             <div class="col-lg-7">
