@@ -1,6 +1,6 @@
 @extends('Auth.layouts.master')
 @section('title')
-    SO SÁNH
+    TRANG CHỦ
 @endsection
 @section('content')
 <main>
@@ -30,7 +30,7 @@
                                         <h5 class="slide-subtitle">Xem nhiều!</h5>
                                         <h2 class="slide-title">Top trending</h2>
                                         <p class="slide-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidid</p>
-                                        <a href="shop.html" class="btn btn-hero">XEM NGAY</a>
+                                        <a href="/product_list" class="btn btn-hero">XEM NGAY</a>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                     <div class="col-lg-4">
                         <div class="service-policy-item mt-30 bg-1">
                             <div class="policy-icon">
-                                <img src="{{URL::asset('img/icon/policy-1.png')}}" alt="policy icon">
+                                <img src="{{URL::asset('Auth/img/icon/policy-1.png')}}" alt="policy icon">
                             </div>
                             <div class="policy-content">
                                 <h5 class="policy-title">MIỄN PHÍ VẬN CHUYỂN</h5>
@@ -64,7 +64,7 @@
                     <div class="col-lg-4">
                         <div class="service-policy-item mt-30 bg-2">
                             <div class="policy-icon">
-                                <img src="{{URL::asset('img/icon/policy-2.png')}}" alt="policy icon">
+                                <img src="{{URL::asset('Auth/img/icon/policy-2.png')}}" alt="policy icon">
                             </div>
                             <div class="policy-content">
                                 <h5 class="policy-title">HỖ TRỢ TRỰC TUYẾN</h5>
@@ -78,7 +78,7 @@
                     <div class="col-lg-4">
                         <div class="service-policy-item mt-30 bg-3">
                             <div class="policy-icon">
-                                <img src="{{URL::asset('img/icon/policy-3.png')}}" alt="policy icon">
+                                <img src="{{URL::asset('Auth/img/icon/policy-3.png')}}" alt="policy icon">
                             </div>
                             <div class="policy-content">
                                 <h5 class="policy-title">TIỀN TRẢ LẠI</h5>
@@ -110,7 +110,7 @@
                             <div class="product-item mb-50">
                                 <div class="product-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-content">
@@ -122,10 +122,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                             <div class="product-item mb-50">
                                 <div class="product-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-content">
@@ -145,10 +145,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                             <div class="product-item mb-50">
                                 <div class="product-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-content">
@@ -168,10 +168,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                             <div class="product-item mb-50">
                                 <div class="product-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-content">
@@ -191,10 +191,10 @@
                                         <span class="price-old"><del>120.000 vnđ</del></span>
                                     </div>
                                     <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                            title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                            title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                     <div class="col-md-6">
                         <div class="img-container mt-30">
                             <a href="product-details.html">
-                                <img src="{{URL::asset('img/banner/banner-1.jpg')}}" alt="banner-image">
+                                <img src="{{URL::asset('Auth/img/banner/banner-1.jpg')}}" alt="banner-image">
                             </a>
                             <div class="banner-text">
                                 <h5 class="banner-subtitle">GIÀY THỂ THAO</h5>
@@ -224,7 +224,7 @@
                     <div class="col-md-6">
                         <div class="img-container mt-30">
                             <a href="product-details.html">
-                                <img src="{{URL::asset('img/banner/banner-2.jpg')}}" alt="banner-image">
+                                <img src="{{URL::asset('Auth/img/banner/banner-2.jpg')}}" alt="banner-image">
                             </a>
                             <div class="banner-text">
                                 <h5 class="banner-subtitle">GIÀY THỂ THAO</h5>
@@ -252,7 +252,7 @@
                     <div class="col-xl-4 col-lg-5 col-md-5">
                         <div class="product-banner">
                             <a href="#">
-                                <img src="{{URL::asset('img/banner/banner-3.jpg')}}" alt="product banner">
+                                <img src="{{URL::asset('Auth/img/banner/banner-3.jpg')}}" alt="product banner">
                             </a>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
-                                            <img src="{{URL::asset('img/product/pro-small-1.jpg')}}" alt="">
+                                            <img src="{{URL::asset('Auth/img/product/pro-small-1.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -282,10 +282,10 @@
                                             <span><i class="ion-android-star"></i></span>
                                         </div>
                                         <div class="product-link-2">
-                                            <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                            <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                                title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +295,7 @@
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
-                                            <img src="{{URL::asset('img/product/pro-small-1.jpg')}}" alt="">
+                                            <img src="{{URL::asset('Auth/img/product/pro-small-1.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -314,10 +314,10 @@
                                             <span><i class="ion-android-star"></i></span>
                                         </div>
                                         <div class="product-link-2">
-                                            <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
-                                            <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                                title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +327,7 @@
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
-                                            <img src="{{URL::asset('img/product/pro-small-1.jpg')}}" alt="">
+                                            <img src="{{URL::asset('Auth/img/product/pro-small-1.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -359,7 +359,7 @@
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
-                                            <img src="{{URL::asset('img/product/pro-small-1.jpg')}}" alt="">
+                                            <img src="{{URL::asset('Auth/img/product/pro-small-1.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -391,7 +391,7 @@
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
-                                            <img src="{{URL::asset('img/product/pro-small-1.jpg')}}" alt="">
+                                            <img src="{{URL::asset('Auth/img/product/pro-small-1.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -423,7 +423,7 @@
                                 <div class="pro-item-small mt-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
-                                            <img src="{{URL::asset('img/product/pro-small-1.jpg')}}" alt="">
+                                            <img src="{{URL::asset('Auth/img/product/pro-small-1.jpg')}}" alt="">
                                         </a>
                                     </div>
                                     <div class="pro-small-content">
@@ -479,7 +479,7 @@
                             <div class="blog-post-item">
                                 <div class="blog-thumb">
                                     <a href="blog-details.html">
-                                        <img src="{{URL::asset('img/blog/blog-1.jpg')}}" alt="blog thumb">
+                                        <img src="{{URL::asset('Auth/img/blog/blog-1.jpg')}}" alt="blog thumb">
                                     </a>
                                 </div>
                                 <div class="blog-content">
@@ -501,7 +501,7 @@
                             <div class="blog-post-item">
                                 <div class="blog-thumb">
                                     <a href="blog-details.html">
-                                        <img src="{{URL::asset('img/blog/blog-2.jpg')}}" alt="blog thumb">
+                                        <img src="{{URL::asset('Auth/img/blog/blog-2.jpg')}}" alt="blog thumb">
                                     </a>
                                 </div>
                                 <div class="blog-content">
@@ -523,7 +523,7 @@
                             <div class="blog-post-item">
                                 <div class="blog-thumb">
                                     <a href="blog-details.html">
-                                        <img src="{{URL::asset('img/blog/blog-3.jpg')}}" alt="blog thumb">
+                                        <img src="{{URL::asset('Auth/img/blog/blog-3.jpg')}}" alt="blog thumb">
                                     </a>
                                 </div>
                                 <div class="blog-content">
@@ -545,7 +545,7 @@
                             <div class="blog-post-item">
                                 <div class="blog-thumb">
                                     <a href="blog-details.html">
-                                        <img src="{{URL::asset('img/blog/blog-3.jpg')}}" alt="blog thumb">
+                                        <img src="{{URL::asset('Auth/img/blog/blog-3.jpg')}}" alt="blog thumb">
                                     </a>
                                 </div>
                                 <div class="blog-content">
@@ -577,27 +577,27 @@
                         <div class="brand-active-carousel">
                             <div class="brand-item">
                                 <a href="#">
-                                    <img src="{{URL::asset('img/brand/br1.png')}}" alt="brand image">
+                                    <img src="{{URL::asset('Auth/img/brand/br1.png')}}" alt="brand image">
                                 </a>
                             </div>
                             <div class="brand-item">
                                 <a href="#">
-                                    <img src="{{URL::asset('img/brand/br2.png')}}" alt="brand image">
+                                    <img src="{{URL::asset('Auth/img/brand/br2.png')}}" alt="brand image">
                                 </a>
                             </div>
                             <div class="brand-item">
                                 <a href="#">
-                                    <img src="{{URL::asset('img/brand/br3.png')}}" alt="brand image">
+                                    <img src="{{URL::asset('Auth/img/brand/br3.png')}}" alt="brand image">
                                 </a>
                             </div>
                             <div class="brand-item">
                                 <a href="#">
-                                    <img src="{{URL::asset('img/brand/br4.png')}}" alt="brand image">
+                                    <img src="{{URL::asset('Auth/img/brand/br4.png')}}" alt="brand image">
                                 </a>
                             </div>
                             <div class="brand-item">
                                 <a href="#">
-                                    <img src="{{URL::asset('img/brand/br5.png')}}" alt="brand image">
+                                    <img src="{{URL::asset('Auth/img/brand/br5.png')}}" alt="brand image">
                                 </a>
                             </div>
                         </div>

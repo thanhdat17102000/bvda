@@ -1,12 +1,12 @@
 @extends('Auth.layouts.master')
 @section('title')
-    Đằng ký
+    Đăng ký
 @endsection
 @section('content')
         <!-- main wrapper start -->
         <main>
             <!-- breadcrumb area start -->
-            <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+            <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
