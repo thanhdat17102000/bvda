@@ -115,6 +115,17 @@ class Database extends Migration
             $table->timestamps();
             $table->foreign('m_id_category')->references('id')->on('t_category');
         });
+        Schema::create('t_commentProduct', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('m_id');
+            $table->unsignedInteger('m_id_user');
+            $table->integer('m_id_parent');
+            $table->text('m_content');
+            $table->boolean('m_status')->default(0);
+            $table->timestamps();
+            $table->foreign('m_id')->references('id')->on('t_product');
+            $table->foreign('m_id_user')->references('id')->on('t_user');
+        });
         Schema::create('t_product_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('m_id_product');

@@ -12,6 +12,9 @@ use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
+//  start Comment sent
+use App\Http\Controllers\Comment_Product;
+// end comment
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,6 +88,13 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
         'product' => App\Http\Controllers\productController::class,
         'user' => App\Http\Controllers\userController::class,
     ]);
+
+    // start Comment
+    Route::get('/list',[Comment_Product::class,'index'])->name('list_comment');
+    Route::get('/delete_cmt/{id}',[Comment_Product::class,'delete_comment']);
+    // end Comment
+
+
     Route::post('doi-matkhau-admin',[App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
     Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
 });
