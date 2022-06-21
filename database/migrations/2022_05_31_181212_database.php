@@ -42,6 +42,7 @@ class Database extends Migration
             $table->integer('m_id_parent');
             $table->text('m_content');
             $table->boolean('m_status')->default(0);
+            $table->text('answer_cmt')->nullable();
             $table->timestamps();
             $table->foreign('m_id_post')->references('id')->on('t_post');
             $table->foreign('m_id_user')->references('id')->on('t_user');
@@ -121,6 +122,7 @@ class Database extends Migration
             $table->unsignedInteger('m_id_user');
             $table->integer('m_id_parent');
             $table->text('m_content');
+            $table->text('answer_cmt')->nullable();
             $table->boolean('m_status')->default(0);
             $table->timestamps();
             $table->foreign('m_id')->references('id')->on('t_product');
