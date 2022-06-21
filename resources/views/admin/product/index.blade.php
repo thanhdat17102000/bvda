@@ -180,6 +180,7 @@
                     </diV>
                 </tr>
             @endforeach
+            {{ $datas -> links()}}
         </tbody>
     </table>
     </div>

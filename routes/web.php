@@ -80,13 +80,16 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
     // Post
     Route::resource('/post', PostController::class);
     Route::get('create-post', [PostController::class,'createPost']);
-    // User
+    // Accounts
+    Route::resource('profile',App\Http\Controllers\UserController::class);
+    Route::get('user',[App\Http\Controllers\UserController::class, 'list'])->name('list-user');
+    Route::post('doi-matkhau-admin',[App\Http\Controllers\UserController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
+    Route::post('doi-thongtin-admin',[App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
+    // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,
-        'user' => App\Http\Controllers\userController::class,
     ]);
-    Route::post('doi-matkhau-admin',[App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
-    Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
+    
 });
 
     Route::group(['prefix'=> 'contact'], function(){
@@ -101,12 +104,6 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
     Route::get('contact/{id}/edit', [ContactController::class, 'getEditContact'])->name('contact-edit-admin');
     Route::post('contact/{id}/edit', [ContactController::class, 'postEditContact']);
     Route::delete('contact/{id}/delete', [ContactController::class, 'getDeleteContact'])->name('contact-delete-admin');
-    // Route::resources('user' => App\Http\Controllers\userController::class,)
-
-    // Route::resources([
-    //     'product' => App\Http\Controllers\productController::class,
-    //     'user' => App\Http\Controllers\userController::class,
-    // ]);
 });
 Route::get(
     '/',
@@ -121,8 +118,8 @@ Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])-
 Route::get('/', [HomeController::class, 'index'])->name('home-auth');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
 Route::post('/contact', [ContactController::class, 'postMessage']);
-
-
+// Auth
 Auth::routes();
+Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

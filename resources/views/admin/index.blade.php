@@ -10,6 +10,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
+        
+        <link href="{{ asset('admin/assets/css') }}/main.css" rel="stylesheet" type="text/css" />
 
         <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
 
@@ -20,10 +22,10 @@
         <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
         
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
+{{-- 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
         
 
     </head>
@@ -54,17 +56,17 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                                Nowak <i class="mdi mdi-chevron-down"></i>
+                                <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                             <!-- item-->
                             <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
+                                <h6 class="text-overflow m-0">Chào mừng</h6>
                             </div>
 
                             <!-- item-->
-                            <a href="/admintrator/user" class="dropdown-item notify-item">
+                            <a href="/admintrator/profile" class="dropdown-item notify-item">
                                 <i class="fe-user"></i>
                                 <span>My Account</span>
                             </a>
@@ -84,7 +86,7 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{ route('logout') }}" class="dropdown-item notify-item">
                                 <i class="fe-log-out"></i>
                                 <span>Logout</span>
                             </a>
@@ -102,18 +104,18 @@
                 <div class="logo-box">
                     <a href="index.html" class="logo logo-dark text-center">
                         <span class="logo-lg">
-                            <img src="{{ asset('admin/assets/images') }}/logo-dark.png" alt="" height="16">
+                            <img src="{{ asset('admin/assets/images') }}/logo.png" alt="" height="75">
                         </span>
                         <span class="logo-sm">
-                            <img src="{{ asset('admin/assets/images') }}/logo-sm.png" alt="" height="24">
+                            <img src="{{ asset('admin/assets/images') }}/logopng" alt="" height="50">
                         </span>
                     </a>
                     <a href="index.html" class="logo logo-light text-center">
                         <span class="logo-lg">
-                            <img src="{{ asset('admin/assets/images') }}/logo-light.png" alt="" height="16">
+                            <img src="{{ asset('admin/assets/images') }}/logo.png" alt="" height="16">
                         </span>
                         <span class="logo-sm">
-                            <img src="{{ asset('admin/assets/images') }}/logo-sm.png" alt="" height="24">
+                            <img src="{{ asset('admin/assets/images') }}/logo.png" alt="" height="24">
                         </span>
                     </a>
                 </div>
@@ -135,7 +137,7 @@
             <!-- end Topbar -->
 
             <!-- ========== Left Sidebar Start ========== -->
-            <div class="left-side-menu">
+            <div  class="left-side-menu">
 
                 <div class="slimscroll-menu">
 
@@ -144,7 +146,7 @@
                         <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                         <div class="dropdown">
                             <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown"  aria-expanded="false">Nguyệt Võ</a>
-                            <div class="dropdown-menu user-pro-dropdown">
+                            {{-- <div class="dropdown-menu user-pro-dropdown">
 
                                 <!-- item-->
                                 <a href="/admintrator/user" class="dropdown-item notify-item">
@@ -165,14 +167,14 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{ route('logout') }}" class="dropdown-item notify-item">
                                     <i class="fe-log-out mr-1"></i>
                                     <span>Logout</span>
                                 </a>
 
-                            </div>
+                            </div> --}}
                         </div>
-                        <p class="text-muted">Admin Head</p>
+                        <p class="text-muted">Admin</p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <a href="#" class="text-muted">
@@ -181,7 +183,7 @@
                             </li>
 
                             <li class="list-inline-item">
-                                <a href="#">
+                                <a href="{{ route('logout') }}">
                                     <i class="mdi mdi-power"></i>
                                 </a>
                             </li>
@@ -189,8 +191,7 @@
                     </div>
 
                     <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-
+                    <div class="sidebar" id="sidebar-menu">
                         <ul class="metismenu" id="side-menu">
 
                             <li class="menu-title">Navigation</li>
