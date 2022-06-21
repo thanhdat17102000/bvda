@@ -13,5 +13,4 @@ class Post extends Model
     protected $table = 't_post';
     protected $primaryKey = 'id';
     
-    
 }

@@ -12,6 +12,7 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
 
+<<<<<<< HEAD
     <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
@@ -29,6 +30,29 @@
 
 </head>
 
+=======
+    <!-- third party css -->
+    @stack('styles')
+    <!-- third party css end -->
+
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
+        type="text/css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet"
+        rel="stylesheet" type="text/css" />
+        
+    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
+        type="text/css" />
+
+    <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
 <body>
 
     <!-- Begin page -->
@@ -52,8 +76,15 @@
                     </form>
                 </li>
                 <li class="dropdown notification-list">
+<<<<<<< HEAD
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image" class="rounded-circle">
+=======
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image"
+                            class="rounded-circle">
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                         <span class="pro-user-name ml-1">
                             Nowak <i class="mdi mdi-chevron-down"></i>
                         </span>
@@ -127,7 +158,11 @@
                 </li>
 
                 <li>
+<<<<<<< HEAD
                     <h4 class="page-title-main">{{$data['title']}}</h4>
+=======
+                    <h4 class="page-title-main">{{ $data['title'] }}</h4>
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                 </li>
 
             </ul>
@@ -142,9 +177,17 @@
 
                 <!-- User box -->
                 <div class="user-box text-center">
+<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
                         <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown" aria-expanded="false">Nguyệt Võ</a>
+=======
+                    <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img"
+                        title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+                    <div class="dropdown">
+                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block"
+                            data-toggle="dropdown" aria-expanded="false">Nguyệt Võ</a>
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
@@ -197,14 +240,23 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
+<<<<<<< HEAD
                             <a href="{{ route("dashboard.index") }}" class=" {{ $data['action'] === 'dashboard' ? 'active' : '' }} ">
+=======
+                            <a href="{{ route('dashboard.index') }}"
+                                class=" {{ $data['action'] === 'dashboard' ? 'active' : '' }} ">
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Thống kê </span>
                             </a>
                         </li>
 
                         <li>
+<<<<<<< HEAD
                             <a href="{{ route("category-admin") }}">
+=======
+                            <a href="{{ route('category-admin') }}">
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Danh mục </span>
                             </a>
@@ -233,12 +285,19 @@
                                     </ul>
                         </li>
                         <li>
+<<<<<<< HEAD
                             <a href="{{ route("contact-admin") }}">
+=======
+                            <a href="{{ route('contact-admin') }}">
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Phản hồi </span>
                             </a>
                         </li>
+<<<<<<< HEAD
                         
+=======
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     </ul>
 
                 </div>
@@ -283,30 +342,59 @@
                     <strong>Customize </strong> the overall color scheme, layout, etc.
                 </div>
                 <div class="mb-2">
+<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/light.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
+=======
+                    <img src="{{ asset('admin/assets/images') }}/layouts/light.png" class="img-fluid img-thumbnail"
+                        alt="">
+                </div>
+                <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch"
+                        checked />
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
                 </div>
 
                 <div class="mb-2">
+<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css" data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
+=======
+                    <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail"
+                        alt="">
+                </div>
+                <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
+                        data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
+                        data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
                 </div>
 
                 <div class="mb-2">
+<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="{{ asset('admin/assets/css') }}/app-rtl.min.css" />
+=======
+                    <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail"
+                        alt="">
+                </div>
+                <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
+                        data-appStyle="{{ asset('admin/assets/css') }}/app-rtl.min.css" />
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
                 </div>
 
                 <div class="mb-2">
+<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-5">
@@ -315,6 +403,20 @@
                 </div>
 
                 <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-download mr-1"></i> Download Now</a>
+=======
+                    <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png"
+                        class="img-fluid img-thumbnail" alt="">
+                </div>
+                <div class="custom-control custom-switch mb-5">
+                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch"
+                        data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
+                        data-appStyle="{{ asset('admin/assets/css') }}/app-dark-rtl.min.css" />
+                    <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
+                </div>
+
+                <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i
+                        class="mdi mdi-download mr-1"></i> Download Now</a>
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
             </div>
         </div> <!-- end slimscroll-menu-->
     </div>
@@ -335,6 +437,7 @@
     <!-- Dashboard init js-->
     <script src="{{ asset('admin/assets/js') }}/pages/dashboard.init.js"></script>
 
+<<<<<<< HEAD
     <!-- App js -->
     <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
 
@@ -351,3 +454,24 @@
 </body>
 
 </html>
+=======
+    {{-- Another JS --}}
+    @stack('scripts')
+
+    <!-- App js -->
+    <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
+
+    <script src="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.js"></script>
+
+    <script src="{{ asset('admin/assets/js') }}/pages/sweet-alerts.init.js"></script>
+
+    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
+
+    <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
+    <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script> 
+
+
+</body>
+
+</html>
+>>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
