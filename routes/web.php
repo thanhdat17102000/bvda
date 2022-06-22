@@ -12,6 +12,9 @@ use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
+//  start Comment sent
+use App\Http\Controllers\Comment_Product;
+// end comment
 /*
 |--------------------------------------------------------------------------
 | Web Routes
