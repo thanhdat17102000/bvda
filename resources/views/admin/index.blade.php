@@ -21,7 +21,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet"
         rel="stylesheet" type="text/css" />
-        
+
     <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
         type="text/css" />
 
@@ -367,7 +367,7 @@
     <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
 
     <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
-    <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script> 
+    <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script>
 
 
 </body>
