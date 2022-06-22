@@ -16,6 +16,8 @@ use App\Models\CategoryModel;
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
 // end comment
+// start comment blog
+// emd comment blog
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -93,6 +95,9 @@ Route::group(['prefix' => 'admintrator'], function () {
     Route::get('/list',[Comment_Product::class,'index'])->name('list_comment');
     Route::get('/delete_cmt/{id}',[Comment_Product::class,'delete_comment']);
     // end Comment
+    // Route::get('/list_cmt_blog','');
+
+
     Route::post('doi-matkhau-admin',[App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
     Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     //ajax category
