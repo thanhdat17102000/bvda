@@ -1,4 +1,7 @@
 @extends('admin.index')
+@section('title')
+    Tài khoản
+@endsection
 @section('content')
 <link href="{{asset('admin/assets/libs/tablesaw/tablesaw.css')}}" rel="stylesheet" type="text/css">
 <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">

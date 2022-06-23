@@ -1,4 +1,7 @@
 @extends('admin.index')
+@section('title')
+    Quản lý tài khoản
+@endsection
 @section('content')
     {{-- <div class="row">
     @foreach ($thanhvien as $d)
@@ -53,11 +56,13 @@
                     <td class="pt-3-half" contenteditable="true">{{$d->phone}}</td>
                     <td class="pt-3-half" contenteditable="true">{{$d->m_address}}</td>
                     <td>
-                        <span class="table-remove"
-                        ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                            Sửa
-                        </button></span
-                        >
+                        <span class="table-remove">
+                            @if ($d->role==1)
+                                Admintrator
+                            @else
+                                Khách hàng
+                            @endif   
+                        </span>
                     </td>
                     <td>
                         <span class="table-remove"
