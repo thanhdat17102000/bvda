@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
 // end comment
+// start comment blog 
+// emd comment blog
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,10 +72,15 @@ Route::get('/lien-he', function(){
 });
 
 // Admin
+Route::group(['prefix'=>'admin'],function(){
+    Auth::routes();
+    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+});
 // Admin
 Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], function () {
-    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
+    // Auth
     //dashboard
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
     // Route::resource('/',DashboardController::class);
     Route::resource('dashboard',DashboardController::class);
     //ajax category
@@ -92,7 +99,16 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
     Route::resources([
         'product' => App\Http\Controllers\productController::class,
     ]);
-    
+
+    // start Comment
+    Route::get('/list',[Comment_Product::class,'index'])->name('list_comment');
+    Route::get('/delete_cmt/{id}',[Comment_Product::class,'delete_comment']);
+    // end Comment
+    // Route::get('/list_cmt_blog','');
+
+
+    Route::post('doi-matkhau-admin',[App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
+    Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
 });
 
     Route::group(['prefix'=> 'contact'], function(){
@@ -121,8 +137,5 @@ Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])-
 Route::get('/', [HomeController::class, 'index'])->name('home-auth');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
 Route::post('/contact', [ContactController::class, 'postMessage']);
-// Auth
-Auth::routes();
-Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
