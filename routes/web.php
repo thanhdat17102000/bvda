@@ -78,18 +78,28 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth'
 Route::post('/contact', [ContactController::class, 'postMessage']);
 
 // Admin
-Route::group(['prefix' => 'admintrator'], function () {
-    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
+Route::group(['prefix'=>'admin'],function(){
+    Auth::routes();
+    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+});
+// Admin
+Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], function () {
+    // Auth
     //dashboard
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
     // Route::resource('/',DashboardController::class);
     Route::resource('dashboard',DashboardController::class);
     // Post
     Route::resource('/post', PostController::class);
     Route::get('create-post', [PostController::class,'createPost']);
-    // User
+    // Accounts
+    Route::resource('profile',App\Http\Controllers\UserController::class);
+    Route::get('user',[App\Http\Controllers\UserController::class, 'list'])->name('list-user');
+    Route::post('doi-matkhau-admin',[App\Http\Controllers\UserController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
+    Route::post('doi-thongtin-admin',[App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
+    // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,
-        'user' => App\Http\Controllers\userController::class,
     ]);
     // start Comment
     Route::get('/list',[Comment_Product::class,'index'])->name('list_comment');
@@ -130,9 +140,5 @@ Route::get(
 Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
 Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
 Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
-
-Route::get('/', [HomeController::class, 'index'])->name('home-auth');
-
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

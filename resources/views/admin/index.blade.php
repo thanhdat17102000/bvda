@@ -12,20 +12,24 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
 
-    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+    <!-- third party css -->
+    @stack('styles')
+    <!-- third party css end -->
+
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
+        type="text/css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet"
+        rel="stylesheet" type="text/css" />
+        
+    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
+        type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 
 </head>
 
@@ -85,7 +89,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('logout')}}" class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
                             <span>Logout</span>
                         </a>
@@ -150,13 +154,13 @@
                             <!-- item-->
                             <a href="/admintrator/user" class="dropdown-item notify-item">
                                 <i class="fe-user mr-1"></i>
-                                <span>My Account</span>
+                                <span>Tài khoản</span>
                             </a>
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-settings mr-1"></i>
-                                <span>Settings</span>
+                                <span>Cài đặt</span>
                             </a>
 
                             <!-- item-->
@@ -166,7 +170,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{route('logout')}}" class="dropdown-item notify-item">
                                 <i class="fe-log-out mr-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -182,7 +186,7 @@
                         </li>
 
                         <li class="list-inline-item">
-                            <a href="#">
+                            <a href="{{route('logout')}}">
                                 <i class="mdi mdi-power"></i>
                             </a>
                         </li>
@@ -238,6 +242,7 @@
                                 <span> Phản hồi </span>
                             </a>
                         </li>
+                        
                     </ul>
 
                 </div>
