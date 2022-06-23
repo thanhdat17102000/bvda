@@ -84,7 +84,7 @@
                             <center> - Đổi mật khẩu - </center>
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Thuộc tài khoản</label>
+                                <label for="exampleInputEmail1">Tên tài khoản</label>
                                 <input type="text" class="form-control" id="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
                             </div>
                             <div class="form-group">
@@ -96,7 +96,7 @@
                                 <input type="password" class="form-control" id="matkhaumoi" name="matkhaumoi" placeholder="Nhập mật khẩu mới">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">xác nhận mật khẩu mới</label>
+                                <label for="exampleInputEmail1">Xác nhận mật khẩu mới</label>
                                 <input type="password" class="form-control" id="xacnhanmatkhau" name="xacnhanmatkhau" placeholder="xác nhận mật khẩu mới">
                             </div>
                             <button type="submit" id="btnluumk" class="btn btn-primary">Lưu mật khẩu</button>
@@ -104,7 +104,7 @@
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="profile1">
                         <center> - Đổi Thông tin - </center>
-                        <form action="{{route('user.update', Auth::user()->id)}}" method="post" role="form" enctype="multipart/form-data">
+                        <form action="{{route('profile.update', Auth::user()->id)}}" method="post" role="form" enctype="multipart/form-data">
                             @csrf @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Họ và Tên</label>
@@ -248,7 +248,7 @@
             ev.preventDefault();
             var _href = $(this).attr('href');
             $('form#form-delete').attr('action',_href);
-            alertify.confirm('bạn muốn xóa sản phẩm này chứ ?', function(result){
+            alertify.confirm('Bạn muốn xóa sản phẩm này ?', function(result){
                 if(result){
                     $('form#form-delete').submit();
                 }
@@ -270,11 +270,11 @@
                 url:'{{route("doimatkhauadmin")}}',
                 method:'post',
                 data:{
-                   id:id,matkhaucu:matkhaucu,matkhaumoi:matkhaumoi,xacnhanmatkhau:xacnhanmatkhau,_token:_token
+                    id:id,matkhaucu:matkhaucu,matkhaumoi:matkhaumoi,xacnhanmatkhau:xacnhanmatkhau,_token:_token
                 },
                 success: function(data){
                     if(data = 'thanhcong'){
-                        alertify.success('update mật khẩu thành công');
+                        alertify.success('Cập nhật mật khẩu thành công');
                     }
                 }
             })
