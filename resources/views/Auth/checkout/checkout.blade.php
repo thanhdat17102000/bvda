@@ -14,7 +14,7 @@ Thanh toán
                             <h1 class="breadcrumb-title">THANH TOÁN</h1>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">TRANG CHỦ</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">THANH TOÁN</li>
+                                <li class="breadcrumb-item active" aria-current="page">THANH  TOÁN</li>
                             </ul>
                         </nav>
                     </div>
