@@ -23,7 +23,6 @@ class UserController extends Controller
         ];
         $thanhvien = accountModel::orderBy('id','asc')->whereIn('role',[1,2])->get();
         return view('admin.user.index', compact('data','thanhvien'));
-
     }
     public function list(){
         $data = [

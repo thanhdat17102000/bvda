@@ -24,6 +24,10 @@
 </head>
 
 <body>
+    @php
+        use App\Models\CategoryModel;
+        $categories = CategoryModel::where('m_id_parent', 0)->get();
+    @endphp
     @include('Auth.components.header')
     @yield('content')
     @include('Auth.components.footer')

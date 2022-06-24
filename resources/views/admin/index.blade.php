@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Adminto - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -34,7 +34,6 @@
 </head>
 
 <body>
-
     <!-- Begin page -->
     <div id="wrapper">
 
@@ -57,41 +56,41 @@
                 </li>
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                        <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            Nowak <i class="mdi mdi-chevron-down"></i>
+                            <i class="mdi mdi-chevron-down">{{Auth::user()->m_name}}</i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
+                            <h6 class="text-overflow m-0">Chào mừng {{Auth::user()->name}}</h6>
                         </div>
 
                         <!-- item-->
-                        <a href="/admintrator/user" class="dropdown-item notify-item">
+                        <a href="/admintrator/profile" class="dropdown-item notify-item">
                             <i class="fe-user"></i>
-                            <span>My Account</span>
+                            <span>Tài khoản</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="fe-settings"></i>
-                            <span>Settings</span>
+                            <span>Cài đặt</span>
                         </a>
 
-                        <!-- item-->
+                        {{-- <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="fe-lock"></i>
                             <span>Lock Screen</span>
-                        </a>
+                        </a> --}}
 
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
                         <a href="{{route('logout')}}" class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                         </a>
 
                     </div>
@@ -146,13 +145,13 @@
 
                 <!-- User box -->
                 <div class="user-box text-center">
-                    <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+                    <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
-                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown" aria-expanded="false">Nguyệt Võ</a>
+                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown" aria-expanded="false">{{Auth::user()->name}}</a>
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
-                            <a href="/admintrator/user" class="dropdown-item notify-item">
+                            <a href="/admintrator/profile" class="dropdown-item notify-item">
                                 <i class="fe-user mr-1"></i>
                                 <span>Tài khoản</span>
                             </a>
@@ -163,21 +162,27 @@
                                 <span>Cài đặt</span>
                             </a>
 
-                            <!-- item-->
+                            {{-- <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-lock mr-1"></i>
                                 <span>Lock Screen</span>
-                            </a>
+                            </a> --}}
 
                             <!-- item-->
                             <a href="{{route('logout')}}" class="dropdown-item notify-item">
                                 <i class="fe-log-out mr-1"></i>
-                                <span>Logout</span>
+                                <span>Đăng xuất</span>
                             </a>
 
                         </div>
                     </div>
-                    <p class="text-muted">Admin Head</p>
+                    <p class="text-muted">
+                        @if(Auth::user()->role == 1) 
+                            Admintrator
+                        @else if(Auth::user()->role == 2)
+                            Nhân viên
+                        @endif
+                    </p>
                     <ul class="list-inline">
                         <li class="list-inline-item">
                             <a href="#" class="text-muted">
