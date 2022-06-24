@@ -1,4 +1,7 @@
 @extends('admin.index')
+@section('title')
+    Thêm bài viết
+@endsection
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->

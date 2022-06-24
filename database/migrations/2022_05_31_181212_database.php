@@ -42,6 +42,7 @@ class Database extends Migration
             $table->integer('m_id_parent');
             $table->text('m_content');
             $table->boolean('m_status')->default(0);
+            $table->text('answer_cmt')->nullable();
             $table->timestamps();
             $table->foreign('m_id_post')->references('id')->on('t_post');
             $table->foreign('m_id_user')->references('id')->on('t_user');
@@ -82,15 +83,29 @@ class Database extends Migration
             $table->timestamps();
         });
         Schema::create('t_user', function (Blueprint $table) {
+            // $table->increments('id');
+            // $table->string('m_username',255);
+            // $table->text('m_password');
+            // $table->string('m_name',255)->nullable();
+            // $table->string('m_phone',15);
+            // $table->boolean('m_role')->default(0);
+            // $table->string('m_address',255)->nullable();
+            // $table->text('m_avatar')->nullable();
+            // $table->boolean('m_status')->default(0);
+            // $table->timestamps();
             $table->increments('id');
-            $table->string('m_username',255);
-            $table->text('m_password');
-            $table->string('m_name',255)->nullable();
-            $table->string('m_phone',15);
-            $table->boolean('m_role')->default(0);
+            $table->string('m_username',255)->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone',15)->nullable();
+            $table->boolean('role')->default(0);
+            $table->boolean('multiple_role')->default(0);
             $table->string('m_address',255)->nullable();
             $table->text('m_avatar')->nullable();
+            $table->string('password');
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('m_status')->default(0);
+            $table->rememberToken();
             $table->timestamps();
         });
         Schema::create('t_category', function (Blueprint $table) {
@@ -121,6 +136,7 @@ class Database extends Migration
             $table->unsignedInteger('m_id_user');
             $table->integer('m_id_parent');
             $table->text('m_content');
+            $table->text('answer_cmt')->nullable();
             $table->boolean('m_status')->default(0);
             $table->timestamps();
             $table->foreign('m_id')->references('id')->on('t_product');
