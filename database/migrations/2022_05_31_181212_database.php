@@ -36,11 +36,13 @@ class Database extends Migration
             $table->foreign('m_id_user')->references('id')->on('t_user');
         });
         Schema::create('t_commentPost', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('idbl');
             $table->unsignedInteger('m_id_post');
             $table->unsignedInteger('m_id_user');
             $table->integer('m_id_parent');
             $table->text('m_content');
+            $table->string('answer_question')->nullable();
+            $table->date('ngaybl')->nullable();
             $table->boolean('m_status')->default(0);
             $table->text('answer_cmt')->nullable();
             $table->timestamps();
@@ -83,18 +85,7 @@ class Database extends Migration
             $table->timestamps();
         });
         Schema::create('t_user', function (Blueprint $table) {
-            // $table->increments('id');
-            // $table->string('m_username',255);
-            // $table->text('m_password');
-            // $table->string('m_name',255)->nullable();
-            // $table->string('m_phone',15);
-            // $table->boolean('m_role')->default(0);
-            // $table->string('m_address',255)->nullable();
-            // $table->text('m_avatar')->nullable();
-            // $table->boolean('m_status')->default(0);
-            // $table->timestamps();
             $table->increments('id');
-            $table->string('m_username',255)->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone',15)->nullable();
@@ -131,15 +122,16 @@ class Database extends Migration
             $table->foreign('m_id_category')->references('id')->on('t_category');
         });
         Schema::create('t_commentProduct', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('m_id');
+            $table->increments('idbl');
+            $table->unsignedInteger('m_id_maloai');
             $table->unsignedInteger('m_id_user');
             $table->integer('m_id_parent');
             $table->text('m_content');
             $table->text('answer_cmt')->nullable();
             $table->boolean('m_status')->default(0);
+            $table->date('ngaybinhluan')->nullable();
             $table->timestamps();
-            $table->foreign('m_id')->references('id')->on('t_product');
+            $table->foreign('m_id_maloai')->references('id')->on('t_product');
             $table->foreign('m_id_user')->references('id')->on('t_user');
         });
         Schema::create('t_product_inventory', function (Blueprint $table) {
