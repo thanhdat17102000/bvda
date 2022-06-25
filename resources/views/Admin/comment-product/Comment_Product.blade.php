@@ -23,7 +23,6 @@
         border-radius: 40px;
 
     }
-
     .avt img {
         width: 100%;
         height: 100%;
@@ -39,7 +38,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="page-title"> Quản lí bình luận <span class="badge badge-danger">@php echo count($d); @endphp</span>
+                <h4 class="page-title"> Quản lí bình luận <span class="badge badge-danger"><?php echo count($query); ?></span>
                 </h4>
             </div>
         </div>
@@ -63,60 +62,59 @@
                     </thead>
 
 
-                    <tbody>
-                        @foreach($d as $row)
+                    <tbody id="output">
+                        @php
+                        if(isset($query)) {
+                        foreach($query as $row) {
+                        @endphp
                         <tr>
-                            <td rowspan="2">
-                                </br>
-                                {{$row['m_username']}} </br>
+                            <td>
+                                {{$row->name}}
                             </td>
-                            <td onload="cut_string()">
-                                <span id="cut_strings">
+                            <td>
+                                <span>
                                     @php
-                                    $str = $row['m_content'];
-                                    $result_str = substr($str,0,40);
-                                    $result_str.='....';
-                                    echo $result_str;
+                                    $str = $row->m_content;
+                                    $ct = substr($str, 0,30);
+                                    $ct .= '....';
+                                    echo $ct;
                                     @endphp
                                 </span>
-                                <button type="button" class="btn btn-primary float-right" style="outline: none;" data-toggle="modal" data-target="#exampleModal">
+                                <button type='button' value="{{$row->idbl}}"   class='get_value btn btn-primary float-right' style='outline: none;' data-toggle='modal' data-target='#exampleModal'>
                                     Xem
                                 </button>
                             </td>
                             <td>
-                                Mã sản phẩm : {!!$row['id']!!} </br>
-                                Tên sản phẩm : {!!$row['m_product_name']!!}
+                                <span style='color:red'>ID : {{$row->m_id_maloai}}</span></br>
+                                {{$row->m_product_name}}
                             </td>
-                            <td with="10%">
-                                {{$row['created_at']}}
+                            <td with='10%'>
+                                {{$row->ngaybinhluan}}
                             </td>
                             <td>
-                                <button class="btn btn-@php if($row['m_status'] ==1) {echo 'primary';} else {echo 'warning';}@endphp 
-" style="outline: none;" id="click_d">
-                                    @php
-                                    if($row['m_status']===1){
-                                    echo "Ðã Duyệt";
-                                    }
-                                    else{
-                                    echo "Chưa Duyệtt";
-                                    }
-                                    @endphp
+                                <button class='btn @php if($row->m_status ==1) {echo "btn-primary";} else {echo "btn-warning";}@endphp style=' outline: none;'>
+                                    @php if($row->m_status ==1) {echo "Đã Duyệt";} else {echo "Duyệt";} @endphp
                                 </button>
                             </td>
                             <td>
-                                <button type="button" @php if($row['m_status']===0){echo "disabled" ;} @endphp class="btn btn-secondary" style="outline: none;" data-toggle="modal" data-target="#exampleModal1">
+                                <button type='button' value="" @php if($row->m_status ==0) echo "disabled"; @endphp class='btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>
                                     Trả lời
                                 </button>
                             </td>
-                            <td <button class="btn btn-danger" style="outline: none;" id>
-                                <a href="/admintrator/delete_cmt/{!!$row['id']!!}">Xóa</a>
+                            <td>
+                                <button class='btn btn-danger' style='outline: none;' id>
+                                    <a href="{{url('admintrator/delete_cmt')}}/{{$row->idbl}}">Xóa</a>
                                 </button>
                             </td>
                         </tr>
-
+                        @php
+                        }
+                        }
+                        @endphp
                     </tbody>
-                    @endforeach
+
                 </table>
+                {{$query->links();}}
 
             </div>
         </div>
@@ -127,16 +125,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        ID KHÁCH HÀNG : {{$row['id']}} </br>
-                        Tên : {{$row['m_username']}}
+                        KHÁCH HÀNG : <span id="id_user"></span> </br>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        {!!$row['m_content']!!}
+                    <p id="content_user">
+                       
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -150,8 +147,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <span style="color:red">Khách Hàng</span> : {{$row['m_username']}} </br>
-                        Nội dung : <span>{!!$row['m_content']!!}</span>
+                        <span style="color:red">Khách Hàng</span> <span ></span></br>
+                        Nội dung : <span></span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -176,13 +173,7 @@
 
 </div> <!-- container-fluid -->
 @push('scripts')
-<!-- <script>
-    window.onload = function(){
-        let nodej = document.getElementById('cut_strings').innerText;
-        let cut_string = nodej.slice(0,39);
-        //
-        document.getElementById('cut_strings').innerText = cut_string;
-    }
-</script>     -->
+ <script src="{{URL::asset('admin/assets/js/jquery/jquery-3.6.0.min.js')}}"></script>
+ <script src="{{URL::asset('admin/assets/js/jquery/load_model.js')}}"></script>
 @endpush
 @endsection

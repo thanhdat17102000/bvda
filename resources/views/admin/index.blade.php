@@ -16,14 +16,11 @@
     @stack('styles')
     <!-- third party css end -->
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet"
-        rel="stylesheet" type="text/css" />
-        
-    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
-        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
@@ -177,10 +174,10 @@
                         </div>
                     </div>
                     <p class="text-muted">
-                        @if(Auth::user()->role == 1) 
-                            Admintrator
+                        @if(Auth::user()->role == 1)
+                        Admintrator
                         @else if(Auth::user()->role == 2)
-                            Nhân viên
+                        Nhân viên
                         @endif
                     </p>
                     <ul class="list-inline">
@@ -242,12 +239,23 @@
                                     </ul>
                         </li>
                         <li>
+                                    <a href="javascript: void(0);">
+                                        <i class="mdi mdi-view-dashboard"></i>
+                                        <span> Quản lí bình luận </span>
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                        <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
+                                        <li><a href="{{ route('product.create') }}">Bình luận Blog</a></li>
+                                    </ul>
+                        </li>
+                        <li>
                             <a href="{{ route("contact-admin") }}">
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Phản hồi </span>
                             </a>
                         </li>
-                        
+
                     </ul>
 
                 </div>

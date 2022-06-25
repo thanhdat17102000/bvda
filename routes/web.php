@@ -102,8 +102,9 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
         'product' => App\Http\Controllers\productController::class,
     ]);
     // start Comment
+
     Route::get('/list',[Comment_Product::class,'index'])->name('list_comment');
-    Route::get('/delete_cmt/{id}',[Comment_Product::class,'delete_comment']);
+    Route::get('/delete_cmt/{id}',[Comment_Product::class,'delete_comment'])->name('delete_cmtpro');
     // end Comment
     // Route::get('/list_cmt_blog','');
 
@@ -137,6 +138,7 @@ Route::get(
         return view('Auth.home-compare.home_page');
     }
 );
+route::get('/get_data_cmt/{id}',[Comment_Product::class,'get_data_cmt']);
 Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
 Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
 Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
