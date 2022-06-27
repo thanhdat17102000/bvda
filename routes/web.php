@@ -69,7 +69,7 @@ Route::get('/compare', function () {
 });
 Route::get('/', function(){
     return view('Auth.home-compare.home_page');
-});
+})->name('home');
 Route::get('/lien-he', function(){
     return view('Auth.contact.contact');
 });
@@ -141,6 +141,7 @@ Route::get(
 route::get('/get_data_cmt/{id}',[Comment_Product::class,'get_data_cmt']);
 Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
 Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
+Route::post('admintrator/order/action', [AdminOrderController::class, 'action'])->name('order.action');
 Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

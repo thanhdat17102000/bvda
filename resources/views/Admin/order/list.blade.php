@@ -22,6 +22,7 @@
 <script src=" {{ asset('admin/assets/libs/datatables/dataTables.select.min.js') }}"></script>
 <script src=" {{ asset('admin/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
 <script src=" {{ asset('admin/assets/libs/pdfmake/vfs_fonts.js') }}"></script>
+<script src=" {{ asset('admin/assets/libs/checkbox/list.js') }}"></script>
 <!-- third party js ends -->
 
 <!-- Datatables init -->
@@ -34,70 +35,90 @@ Danh sách đơn hàng
 <div class="row">
     <div class="col-12">
         <div class="card-box">
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <h4 class="mt-0 header-title">Danh sách đơn hàng</h4>
             <ul style="list-style: none" class="pl-0">
-                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="#">Tất cả <span class="text-dark font-weight-bold">(5)</span> |</a></li>
-                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="#">Đơn đã chuyển <span class="text-dark font-weight-bold">(6)</span> |</a></li>
-                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="#">Đơn đang chuyển <span class="text-dark font-weight-bold">(7)</span> |</a></li>
-                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="#">Đơn đang chờ <span class="text-dark font-weight-bold">(8)</span> |</a></li>
-                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="#">Đơn đã hủy <span class="text-dark font-weight-bold">(9)</span> </a></li>
+                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="{{route('order')}}">Tất cả <span class="text-dark font-weight-bold">({{$count_total}})</span> |</a></li>
+                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="{{request()->fullUrlWithQuery(['status' => 'confirm'])}}">Đơn hoàn thành <span class="text-dark font-weight-bold">({{$count[0]}})</span> |</a></li>
+                <li class="float-left pr-1"><a style="color: mediumvioletred;" href="{{request()->fullUrlWithQuery(['status' => 'cancel'])}}">Đơn đã hủy <span class="text-dark font-weight-bold">({{$count[1]}})</span> </a></li>
             </ul><br>
-            <div class="actions">
-                <select name="actions" style="border: 1px solid #ccc;
+            <form action="{{url('admintrator/order/action')}}" method="POST">
+                @csrf
+                <div class="actions">
+                    <select name="actions" style="border: 1px solid #ccc;
     padding: 4px 10px;
     border-radius: 3px;">
-                    <option>Tác vụ</option>
-                    <option value="1">1. Xác nhận đơn hàng</option>
-                    <option value="2">2. Gỡ, tạm chỉnh sửa</option>
-                    <option value="3">3. Kết thúc đơn hàng</option>
-                </select>
-                <input type="submit" name="sm_action" value="Áp dụng" style="border-radius: 3px;
+                        <option>Tác vụ</option>
+                        <option value="confirm">Hoàn thành đơn hàng</option>
+                        <option value="cancel">Hủy đơn hàng</option>
+                    </select>
+                    <input type="submit" name="sm_action" value="Áp dụng" style="border-radius: 3px;
     border: 1px solid #afafaf;
     padding: 2px 15px;
     background: #fafafa;">
-            </div><br>
-            <table id="datatable" class="table table-bordered dt-responsive nowrap">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="checkAll" id="checkAll">
-                        </th>
-                        <th>Stt</th>
-                        <th>Họ và tên</th>
-                        <th>Email</th>
-                        <th>Địa chỉ</th>
-                        <th>Số điện thoại</th>
-                        <th>Ghi chú</th>
-                        <th>Tổng tiền</th>
-                        <th>Trạng thái</th>
-                        <th>Ngày đặt hàng</th>
-                        <th>Xem chi tiết</th>
-                    </tr>
-                </thead>
+                </div><br>
+                <table id="datatable" class="table table-bordered dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>
+                                <label for="">
+                                    <input type="checkbox" name="checkAll" id="checkAll" class="checkAll">
+                                </label>
+                            </th>
+                            <th>Stt</th>
+                            <th>Tên khách hàng</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th style="width:230px">Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
 
 
-                <tbody>
-                    @foreach ($orders as $order)
-                    <tr>
-                        <td>
-                            <input type="checkbox" name="checkItem[]">
-                        </td>
-                        <td>1</td>
-                        <td>{{$order->m_name}}</td>
-                        <td>{{$order->m_email}}</td>
-                        <td>{{$order->m_address}}</td>
-                        <td>{{$order->m_phone}}</td>
-                        <td>{{$order->m_note}}</td>
-                        <td>{{$order->m_total_price}}</td>
-                        <td>Đang chuyển</td>
-                        <td>{{$order->created_at}}</td>
-                        <td><a href="{{route('order.detail')}}">
-                                <i class="fas fa-file"></i>
-                            </a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    <tbody>
+                        @php
+                        $i = 0;
+                        @endphp
+                        @foreach ($orders as $order)
+                        <tr>
+                            <td>
+                                <label for="">
+                                    <input type="checkbox" name="checkItem[]" class="checkbox_childrent" value="{{$order->id}}">
+                                </label>
+                            </td>
+                            <td>@php
+                                $i++;
+                                echo "$i";
+                                @endphp
+                            </td>
+                            <td>{{$order->m_name}}</td>
+                            <td>{{$order->m_email}}</td>
+                            <td>{{$order->m_phone}}</td>
+                            <td>@if($order->m_status == 0)
+                                <span class="bg bg-danger text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Chưa hoàn thành</span>
+                                @elseif($order->m_status == 1)
+                                <span class="bg bg-success text-white font-weight-bold" style="padding: 10px 10px; padding-right: 30px;">Đã hoàn thành</span>
+                                @endif
+                            </td>
+                            <td><a href="{{route('order.detail')}}">
+                                    <i class="fas fa-file"></i>
+                                </a>
+                                <button type="button" class="btn btn-info btn-xs" id="sa-params">Xóa</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div> <!-- end row -->

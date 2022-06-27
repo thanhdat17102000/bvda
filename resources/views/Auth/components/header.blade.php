@@ -49,7 +49,7 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="/">Trang chủ</a>
+                                            <li class="active"><a href="{{route('home')}}">Trang chủ</a>
                                             </li>
                                             <li><a href="/product_list">Cửa hàng <i class="fa fa-angle-down"></i></a>
 

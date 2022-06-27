@@ -191,7 +191,7 @@
 
                 <div class="minicart-button">
                     <a href="cart"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
-                    <a href="cart"><i class="fa fa-share"></i>Kiểm tra giỏ hàng</a>
+                    <!-- <a href="cart"><i class="fa fa-share"></i>Kiểm tra giỏ hàng</a> -->
                 </div>
             </div>
         </div>

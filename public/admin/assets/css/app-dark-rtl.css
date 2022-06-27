@@ -6567,6 +6567,7 @@ body[data-layout=horizontal].enlarged .content-page {
 
 .dataTables_wrapper .dataTables_filter {
   text-align: left !important; }
+  
   .dataTables_wrapper .dataTables_filter input {
     margin-left: 0px !important;
     margin-right: 0.5em; }
