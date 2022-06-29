@@ -6,25 +6,26 @@
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
-
     <!-- third party css -->
     @stack('styles')
     <!-- third party css end -->
+    <!-- Notification css (Toastr) -->
+    <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
+        type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
+        type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -222,21 +223,26 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admintrator/post">
+                            <a href="javascript: void(0);">
                                 <i class="mdi mdi-view-dashboard"></i>
-                                <span> Bài viết</span>
-                                <a href="{{ route('order') }}">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Quản lý đơn hàng </span>
-                                    <a href="javascript: void(0);">
-                                        <i class="mdi mdi-view-dashboard"></i>
-                                        <span> Sản phẩm </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="nav-second-level mm-collapse" aria-expanded="false">
-                                        <li><a href="{{ route('product.index') }}">Xem sản phẩm</a></li>
-                                        <li><a href="{{ route('product.create') }}">Thêm sản phẩm</a></li>
-                                    </ul>
+                                <span> Bài viết </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('post-list') }}">Danh sách bài viết</a></li>
+                                <li><a href="{{ route('add-form') }}">Thêm bài viết</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> Sản phẩm </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('product.index') }}">Xem sản phẩm</a></li>
+                                <li><a href="{{ route('product.create') }}">Thêm sản phẩm</a></li>
+                            </ul>
                         </li>
                         <li>
                                     <a href="javascript: void(0);">
@@ -341,30 +347,20 @@
     <div class="rightbar-overlay"></div>
     <!-- Vendor js -->
     <script src="{{ asset('admin/assets/js') }}/vendor.min.js"></script>
+    <script src="{{ asset('admin/assets/libs/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/pages/toastr.init.js') }}"></script>
 
-    <!-- knob plugin -->
-    <script src="{{ asset('admin/assets/libs') }}/jquery-knob/jquery.knob.min.js"></script>
+    {{-- Another JS --}}
+    @stack('scripts')
+    <!-- Toastr js -->
 
-    <!--Morris Chart-->
-    <script src="{{ asset('admin/assets/libs') }}/morris-js/morris.min.js"></script>
-    <script src="{{ asset('admin/assets/libs') }}/raphael/raphael.min.js"></script>
-
-    <!-- Dashboard init js-->
-    <script src="{{ asset('admin/assets/js') }}/pages/dashboard.init.js"></script>
+    <script src="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('admin/assets/js') }}/pages/sweet-alerts.init.js"></script>
+    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
+    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
 
     <!-- App js -->
     <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
-
-    <script src="{{ asset('admin/assets/libs')}}/sweetalert2/sweetalert2.min.js"></script>
-
-    <script src="{{ asset('admin/assets/js')}}/pages/sweet-alerts.init.js"></script>
-
-    <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script>
-
-    <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
-
-    @stack('scripts')
-
 </body>
 
 </html>
