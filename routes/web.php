@@ -5,11 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use GuzzleHttp\Middleware;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
 //  start Comment sent
@@ -81,8 +78,9 @@ Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], fu
     Route::post('category_delete',[CategoryController::class,'delete']);
     Route::post('category_loadDetail',[CategoryController::class,'loadDetail']);
     // Post
-    Route::resource('/post', PostController::class);
-    Route::get('create-post', [PostController::class,'createPost']);
+    Route::get('post', [PostController::class, 'index'])->name('post-list');
+    Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
+    Route::get('post/edit/{id}', [PostController::class, 'edit_form'])->name('edit-form');
     // User
     Route::resources([
         'product' => App\Http\Controllers\productController::class,

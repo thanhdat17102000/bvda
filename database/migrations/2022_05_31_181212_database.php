@@ -27,11 +27,16 @@ class Database extends Migration
 
         Schema::create('t_post', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('m_id_user');
-            $table->string('m_title',255);
-            $table->text('m_thumnails');
+            $table->unsignedInteger('m_id_user')->nullable();
+            $table->string('m_title', 255);
+            $table->string('m_slug', 255);
+            $table->text('m_desc');
             $table->text('m_content');
-            $table->integer('m_view');
+            $table->integer('m_view')->default(0);
+            $table->string('m_meta_desc', 255)->nullable();
+            $table->string('m_meta_keyword', 255)->nullable();
+            $table->boolean('m_status')->default(1);
+            $table->string('m_image', 200);
             $table->timestamps();
             $table->foreign('m_id_user')->references('id')->on('t_user');
         });
@@ -49,10 +54,10 @@ class Database extends Migration
         Schema::create('t_order', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('m_id_user')->nullable();
-            $table->string('m_name',255);
-            $table->string('m_email',255);
-            $table->string('m_address',255);
-            $table->string('m_phone',15);
+            $table->string('m_name', 255);
+            $table->string('m_email', 255);
+            $table->string('m_address', 255);
+            $table->string('m_phone', 15);
             $table->text('m_note')->nullable();
             $table->double('m_total_price');
             $table->boolean('m_status_ship')->default(0);
@@ -67,28 +72,28 @@ class Database extends Migration
             $table->unsignedInteger('m_id_product');
             $table->double('m_price');
             $table->integer('m_quanti');
-            $table->string('m_product_name',255);
+            $table->string('m_product_name', 255);
             $table->foreign('m_id_order')->references('id')->on('t_order');
             $table->foreign('m_id_product')->references('id')->on('t_product');
         });
         Schema::create('t_contact', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('m_name',255);
-            $table->string('m_phone',15);
-            $table->string('m_email',255);
-            $table->string('m_title',255);
+            $table->string('m_name', 255);
+            $table->string('m_phone', 15);
+            $table->string('m_email', 255);
+            $table->string('m_title', 255);
             $table->text('m_content')->nullable();
             $table->text('m_reply')->nullable();
             $table->timestamps();
         });
         Schema::create('t_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('m_username',255);
+            $table->string('m_username', 255);
             $table->text('m_password');
-            $table->string('m_name',255)->nullable();
-            $table->string('m_phone',15);
+            $table->string('m_name', 255)->nullable();
+            $table->string('m_phone', 15);
             $table->boolean('m_role')->default(0);
-            $table->string('m_address',255)->nullable();
+            $table->string('m_address', 255)->nullable();
             $table->text('m_avatar')->nullable();
             $table->boolean('m_status')->default(0);
             $table->timestamps();
@@ -96,15 +101,15 @@ class Database extends Migration
         Schema::create('t_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('m_id_parent');
-            $table->string('m_title',255);
+            $table->string('m_title', 255);
             $table->integer('m_index')->default(0);
         });
         Schema::create('t_product', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('m_id_category');
-            $table->string('m_product_name',255);
-            $table->string('m_product_slug',255);
-            $table->string('m_short_description',255);
+            $table->string('m_product_name', 255);
+            $table->string('m_product_slug', 255);
+            $table->string('m_short_description', 255);
             $table->text('m_description');
             $table->text('m_picture');
             $table->double('m_price');
@@ -130,11 +135,10 @@ class Database extends Migration
             $table->increments('id');
             $table->unsignedInteger('m_id_product');
             $table->integer('m_quanti');
-            $table->string('m_size',255);
+            $table->string('m_size', 255);
             $table->foreign('m_id_product')->references('id')->on('t_product');
         });
         Schema::enableForeignKeyConstraints();
-
     }
 
     /**
