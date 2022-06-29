@@ -10,16 +10,55 @@ class AdminOrderController extends Controller
     //
     public function __construct()
     {
-        
     }
-    public function index()
+    public function action(Request $request)
+    {
+        $list_check = $request->input('checkItem');
+        if (!empty($list_check)) {
+            $act = $request->input('actions');
+            if ($act == 'confirm') {
+                foreach ($list_check as $id) {
+                    DB::table('t_order')
+                        ->where('id', $id)
+                        ->update([
+                            'm_status' => 1
+                        ]);
+                }
+                return redirect()->route('order')->with('status', 'Bạn đã áp dụng tác vụ thành công');
+            }
+            if ($act == 'cancel') {
+                foreach ($list_check as $id) {
+                    DB::table('t_order')
+                        ->where('id', $id)
+                        ->update([
+                            'm_status' => 0
+                        ]);
+                }
+                return redirect()->route('order')->with('status', 'Bạn đã áp dụng tác vụ thành công');
+            }
+        }else{
+            return redirect()->route('order')->with('error', 'Bạn chưa chọn tác vụ');
+        }
+    }
+    public function index(Request $request)
     {
         $data = [
             'title' => 'DANH SÁCH ĐƠN HÀNG',
             'action' => 'order'
         ];
-        $orders = DB::table('t_order')->get();
-        return view('Admin.order.list', compact('data', 'orders'));
+        $status = $request->input('status');
+        if ($status == 'confirm') {
+            $orders = DB::table('t_order')->where('m_status', 1)->get();
+        } elseif ($status == 'cancel') {
+            $orders = DB::table('t_order')->where('m_status', 0)->get();
+        } else {
+            $orders = DB::table('t_order')->get();
+        }
+        $count_confirm = DB::table('t_order')->where('m_status', 1)->count();
+        $count_cancel = DB::table('t_order')->where('m_status', 0)->count();
+        $count = [$count_confirm, $count_cancel];
+        $count_total = $count[0] + $count[1];
+        return view('Admin.order.list', compact('data', 'orders', 'count', 'count_total'));
     }
     public function list()
     {

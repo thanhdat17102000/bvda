@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('Admin.index')
 @section('content')
 <link href="{{asset('admin/assets/libs/tablesaw/tablesaw.css')}}" rel="stylesheet" type="text/css">
 <style>
@@ -180,6 +180,7 @@
                     </diV>
                 </tr>
             @endforeach
+            {{ $datas -> links()}}
         </tbody>
     </table>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -47,20 +48,41 @@ class LoginController extends Controller
     public function login(Request $request){
         $input = $request->all();
         $this->validate($request,[
-            'email' => 'required|email',
+            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
             'password' =>'required'
+        ],[
+            'email.required'=> 'Email không được bỏ trống!', 
+            'email.regex'=>'Email hổng đúng định dạng!',
+            'password.required'=> 'Mật khẩu không được bỏ trống!', 
         ]);
-
         if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){
             if (auth()->user()->role == 1) {
-                return redirect()->route('admintrator');
-            }
-            elseif (auth()->user()->role == 0) {
-                return redirect()->route('home');
-            }
+                    return redirect()->route('admintrator');
+                }
+                elseif (auth()->user()->role == 0) {
+                    return redirect()->route('home');
+                }
         }
         else{
-            return redirect()->route('home')->with('error', 'email và password sai !');
+            return redirect()->route('login');
         }
+    }
+        // echo 'Đăng nhập thành công!';
+
+        // if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){
+        //     if (auth()->user()->role == 1) {
+        //         return redirect()->route('admintrator');
+        //     }
+        //     elseif (auth()->user()->role == 0) {
+        //         return redirect()->route('home');
+        //     }
+        // }
+        // else{
+        //     return redirect()->route('login');
+        // }
+        // // ->with('error', 'Email hoặc mật khẩu không đúng');  
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

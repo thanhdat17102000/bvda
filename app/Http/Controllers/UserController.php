@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
-use App\Models\accountModel;
-use Auth;
+use App\Models\AccountModel;
+// use Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -17,13 +18,28 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Người dùng',
+            'title' => 'Tài khoản',
             'action'=> 'Người dùng'
         ];
         $thanhvien = accountModel::orderBy('id','asc')->whereIn('role',[1,2])->get();
         return view('admin.user.index', compact('data','thanhvien'));
-
     }
+    public function list(){
+        $data = [
+            'title' => 'Danh sách tài khoản',
+            'action'=> 'Người dùng'
+        ];
+        $thanhvien = AccountModel::orderBy('id','asc')->get();
+        return view('admin.user.list', compact('data','thanhvien'));
+    }
+    // public function list_user()
+    // {
+    //     $data = [
+    //         'title' => 'Người dùng',
+    //         'action' => 'người dùng'
+    //     ];
+    //     return view('admin.user.list_user');
+    // }
     public function doimatkhauadmin(Request $request){
         $id = $request->id;
         $data = $request->all();
@@ -33,7 +49,7 @@ class UserController extends Controller
                 $updated = accountModel::find($id);
                 $updated->password = Hash::make($data['matkhaumoi']);
                 if($updated->save()){
-                    echo 'thanhcong';
+                    echo 'Thanh cong';
                 }
             }
         }
@@ -119,7 +135,7 @@ class UserController extends Controller
         $updated->phone = $request->phone;
         $updated->m_address = $request->m_address;
         if($updated->save()){
-            return redirect()->back()->with('alert_success', 'update thông tin thành công.');}
+            return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');}
     }
 
     /**

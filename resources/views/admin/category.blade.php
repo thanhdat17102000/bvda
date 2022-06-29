@@ -1,5 +1,7 @@
 @extends('admin.index')
-
+@section('title')
+    Quản trị danh mục
+@endsection
 @section('content')
 <div class="content ">
     <button type="button" class="btn btn-info btn-xs" id="sa-success">Thành công</button>

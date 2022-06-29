@@ -89,7 +89,7 @@ body {
   position: relative;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  font-size: 0.925rem; }
+  font-size: 1.1rem; }
   #sidebar-menu > ul > li > a:hover, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:active {
     color: #71b6f9;
     text-decoration: none; }
@@ -4569,3 +4569,7 @@ div.hopscotch-bubble {
 .jvectormap-zoomin, .jvectormap-zoomout {
   background-color: #323a46;
   color: #f8f9fa; }
+
+  #sidebar-menu>ul>li>a{
+    font-size: 20px !important;
+  }
