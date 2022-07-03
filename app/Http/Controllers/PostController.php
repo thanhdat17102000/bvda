@@ -32,4 +32,12 @@ class PostController extends Controller
         ];
         return view('Admin.post.edit_post')->with(compact('data'));
     }
+    public function blog_list()
+    {
+        return view('Auth.blog.tintuc');
+    }
+    public function detail($m_slug)
+    {
+        return view('Auth.blog.chitiettintuc', ['m_slug' => $m_slug]);
+    }
 }

@@ -4,6 +4,11 @@
     <script src="{{ asset('admin/assets/libs/dropify/dropify.min.js') }}"></script>
     <!-- form-upload init -->
     <script src="{{ asset('admin/assets/js/pages/form-fileupload.init.js') }}"></script>
+    <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('m_desc');
+        CKEDITOR.replace('m_content');
+    </script>
     <script>
         toastr.options = {
             "closeButton": false,
@@ -23,20 +28,25 @@
             "hideMethod": "fadeOut"
         }
 
-        $('.form-horizontal:first').submit(function(e) {
+        $('.form-horizontal').submit(function(e) {
             e.preventDefault();
-            $.ajax({
+            let data = new FormData(this);
+            data.set('m_desc', CKEDITOR.instances.m_desc.getData());
+            data.set('m_content', CKEDITOR.instances.m_content.getData());
+              $.ajax({
                 url: '{{ url('api/post') }}',
                 type: 'post',
-                data: new FormData(this),
+                data,
                 processData: false,
                 contentType: false,
                 success: function(response) {
+                    console.log(response);
                     $(':reset').click();
                     $('.dropify-clear:first').click();
                     toastr.success('Thêm thành công!', 'Xem danh sách để kiểm tra')
                 },
                 error: function(error) {
+                    console.log(error);
                     toastr.error('Lỗi thêm bài viết!', 'Vui lòng kiểm tra lại thông tin')
                 }
             });
@@ -56,8 +66,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="p-2">
-                                    <form class="form-horizontal" role="form" enctype="multipart/form-data">
+                                    <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
                                         @csrf
+                                        <input type="hidden" value="{{Auth::id()}}" name="m_id_user">
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Tiêu đề</label>
                                             <div class="col-md-10">
@@ -75,13 +86,13 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Tóm tắt bài viết</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" placeholder="Nhập tóm tắt bài viết" name="m_desc"></textarea>
+                                                <textarea class="form-control" id="m_desc" rows="5" placeholder="Nhập tóm tắt bài viết" name="m_desc"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Nội dung bài viết</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" placeholder="Nhập nội dung bài viết" name="m_content"></textarea>
+                                                <textarea class="form-control" id="m_content" rows="5" placeholder="Nhập nội dung bài viết" name="m_content"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">

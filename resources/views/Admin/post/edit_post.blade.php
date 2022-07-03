@@ -2,8 +2,11 @@
 @push('scripts')
     <!-- dropify js -->
     <script src="{{ asset('admin/assets/libs/dropify/dropify.min.js') }}"></script>
-    <!-- form-upload init -->
-    <script src="{{ asset('admin/assets/js/pages/form-fileupload.init.js') }}"></script>
+    <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('m_desc');
+        CKEDITOR.replace('m_content');
+    </script>
     <script>
         toastr.options = {
             "closeButton": false,
@@ -30,14 +33,24 @@
                 success: function(response) {
                     $('input[name=m_title]').val(response.m_title);
                     $('input[name=m_slug]').val(response.m_slug);
-                    $('textarea[name=m_desc]').val(response.m_desc);
-                    $('textarea[name=m_content]').val(response.m_content);
+                    CKEDITOR.instances.m_desc.setData(response.m_desc);
+                    CKEDITOR.instances.m_content.setData(response.m_content);
                     $('input[name=m_meta_keyword]').val(response.m_meta_keyword);
                     $('input[name=m_meta_desc]').val(response.m_meta_desc);
                     response.m_status == 0 ? $('#hidden').prop("checked", true) : '';
-                    $('input[name=m_image]').attr('data-default-file',
-                        `{{ asset('uploads/post/${response.m_image}') }}`);
-                    $('.dropify').dropify()
+                    $('.dropify').attr('data-default-file',
+                        `{{ asset('uploads/post/${response.m_image}') }}`)
+                    $('.dropify').dropify({
+                        messages: {
+                            'default': 'Drag and drop a file here or click',
+                            'replace': 'Drag and drop or click to replace',
+                            'remove': 'Remove',
+                            'error': 'Ooops, something wrong appended.'
+                        },
+                        error: {
+                            'fileSize': 'The file size is too big (1M max).'
+                        }
+                    });
                 },
                 error: function(error) {
                     toastr.error('Lỗi lấy thông tin bài viết!', 'Vui lòng kiểm tra lại thông tin')
@@ -48,25 +61,16 @@
 
         $('.form-horizontal:first').submit(function(e) {
             e.preventDefault();
-            let data = {
-                _token: '{{ csrf_token() }}',
-                m_title: $('input[name=m_title]').val(),
-                m_slug: $('input[name=m_slug]').val(),
-                m_desc: $('textarea[name=m_desc]').val(),
-                m_content: $('textarea[name=m_content]').val(),
-                m_meta_keyword: $('input[name=m_meta_keyword]').val(),
-                m_meta_desc: $('input[name=m_meta_desc]').val(),
-                m_image: $('input[name=m_image]')[0].files,
-                m_status: $('input[name=m_status]:checked').val(),
-            }
+            let data = new FormData(this);
+            data.set('m_desc', CKEDITOR.instances.m_desc.getData());
+            data.set('m_content', CKEDITOR.instances.m_content.getData());
             $.ajax({
                 url: '{{ url('api/post/' . $data['id']) }}',
-                type: 'put',
-                data: $(this).serialize(),
-                // processData: false,
-                // contentType: false,
+                type: 'post',
+                data,
+                processData: false,
+                contentType: false,
                 success: function(response) {
-                    console.log(response);
                     toastr.success('Sửa thành công!', 'Xem danh sách để kiểm tra'),
                         renderPost();
                 },
@@ -94,6 +98,7 @@
                                     <form class="form-horizontal" role="form" enctype="multipart/form-data"
                                         method="POST">
                                         @csrf
+                                        @method('put')
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Tiêu đề</label>
                                             <div class="col-md-10">
@@ -111,13 +116,13 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Tóm tắt bài viết</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" placeholder="Nhập tóm tắt bài viết" name="m_desc"></textarea>
+                                                <textarea class="form-control" id="m_desc"  rows="5" placeholder="Nhập tóm tắt bài viết" name="m_desc"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Nội dung bài viết</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" rows="5" placeholder="Nhập nội dung bài viết" name="m_content"></textarea>
+                                                <textarea class="form-control" id="m_content" rows="5" placeholder="Nhập nội dung bài viết" name="m_content"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">

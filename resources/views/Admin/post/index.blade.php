@@ -2,8 +2,8 @@
 @push('styles')
     <!-- third party css -->
 
-    {{-- <link href=" {{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" /> --}}
-    {{-- <link href=" {{ asset('admin/assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" /> --}}
+    <link href=" {{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <link href=" {{ asset('admin/assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href=" {{ asset('admin/assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href=" {{ asset('admin/assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
@@ -11,8 +11,8 @@
 @push('scripts')
     <!-- third party js -->
     <script src=" {{ asset('admin/assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
-    {{-- <script src=" {{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.js') }}"></script> --}}
-    {{-- <script src=" {{ asset('admin/assets/libs/datatables/dataTables.responsive.min.js') }}"></script> --}}
+    <script src=" {{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script src=" {{ asset('admin/assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/datatables/responsive.bootstrap4.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/datatables/dataTables.buttons.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/datatables/buttons.bootstrap4.min.js') }}"></script>
@@ -51,6 +51,7 @@
                 data: "",
                 dataType: "json",
                 success: function(response) {
+                    console.log('list-post', response);
                     let tbody = ``;
                     response.map((item, index) => {
                         tbody += `
@@ -62,7 +63,7 @@
                                     <td>${item.m_slug}</td>
                                     <td>${item.m_content}</td>
                                     <td>${item.m_meta_keyword}</td>
-                                    <td>${item.m_staus == 0 ? 'Ẩn' : 'Hiện'}</td>
+                                    <td>${item.m_status === 0 ? 'Ẩn' : 'Hiện'}</td>
                                     <td>
                                         <button type="button" data-id="${item.id}" class="btn-edit btn btn-icon waves-effect waves-light btn-success"><i class="far fa-edit"></i></button>
                                         <button type="button" data-id="${item.id}" class="btn-delete btn btn-icon waves-effect waves-light btn-danger mt-2"><i class="fas fa-trash-alt"></i></button>
@@ -78,11 +79,13 @@
                             processData: false,
                             contentType: false,
                             success: function(response) {
+                                console.log("result", response);
                                 renderData();
                                 toastr.success('Xóa thành công!',
                                     'Xem danh sách để kiểm tra')
                             },
                             error: function(e) {
+                                console.log(e);
                                 toastr.error('Lỗi xóa!', 'Dữ liệu không tồn tại');
                             }
                         });
@@ -93,6 +96,7 @@
                     });
                 },
                 error: function(e) {
+                    console.log(e);
                     toastr.error('Lỗi tải trang!', 'Dữ liệu không tồn tại');
                 }
             });
@@ -107,7 +111,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-box">
-                        <table id="datatable" class="table table-bordered dt-responsive nowrap">
+                        <table id="datatable" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Tiêu đề</th>
