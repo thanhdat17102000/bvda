@@ -2,9 +2,30 @@
 @section('title')
     Tin tức
 @endsection
+@push('scripts')
+    <script>
+        $.ajax({
+            type: "get",
+            url: "{{url('api/blog/'.$m_slug)}}",
+            success: function (response) {
+                console.log(response);
+                $('.blog-author-title h5').text(response[0].user.name);
+                $('.blog-widget-img img').attr('src', `{{asset('uploads/avatar/')}}/${response[0].user.m_avatar}`);
+                $('.blog-thumb img').attr('src', `{{asset('uploads/post/')}}/${response[0].m_image}`);
+                $('.blog-title').text(response[0].m_title);
+                $('.blog-meta i').first().text(response[0].user.name);
+                $('.blog-meta i').last().text(moment(response[0].created_at).format('DD/MM/YYYY'));
+                $('.content').html(response[0].m_content);
+            },
+            error: function (error){
+                console.log(error);
+            }
+        });
+    </script>
+@endpush
 @section('content')
-<!-- main wrapper start -->
-<main>
+    <!-- main wrapper start -->
+    <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
             <div class="container">
@@ -35,7 +56,7 @@
                             <!-- widget item start -->
                             <div class="blog-widget">
                                 <div class="blog-widget-img">
-                                    <img src="assets/img/blog/11.jpg" alt="author thumb" />
+                                    <img src="" alt="author thumb" />
                                 </div>
                                 <div class="blog-author-title text-center">
                                     <h5>Erik Jhonson</h5>
@@ -66,38 +87,46 @@
                                 <ul class="recent-posts-inner">
                                     <li class="recent-posts">
                                         <div class="recent-posts-image">
-                                            <a href="blog-details.html"><img src="assets/img/blog/recent-01.jpg" alt="post thumb"></a>
+                                            <a href="blog-details.html"><img src="assets/img/blog/recent-01.jpg"
+                                                    alt="post thumb"></a>
                                         </div>
                                         <div class="recent-posts-body">
-                                            <span class="recent-posts-meta">February  13,  2018</span>
-                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose This is demo</a></h6>
+                                            <span class="recent-posts-meta">February 13, 2018</span>
+                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose
+                                                    This is demo</a></h6>
                                         </div>
                                     </li>
                                     <li class="recent-posts">
                                         <div class="recent-posts-image">
-                                            <a href="blog-details.html"><img src="assets/img/blog/recent-02.jpg" alt="post thumb"></a>
+                                            <a href="blog-details.html"><img src="assets/img/blog/recent-02.jpg"
+                                                    alt="post thumb"></a>
                                         </div>
                                         <div class="recent-posts-body">
-                                            <span class="recent-posts-meta">February  13,  2018</span>
-                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose This is demo</a></h6>
+                                            <span class="recent-posts-meta">February 13, 2018</span>
+                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose
+                                                    This is demo</a></h6>
                                         </div>
                                     </li>
                                     <li class="recent-posts">
                                         <div class="recent-posts-image">
-                                            <a href="blog-details.html"><img src="assets/img/blog/recent-03.jpg" alt="post thumb"></a>
+                                            <a href="blog-details.html"><img src="assets/img/blog/recent-03.jpg"
+                                                    alt="post thumb"></a>
                                         </div>
                                         <div class="recent-posts-body">
-                                            <span class="recent-posts-meta">February  13,  2018</span>
-                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose This is demo</a></h6>
+                                            <span class="recent-posts-meta">February 13, 2018</span>
+                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose
+                                                    This is demo</a></h6>
                                         </div>
                                     </li>
                                     <li class="recent-posts">
                                         <div class="recent-posts-image">
-                                            <a href="blog-details.html"><img src="assets/img/blog/recent-04.jpg" alt="post thumb"></a>
+                                            <a href="blog-details.html"><img src="assets/img/blog/recent-04.jpg"
+                                                    alt="post thumb"></a>
                                         </div>
                                         <div class="recent-posts-body">
-                                            <span class="recent-posts-meta">February  13,  2018</span>
-                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose This is demo</a></h6>
+                                            <span class="recent-posts-meta">February 13, 2018</span>
+                                            <h6 class="recent-posts-title"><a href="blog-details.html">Diffrent title gose
+                                                    This is demo</a></h6>
                                         </div>
                                     </li>
                                 </ul>
@@ -138,125 +167,102 @@
                                 <!-- blog single item start -->
                                 <div class="blog-post-item">
                                     <div class="blog-thumb">
-                                        <img src="assets/img/blog/blog-details-2.jpg" alt="blog thumb">
+                                        <img src="" alt="blog thumb">
                                     </div>
                                     <div class="blog-content blog-details">
                                         <h5 class="blog-title">
-                                            Con gái nổi tiếng tiết lộ về việc có được đôi mắt của mình
+                                            
                                         </h5>
                                         <ul class="blog-meta">
-                                            <li><span>By: </span>Admin,</li>
-                                            <li><span>On: </span>19.05.2022</li>
+                                            <li><span>By: </span><i></i></li>
+                                            <li><span>On: </span><i></i></li>
                                         </ul>
-                                        <p> Nỗi đau tự nó lớn hơn. Niềm vui bền bỉ
-                                            kết quả là cái gì đó không liên quan gì đến nó;
-                                            bài tập đòi hỏi, công cụ tìm kiếm dễ dàng, các nhiệm vụ,</p>
-                                        <blockquote>
-                                            <p>Mỗi lần như vậy luôn có cuộc sống của những đứa trẻ, và cảm giác hồi hộp trong cung càng được nâng cao.
-                                                venenatis elit và venenatis twallis. Nó chỉ là bình thường, và nó là tốt
-                                                tất nhiên rồi Những chú gấu ngồi trên khắp thế giới khi còn là thanh thiếu niên. Proin
-                                                nói
-                                                xung quanh thời gian, và nỗi sợ hãi của hệ thống miễn dịch. Nhưng ở cuối nhiệt độ
-                                                sô cô la</p>
-                                        </blockquote>
-                                        <p>rằng thời gian của lỗi
-                                            quả thực chúng ta có thể bị cuốn đi bởi những thú vui mà Ngài sinh ra để dành! Từ hoặc 'thường xuyên'
-                                            từ chối
-                                            như thể bạn sẵn sàng gặp lỗi
-                                            ai
-                                            anh ta từ chối những thú vui xứng đáng nhất, và đẩy lùi chúng. Đối với các nhà sản xuất hiện nay
-                                            bị hỏng
-                                            rời bỏ nơi mà chúng ta nghĩ rằng nỗi đau của chúng ta thường bị từ chối bởi mong muốn được trở thành
-                                            đào tạo cần thiết, không có ai để mang gánh nặng của những thành tựu lớn nhất của cuộc sống? Niềm vui của tâm trí
-                                            trong thời gian khó khăn vì những triệu chứng này
-                                            đau không bao giờ phân biệt giữa thú vui?
-                                            Chinh no
-                                            ai sẽ chọn từ chối lợi thế bẩm sinh, rằng sẽ không có ai có thể có suy nghĩ giống như vậy?
-                                        </p>
+                                        <div class="content"></div>
                                     </div>
                                 </div>
                                 <!-- blog single item start -->
 
                                 <!-- comment area start -->
-                            <div class="comment-section section-padding">
-                                <h5>03 bình luận</h5>
-                                <ul>
-                                    <li>
-                                        <div class="author-avatar">
-                                            <img src="assets/img/blog/comment-icon.png" alt="">
-                                        </div>
-                                        <div class="comment-body">
-                                            <span class="reply-btn"><a href="#">Reply</a></span>
-                                            <h5 class="comment-author">Datle</h5>
-                                            <div class="comment-post-date">
-                                                19 - 05, 2022 at 9:30pm
+                                <div class="comment-section section-padding">
+                                    <h5>03 bình luận</h5>
+                                    <ul>
+                                        <li>
+                                            <div class="author-avatar">
+                                                <img src="assets/img/blog/comment-icon.png" alt="">
                                             </div>
-                                            <p>Rất ý nghĩa</p>
-                                        </div>
-                                    </li>
-                                    <li class="comment-children">
-                                        <div class="author-avatar">
-                                            <img src="assets/img/blog/comment-icon.png" alt="">
-                                        </div>
-                                        <div class="comment-body">
-                                            <span class="reply-btn"><a href="#">Reply</a></span>
-                                            <h5 class="comment-author">Truongnguyen</h5>
-                                            <div class="comment-post-date">
-                                                19 - 05, 2022 at 9:30pm
+                                            <div class="comment-body">
+                                                <span class="reply-btn"><a href="#">Reply</a></span>
+                                                <h5 class="comment-author">Datle</h5>
+                                                <div class="comment-post-date">
+                                                    19 - 05, 2022 at 9:30pm
+                                                </div>
+                                                <p>Rất ý nghĩa</p>
                                             </div>
-                                            <p>Bài hay qua tôi đã học thêm được nhiều thứ.</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="author-avatar">
-                                            <img src="assets/img/blog/comment-icon.png" alt="">
-                                        </div>
-                                        <div class="comment-body">
-                                            <span class="reply-btn"><a href="#">Reply</a></span>
-                                            <h5 class="comment-author">Nguyetvo</h5>
-                                            <div class="comment-post-date">
-                                                19 - 05, 2022 at 9:30pm
+                                        </li>
+                                        <li class="comment-children">
+                                            <div class="author-avatar">
+                                                <img src="assets/img/blog/comment-icon.png" alt="">
                                             </div>
-                                            <p>Rất hay </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- comment area end -->
-    
-                            <!-- start blog comment box -->
-                            <div class="blog-comment-wrapper">
-                                <h5>Góp Ý</h5>
-                                <p>Địa chỉ email sẽ không được công bố. Các trường bắt buộc được đánh dấu *</p>
-                                <form action="#">
-                                    <div class="comment-post-box">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label>Nhận xét</label>
-                                                <textarea name="commnet" placeholder="Write a comment"></textarea>
+                                            <div class="comment-body">
+                                                <span class="reply-btn"><a href="#">Reply</a></span>
+                                                <h5 class="comment-author">Truongnguyen</h5>
+                                                <div class="comment-post-date">
+                                                    19 - 05, 2022 at 9:30pm
+                                                </div>
+                                                <p>Bài hay qua tôi đã học thêm được nhiều thứ.</p>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <label>Tên</label>
-                                                <input type="text" class="coment-field" placeholder="Name">
+                                        </li>
+                                        <li>
+                                            <div class="author-avatar">
+                                                <img src="assets/img/blog/comment-icon.png" alt="">
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <label>Email</label>
-                                                <input type="text" class="coment-field" placeholder="Email">
+                                            <div class="comment-body">
+                                                <span class="reply-btn"><a href="#">Reply</a></span>
+                                                <h5 class="comment-author">Nguyetvo</h5>
+                                                <div class="comment-post-date">
+                                                    19 - 05, 2022 at 9:30pm
+                                                </div>
+                                                <p>Rất hay </p>
                                             </div>
-                                            <div class="col-lg-4 col-md-4">
-                                                <label>Website</label>
-                                                <input type="text" class="coment-field" placeholder="Website">
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="coment-btn">
-                                                    <input class="btn" type="submit" name="submit" value="POST COMMENT">
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- comment area end -->
+
+                                <!-- start blog comment box -->
+                                <div class="blog-comment-wrapper">
+                                    <h5>Góp Ý</h5>
+                                    <p>Địa chỉ email sẽ không được công bố. Các trường bắt buộc được đánh dấu *</p>
+                                    <form action="#">
+                                        <div class="comment-post-box">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label>Nhận xét</label>
+                                                    <textarea name="commnet" placeholder="Write a comment"></textarea>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <label>Tên</label>
+                                                    <input type="text" class="coment-field" placeholder="Name">
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <label>Email</label>
+                                                    <input type="text" class="coment-field" placeholder="Email">
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <label>Website</label>
+                                                    <input type="text" class="coment-field" placeholder="Website">
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="coment-btn">
+                                                        <input class="btn" type="submit" name="submit"
+                                                            value="POST COMMENT">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- start blog comment box -->
+                                    </form>
+                                </div>
+                                <!-- start blog comment box -->
                             </div>
                         </div>
                     </div>

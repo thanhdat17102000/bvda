@@ -94,7 +94,7 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
                 <div class="col-sm-10">
-                    <textarea class="ckeditor form-control" name="m_description" placeholder="Nhập mô tả sản phẩm"></textarea>
+                    <textarea class="    form-control" name="m_description" placeholder="Nhập mô tả sản phẩm"></textarea>
                     @error('m_description')
                         <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
                             <li class="parsley-required">{{$message}}</li>
