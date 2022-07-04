@@ -3,44 +3,20 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Adminto - Responsive Bootstrap 4 Admin Dashboard</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
-
-<<<<<<< HEAD
-    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-</head>
-
-=======
     <!-- third party css -->
     @stack('styles')
     <!-- third party css end -->
+    <!-- Notification css (Toastr) -->
+    <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
-        type="text/css" />
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" id="app-stylesheet"
-        rel="stylesheet" type="text/css" />
-        
     <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
         type="text/css" />
 
@@ -48,13 +24,14 @@
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
+        type="text/css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
 <body>
-
     <!-- Begin page -->
     <div id="wrapper">
 
@@ -76,49 +53,42 @@
                     </form>
                 </li>
                 <li class="dropdown notification-list">
-<<<<<<< HEAD
                     <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image" class="rounded-circle">
-=======
-                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
-                        role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-image"
-                            class="rounded-circle">
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
+                        <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            Nowak <i class="mdi mdi-chevron-down"></i>
+                            <i class="mdi mdi-chevron-down">{{Auth::user()->m_name}}</i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
+                            <h6 class="text-overflow m-0">Chào mừng {{Auth::user()->name}}</h6>
                         </div>
 
                         <!-- item-->
-                        <a href="/admintrator/user" class="dropdown-item notify-item">
+                        <a href="/admintrator/profile" class="dropdown-item notify-item">
                             <i class="fe-user"></i>
-                            <span>My Account</span>
+                            <span>Tài khoản</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="fe-settings"></i>
-                            <span>Settings</span>
+                            <span>Cài đặt</span>
                         </a>
 
-                        <!-- item-->
+                        {{-- <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <i class="fe-lock"></i>
                             <span>Lock Screen</span>
-                        </a>
+                        </a> --}}
 
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <a href="{{route('logout')}}" class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                         </a>
 
                     </div>
@@ -158,11 +128,7 @@
                 </li>
 
                 <li>
-<<<<<<< HEAD
                     <h4 class="page-title-main">{{$data['title']}}</h4>
-=======
-                    <h4 class="page-title-main">{{ $data['title'] }}</h4>
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                 </li>
 
             </ul>
@@ -177,46 +143,44 @@
 
                 <!-- User box -->
                 <div class="user-box text-center">
-<<<<<<< HEAD
-                    <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+                    <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
-                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown" aria-expanded="false">Nguyệt Võ</a>
-=======
-                    <img src="{{ asset('admin/assets/images') }}/users/user-1.jpg" alt="user-img"
-                        title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
-                    <div class="dropdown">
-                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block"
-                            data-toggle="dropdown" aria-expanded="false">Nguyệt Võ</a>
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
+                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown" aria-expanded="false">{{Auth::user()->name}}</a>
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
-                            <a href="/admintrator/user" class="dropdown-item notify-item">
+                            <a href="/admintrator/profile" class="dropdown-item notify-item">
                                 <i class="fe-user mr-1"></i>
-                                <span>My Account</span>
+                                <span>Tài khoản</span>
                             </a>
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-settings mr-1"></i>
-                                <span>Settings</span>
+                                <span>Cài đặt</span>
                             </a>
 
-                            <!-- item-->
+                            {{-- <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-lock mr-1"></i>
                                 <span>Lock Screen</span>
-                            </a>
+                            </a> --}}
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{route('logout')}}" class="dropdown-item notify-item">
                                 <i class="fe-log-out mr-1"></i>
-                                <span>Logout</span>
+                                <span>Đăng xuất</span>
                             </a>
 
                         </div>
                     </div>
-                    <p class="text-muted">Admin Head</p>
+                    <p class="text-muted">
+                        @if(Auth::user()->role == 1)
+                        Admintrator
+                        @else if(Auth::user()->role == 2)
+                        Nhân viên
+                        @endif
+                    </p>
                     <ul class="list-inline">
                         <li class="list-inline-item">
                             <a href="#" class="text-muted">
@@ -225,7 +189,7 @@
                         </li>
 
                         <li class="list-inline-item">
-                            <a href="#">
+                            <a href="{{route('logout')}}">
                                 <i class="mdi mdi-power"></i>
                             </a>
                         </li>
@@ -240,23 +204,14 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-<<<<<<< HEAD
                             <a href="{{ route("dashboard.index") }}" class=" {{ $data['action'] === 'dashboard' ? 'active' : '' }} ">
-=======
-                            <a href="{{ route('dashboard.index') }}"
-                                class=" {{ $data['action'] === 'dashboard' ? 'active' : '' }} ">
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Thống kê </span>
                             </a>
                         </li>
 
                         <li>
-<<<<<<< HEAD
                             <a href="{{ route("category-admin") }}">
-=======
-                            <a href="{{ route('category-admin') }}">
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Danh mục </span>
                             </a>
@@ -268,36 +223,45 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admintrator/post">
+                            <a href="javascript: void(0);">
                                 <i class="mdi mdi-view-dashboard"></i>
-                                <span> Bài viết</span>
-                                <a href="{{ route('order') }}">
-                                    <i class="mdi mdi-view-dashboard"></i>
-                                    <span> Quản lý đơn hàng </span>
+                                <span> Bài viết </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('post-list') }}">Danh sách bài viết</a></li>
+                                <li><a href="{{ route('add-form') }}">Thêm bài viết</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> Sản phẩm </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('product.index') }}">Xem sản phẩm</a></li>
+                                <li><a href="{{ route('product.create') }}">Thêm sản phẩm</a></li>
+                            </ul>
+                        </li>
+                        <li>
                                     <a href="javascript: void(0);">
                                         <i class="mdi mdi-view-dashboard"></i>
-                                        <span> Sản phẩm </span>
+                                        <span> Quản lí bình luận </span>
                                         <span class="menu-arrow"></span>
                                     </a>
                                     <ul class="nav-second-level mm-collapse" aria-expanded="false">
-                                        <li><a href="{{ route('product.index') }}">Xem sản phẩm</a></li>
-                                        <li><a href="{{ route('product.create') }}">Thêm sản phẩm</a></li>
+                                        <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
+                                        <li><a href="">Bình luận Blog</a></li>
                                     </ul>
                         </li>
                         <li>
-<<<<<<< HEAD
                             <a href="{{ route("contact-admin") }}">
-=======
-                            <a href="{{ route('contact-admin') }}">
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Phản hồi </span>
                             </a>
                         </li>
-<<<<<<< HEAD
-                        
-=======
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
+
                     </ul>
 
                 </div>
@@ -342,59 +306,30 @@
                     <strong>Customize </strong> the overall color scheme, layout, etc.
                 </div>
                 <div class="mb-2">
-<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/light.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-=======
-                    <img src="{{ asset('admin/assets/images') }}/layouts/light.png" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch"
-                        checked />
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
                 </div>
 
                 <div class="mb-2">
-<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css" data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
-=======
-                    <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
-                        data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
-                        data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
                 </div>
 
                 <div class="mb-2">
-<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
                     <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="{{ asset('admin/assets/css') }}/app-rtl.min.css" />
-=======
-                    <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail"
-                        alt="">
-                </div>
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
-                        data-appStyle="{{ asset('admin/assets/css') }}/app-rtl.min.css" />
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
                     <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
                 </div>
 
                 <div class="mb-2">
-<<<<<<< HEAD
                     <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png" class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-5">
@@ -403,20 +338,6 @@
                 </div>
 
                 <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-download mr-1"></i> Download Now</a>
-=======
-                    <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png"
-                        class="img-fluid img-thumbnail" alt="">
-                </div>
-                <div class="custom-control custom-switch mb-5">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch"
-                        data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
-                        data-appStyle="{{ asset('admin/assets/css') }}/app-dark-rtl.min.css" />
-                    <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
-                </div>
-
-                <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i
-                        class="mdi mdi-download mr-1"></i> Download Now</a>
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65
             </div>
         </div> <!-- end slimscroll-menu-->
     </div>
@@ -426,52 +347,20 @@
     <div class="rightbar-overlay"></div>
     <!-- Vendor js -->
     <script src="{{ asset('admin/assets/js') }}/vendor.min.js"></script>
+    <script src="{{ asset('admin/assets/libs/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/pages/toastr.init.js') }}"></script>
 
-    <!-- knob plugin -->
-    <script src="{{ asset('admin/assets/libs') }}/jquery-knob/jquery.knob.min.js"></script>
-
-    <!--Morris Chart-->
-    <script src="{{ asset('admin/assets/libs') }}/morris-js/morris.min.js"></script>
-    <script src="{{ asset('admin/assets/libs') }}/raphael/raphael.min.js"></script>
-
-    <!-- Dashboard init js-->
-    <script src="{{ asset('admin/assets/js') }}/pages/dashboard.init.js"></script>
-
-<<<<<<< HEAD
-    <!-- App js -->
-    <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
-
-    <script src="{{ asset('admin/assets/libs')}}/sweetalert2/sweetalert2.min.js"></script>
-
-    <script src="{{ asset('admin/assets/js')}}/pages/sweet-alerts.init.js"></script>
-
-    <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script>
-
-    <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
-
-    @stack('scripts')
-
-</body>
-
-</html>
-=======
     {{-- Another JS --}}
     @stack('scripts')
+    <!-- Toastr js -->
+
+    <script src="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('admin/assets/js') }}/pages/sweet-alerts.init.js"></script>
+    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
+    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
 
     <!-- App js -->
     <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
-
-    <script src="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.js"></script>
-
-    <script src="{{ asset('admin/assets/js') }}/pages/sweet-alerts.init.js"></script>
-
-    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
-
-    <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
-    <script src="{{ asset('admin/assets/js') }}/{{$data['action']}}.js"></script> 
-
-
 </body>
 
 </html>
->>>>>>> 5d0c1a393ec7033458919671e8ec5797fc8e8c65

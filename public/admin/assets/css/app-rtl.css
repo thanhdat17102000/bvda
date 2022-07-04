@@ -88,8 +88,7 @@ body {
   padding: 11px 20px;
   position: relative;
   -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-  font-size: 0.925rem; }
+  transition: all 0.4s; }
   #sidebar-menu > ul > li > a:hover, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:active {
     color: #71b6f9;
     text-decoration: none; }

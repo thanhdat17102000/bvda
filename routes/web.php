@@ -5,17 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use GuzzleHttp\Middleware;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CategoryModel;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
 // end comment
-// start comment blog 
+// start comment blog
 // emd comment blog
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +26,65 @@ use App\Http\Controllers\Comment_Product;
 |
 */
 
+// AuthAdmin
+Route::group(['prefix' => 'admintrator'], function () {
+    Auth::routes();
+    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+});
+// Admin
+Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']], function () {
+    //dashboard
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
+    Route::resource('dashboard', DashboardController::class);
+    // Post
+    Route::get('post', [PostController::class, 'index'])->name('post-list');
+    Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
+    Route::get('post/edit/{id}', [PostController::class, 'edit_form'])->name('edit-form');
+    Route::post('/update-trangthai', [Comment_Product::class, 'update_trangthai']);
+    // Route::post("/update-trangthai", "Comment_Product@update_trangthai")->name('updatedh');
+    // Accounts
+    Route::resource('profile', App\Http\Controllers\UserController::class);
+    Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
+    Route::post('doi-matkhau-admin', [App\Http\Controllers\UserController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
+    Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
+    // Product
+    Route::resources([
+        'product' => App\Http\Controllers\productController::class,
+    ]);
+    // start Comment
+    Route::get('/list', [Comment_Product::class, 'index'])->name('list_comment');
+    Route::get('/delete_cmt/{id}', [Comment_Product::class, 'delete_comment'])->name('delete_cmtpro');
+    // end Comment
+    Route::post('doi-matkhau-admin', [App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
+    Route::post('doi-thongtin-admin', [App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
+    //ajax category
+    Route::get('category', [CategoryController::class, 'index'])->name('category-admin');
+    Route::post('category_delete', [CategoryController::class, 'delete']);
+    //category
+    Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
+    Route::post('category/add', [CategoryController::class, 'postAddCategory']);
+    Route::get('category/{id}/edit', [CategoryController::class, 'getEditCategory'])->name('category-edit-admin');
+    Route::post('category/{id}/edit', [CategoryController::class, 'postEditCategory']);
+    Route::get('category_loadlist', [CategoryController::class, 'loadlist']);
+    //contact
+    Route::get('contact', [ContactController::class, 'getContact'])->name('contact-admin');
+    Route::get('contact/{id}/edit', [ContactController::class, 'getEditContact'])->name('contact-edit-admin');
+    Route::post('contact/{id}/edit', [ContactController::class, 'postEditContact']);
+    Route::delete('contact/{id}/delete', [ContactController::class, 'getDeleteContact'])->name('contact-delete-admin');
+    // order
+    Route::get('order', [AdminOrderController::class, 'index'])->name('order');
+    Route::post('order/store', [AdminOrderController::class, 'store'])->name('order.store');
+    Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
+    Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+
+    
+    route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
+});
+
+// Client
 Route::get('/product_list', function () {
-    return view('Auth.product_list.product_list');
+    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    return view('Auth.product_list.product_list', compact('categories'));
 });
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
@@ -56,7 +111,8 @@ Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
 Route::get('/blog', function () {
-    return view('Auth.blog.tintuc');
+    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    return view('Auth.blog.tintuc', compact('categories'));
 });
 Route::get('/chitiettin', function () {
     return view('Auth.blog.chitiettintuc');
@@ -64,78 +120,26 @@ Route::get('/chitiettin', function () {
 Route::get('/compare', function () {
     return view('Auth.home-compare.compare');
 });
-Route::get('/', function(){
+Route::get('/', function () {
     return view('Auth.home-compare.home_page');
-});
-Route::get('/lien-he', function(){
+})->name('home');
+Route::get('/lien-he', function () {
     return view('Auth.contact.contact');
 });
-
-// Admin
-// Admin
-Route::group(['prefix' => 'admintrator','middleware'=>['checkAdmin','auth']], function () {
-    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
-    //dashboard
-    // Route::resource('/',DashboardController::class);
-    Route::resource('dashboard',DashboardController::class);
-    //ajax category
-    Route::get('category', [CategoryController::class, 'index'])->name('category-admin');
-    Route::post('category_delete',[CategoryController::class,'delete']);
-    Route::post('category_loadDetail',[CategoryController::class,'loadDetail']);
-    // Post
-    Route::resource('/post', PostController::class);
-    Route::get('create-post', [PostController::class,'createPost']);
-    // User
-    Route::resources([
-        'product' => App\Http\Controllers\productController::class,
-        'user' => App\Http\Controllers\userController::class,
-    ]);
-
-    // start Comment
-    Route::get('/list',[Comment_Product::class,'index'])->name('list_comment');
-    Route::get('/delete_cmt/{id}',[Comment_Product::class,'delete_comment']);
-    // end Comment
-    Route::get('/list_cmt_blog','');
-
-
-    Route::post('doi-matkhau-admin',[App\Http\Controllers\profileController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
-    Route::post('doi-thongtin-admin',[App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
-});
-
-    Route::group(['prefix'=> 'contact'], function(){
-    //category
-    Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
-    Route::post('category/add', [CategoryController::class, 'postAddCategory']);
-    Route::get('category/{id}/edit', [CategoryController::class, 'getEditCategory'])->name('category-edit-admin');
-    Route::post('category/{id}/edit', [CategoryController::class, 'postEditCategory']);
-    Route::get('category_loadlist',[CategoryController::class,'loadlist']);
-    //contact
-    Route::get('contact', [ContactController::class, 'getContact'])->name('contact-admin');
-    Route::get('contact/{id}/edit', [ContactController::class, 'getEditContact'])->name('contact-edit-admin');
-    Route::post('contact/{id}/edit', [ContactController::class, 'postEditContact']);
-    Route::delete('contact/{id}/delete', [ContactController::class, 'getDeleteContact'])->name('contact-delete-admin');
-    // Route::resources('user' => App\Http\Controllers\userController::class,)
-
-    // Route::resources([
-    //     'product' => App\Http\Controllers\productController::class,
-    //     'user' => App\Http\Controllers\userController::class,
-    // ]);
-});
+// Blog
+Route::get('/blog-detail/{m_slug}', [PostController::class, 'detail'])->name('blog-detail');
+Route::get('/blog', [PostController::class, 'blog_list'])->name('blog-list');
+//liên hệ phần người dùng
+Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
+Route::post('/contact', [ContactController::class, 'postMessage']);
 Route::get(
     '/',
     function () {
         return view('Auth.home-compare.home_page');
     }
 );
-Route::get('admintrator/order', [AdminOrderController::class, 'index'])->name('order');
-Route::post('admintrator/order/store', [AdminOrderController::class, 'store'])->name('order.store');
-Route::get('admintrator/order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
-// 
-Route::get('/', [HomeController::class, 'index'])->name('home-auth');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
-Route::post('/contact', [ContactController::class, 'postMessage']);
 
+Route::get('/get_data_cmt/{id}', [Comment_Product::class, 'get_data_cmt']);
 
-Auth::routes();
-
+Route::get('/get_data_khachang/{id}',[Comment_Product::class,'get_data_khachang']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

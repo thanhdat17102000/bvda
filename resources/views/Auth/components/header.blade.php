@@ -49,7 +49,7 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="/">Trang chủ</a>
+                                            <li class="active"><a href="{{route('home')}}">Trang chủ</a>
                                             </li>
                                             <li><a href="/product_list">Cửa hàng <i class="fa fa-angle-down"></i></a>
 
@@ -68,9 +68,9 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
-                                            <li><a href="/blog">Tin tức</a>
+                                            <li><a href="{{route('blog-list')}}">Tin tức</a>
                                             </li>
-                                            <li><a href="/lien-he">Liên hệ</a></li>
+                                            <li><a href="{{route('contact-auth')}}">Liên hệ</a></li>
                                             <li><a href="#">Về chúng tôi</a></li>
                                         </ul>
                                     </nav>

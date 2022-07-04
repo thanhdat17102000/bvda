@@ -91,25 +91,19 @@
                             <td with='10%'>
                                 {{$row->ngaybinhluan}}
                             </td>
+                      
                             <td>
-                               
-                               @if ($row->m_status==0)
-                                <a class="status" data-bl_id="{{$row->idbl}}" value="0">
-                                    DUYỆT
-                        </a>
-                               @else
-                               <a class="status"  data-bl_id="{{$row->idbl}}" value="{{$row->idbl}}">
-                                     Chưa DUYỆT
-                        </a>
-                               @endif
-
-                               <!-- @php if($row->m_status ==1) {echo "btn-primary";} else {echo "btn-warning";}@endphp -->
-                                
-
+                                @if($row->m_status ==1)
+                                    <button class="statust btn btn-primary" data-order_id="{{$row->idbl}}" value="0">Duyệt</button>
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                @else
+                                    <button class="statust btn btn-warning" data-order_id="{{$row->idbl}}" value="1">Chưa Duyệt</button>
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                @endif
                             </td>
                             <td>
-                                <button type='button' value="{{$row->idbl}}" class='btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>
-                                    Trả lời
+                                <button type='button'  value="{{$row->idbl}}" class='answer_queston btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>
+                                     Trả lời
                                 </button>
                             </td>
                             <td>
@@ -158,8 +152,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <span style="color:red">Khách Hàng</span> <span ></span></br>
-                        Nội dung : <span></span>
+                        <span style="color:red">Khách Hàng</span> <span class="name_"></span></br>
+                        Nội dung : <span class="content_"></span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -167,11 +161,13 @@
                 </div>
                 <div class="modal-body">
                     <h3>TRẢ LỜI BÌNH LUẬN</h3>
-                    <form method="post" action="">
+                    <form method="post" class="form_">
+                        @csrf
                         <div class="form-group">
+                            <input type="hidden" class="input-answer" name="idbl" value="" data-id="">
                             <textarea class="form-control" name="data_cmt" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
-                        <button type="submit" name="send_cmt" class="btn btn-primary">GỬI</button>
+                        <button type="submit" name="send_cmt" class="send_cmt btn btn-primary">GỬI</button>
                     </form>
                 </div>
                 <div class="modal-footer">

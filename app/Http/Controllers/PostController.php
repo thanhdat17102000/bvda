@@ -2,33 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\Models\PostModels;
 
 class PostController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
-            'title' => 'Quản lý bài viết',
-            'action'=> 'post'
+            'title' => 'Danh sách bài viết',
+            'action' => '',
         ];
-        return view('Admin.blog.blog-list',compact('data'));
+        return view('Admin.post.index')->with(compact('data'));
     }
-    // public function createPost(){
-    //     $Post= new PostModels();
-    //     $result = [
-    //         'status' => 'OK',
-    //         'msg' => 'Tải danh mục thành công',
-    //         'data' => [],
-    //     ];
-
-    //     $Post->insert(array(
-    //         $Post::FIELD_TITLE => $_POST['categoryTitle'],
-    //         $Post::FIELD_ID_PARENT => $_POST['categoryIdParent']
-            
-    //     ));
-    //     echo json_encode($result, JSON_UNESCAPED_UNICODE);
-    // }
-
+    public function add_form()
+    {
+        $data = [
+            'title' => 'Thêm bài viết',
+            'action' => ''
+        ];
+        return view('Admin.post.add_post')->with(compact('data'));
+    }
+    public function edit_form($id)
+    {
+        $data = [
+            'title' => 'Sửa bài viết',
+            'action' => '',
+            'id' => $id
+        ];
+        return view('Admin.post.edit_post')->with(compact('data'));
+    }
+    public function blog_list()
+    {
+        return view('Auth.blog.tintuc');
+    }
+    public function detail($m_slug)
+    {
+        return view('Auth.blog.chitiettintuc', ['m_slug' => $m_slug]);
+    }
 }
