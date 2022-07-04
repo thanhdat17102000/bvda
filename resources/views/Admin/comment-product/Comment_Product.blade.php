@@ -92,9 +92,17 @@
                                 {{$row->ngaybinhluan}}
                             </td>
                             <td>
-                                <button class='btn @php if($row->m_status ==1) {echo "btn-primary";} else {echo "btn-warning";}@endphp style=' outline: none;'>
+                                <!-- <button class='btn @php if($row->m_status ==1) {echo "btn-primary";} else {echo "btn-warning";}@endphp '>
                                     @php if($row->m_status ==1) {echo "Đã Duyệt";} else {echo "Duyệt";} @endphp
-                                </button>
+                                </button> -->
+                                
+                                @if($row->m_status ==1)
+                                    <button class="statust" data-order_id="{{$row->idbl}}" value="0" >Duyệt</button>
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                @else
+                                    <button class="statust" data-order_id="{{$row->idbl}}" value="1">Chưa Duyệt</button>
+                                    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                                @endif
                             </td>
                             <td>
                                 <button type='button' value="" @php if($row->m_status ==0) echo "disabled"; @endphp class='btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>

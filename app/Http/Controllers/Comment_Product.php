@@ -41,4 +41,13 @@ class Comment_Product extends Controller
             ['query' => $query]
         );
     }
+    public function update_trangthai(Request $request){
+        $data = $request->all();
+        $idbl = $data['idbl'];
+        $m_status = $data['m_status'];
+        $update = Cmt_Product::find($idbl);
+        $update->m_status = $m_status;
+        $update->save();
+        echo 'done';
+    }
 }

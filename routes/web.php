@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('post', [PostController::class, 'index'])->name('post-list');
     Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
     Route::get('post/edit/{id}', [PostController::class, 'edit_form'])->name('edit-form');
+    Route::post('/update-trangthai', [Comment_Product::class, 'update_trangthai']);
+    // Route::post("/update-trangthai", "Comment_Product@update_trangthai")->name('updatedh');
     // Accounts
     Route::resource('profile', App\Http\Controllers\UserController::class);
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
