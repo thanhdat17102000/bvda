@@ -50,4 +50,20 @@ class Comment_Product extends Controller
         $update->save();
         echo 'done';
     }
+    public function get_data_khachang($id){
+        $idbl = $id;
+        $query  =   Cmt_Product::join('t_user','t_commentproduct.m_id_user','=','t_user.id')
+        ->join('t_product','t_commentproduct.m_id_maloai','=','t_product.id')
+        ->select('t_commentproduct.*','t_user.name','t_user.m_avatar','t_product.id','t_product.m_product_name')
+        ->where('idbl','=',$idbl)
+        ->get();
+        return response()->json(
+            ['query' => $query]
+        );
+    }
+    public function answer_data(Request $request, $id){
+        $idbl = $id;
+        $data = $request->all();
+        dd($data);
+    }
 }

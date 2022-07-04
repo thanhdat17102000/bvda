@@ -252,7 +252,7 @@
                                     </a>
                                     <ul class="nav-second-level mm-collapse" aria-expanded="false">
                                         <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
-                                        <li><a href="{{ route('product.create') }}">Bình luận Blog</a></li>
+                                        <li><a href="">Bình luận Blog</a></li>
                                     </ul>
                         </li>
                         <li>

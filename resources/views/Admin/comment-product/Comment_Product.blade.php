@@ -91,22 +91,19 @@
                             <td with='10%'>
                                 {{$row->ngaybinhluan}}
                             </td>
+                      
                             <td>
-                                <!-- <button class='btn @php if($row->m_status ==1) {echo "btn-primary";} else {echo "btn-warning";}@endphp '>
-                                    @php if($row->m_status ==1) {echo "Đã Duyệt";} else {echo "Duyệt";} @endphp
-                                </button> -->
-                                
                                 @if($row->m_status ==1)
-                                    <button class="statust" data-order_id="{{$row->idbl}}" value="0" >Duyệt</button>
+                                    <button class="statust btn btn-primary" data-order_id="{{$row->idbl}}" value="0">Duyệt</button>
                                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                                 @else
-                                    <button class="statust" data-order_id="{{$row->idbl}}" value="1">Chưa Duyệt</button>
+                                    <button class="statust btn btn-warning" data-order_id="{{$row->idbl}}" value="1">Chưa Duyệt</button>
                                     <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                                 @endif
                             </td>
                             <td>
-                                <button type='button' value="" @php if($row->m_status ==0) echo "disabled"; @endphp class='btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>
-                                    Trả lời
+                                <button type='button'  value="{{$row->idbl}}" class='answer_queston btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>
+                                     Trả lời
                                 </button>
                             </td>
                             <td>
@@ -145,7 +142,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" style="outline:none;" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" style="outline:none;" data-dismiss="modal">ĐÓNG</button>
                 </div>
             </div>
         </div>
@@ -155,8 +152,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <span style="color:red">Khách Hàng</span> <span ></span></br>
-                        Nội dung : <span></span>
+                        <span style="color:red">Khách Hàng</span> <span class="name_"></span></br>
+                        Nội dung : <span class="content_"></span>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -164,15 +161,17 @@
                 </div>
                 <div class="modal-body">
                     <h3>TRẢ LỜI BÌNH LUẬN</h3>
-                    <form method="post" action="">
+                    <form method="post" class="form_">
+                        @csrf
                         <div class="form-group">
+                            <input type="hidden" class="input-answer" name="idbl" value="" data-id="">
                             <textarea class="form-control" name="data_cmt" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
-                        <button type="submit" name="send_cmt" class="btn btn-primary">GỬI</button>
+                        <button type="submit" name="send_cmt" class="send_cmt btn btn-primary">GỬI</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" style="outline:none;" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" style="outline:none;" data-dismiss="modal">ĐÓNG</button>
                 </div>
             </div>
         </div>

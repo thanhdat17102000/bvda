@@ -76,6 +76,9 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('order/store', [AdminOrderController::class, 'store'])->name('order.store');
     Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
     Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+
+    
+    route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
 });
 
 // Client
@@ -135,5 +138,8 @@ Route::get(
         return view('Auth.home-compare.home_page');
     }
 );
+
 Route::get('/get_data_cmt/{id}', [Comment_Product::class, 'get_data_cmt']);
+
+Route::get('/get_data_khachang/{id}',[Comment_Product::class,'get_data_khachang']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
