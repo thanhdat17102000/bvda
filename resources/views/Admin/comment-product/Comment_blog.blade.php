@@ -91,17 +91,16 @@
                                 {{$row['created_at']}}
                             </td>
                             <td>
-                                <button class="btn btn-@php if($row['m_status'] ==1) {echo 'primary';} else {echo 'warning';}@endphp 
-" style="outline: none;" id="click_d">
-                                    @php
-                                    if($row['m_status']===1){
+                                <!-- <button class="btn btn-@php if($row['m_status'] ==1) {echo 'primary';} else {echo 'warning';}@endphp 
+" style="outline: none;" id="click_d"> -->
+                                    
+                                    @if($row['m_status']===1){
                                     echo "Ðã Duyệt";
                                     }
-                                    else{
+                                    @else{
                                     echo "Chưa Duyệtt";
                                     }
-                                    @endphp
-                                </button>
+                                    @endif
                             </td>
                             <td>
                                 <button type="button" @php if($row['m_status']===0){echo "disabled" ;} @endphp class="btn btn-secondary" style="outline: none;" data-toggle="modal" data-target="#exampleModal1">
