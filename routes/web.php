@@ -42,6 +42,8 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('post', [PostController::class, 'index'])->name('post-list');
     Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
     Route::get('post/edit/{id}', [PostController::class, 'edit_form'])->name('edit-form');
+    Route::post('/update-trangthai', [Comment_Product::class, 'update_trangthai']);
+    // Route::post("/update-trangthai", "Comment_Product@update_trangthai")->name('updatedh');
     // Accounts
     Route::resource('profile', App\Http\Controllers\UserController::class);
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
@@ -82,6 +84,9 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('order/store', [AdminOrderController::class, 'store'])->name('order.store');
     Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
     Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+
+    
+    route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
 });
 
 // Client
@@ -141,5 +146,8 @@ Route::get(
         return view('Auth.home-compare.home_page');
     }
 );
+
 Route::get('/get_data_cmt/{id}', [Comment_Product::class, 'get_data_cmt']);
+
+Route::get('/get_data_khachang/{id}',[Comment_Product::class,'get_data_khachang']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

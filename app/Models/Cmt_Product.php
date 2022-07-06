@@ -8,5 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Cmt_Product extends Model
 {
    protected $table = "t_commentproduct";
-   protected $primakey = "id";
+   protected $primaryKey = "idbl";
+   protected $fillable = [
+      'm_id_maloai ',
+      'm_id_user ',
+      'm_id_parent',
+      'm_content',
+      'answer_cmt',
+      'm_status',
+      'ngaybinhluan',
+  ];
 }
