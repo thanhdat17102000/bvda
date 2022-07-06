@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
+use App\Models\product;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
@@ -79,12 +80,16 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 
     
     route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
+
+    // file images
+    Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
 });
 
 // Client
 Route::get('/product_list', function () {
     $categories = CategoryModel::where('m_id_parent', 0)->get();
-    return view('Auth.product_list.product_list', compact('categories'));
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->get();
+    return view('Auth.product_list.product_list', compact('categories','showproduct'));
 });
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
@@ -98,9 +103,11 @@ Route::get('/checkout', function () {
 Route::get('/profile', function () {
     return view('Auth.account.profile');
 });
-Route::get('/productdetails', function () {
-    return view('Auth.product_details.productdetails');
-});
+// Route::get('/productdetails', function () {
+//     return view('Auth.product_details.productdetails');
+// });
+Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
+
 Route::get('/login', function () {
     return view('Auth.account.login');
 });

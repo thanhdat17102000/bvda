@@ -261,6 +261,12 @@
                                 <span> Phản hồi </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route("file") }}">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> QL hình ảnh </span>
+                            </a>
+                        </li>
 
                     </ul>
 
