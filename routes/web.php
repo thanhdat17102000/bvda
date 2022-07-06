@@ -12,6 +12,8 @@ use App\Models\CategoryModel;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\UserController;
+
 // end comment
 // start comment blog
 // emd comment blog
@@ -45,6 +47,12 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
     Route::post('doi-matkhau-admin', [App\Http\Controllers\UserController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
+    // Quản lý user
+    Route::get('/delete_user/{id}', [UserController::class,'delete_user'])->name('delete_user');
+    Route::get('/update_user', [UserController::class, 'capnhat'])->name('update_user');
+    // Route::get('api/user', [App\Http\Controllers\Api\UserController::class, 'index']);
+
+    // Route::get('/update_user/{id}', [UserController::class,'update_user'])->name('update_user');
     // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,

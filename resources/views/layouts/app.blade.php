@@ -13,7 +13,7 @@
     }
 </style>
 <body>
-    <nav class="navbar navbar-warning navbar-expand-lg mb-5 background-radial-gradient overflow-hidden" style="background-color: #ffc107;">
+    {{-- <nav class="navbar navbar-warning navbar-expand-lg mb-5 background-radial-gradient overflow-hidden" style="background-color: #ffc107;">
         <div class="container">
             <a class="navbar-brand mr-auto" href="#">Kingdom Sneaker</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -37,7 +37,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
-    @yield('content')
+    </nav> --}}
+        @yield('content')
 </body>
 </html>

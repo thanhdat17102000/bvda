@@ -2,82 +2,81 @@
 @section('title')
     Quản lý tài khoản
 @endsection
+@push('styles')
+    <!-- third party css -->
+    <link href=" {{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <link href=" {{ asset('admin/assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <link href=" {{ asset('admin/assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <link href=" {{ asset('admin/assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+    <!-- third party css end -->
+@endpush
+@push('scripts')
+        <!-- third party js -->
+        <script src=" {{ asset('admin/assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/dataTables.bootstrap4.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/responsive.bootstrap4.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/dataTables.buttons.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/buttons.bootstrap4.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/buttons.html5.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/buttons.flash.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/buttons.print.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/dataTables.keyTable.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/datatables/dataTables.select.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+        <script src=" {{ asset('admin/assets/libs/pdfmake/vfs_fonts.js') }}"></script>
+        <!-- third party js ends -->
+        <!-- Datatables init -->
+        <script src=" {{ asset('admin/assets/js/pages/datatables.init.js') }}"></script>
+        <script>
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            
+        </script>
+@endpush
 @section('content')
-    {{-- <div class="row">
-    @foreach ($thanhvien as $d)
-        <div class="card ml-3 overflow-hidden" style="width: 15rem;">
-            <img src="{{asset('uploads/avatar')}}/{{$d->m_avatar}}" height="175" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{$d->name}}</h5>
-                Email: <p class="card-text">{{$d->email}}</p>
-                @if( $d->role ==1)
-                    <p class="card-text">Quản trị viên</p>
-                @else
-                    <p class="card-text">Khách hàng</p>
-                @endif
-                Số điện thoại<p class="card-text">{{$d->phone}}</p>
-                <p class="card-text">{{$d->address}}</p>
-                <a href="#" class="btn btn-primary">Sửa</a>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box">
+                    <table id="datatable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID người dùng</th>
+                                <th>Họ và tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Role</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    @endforeach
-    </div>   --}}
-        <!-- Editable table -->
-    <div class="card">
-        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
-        Danh sách tài khoản
-        </h3>
-        <div class="card-body">
-        <div id="table" class="table-editable">
-            <span class="table-add float-right mb-3 mr-2"
-            ><a href="#!" class="text-success"
-                ><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a
-            ></span>
-            <table class="table table-bordered table-responsive-md table-striped text-center">
-            <thead>
-                <tr>
-                <th class="text-center">STT</th>
-                {{-- <th class="text-center">Ảnh</th> --}}
-                <th class="text-center">Tên</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Số điện thoại</th>
-                <th class="text-center">Địa chỉ</th>
-                <th class="text-center">Role</th>
-                <th class="text-center">Thao tác</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($thanhvien as $d)
-                <tr>
-                    <td class="pt-3-half" contenteditable="true">{{$d->id}}</td>
-                    {{-- <td class="pt-3-half" contenteditable="true">{{$d->m_avatar}}</td> --}}
-                    <td class="pt-3-half" contenteditable="true">{{$d->name}}</td>
-                    <td class="pt-3-half" contenteditable="true">{{$d->email}}</td>
-                    <td class="pt-3-half" contenteditable="true">{{$d->phone}}</td>
-                    <td class="pt-3-half" contenteditable="true">{{$d->m_address}}</td>
-                    <td>
-                        <span class="table-remove">
-                            @if ($d->role==1)
-                                Admintrator
-                            @else
-                                Khách hàng
-                            @endif   
-                        </span>
-                    </td>
-                    <td>
-                        <span class="table-remove"
-                        ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                            Xóa
-                        </button></span
-                        >
-                    </td>
-                </tr>
-                @endforeach
-                <!-- This is our clonable table line -->
-            </tbody>
-            </table>
-        </div>
-        </div>
-    </div>
-    <!-- Editable table -->
+        </div> <!-- end row -->
+
+    </div> <!-- container-fluid -->
+
+</div> <!-- content -->
 @endsection

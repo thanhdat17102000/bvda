@@ -138,6 +138,44 @@ class UserController extends Controller
             return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');}
     }
 
+    // Xóa tài khoản
+    public function delete_user($id)
+    {
+        $id_user = $id;
+        $result = User::where('id','=',$id_user)->delete();
+        if($result) {
+            $message = 'Đã Xóa Thành Công người dùng!';
+        }
+        return redirect()->back()->with('alert_success','Đã xóa người dùng thành công!');
+
+
+    }
+
+    // Cập nhật tài khoản
+    public function capnhat(){
+        $data = [
+        'title' => 'Cập nhật tài khoản',
+        'action' => 'Người dùng'
+        ];
+        return view('Admin.user.edit_user');
+    }
+    public function update_user(Request $request, $id)
+    {   
+
+        // $updated = AccountModel::find($id);
+        // if($file = $request->file('avatar')){
+        //     $ext= $request->avatar->getClientOriginalName();
+        //     $file_name = time().'-'.'avatar.'.$ext;
+        //     $file->move('uploads/avatar', $file_name);
+        //     $updated->m_avatar = $file_name;
+        // }
+        // $updated->email = $request->email;
+        // $updated->phone = $request->phone;
+        // $updated->m_address = $request->m_address;
+        // if($updated->save()){
+        //     return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');}
+    }
+
     /**
      * Remove the specified resource from storage.
      *
