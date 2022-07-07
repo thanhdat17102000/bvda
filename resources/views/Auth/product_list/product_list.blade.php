@@ -2,6 +2,23 @@
 @section('title')
     Danh sách sản phẩm
 @endsection
+@push('scripts')
+    <script>
+        $('#add-cart')
+        $.ajax({
+            type: "post",
+            url: "url('api/cart')",
+            data: new FormData(this),
+            // dataType: "dataType",
+            success: function (response) {
+                
+            },
+            error : function (error){
+
+            }
+        });
+    </script>
+@endpush
 @section('content')
 <!-- main wrapper start -->
 <main>
@@ -12,7 +29,7 @@
                     <div class="col-12">
                         <div class="breadcrumb-wrap text-center">
                             <nav aria-label="breadcrumb">
-                                <h1 class="breadcrumb-title"> danh sách Sản phẩm</h1>
+                                <h1 class="breadcrumb-title"> Danh sách Sản phẩm</h1>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">sản phẩm</li>
@@ -207,7 +224,7 @@
                                             <div class="product-link-2 position-static">
                                                 <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
                                                         class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
+                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ" id="add-cart"><i
                                                         class="ion-bag"></i></a>
                                                 <a href="#" data-toggle="modal" data-target="#quick_view"> <span
                                                         data-toggle="tooltip" title="Xem Nhanh"><i
@@ -216,6 +233,13 @@
                                         </div>
                                     </div>
                                     <!-- product list item start -->
+
+                                    {{-- form cart --}}
+                                    <form action="" method="post">
+                                        @csrf
+                                        <input type="hidden" value="1" name="quantity">
+                                        <input type="hidden" value="1" name="productId">
+                                    </form>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
                                     <!-- product grid item start -->
