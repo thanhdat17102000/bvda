@@ -252,13 +252,19 @@
                                     </a>
                                     <ul class="nav-second-level mm-collapse" aria-expanded="false">
                                         <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
-                                        <li><a href="{{ route('product.create') }}">Bình luận Blog</a></li>
+                                        <li><a href="">Bình luận Blog</a></li>
                                     </ul>
                         </li>
                         <li>
                             <a href="{{ route("contact-admin") }}">
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Phản hồi </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("file") }}">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> QL hình ảnh </span>
                             </a>
                         </li>
 

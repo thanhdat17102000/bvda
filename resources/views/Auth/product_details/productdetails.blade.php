@@ -33,40 +33,36 @@
                     <!-- product details inner end -->
                     <div class="product-details-inner">
                         <div class="row">
+                            @foreach($showproductdetailget as $showdetail)
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt=""/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt=""/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt=""/>
-                                    </div>
+                                    @if(json_decode($showdetail->m_picture))
+                                        @foreach(json_decode($showdetail->m_picture) as $showimg)
+                                            <div class="pro-large-img img-zoom">
+                                                <img src="{{asset('uploads')}}/{{$showimg}}" alt="" />
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt="" /></div>
+                                    @if(json_decode($showdetail->m_picture))
+                                        @foreach(json_decode($showdetail->m_picture) as $showimg)
+                                            <div class="pro-nav-thumb"><img src="{{asset('uploads')}}/{{$showimg}}" alt="" /></div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="pro-det-title">Primitive Mens Premium Shoes</h3>
+                                    <h3 class="pro-det-title">{{$showdetail->m_product_name}}</h3>
                                     <div class="pro-review">
                                         <span><a href="#">1 đánh giá</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="regular-price">$70.00</span>
-                                        <span class="old-price"><del>$80.00</del></span>
+                                        <span class="regular-price">{{number_format($showdetail->m_price,0,',','.')}}VND</span>
+                                        <span class="old-price"><del>{{number_format($showdetail->m_original_price,0,',','.')}}VND</del></span>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br>
-                                    Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea dictumst. Suspendisse ultrices mauris diam. Nullam sed aliquet elit. Mauris consequat nisi ut mauris efficitur lacinia.</p>
+                                    <p>{!!$showdetail->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
                                             <div class="pro-qty"><input type="text" value="1"></div>
@@ -101,7 +97,11 @@
                                     </div>
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Tình trạng:</h5>
+                                        @if($showdetail->m_buy > 0)
                                         <span>Còn hàng</span>
+                                        @else
+                                        <span style="color:red">Hết hàng</span>
+                                        @endif
                                     </div>
                                     <div class="share-icon">
                                         <h5 class="cat-title">Chia sẻ:</h5>
@@ -112,6 +112,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- product details inner end -->
@@ -133,28 +134,36 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content reviews-tab">
+                                        @foreach($showproductdetailget as $showdetail)
                                         <div class="tab-pane fade show active" id="tab_one">
                                             <div class="tab-one">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque.</p>
+                                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque.</p> -->
                                                 <div class="review-description">
                                                     <div class="tab-thumb">
-                                                        <img src="{{URL::asset('Auth/img/about/services.jpg')}}" alt="">
+                                                        @if(json_decode($showdetail->m_picture))
+                                                        <img src="{{asset('uploads')}}/{{json_decode($showdetail->m_picture)[0]}}" alt="">
+                                                        @endif
                                                     </div>
                                                     <div class="tab-des">
                                                         <h3>Thông tin sản phẩm :</h3>
                                                         <ul>
-                                                            <li>Donec non est at libero vulputate rutrum</li>
-                                                            <li>Morbi ornare lectus quis justo gravida</li>
-                                                            <li>Pellentesque aliquet, sem eget laoreet</li>
-                                                            <li>Donec a neque libero</li>
-                                                            <li>Pellentesque aliquet, sem eget laoreet</li>
+                                                            <li>Thuộc sản phẩm : {{$showdetail->showdanhmuc->m_title}}</li>
+                                                            <li>{{$showdetail->m_product_name}}</li>
+                                                            <li>Giá mặc định :{{number_format($showdetail->m_price,0,',','.')}}VND</li>
+                                                            <li>Giá giảm : {{number_format($showdetail->m_original_price,0,',','.')}}VND</li>
+                                                            <li>@if($showdetail->m_buy > 0)
+                                                                <span>Còn hàng</span>
+                                                                @else
+                                                                <span>Hết hàng</span>
+                                                                @endif
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <p>Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue. Nunc facilisis sagittis ullamcorper.</p>
-                                                <p>Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.</p>
+                                                <p>{!!$showdetail->m_description!!}</p>
                                             </div>
                                         </div>
+                                        @endforeach
                                         <div class="tab-pane fade" id="tab_two">
                                             <table class="table table-bordered">
                                                 <tbody>
@@ -252,128 +261,32 @@
                                 <div class="col-12">
                                     <div class="product-carousel-4 mbn-50 slick-row-15 slick-arrow-style">
                                         <!-- product single item start -->
+                                        @foreach($showproductrelated as $showrelated)
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
+                                                    @if(json_decode($showrelated->m_picture))
+                                                        <img src="{{asset('uploads')}}/{{json_decode($showrelated->m_picture)[0]}}" alt="">
+                                                    @endif
                                                 </a>
                                             </div>
                                             <div class="product-content">
                                                 <h5 class="product-name">
-                                                    <a href="product-details.html">Leather Mens Slipper</a>
+                                                    <a href="product-details.html">{{$showrelated->m_product_name}}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
+                                                    <span class="price-regular">{{number_format($showrelated->m_price,0,',','.')}}VND</span>
+                                                    <span class="price-old"><del>{{number_format($showrelated->m_original_price,0,',','.')}}VND</del></span>
                                                 </div>
                                                 <div class="product-action-link">
                                                     <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                                     <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
+                                                    <a href="#" data-toggle="modal" data-target="#quick_view{{$showrelated->id}}"> <span data-toggle="tooltip"
                                                         title="Xem nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('Auth/img/product/product-2.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Quickiin Mens shoes</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Xem nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('Auth/img/product/product-3.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Rexpo Womens shoes</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('Auth/img/product/product-4.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Primitive Mens shoes</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('Auth/img/product/product-5.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Leather Mens Slipper</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                         <!-- product single item start -->
                                     </div>
                                 </div>
@@ -389,7 +302,8 @@
 </main>
 <!-- main wrapper end -->
     <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
+    @foreach($showproductrelated as $showrelated)
+    <div class="modal" id="quick_view{{$showrelated->id}}">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -401,37 +315,33 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="product thumb" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt="product thumb"/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt="product thumb"/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt="product thumb"/>
-                                    </div>
+                                    @if(json_decode($showrelated->m_picture))
+                                        @foreach(json_decode($showrelated->m_picture) as $showimg)
+                                            <div class="pro-large-img img-zoom">
+                                                <img src="{{asset('uploads')}}/{{$showimg}}" alt="" />
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img1.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-details-img4.jpg')}}" alt="" /></div>
+                                    @if(json_decode($showrelated->m_picture))
+                                        @foreach(json_decode($showrelated->m_picture) as $showimg)
+                                            <div class="pro-nav-thumb"><img src="{{asset('uploads')}}/{{$showimg}}" alt="" /></div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="pro-det-title">Primitive Mens Premium Shoes</h3>
+                                    <h3 class="pro-det-title">{{$showrelated->m_product_name}}</h3>
                                     <div class="pro-review">
                                         <span><a href="#">1 bình luận</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="regular-price">$70.00</span>
-                                        <span class="old-price"><del>$80.00</del></span>
+                                        <span class="price-regular">{{number_format($showrelated->m_original_price,0,',','.')}}VND</span>
+                                        <span class="price-old"><del>{{number_format($showrelated->m_price,0,',','.')}}VND</del></span>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                    <p>{!!$showrelated->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
                                             <div class="pro-qty"><input type="text" value="1"></div>
@@ -440,7 +350,11 @@
                                     </div>
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Tình trạng: </h5>
+                                        @if($showrelated->m_buy > 0)
                                         <span>Còn hàng</span>
+                                        @else
+                                        <span style="color:red">Hết hàng</span>
+                                        @endif
                                     </div>
                                     <div class="share-icon">
                                         <h5 class="cat-title">Chia sẻ:</h5>
@@ -458,6 +372,7 @@
             </div>
         </div>
     </div>
+    @endforeach
     <!-- Quick view modal end -->
 
 
