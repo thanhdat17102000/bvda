@@ -95,7 +95,13 @@
             @foreach($datas as $key => $dt)
                 <tr>
                     <td class=" tablesaw-swipe-cellpersist" style="width: 30px;">{{$i++}}</td>
-                    <td class="tablesaw-priority-0 tablesaw-toggle-cellvisible"><img src="{{asset('uploads')}}/{{json_decode($dt->m_picture)[0]}}" width="100px" height="100px" /></td>
+                    <td class="tablesaw-priority-0 tablesaw-toggle-cellvisible">
+                        @if(json_decode($dt->m_picture))
+                        <img src="{{asset('uploads')}}/{{json_decode($dt->m_picture)[0]}}" width="100px" height="100px" />
+                        @else
+                        <img src="{{asset('uploads')}}/1657125436-sanpham.p1.jpg" width="100px" height="100px" />
+                        @endif
+                    </td>
                     <td class="tablesaw-priority-1 tablesaw-toggle-cellvisible">{{$dt->showdanhmuc->m_title}}</td>
                     <td class="tablesaw-priority-2 tablesaw-toggle-cellvisible">{{$dt->m_product_name}}</td>
                     <td class="tablesaw-priority-3 tablesaw-toggle-cellvisible">{{$dt->m_product_slug}}</td>
@@ -126,7 +132,9 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="phongnen">
+                                                @if(json_decode($dt->m_picture))
                                                 <img src="{{asset('uploads')}}/{{json_decode($dt->m_picture)[0]}}" alt="">
+                                                @endif
                                             </div>
                                             <div class="form-group" style="text-align:center; margin:15px 0px 0px 0px">
                                                 <p><a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> xem thêm hình </a>
@@ -145,7 +153,7 @@
                                             @endif
                                         </p>
                                             <p><strong>Giá đã giảm: </strong><mark>{{number_format($dt->m_original_price, 0, '.', '.')}} Vnđ</mark></p>
-                                            <p><strong>Ngày đăng sản phẩm: </strong><span>{{$dt->updated_at->diffForHumans()}}</span></p>
+                                            {{-- <p><strong>Ngày đăng sản phẩm: </strong><span>{{$dt->updated_at->diffForHumans()}}</span></p> --}}
                                             <p><strong>Số lượng tồn kho: </strong><span>{{$dt->m_buy}}</span> 
                                             |
                                             <strong>lượt xem sản phẩm: </strong><span>{{$dt->m_view}}</span></p>

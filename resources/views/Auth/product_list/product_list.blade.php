@@ -2,17 +2,36 @@
 @section('title')
     Danh sách sản phẩm
 @endsection
+@push('scripts')
+    <script>
+        $('#add-cart').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "url('api/cart')",
+                data: new FormData(this),
+                // dataType: "dataType",
+                success: function(response) {
+                    
+                },
+                error: function(error) {
+
+                }
+            });
+        });
+    </script>
+@endpush
 @section('content')
-<!-- main wrapper start -->
-<main>
+    <!-- main wrapper start -->
+    <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
+        <div class="breadcrumb-area bg-img" data-bg="{{ URL::asset('Auth/img/banner/breadcrumb-banner.jpg') }}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="breadcrumb-wrap text-center">
                             <nav aria-label="breadcrumb">
-                                <h1 class="breadcrumb-title"> danh sách Sản phẩm</h1>
+                                <h1 class="breadcrumb-title"> Danh sách Sản phẩm</h1>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">sản phẩm</li>
@@ -108,7 +127,7 @@
                             <div class="sidebar-single">
                                 <div class="sidebar-banner">
                                     <a href="#">
-                                        <img src="{{URL::asset('Auth/img/banner/banner_left.jpg')}}" alt="">
+                                        <img src="{{ URL::asset('Auth/img/banner/banner_left.jpg') }}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -157,198 +176,75 @@
 
                             <!-- product item list start -->
                             <div class="shop-product-wrap grid-view row mbn-50">
-                                <div class="col-lg-4 col-sm-6">
-                                    <!-- product grid item start -->
-                                    <div class="product-item mb-53">
-                                        <div class="product-thumb">
-                                            <a href="product-details.html">
-                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h5 class="product-name">
-                                                <a href="product-details.html">Leather Mens Slipper</a>
-                                            </h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">$80.00</span>
-                                                <span class="price-old"><del>$70.00</del></span>
+                                @foreach ($showproduct as $key => $showprd)
+                                    <div class="col-lg-4 col-sm-6">
+                                        <!-- product grid item start -->
+                                        <div class="product-item mb-53">
+                                            <div class="product-thumb">
+                                                <a href="{{ route('productdetails', $showprd->m_product_slug) }}">
+                                                    @if (json_decode($showprd->m_picture))
+                                                        <img src="{{ asset('uploads') }}/{{ json_decode($showprd->m_picture)[0] }}"
+                                                            alt="">
+                                                    @endif
+                                                </a>
                                             </div>
-                                            <div class="product-action-link">
-                                                <a href="/wishlist" data-toggle="tooltip" title="Yên Thích"><i
-                                                        class="ion-android-favorite-outline"></i></a>
-                                                <a href="/cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                        class="ion-bag"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                        data-toggle="tooltip" title="Xem Nhanh"><i
-                                                            class="ion-ios-eye-outline"></i></span> </a>
+                                            <div class="product-content">
+                                                <h5 class="product-name">
+                                                    <a
+                                                        href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ $showprd->m_product_name }}</a>
+                                                </h5>
+                                                <div class="price-box">
+                                                    <span
+                                                        class="price-regular">{{ number_format($showprd->m_price, 0, ',', '.') }}VND</span>
+                                                    <span
+                                                        class="price-old"><del>{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</del></span>
+                                                </div>
+                                                <div class="product-action-link">
+                                                    <a href="/wishlist" data-toggle="tooltip" title="Yên Thích"><i
+                                                            class="ion-android-favorite-outline"></i></a>
+                                                    <a href="/cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
+                                                            class="ion-bag"></i></a>
+                                                    <a href="#" data-toggle="modal" data-target="#quick_view">
+                                                        <span data-toggle="tooltip" title="Xem Nhanh"><i
+                                                                class="ion-ios-eye-outline"></i></span> </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- product grid item end -->
+                                        <!-- product grid item end -->
 
-                                    <!-- product list item start -->
-                                    <div class="product-list-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="product-details.html">
-                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="product-content-list">
-                                            <h5 class="product-name">
-                                                <a href="product-details.html">Leather Mens Slipper</a>
-                                            </h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">$80.00</span>
-                                                <span class="price-old"><del>$70.00</del></span>
+                                        <!-- product list item start -->
+                                        <div class="product-list-item mb-30">
+                                            <div class="product-thumb">
+                                                <a href="product-details.html">
+                                                    <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}"
+                                                        alt="product thumb">
+                                                </a>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere
-                                                metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet
-                                                sem vitae urna fringilla tempus.</p>
-                                            <div class="product-link-2 position-static">
-                                                <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
-                                                        class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                        class="ion-bag"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                        data-toggle="tooltip" title="Xem Nhanh"><i
-                                                            class="ion-ios-eye-outline"></i></span> </a>
+                                            <div class="product-content-list">
+                                                <h5 class="product-name">
+                                                    <a href="product-details.html">Leather Mens Slipper</a>
+                                                </h5>
+                                                <div class="price-box">
+                                                    <span class="price-regular">$80.00</span>
+                                                    <span class="price-old"><del>$70.00</del></span>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere
+                                                    metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet
+                                                    sem vitae urna fringilla tempus.</p>
+                                                <div class="product-link-2 position-static">
+                                                    <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
+                                                            class="ion-android-favorite-outline"></i></a>
+                                                    <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
+                                                            class="ion-bag"></i></a>
+                                                    <a href="#" data-toggle="modal" data-target="#quick_view">
+                                                        <span data-toggle="tooltip" title="Xem Nhanh"><i
+                                                                class="ion-ios-eye-outline"></i></span> </a>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- product list item start -->
                                     </div>
-                                    <!-- product list item start -->
-                                </div>
-                                <div class="col-lg-4 col-sm-6">
-                                    <!-- product grid item start -->
-                                    <div class="product-item mb-53">
-                                        <div class="product-thumb">
-                                            <a href="product-details.html">
-                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h5 class="product-name">
-                                                <a href="product-details.html">Quickiin Mens shoes</a>
-                                            </h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">$80.00</span>
-                                                <span class="price-old"><del>$70.00</del></span>
-                                            </div>
-                                            <div class="product-action-link">
-                                                <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
-                                                        class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                        class="ion-bag"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                        data-toggle="tooltip" title="Xem Nhanh"><i
-                                                            class="ion-ios-eye-outline"></i></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product grid item end -->
-
-                                    <!-- product list item start -->
-                                    <div class="product-list-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="product-details.html">
-                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="product-content-list">
-                                            <h5 class="product-name">
-                                                <a href="product-details.html">Quickiin Mens shoes</a>
-                                            </h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">$80.00</span>
-                                                <span class="price-old"><del>$70.00</del></span>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere
-                                                metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet
-                                                sem vitae urna fringilla tempus.</p>
-                                            <div class="product-link-2 position-static">
-                                                <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
-                                                        class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                        class="ion-bag"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                        data-toggle="tooltip" title="Xem Nhanh"><i
-                                                            class="ion-ios-eye-outline"></i></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product list item start -->
-                                </div>
-                                <div class="col-lg-4 col-sm-6">
-                                    <!-- product grid item start -->
-                                    <div class="product-item mb-53">
-                                        <div class="product-thumb">
-                                            <a href="product-details.html">
-                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h5 class="product-name">
-                                                <a href="product-details.html">Rexpo Womens shoes</a>
-                                            </h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">$80.00</span>
-                                                <span class="price-old"><del>$70.00</del></span>
-                                            </div>
-                                            <div class="product-action-link">
-                                                <a href="#" data-toggle="tooltip" title="Yên Thích"><i
-                                                        class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                        class="ion-bag"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                        data-toggle="tooltip" title="Xem Nhanh"><i
-                                                            class="ion-ios-eye-outline"></i></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product grid item end -->
-
-                                    <!-- product list item start -->
-                                    <div class="product-list-item mb-30">
-                                        <div class="product-thumb">
-                                            <a href="product-details.html">
-                                                <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb">
-                                            </a>
-                                        </div>
-                                        <div class="product-content-list">
-                                            <h5 class="product-name">
-                                                <a href="product-details.html">Rexpo Womens shoes</a>
-                                            </h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">$80.00</span>
-                                                <span class="price-old"><del>$70.00</del></span>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere
-                                                metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet
-                                                sem vitae urna fringilla tempus.</p>
-                                            <div class="product-link-2 position-static">
-                                                <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
-                                                        class="ion-android-favorite-outline"></i></a>
-                                                <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                        class="ion-bag"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"> <span
-                                                        data-toggle="tooltip" title="Xem Nhanh"><i
-                                                            class="ion-ios-eye-outline"></i></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-
-                                    <!-- start pagination area -->
-                                    <div class="paginatoin-area text-center mt-45">
-                                        <ul class="pagination-box">
-                                            <li><a class="Previous" href="#"><i class="ion-ios-arrow-left"></i></a></li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a class="Next" href="#"><i class="ion-ios-arrow-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <!-- end pagination area -->
-                                </div>
+                                @endforeach
                             </div>
                             <!-- shop main wrapper end -->
                         </div>
@@ -371,26 +267,34 @@
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}"
+                                            alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}"
+                                            alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}"
+                                            alt="product thumb" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="product thumb" />
+                                        <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}"
+                                            alt="product thumb" />
                                     </div>
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/img/product/product-1.jpg')}}"
+                                    <div class="pro-nav-thumb"><img
+                                            src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="" />
+                                    </div>
+                                    <div class="pro-nav-thumb"><img
+                                            src="{{ URL::asset('Auth/Auth/img/product/product-details-img2') }}.jpg"
                                             alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/Auth/img/product/product-details-img2')}}.jpg"
+                                    <div class="pro-nav-thumb"><img
+                                            src="{{ URL::asset('Auth/Auth/img/product/product-details-img3') }}.jpg"
                                             alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/Auth/img/product/product-details-img3')}}.jpg"
-                                            alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('Auth/Auth/img/product/product-details-img4')}}.jpg"
+                                    <div class="pro-nav-thumb"><img
+                                            src="{{ URL::asset('Auth/Auth/img/product/product-details-img4') }}.jpg"
                                             alt="" /></div>
                                 </div>
                             </div>
@@ -433,6 +337,4 @@
         </div>
     </div>
     <!-- Quick view modal end -->
-    
 @endsection
-        

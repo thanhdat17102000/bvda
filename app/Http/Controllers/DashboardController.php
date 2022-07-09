@@ -33,6 +33,13 @@ class DashboardController extends Controller
         ];
         return view('admin.dashboard',compact('data'));
     }
+    public function file(){
+        $data = [
+            'title' => 'file Hình',
+            'action'=> 'file'
+        ]; 
+        return view('admin.file',compact('data'));
+    }
 
     /**
      * Show the form for creating a new resource.
