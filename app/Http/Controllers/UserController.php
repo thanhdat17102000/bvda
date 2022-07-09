@@ -7,6 +7,7 @@ use App\Models\AccountModel;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\User;
 
 class UserController extends Controller
 {
@@ -151,7 +152,7 @@ class UserController extends Controller
 
     }
 
-    // Cập nhật tài khoản
+    // Cập nhật profile
     public function capnhat(){
         $data = [
         'title' => 'Cập nhật tài khoản',
@@ -159,21 +160,15 @@ class UserController extends Controller
         ];
         return view('Admin.user.edit_user');
     }
-    public function update_user(Request $request, $id)
+    // Cập nhật tài khoản
+    public function update_form(Request $request, $id)
     {   
-
-        // $updated = AccountModel::find($id);
-        // if($file = $request->file('avatar')){
-        //     $ext= $request->avatar->getClientOriginalName();
-        //     $file_name = time().'-'.'avatar.'.$ext;
-        //     $file->move('uploads/avatar', $file_name);
-        //     $updated->m_avatar = $file_name;
-        // }
-        // $updated->email = $request->email;
-        // $updated->phone = $request->phone;
-        // $updated->m_address = $request->m_address;
-        // if($updated->save()){
-        //     return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');}
+        $data = [
+            'title' => 'Cập nhật tài khoản',
+            'action' => '',
+            'id'=> $id,
+        ];
+        return view('Admin.user.edit_user')->with(compact('data'));
     }
 
     /**

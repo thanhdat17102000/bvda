@@ -44,17 +44,14 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('post/edit/{id}', [PostController::class, 'edit_form'])->name('edit-form');
     Route::post('/update-trangthai', [Comment_Product::class, 'update_trangthai']);
     // Route::post("/update-trangthai", "Comment_Product@update_trangthai")->name('updatedh');
-    // Accounts
+    // Profile
     Route::resource('profile', App\Http\Controllers\UserController::class);
-    Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
     Route::post('doi-matkhau-admin', [App\Http\Controllers\UserController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     // Quản lý user
+    Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
     Route::get('/delete_user/{id}', [UserController::class,'delete_user'])->name('delete_user');
-    Route::get('/update_user', [UserController::class, 'capnhat'])->name('update_user');
-    // Route::get('api/user', [App\Http\Controllers\Api\UserController::class, 'index']);
-
-    // Route::get('/update_user/{id}', [UserController::class,'update_user'])->name('update_user');
+    Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,

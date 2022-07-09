@@ -2,72 +2,190 @@
 @section('title')
     Cập nhật thông tin
 @endsection
+@push('scripts')
+    <!-- dropify js -->
+    <script src="{{ asset('admin/assets/libs/dropify/dropify.min.js') }}"></script>
+    <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    {{-- <script type="text/javascript">
+        CKEDITOR.replace('m_desc');
+        CKEDITOR.replace('m_content');
+    </script> --}}
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+        const renderUser = () => {
+            $.ajax({
+                type: "get",
+                url: "{{ url('api/user/' . $data['id']) }}",
+                success: function(response) { 
+                    console.log(response)
+                    $('input[name=name]').val(response.name);
+                    $('input[name=email]').val(response.email);
+                    $('input[name=phone]').val(response.phone);
+                    $('input[name=m_address]').val(response.address)
+                    $('select[name=m_role]').val(response.m_role);
+                    $('input[name=m_status]').val(response.m_status);
+                    response.m_status == 0 ? $('#hidden').prop("checked", true) : '';
+                    $('.dropify').attr('data-default-file',
+                        `{{ asset('uploads/post/${response.m_avatar}') }}`)
+                    $('.dropify').dropify({
+                        messages: {
+                            'default': 'Drag and drop a file here or click',
+                            'replace': 'Drag and drop or click to replace',
+                            'remove': 'Remove',
+                            'error': 'Ooops, something wrong appended.'
+                        },
+                        error: {
+                            'fileSize': 'The file size is too big (1M max).'
+                        }
+                    });
+                },
+                error: function(error) {
+                    toastr.error('Lỗi lấy thông tin tài khoản!', 'Vui lòng kiểm tra lại thông tin')
+                }
+            });
+        }
+        renderUser();
+
+        $('.form-horizontal:first').submit(function(e) {
+            e.preventDefault();
+            let data = new FormData(this);
+            console.log(data)
+            // data.set('m_desc', CKEDITOR.instances.m_desc.getData());
+            // data.set('m_content', CKEDITOR.instances.m_content.getData());
+            $.ajax({
+                url: '{{ url('api/user/' . $data['id']) }}',
+                type: 'post',
+                data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    toastr.success('Sửa thành công!', 'Xem danh sách để kiểm tra'),
+                        renderUser();
+                },
+                error: function(error) {
+                    console.log(error);
+                    toastr.error('Lỗi sửa bài viết!', 'Vui lòng kiểm tra lại thông tin')
+                }
+            });
+        });
+    </script>
+@endpush
+@push('styles')
+    <!-- dropify -->
+    <link href="{{ asset('admin/assets/libs/dropify/dropify.min.css') }}" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
-<div class="card-box">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                <span class="d-none d-sm-block">Đổi mật khẩu</span>            
-            </a>
-        </li>
-        <!-- <li class="nav-item">
-            <a href="#messages1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                <span class="d-none d-sm-block">Vai trò quản trị</span>    
-            </a>
-        </li> -->
-    </ul>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="p-2">
+                                    <form class="form-horizontal" role="form" enctype="multipart/form-data"
+                                        method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Họ và tên</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" placeholder="Nhập họ và tên"
+                                                name="name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Email</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" placeholder="Nhập email"
+                                                    name="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Số điện thoại</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" placeholder="Nhập số điện thoại"
+                                                name="phone">                                            
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Địa chỉ</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" placeholder="Nhập địa chỉ"
+                                                name="m_address">                                            
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Role</label>
+                                            <div class="col-md-10">
+                                                <select class="form-select form-control" aria-label="">
+                                                    <option name="m_role" value="0"  selected>Khách hàng</option>
+                                                    <option name="m_role" value="1">Admin</option>
+                                                    <option name="m_role" value="2">Tác giả</option>
+                                                    <option name="m_role" value="3">Kế toán</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Trạng thái hiển thị</label>
+                                            <div class="col-md-10 row mt-1">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="hidden" name="m_status" value="0"
+                                                        class="custom-control-input">
+                                                    <label class="custom-control-label" for="hidden">Đang hoạt động</label>
+                                                </div>
+                                                <div class="custom-control custom-radio ml-4">
+                                                    <input type="radio" id="show" name="m_status" value="1"
+                                                        class="custom-control-input" @checked(true)>
+                                                    <label value="0" name="m_status" class="custom-control-label" for="show">Ngưng hoạt động</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Hình ảnh</label>
+                                            <div class="col-md-4">
+                                                <div class="card-box">
+                                                    <input type="file" name="m_avatar" class="dropify"
+                                                        data-default-file="" />
+                                                </div>
+                                            </div><!-- end col -->
+                                        </div>
+                                        <div class="form-group text-right mb-0">
+                                            <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                                                Lưu
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect waves-light">
+                                                Hủy
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade show active" id="home1">
-        <div role="tabpanel" class="tab-pane fade" id="profile1">
-        <center> - Đổi Thông tin - </center>
-        <form action="{{route('profile.update', Auth::user()->id)}}" method="post" role="form" enctype="multipart/form-data">
-            @csrf @method('PUT')
-            <div class="form-group">
-                <label for="exampleInputEmail1">Họ và Tên</label>
-                <input type="text" class="form-control" id="idadmin" value="{{Auth::user()->name}}">
+                        </div>
+                        <!-- end row -->
+
+                    </div> <!-- end card-box -->
+                </div><!-- end col -->
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="text" class="form-control" id="email" name="email" value="{{Auth::user()->email}}" placeholder="nhập số điện thoại">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Số điện thoại</label>
-                <input type="number" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}" min="0" placeholder="nhập số điện thoại">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Địa chỉ</label>
-                <input type="text" class="form-control" id="address" name="m_address" value="{{Auth::user()->m_address}}" placeholder="nhập địa chỉ">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Role</label>
-                <input type="text" class="form-control" id="address" name="m_address" value="{{Auth::user()->m_role}}" placeholder="nhập địa chỉ">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Avatar</label>
-                <input type="file" class="form-control" id="avatar" name="avatar" placeholder="Chọn hình ảnh avatar">
-                @if(Auth::user()->m_avatar)
-                    <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="" width="100px" height="100px" style="margin:5px">
-                @endif
-            </div>
-            <button type="submit" id="btnthongtin" class="btn btn-primary">Lưu Thông Tin</button>
-        </form>
+            <!-- end row -->
         </div>
-        <!-- <div role="tabpanel" class="tab-pane fade" id="messages1">
-            <p class="mb-0">Etsy mixtape wayfarers, ethical
-                wes anderson tofu before they sold out mcsweeney's organic lomo
-                retro fanny pack lo-fi farm-to-table readymade. Messenger bag
-                gentrify pitchfork tattooed craft beer, iphone skateboard locavore
-                carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy
-                irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg
-                banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy
-                retro mlkshk vice blog. Scenester cred you probably haven't heard of
-                them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu
-                synth chambray yr.</p>
-        </div> -->
     </div>
-</div>
-
 @endsection

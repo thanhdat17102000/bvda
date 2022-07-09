@@ -4,6 +4,9 @@ use App\Http\Controllers\Api\BlogControllerApi;
 use App\Http\Controllers\Api\PostControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UserControllerAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::apiResource('/post', PostControllerApi::class);
 Route::apiResource('/blog', BlogControllerApi::class);
+Route::apiResource('/user',UserControllerApi::class);

@@ -217,10 +217,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admintrator/user">
+                            <a href="#">
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Người dùng</span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="/admintrator/user">Danh sách tài khoản</a></li>
+                                <li><a href="{{ route('add-form') }}">Thêm tài khoản</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">
