@@ -107,12 +107,14 @@ Route::get('/profile', function () {
 //     return view('Auth.product_details.productdetails');
 // });
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
+Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
+Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdelete');
 
 Route::get('/login', function () {
-    return view('Auth.account.login');
+    return view('Auth.login');
 });
 Route::get('/register', function () {
-    return view('Auth.account.register');
+    return view('Auth.register');
 });
 Route::get('/profile', function () {
     return view('Auth.account.profile');

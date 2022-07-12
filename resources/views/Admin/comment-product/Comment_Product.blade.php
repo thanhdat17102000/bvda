@@ -89,7 +89,7 @@
                                 {{$row->m_product_name}}
                             </td>
                             <td with='10%'>
-                                {{$row->ngaybinhluan}}
+                                {{$row->updated_at->diffForHumans()}}
                             </td>
                       
                             <td>

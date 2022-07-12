@@ -94,11 +94,40 @@
                                             <a href="#">
                                                 <i class="ion-ios-gear-outline"></i>
                                             </a>
+                                            @if(Route::has('login'))
+                                            @auth
+                                                @if(Auth::user()->role == 1)
+                                                <ul class="dropdown-list">
+                                                    <li><a href="{{route('admintrator')}}">chuyển admin</a></li>
+                                                    <!-- <li><a href="">Thông tin đơn hàng</a></li> -->
+                                                    <li><a href="{{ route('logout')}}" 
+                                                    onclick="event.preventDefault(); 
+                                                    document.getElementById('logout-form').submit();"
+                                                    >Đăng xuất</a></li>
+                                                    <form action="{{ route('logout')}}" method="post" id="logout-form">
+                                                        @csrf
+                                                    </form>
+                                                </ul>
+                                                @else
+                                                <ul class="dropdown-list">
+                                                    <li><a href="/profile">Tài khoản của bạn</a></li>
+                                                    <li><a href="">Thông tin Đơn hàng</a></li>
+                                                    <li><a href="{{ route('logout')}}" 
+                                                    onclick="event.preventDefault(); 
+                                                    document.getElementById('logout-form').submit();"
+                                                    >Đăng xuất</a></li>
+                                                    <form action="{{ route('logout')}}" method="post" id="logout-form">
+                                                        @csrf
+                                                    </form>
+                                                </ul>
+                                                @endif
+                                            @else
                                             <ul class="dropdown-list">
-                                                <li><a href="/login">Đăng nhập</a></li>
-                                                <li><a href="/register">đăng ký</a></li>
-                                                <li><a href="/profile">Tài khoản</a></li>
+                                                <li><a href="{{route('login')}}">Đăng nhập</a></li>
+                                                <li><a href="{{route('register')}}">đăng ký</a></li>
                                             </ul>
+                                            @endif
+                                            @endif
                                         </li>
                                         <li>
                                             <a href="#" class="minicart-btn">
