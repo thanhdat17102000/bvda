@@ -9,6 +9,8 @@
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
     <!-- third party css -->
@@ -17,15 +19,13 @@
     <!-- Notification css (Toastr) -->
     <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
-        type="text/css" />
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -245,15 +245,15 @@
                             </ul>
                         </li>
                         <li>
-                                    <a href="javascript: void(0);">
-                                        <i class="mdi mdi-view-dashboard"></i>
-                                        <span> Quản lí bình luận </span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="nav-second-level mm-collapse" aria-expanded="false">
-                                        <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
-                                        <li><a href="">Bình luận Blog</a></li>
-                                    </ul>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> Quản lí bình luận </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
+                                <li><a href="">Bình luận Blog</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{ route("contact-admin") }}">
