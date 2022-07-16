@@ -17,6 +17,8 @@
     <link href="{{ URL::asset('Auth/css/style.css') }}" rel="stylesheet">
     <!-- Modernizer JS -->
     <script src="{{ URL::asset('Auth/js/modernizr-2.8.3.min.js') }}"></script>
+    <!-- Notification css (Toastr) -->
+    <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
 
     <!--[if lt IE 9]>
@@ -40,6 +42,27 @@
     <script src="{{ URL::asset('Auth/js/plugins.js') }}"></script>
     <!--=== Active Js ===-->
     <script src="{{ URL::asset('Auth/js/active.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/toastr/toastr.min.js') }}"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+    @stack('scriptsPrev')
     @stack('scripts')
 </body>
 

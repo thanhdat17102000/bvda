@@ -1,4 +1,33 @@
 @extends('Auth.layouts.master')
+@push('scripts')
+    <script>
+         $('.cart-info').submit(function(e) {
+            e.preventDefault();
+            let data = new FormData(this);
+            data.append('quantity', $('input[name=quantity]').val())
+            $.ajax({
+                type: "post",
+                url: "{{ url('api/cart') }}",
+                data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    renderCart();
+                    toastr.success('',
+                        'Thêm giỏ hàng thành công')
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('.add-cart').click(function(e) {
+            e.preventDefault();
+            $('.cart-info').submit();
+        });
+    </script>
+@endpush
 @section('title')
     Chi tiết sản phẩm
 @endsection
@@ -65,10 +94,15 @@
                                     <p>{!!$showdetail->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                            <div class="pro-qty"><input name="quantity" type="text" value="1"></div>
                                         </div>
-                                        <a href="cart.html" class="btn btn-default">Thêm vào giỏ hàng</a>
+                                        <a href="#" class="add-cart" class="btn btn-default">Thêm vào giỏ hàng</a>
                                     </div>
+                                    <form action="" method="post" class="cart-info">
+                                        @csrf
+                                        <input type="hidden" name="productId"
+                                            value="{{ $showdetail->id }}">
+                                    </form>
                                     <div class="color-option mb-20">
                                         <h5 class="cat-title">Màu sắc :</h5>
                                         <ul>

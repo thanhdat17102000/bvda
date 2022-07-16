@@ -4,20 +4,28 @@
 @endsection
 @push('scripts')
     <script>
-        $('#add-cart').click(function(e) {
+        $('.cart-info').submit(function(e) {
             e.preventDefault();
             $.ajax({
                 type: "post",
-                url: "url('api/cart')",
+                url: "{{ url('api/cart') }}",
                 data: new FormData(this),
-                // dataType: "dataType",
+                processData: false,
+                contentType: false,
                 success: function(response) {
-                    
+                    console.log(response);
+                    renderCart();
+                    toastr.success('',
+                        'Thêm giỏ hàng thành công')
                 },
                 error: function(error) {
-
+                    console.log(error);
                 }
             });
+        });
+        $('.add-cart').click(function(e) {
+            e.preventDefault();
+            $(this).next('.cart-info').submit();
         });
     </script>
 @endpush
@@ -202,8 +210,14 @@
                                                 <div class="product-action-link">
                                                     <a href="/wishlist" data-toggle="tooltip" title="Yên Thích"><i
                                                             class="ion-android-favorite-outline"></i></a>
-                                                    <a href="/cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
-                                                            class="ion-bag"></i></a>
+                                                    <a href="#" class="add-cart" data-toggle="tooltip"
+                                                        title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
+                                                    <form action="" method="post" class="cart-info">
+                                                        @csrf
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <input type="hidden" name="productId"
+                                                            value="{{ $showprd->id }}">
+                                                    </form>
                                                     <a href="#" data-toggle="modal" data-target="#quick_view">
                                                         <span data-toggle="tooltip" title="Xem Nhanh"><i
                                                                 class="ion-ios-eye-outline"></i></span> </a>
@@ -243,6 +257,7 @@
                                             </div>
                                         </div>
                                         <!-- product list item start -->
+                                        {{-- add to cart --}}
                                     </div>
                                 @endforeach
                             </div>
@@ -324,8 +339,8 @@
                                         <h5 class="cat-title">Chia sẻ:</h5>
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-pinteret"></i></a>
+                                        <a href="#"><i class="fa fa-google-pluss"></i></a>
                                     </div>
                                 </div>
                             </div>
