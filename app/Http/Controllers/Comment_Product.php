@@ -63,7 +63,13 @@ class Comment_Product extends Controller
     }
     public function answer_data(Request $request, $id){
         $idbl = $id;
-        $data = $request->all();
-        dd($data);
+        $data = $request->input('data_cmt');
+        Cmt_Product::where('idbl','=',$idbl)
+        ->update(
+            [
+                'answer_cmt' => $data
+            ]
+            );            
+        return redirect()->back()->with('alert');
     }
 }

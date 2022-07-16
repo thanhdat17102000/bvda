@@ -169,6 +169,9 @@
                         </div>
                         <button type="submit" name="send_cmt" class="send_cmt btn btn-primary">GỬI</button>
                     </form>
+                    @if(session('alert'))
+                       <section class="alert alert-success" >{{session('alert')}}</section>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" style="outline:none;" data-dismiss="modal">ĐÓNG</button>
@@ -182,5 +185,6 @@
 @push('scripts')
  <script src="{{URL::asset('admin/assets/js/jquery/jquery-3.6.0.min.js')}}"></script>
  <script src="{{URL::asset('admin/assets/js/jquery/load_model.js')}}"></script>
+ <script src="sweetalert2.all.min.js"></script>
 @endpush
 @endsection
