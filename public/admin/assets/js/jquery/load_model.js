@@ -49,6 +49,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('.answer_queston').click(function(){
         var idbl = $(this).val();
+        console.log(idbl)
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -64,9 +65,12 @@ $(document).ready(function(){
               $('.name_').text(data.query[0].name)
               $('.content_').text(data.query[0].m_content)
               $('.input-answer').attr('value',data.query[0].idbl)
+            //   sử dụng nối chuỗi để gửi dữ liệu 
+            var action_controller = "/admintrator/answer_data/"+idbl;
+              $('.form_').attr('action',action_controller) 
            }
         })
-    })
-    $('.send_cmt')
 
+    })
+  
 })
