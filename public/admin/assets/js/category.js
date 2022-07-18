@@ -12,10 +12,11 @@ function deleteData(id) {
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Đồng ý",
-        closeOnConfirm: false
+        // closeOnConfirm: false,
+        // closeOnCancel: false,
     })
-        .then((willDelete) => {
-            if (willDelete) {
+        .then((result) => {
+            if (result.value == true) {
                 $.ajax({
                     url: "/admintrator/category/" + id + "/delete",
                     type: "POST",
@@ -34,8 +35,6 @@ function deleteData(id) {
                         })
                     }
                 })
-            } else {
-                swal("Your imaginary file is safe!");
             }
         });
 }
