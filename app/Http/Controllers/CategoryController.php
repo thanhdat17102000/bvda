@@ -46,6 +46,10 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $category = CategoryModel::where('id', $id)->delete();
+        $sub_category = CategoryModel::where('m_id_parent', $id)->first();
+        if($sub_category) {
+            CategoryModel::where('m_id_parent', $id)->delete();
+        }
         return response()->json([
             'status' => 200,
             'message' => 'Xóa danh mục thành công'
