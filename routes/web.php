@@ -60,10 +60,10 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     //ajax category
     Route::get('category', [CategoryController::class, 'index'])->name('category-admin');
-    Route::post('category_delete', [CategoryController::class, 'delete']);
+    Route::post('category/{id}/delete', [CategoryController::class, 'delete']);
     //category
     Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
-    Route::post('category/add', [CategoryController::class, 'postAddCategory']);
+    Route::post('category/add', [CategoryController::class, 'postAddCategory'])->name('category-post-admin');
     Route::get('category/{id}/edit', [CategoryController::class, 'getEditCategory'])->name('category-edit-admin');
     Route::post('category/{id}/edit', [CategoryController::class, 'postEditCategory']);
     Route::get('category_loadlist', [CategoryController::class, 'loadlist']);
@@ -78,7 +78,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
     Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
 
-    
+
     route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
 
     // file images

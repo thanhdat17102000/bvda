@@ -24,17 +24,17 @@ class PostCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:150',
-            'index' => 'required|numeric|min:1'
+            'nameCategory' => 'required|string|max:150',
+            'numberCategory' => 'required|numeric|min:1'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Tên danh mục là bắt buộc.',
-            'index.required' => 'Số thứ tự là bắt buộc.',
-            'index.min' => 'Số thứ tự phải lớn hơn 1.',
+            'nameCategory.required' => 'Tên danh mục là bắt buộc.',
+            'numberCategory.required' => 'Số thứ tự là bắt buộc.',
+            'numberCategory.min' => 'Số thứ tự phải lớn hơn 1.',
         ];
     }
 }
