@@ -8,6 +8,7 @@ use App\Models\CategoryModel;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Auth;
+use DB;
 
 class productController extends Controller
 {
@@ -20,10 +21,10 @@ class productController extends Controller
     {
         $data = [
             'title' => 'Danh Mục',
-            'action'=> 'Sản phẩm'
+            'action' => 'Sản phẩm'
         ];
-        $datas = product::orderBy('id','asc')->search()->paginate(10);
-        return view('admin.product.index', compact('datas','data'));
+        $datas = product::orderBy('id', 'asc')->search()->paginate(10);
+        return view('admin.product.index', compact('datas', 'data'));
     }
 
     /**
@@ -35,10 +36,10 @@ class productController extends Controller
     {
         $data = [
             'title' => 'Sản phẩm',
-            'action'=> 'Thêm sản phẩm'
+            'action' => 'Thêm sản phẩm'
         ];
-        $showcategory = CategoryModel::orderBy('id','asc')->get();
-        return view('admin.product.create', compact('data','showcategory'));
+        $showcategory = CategoryModel::orderBy('id', 'asc')->get();
+        return view('admin.product.create', compact('data', 'showcategory'));
     }
 
     /**
@@ -49,31 +50,33 @@ class productController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'm_product_name' => 'required|unique:t_product',
-            'm_short_description' => 'required|max:255',
-            'm_description' => 'required',
-            'file_upload' => 'required|max:2048',
-            'm_price' => 'required',
-            'm_original_price' => 'required',
-            'm_buy' => 'required',
-        ],
-        [
-            'm_product_name.required' => 'Tên sản phẩm không để trống',
-            'm_short_description.required' => 'mô tả ngắn không để trống',
-            'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
-            'm_description.required' => 'mô tả không để trống',
-            'file_upload.required' => 'hình ảnh không để trống',
-            'file_upload.max' => 'hình ảnh tối đa là 2000kb',
-            'm_price.required' => 'giá gốc không được để trống',
-            'm_original_price.required' => 'giá khuyến mãi không được để trống',
-            'm_buy.required' => 'số lượng tồn kho không được để trống',
-            'm_product_name.unique' => 'Tên sản phẩm này đã có trong CSDL',
-        ]);
+        $validated = $request->validate(
+            [
+                'm_product_name' => 'required|unique:t_product',
+                'm_short_description' => 'required|max:255',
+                'm_description' => 'required',
+                'file_upload' => 'required|max:2048',
+                'm_price' => 'required',
+                'm_original_price' => 'required',
+                'm_buy' => 'required',
+            ],
+            [
+                'm_product_name.required' => 'Tên sản phẩm không để trống',
+                'm_short_description.required' => 'mô tả ngắn không để trống',
+                'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
+                'm_description.required' => 'mô tả không để trống',
+                'file_upload.required' => 'hình ảnh không để trống',
+                'file_upload.max' => 'hình ảnh tối đa là 2000kb',
+                'm_price.required' => 'giá gốc không được để trống',
+                'm_original_price.required' => 'giá khuyến mãi không được để trống',
+                'm_buy.required' => 'số lượng tồn kho không được để trống',
+                'm_product_name.unique' => 'Tên sản phẩm này đã có trong CSDL',
+            ]
+        );
         $create = new product();
         $create->m_product_name = $request->m_product_name;
         $create->m_id_category = $request->m_id_category;
-        $create->m_product_slug = Str::slug($request->m_product_name).'.html';
+        $create->m_product_slug = Str::slug($request->m_product_name) . '.html';
         $create->m_short_description = $request->m_short_description;
         $create->m_description = $request->m_description;
         $create->m_price = $request->m_price;
@@ -81,19 +84,18 @@ class productController extends Controller
         $create->m_buy = $request->m_buy;
         $create->m_status = $request->m_status;
         $file_upload = array();
-        if($files = $request->file('file_upload'))
-        {
+        if ($files = $request->file('file_upload')) {
             // $file = $request->file_upload;
             // $ext[] = $request->file_upload->extension();
             // $file_name = random(8).'-'.'sanpham.'.$ext;
             // $file->move(public_path('uploads'), $file_name);
             foreach ($files as $file) {
-                $name=$file->getClientOriginalName();
-                $uploadname = time().'-'.'sanpham.'.$name;
-                $file->move('uploads',$uploadname);
-                $file_name[]=$uploadname;
+                $name = $file->getClientOriginalName();
+                $uploadname = time() . '-' . 'sanpham.' . $name;
+                $file->move('uploads', $uploadname);
+                $file_name[] = $uploadname;
             }
-            $layhinh = implode(", ",$file_name);
+            $layhinh = implode(", ", $file_name);
             $chuyenhinh = explode(", ", $layhinh);
             $luuhinh = json_encode($chuyenhinh, JSON_UNESCAPED_SLASHES);
         }
@@ -123,11 +125,11 @@ class productController extends Controller
     {
         $data = [
             'title' => 'Sản phẩm',
-            'action'=> 'sửa sản phẩm'
+            'action' => 'sửa sản phẩm'
         ];
         $updated = product::find($id);
-        $showcategory = CategoryModel::orderBy('id','asc')->get();
-        return view('admin.product.edit', compact('data','updated','showcategory'));
+        $showcategory = CategoryModel::orderBy('id', 'asc')->get();
+        return view('admin.product.edit', compact('data', 'updated', 'showcategory'));
     }
 
     /**
@@ -139,29 +141,31 @@ class productController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'm_product_name' => 'required',
-            'm_short_description' => 'required|max:255',
-            'm_description' => 'required',
-            'file_upload' => 'max:2048',
-            'm_price' => 'required',
-            'm_original_price' => 'required',
-            'm_buy' => 'required',
-        ],
-        [
-            'm_product_name.required' => 'Tên sản phẩm không để trống',
-            'm_short_description.required' => 'mô tả ngắn không để trống',
-            'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
-            'm_description.required' => 'mô tả không để trống',
-            'file_upload.max' => 'hình ảnh tối đa là 2000kb',
-            'm_price.required' => 'giá gốc không được để trống',
-            'm_original_price.required' => 'giá khuyến mãi không được để trống',
-            'm_buy.required' => 'số lượng tồn kho không được để trống',
-        ]);
+        $validated = $request->validate(
+            [
+                'm_product_name' => 'required',
+                'm_short_description' => 'required|max:255',
+                'm_description' => 'required',
+                'file_upload' => 'max:2048',
+                'm_price' => 'required',
+                'm_original_price' => 'required',
+                'm_buy' => 'required',
+            ],
+            [
+                'm_product_name.required' => 'Tên sản phẩm không để trống',
+                'm_short_description.required' => 'mô tả ngắn không để trống',
+                'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
+                'm_description.required' => 'mô tả không để trống',
+                'file_upload.max' => 'hình ảnh tối đa là 2000kb',
+                'm_price.required' => 'giá gốc không được để trống',
+                'm_original_price.required' => 'giá khuyến mãi không được để trống',
+                'm_buy.required' => 'số lượng tồn kho không được để trống',
+            ]
+        );
         $updated = product::find($id);
         $updated->m_product_name = $request->m_product_name;
         $updated->m_id_category = $request->m_id_category;
-        $updated->m_product_slug = Str::slug($request->m_product_name).'.html';
+        $updated->m_product_slug = Str::slug($request->m_product_name) . '.html';
         $updated->m_short_description = $request->m_short_description;
         $updated->m_description = $request->m_description;
         $updated->m_price = $request->m_price;
@@ -169,26 +173,24 @@ class productController extends Controller
         $updated->m_buy = $request->m_buy;
         $updated->m_status = $request->m_status;
         $file_upload = array();
-        if($files = $request->file('file_upload'))
-        {
-            if($request->file('file_upload') == null){
-
-            }elseif($request->file('file_upload')){
+        if ($files = $request->file('file_upload')) {
+            if ($request->file('file_upload') == null) {
+            } elseif ($request->file('file_upload')) {
                 $deleteimg = json_decode($updated->m_picture);
                 $length = count($deleteimg);
                 for ($i = 0; $i < $length; $i++) {
-                $path = public_path("uploads/".$deleteimg[$i]);
-                    if(file_exists($path)){
+                    $path = public_path("uploads/" . $deleteimg[$i]);
+                    if (file_exists($path)) {
                         unlink($path);
                     }
                 }
                 foreach ($files as $file) {
-                    $name=$file->getClientOriginalName();
-                    $uploadname = time().'-'.'sanpham.'.$name;
-                    $file->move('uploads',$uploadname);
-                    $file_name[]=$uploadname;
+                    $name = $file->getClientOriginalName();
+                    $uploadname = time() . '-' . 'sanpham.' . $name;
+                    $file->move('uploads', $uploadname);
+                    $file_name[] = $uploadname;
                 }
-                $layhinh = implode(", ",$file_name);
+                $layhinh = implode(", ", $file_name);
                 $chuyenhinh = explode(", ", $layhinh);
                 $luuhinh = json_encode($chuyenhinh, JSON_UNESCAPED_SLASHES);
                 $updated->m_picture = $luuhinh;
@@ -210,31 +212,47 @@ class productController extends Controller
         $deleteimg = json_decode($delete->m_picture);
         $length = count($deleteimg);
         for ($i = 0; $i < $length; $i++) {
-            $path = public_path("uploads/".$deleteimg[$i]);
-            if(file_exists($path)){
+            $path = public_path("uploads/" . $deleteimg[$i]);
+            if (file_exists($path)) {
                 unlink($path);
             }
         }
         $delete->delete();
         return redirect()->back()->with('alert_success', 'Xóa sản phẩm thành công.');
-
     }
 
-    public function productFavourite(Request $request) {
-        $userLogin = Auth::user();
-        // $dataProduct = $request->dataProduct;
-        // User::where('id', $userLogin->id)->update([
-        //     'product_favourite' => $dataProduct
-        // ]);
-
+    //chọn sản phẩm yêu thích
+    public function productFavourite(Request $request)
+    {
+        $userLogin = Auth::user()->id;
         $idProduct = $request->idProduct;
-        // $dataUser = $request->dataUser;
-        $product = product::where('id', $idProduct)->update([
-            'user_favourite' => $userLogin
+        $checkData = DB::table('t_user_favourite')->where('id_user', $userLogin)->where('id_product', $idProduct)->first();
+        if ($checkData) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Sản phẩm yêu thích đã được chọn trước đó'
+            ]);
+        }
+        $addFavourite = DB::table('t_user_favourite')->insert([
+            'id_user' =>  $userLogin,
+            'id_product' => $idProduct
         ]);
         return response()->json([
             'status' => 200,
-            'message' => 'Bạn đã chọn sản phẩm yêu thích thành công'
+            'message' => 'Bạn đã chọn sản phẩm yêu thích thành công',
+            'data' =>  $addFavourite,
         ]);
+    }
+
+    public function listProductFavourite()
+    {
+       if(Auth::user()) {
+        $userLogin = Auth::user()->id;
+        $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
+        return view('Auth.product_list.favourite', compact('list_favourite'));
+       } else {
+            $list_favourite = [];
+            return view('Auth.product_list.favourite', compact('list_favourite'));
+       }
     }
 }

@@ -105,11 +105,11 @@ Danh sách sản phẩm
                 <div class="col-12">
                     <div class="breadcrumb-wrap text-center">
                         <nav aria-label="breadcrumb">
-                            <h1 class="breadcrumb-title"> Danh sách Sản phẩm</h1>
-                            <ul class="breadcrumb">
+                            <h1 class="breadcrumb-title"> Danh sách Sản phẩm yêu thích</h1>
+                            <!-- <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">sản phẩm</li>
-                            </ul>
+                            </ul> -->
                         </nav>
                     </div>
                 </div>
@@ -123,95 +123,11 @@ Danh sách sản phẩm
         <div class="container">
             <div class="row">
                 <!-- sidebar area start -->
-                <div class="col-lg-3 order-2">
-                    <div class="sidebar-wrapper">
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Danh mục </h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <ul class="color-list">
-                                    <li><a href="#">Nam <span>(10)</span></a></li>
-                                    <li><a href="#">Nữ <span>(05)</span></a></li>
-                                    <li><a href="#">Thể thao <span>(15)</span></a></li>
-                                    <li><a href="#">Boot <span>(12)</span></a></li>
 
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Lọc theo giá</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <div class="price-range-wrap">
-                                    <div class="price-range" data-min="20" data-max="400"></div>
-                                    <div class="range-slider">
-                                        <form action="#">
-                                            <div class="price-input">
-                                                <label for="amount">giá: </label>
-                                                <input type="text" id="amount">
-                                            </div>
-                                            <button class="filter-btn">lọc</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>màu</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <ul class="color-list">
-                                    <li><a href="#">vàng <span>(05)</span></a></li>
-                                    <li><a href="#">xanh <span>(12)</span></a></li>
-                                    <li><a href="#">trắng <span>(14)</span></a></li>
-                                    <li><a href="#">đen <span>(20)</span></a></li>
-                                    <li><a href="#">xám <span>(08)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Kích cỡ</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <ul class="size-list">
-                                    <li><a href="#">s <span>(05)</span></a></li>
-                                    <li><a href="#">M <span>(06)</span></a></li>
-                                    <li><a href="#">l <span>(02)</span></a></li>
-                                    <li><a href="#">XL <span>(01)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-banner">
-                                <a href="#">
-                                    <img src="{{ URL::asset('Auth/img/banner/banner_left.jpg') }}" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-                    </div>
-                </div>
                 <!-- sidebar area end -->
 
                 <!-- shop main wrapper start -->
-                <div class="col-lg-9 order-1">
+                <div class="col-lg-12 order-1">
                     <div class="shop-product-wrapper">
                         <!-- shop product top wrap start -->
                         <div class="shop-top-bar">
@@ -224,7 +140,7 @@ Danh sách sản phẩm
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-8 col-md-9 order-1 order-md-2">
+                                <!-- <div class="col-xl-7 col-lg-8 col-md-9 order-1 order-md-2">
                                     <div class="top-bar-right">
                                         <div class="product-short">
                                             <p>Sắp xếp : </p>
@@ -242,15 +158,15 @@ Danh sách sản phẩm
                                             <p>đang xem 1-16 sản phẩm</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- shop product top wrap start -->
 
                         <!-- product item list start -->
                         <div class="shop-product-wrap grid-view row mbn-50">
-                            @foreach ($showproduct as $key => $showprd)
-                            <div class="col-lg-4 col-sm-6">
+                            @foreach ($list_favourite as $key => $showprd)
+                            <div class="col-lg-3 col-sm-6">
                                 <!-- product grid item start -->
                                 <div class="product-item mb-53">
                                     <div class="product-thumb">
@@ -270,21 +186,18 @@ Danh sách sản phẩm
                                         </div>
                                         <div class="product-action-link">
                                             <!-- <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a> -->
-                                            @foreach($list_favourite as $item)
-                                                @if($item->id_product == $showprd->id)
-                                                    <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @else
-                                                    <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @endif
-                                            @endforeach
-                                            <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
+                                            <!-- <form action="" method="post" id="add-favourite">
+                                                @csrf
+                                                <input type="hidden" id="idProductFavourite" name="idProductFavourite" data-id="{{$showprd->id}}">
+                                            </form> -->
+                                            <!-- <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">
                                                 @csrf
                                                 <input type="hidden" name="quantity" value="1">
                                                 <input type="hidden" name="productId" value="{{ $showprd->id }}">
                                             </form>
                                             <a href="#" data-toggle="modal" data-target="#quick_view">
-                                                <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
+                                                <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a> -->
                                         </div>
                                     </div>
                                 </div>
