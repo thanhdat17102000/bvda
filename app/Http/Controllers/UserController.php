@@ -33,14 +33,15 @@ class UserController extends Controller
         $thanhvien = AccountModel::orderBy('id','asc')->get();
         return view('admin.user.list', compact('data','thanhvien'));
     }
-    // public function list_user()
-    // {
-    //     $data = [
-    //         'title' => 'Người dùng',
-    //         'action' => 'người dùng'
-    //     ];
-    //     return view('admin.user.list_user');
-    // }
+    public function add_user(){
+        $data = [
+            'title' => 'Thêm tài khoản',
+            'action'=> ''
+        ];
+        return view('admin.user.add_user', compact('data'));
+    }
+
+
     public function doimatkhauadmin(Request $request){
         $id = $request->id;
         $data = $request->all();
@@ -50,7 +51,7 @@ class UserController extends Controller
                 $updated = accountModel::find($id);
                 $updated->password = Hash::make($data['matkhaumoi']);
                 if($updated->save()){
-                    echo 'Thanh cong';
+                    echo 'Đổi mật khẩu thành công!';
                 }
             }
         }

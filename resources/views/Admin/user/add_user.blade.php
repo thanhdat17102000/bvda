@@ -1,15 +1,14 @@
 @extends('admin.index')
-@section('title')
-    Cập nhật thông tin
-@endsection
 @push('scripts')
     <!-- dropify js -->
     <script src="{{ asset('admin/assets/libs/dropify/dropify.min.js') }}"></script>
+    <!-- form-upload init -->
+    <script src="{{ asset('admin/assets/js/pages/form-fileupload.init.js') }}"></script>
     <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         CKEDITOR.replace('m_desc');
         CKEDITOR.replace('m_content');
-    </script> --}}
+    </script>
     <script>
         toastr.options = {
             "closeButton": false,
@@ -29,59 +28,26 @@
             "hideMethod": "fadeOut"
         }
 
-        const renderUser = () => {
-            $.ajax({
-                type: "get",
-                url: "{{ url('api/user/' . $data['id']) }}",
-                success: function(response) { 
-                    console.log(response)
-                    $('input[name=name]').val(response.name);
-                    $('input[name=email]').val(response.email);
-                    $('input[name=phone]').val(response.phone);
-                    $('input[name=m_address]').val(response.m_address);
-                    $('input[name=role]').val(response.role);
-                    // $('input[name=m_status]').val(response.m_status);
-                    // response.m_status == 0 ? $('#hidden').prop("checked", true) : '';
-                    $('.dropify').attr('data-default-file',
-                        `{{ asset('uploads/avatar/${response.m_avatar}') }}`)
-                    $('.dropify').dropify({
-                        messages: {
-                            'default': 'Drag and drop a file here or click',
-                            'replace': 'Drag and drop or click to replace',
-                            'remove': 'Remove',
-                            'error': 'Ooops, something wrong appended.'
-                        },
-                        error: {
-                            'fileSize': 'The file size is too big (1M max).'
-                        }
-                    });
-                },
-                error: function(error) {
-                    toastr.error('Lỗi lấy thông tin tài khoản!', 'Vui lòng kiểm tra lại thông tin')
-                }
-            });
-        }
-        renderUser();
-
-        $('.form-horizontal:first').submit(function(e) {
+        $('.form-horizontal').submit(function(e) {
             e.preventDefault();
             let data = new FormData(this);
-            console.log(data)
-            // data.set('m_desc', CKEDITOR.instances.m_desc.getData());
-            // data.set('m_content', CKEDITOR.instances.m_content.getData());
-            $.ajax({
-                url: '{{ url('api/user/' . $data['id']) }}',
+            data.set('m_desc', CKEDITOR.instances.m_desc.getData());
+            data.set('m_content', CKEDITOR.instances.m_content.getData());
+              $.ajax({
+                url: '{{ url('api/user') }}',
                 type: 'post',
                 data,
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    toastr.success('Sửa thành công!', 'Xem danh sách để kiểm tra'),
-                        renderUser();
+                    console.log(response);
+                    $(':reset').click();
+                    $('.dropify-clear:first').click();
+                    toastr.success('Thêm thành công!', 'Xem danh sách để kiểm tra')
                 },
                 error: function(error) {
                     console.log(error);
-                    toastr.error('Lỗi sửa bài viết!', 'Vui lòng kiểm tra lại thông tin')
+                    toastr.error('Lỗi thêm bài viết!', 'Vui lòng kiểm tra lại thông tin')
                 }
             });
         });
@@ -100,72 +66,64 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="p-2">
-                                    <form class="form-horizontal" role="form" enctype="multipart/form-data"
-                                        method="POST">
+                                    <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
                                         @csrf
-                                        @method('put')
+                                        <input type="hidden" value="{{Auth::id()}}" name="m_id_user">
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Họ và tên</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập họ và tên"
-                                                name="name">
+                                                    name="m_title">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Email</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập email"
-                                                    name="email">
+                                                    name="m_slug">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Số điện thoại</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập số điện thoại"
-                                                name="phone">                                            
+                                                    name="m_meta_keyword">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Địa chỉ</label>
+                                            <label class="col-md-2 col-form-label">Phân quyền</label>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control" placeholder="Nhập địa chỉ"
-                                                name="m_address">                                            
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Role</label>
-                                            <div class="col-md-10">
-                                                <input type="text" class="form-control" placeholder="Quyền"
-                                                name="role">
+                                                <input type="text" class="form-control" placeholder="Nhập quyền"
+                                                    name="m_meta_desc">
                                             </div>
                                         </div>
                                         {{-- <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Trạng thái</label>
+                                            <label class="col-md-2 col-form-label">Trạng thái hiển thị</label>
                                             <div class="col-md-10 row mt-1">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="hidden" name="m_status" value="0"
                                                         class="custom-control-input">
-                                                    <label class="custom-control-label" for="hidden">Đang hoạt động</label>
+                                                    <label class="custom-control-label" for="hidden">Ẩn</label>
                                                 </div>
                                                 <div class="custom-control custom-radio ml-4">
                                                     <input type="radio" id="show" name="m_status" value="1"
                                                         class="custom-control-input" @checked(true)>
-                                                    <label value="0" name="m_status" class="custom-control-label" for="show">Ngưng hoạt động</label>
+                                                    <label class="custom-control-label" for="show">Hiện</label>
                                                 </div>
                                             </div>
                                         </div> --}}
                                         <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Hình ảnh</label>
+                                            <label class="col-md-2 col-form-label">Avatar</label>
                                             <div class="col-md-4">
                                                 <div class="card-box">
-                                                    <input type="file" name="m_avatar" class="dropify"
+                                                    <input type="file" name="m_image" class="dropify"
                                                         data-default-file="" />
                                                 </div>
                                             </div><!-- end col -->
                                         </div>
                                         <div class="form-group text-right mb-0">
                                             <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
-                                                Lưu
+                                                Thêm tài khoản
                                             </button>
                                             <button type="reset" class="btn btn-secondary waves-effect waves-light">
                                                 Hủy

@@ -10,6 +10,8 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
 use App\Models\product;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
@@ -51,7 +53,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     // Quản lý user
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
-    Route::get('/delete_user/{id}', [UserController::class,'delete_user'])->name('delete_user');
+    Route::get('/user/add', [UserController::class,'add_user'])->name('add_user');
     Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([

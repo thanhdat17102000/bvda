@@ -55,7 +55,7 @@
                 success: function(response) {
                     console.log(response);
                     let tbody = ``;
-                    response.user.map((item, index) => {
+                    response.map((item, index) => {
                         tbody += `
                                 <tr>
                                     <td>${item.id}</td>
@@ -63,7 +63,7 @@
                                     <td>${item.email}</td>
                                     <td>${item.phone}</td>
                                     <td>${item.m_address}</td>
-                                    <td>${item.role}</td>
+                                    <td>${item.role === 1 ? 'Admin' : 'Khách hàng'}</td>
                                     <td>
                                         <button type="button" data-id="${item.id}" class="btn-edit btn btn-icon waves-effect waves-light btn-success"><i class="far fa-edit"></i></button>
                                         <button type="button" data-id="${item.id}" class="btn-delete btn btn-icon waves-effect waves-light btn-danger mt-2"><i class="fas fa-trash-alt"></i></button>
@@ -71,25 +71,25 @@
                                 </tr>`
                     });
                     $('tbody:first').html(tbody);
-                    // $('.btn-delete').click(function(e) {
-                    //     let id = $(this).data('id');
-                    //     $.ajax({
-                    //         type: "delete",
-                    //         url: `{{ url('api/user/${id}') }}`,
-                    //         processData: false,
-                    //         contentType: false,
-                    //         success: function(response) {
-                    //             console.log("result", response);
-                    //             renderData();
-                    //             toastr.success('Xóa thành công!',
-                    //                 'Xem danh sách để kiểm tra')
-                    //         },
-                    //         error: function(e) {
-                    //             console.log(e);
-                    //             toastr.error('Lỗi xóa!', 'Dữ liệu không tồn tại');
-                    //         }
-                    //     });
-                    // });
+                    $('.btn-delete').click(function(e) {
+                        let id = $(this).data('id');
+                        $.ajax({
+                            type: "delete",
+                            url: `{{ url('api/user/${id}') }}`,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                console.log("result", response);
+                                renderData();
+                                toastr.success('Xóa thành công!',
+                                    'Xem danh sách để kiểm tra')
+                            },
+                            error: function(e) {
+                                console.log(e);
+                                toastr.error('Lỗi xóa!', 'Dữ liệu không tồn tại');
+                            }
+                        });
+                    });
                     $('.btn-edit').click(function (e) { 
                         let id = $(this).data('id');
                         $(location).attr('href',`{{ url('admintrator/user/edit/${id}') }}`)

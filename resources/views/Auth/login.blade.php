@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-center h-100">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-5">
             <div style="background-color: rgba(0,0,0,0.5) !important;" class="card">
                 <div class="card-header bg-warning">{{ __('Đăng nhập') }}</div>
 
@@ -11,7 +11,7 @@
                         @csrf
 
                         <div class="row mb-3 input-group form-group">
-                            <label for="email" class="col-md-4 col-form-label text-light text-md-end">{{ __('Email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-light text-md-end">{{ __('Email     ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control input-group-prepend @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
@@ -43,7 +43,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label text-light" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
