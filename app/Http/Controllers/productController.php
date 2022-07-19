@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\CategoryModel;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Auth;
 
 class productController extends Controller
 {
@@ -170,7 +172,7 @@ class productController extends Controller
         if($files = $request->file('file_upload'))
         {
             if($request->file('file_upload') == null){
-                
+
             }elseif($request->file('file_upload')){
                 $deleteimg = json_decode($updated->m_picture);
                 $length = count($deleteimg);
@@ -216,5 +218,23 @@ class productController extends Controller
         $delete->delete();
         return redirect()->back()->with('alert_success', 'Xóa sản phẩm thành công.');
 
+    }
+
+    public function productFavourite(Request $request) {
+        $userLogin = Auth::user();
+        // $dataProduct = $request->dataProduct;
+        // User::where('id', $userLogin->id)->update([
+        //     'product_favourite' => $dataProduct
+        // ]);
+
+        $idProduct = $request->idProduct;
+        // $dataUser = $request->dataUser;
+        $product = product::where('id', $idProduct)->update([
+            'user_favourite' => $userLogin
+        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Bạn đã chọn sản phẩm yêu thích thành công'
+        ]);
     }
 }

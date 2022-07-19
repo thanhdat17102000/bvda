@@ -131,6 +131,7 @@ class Database extends Migration
             $table->unsignedInteger('m_id_maloai');
             $table->unsignedInteger('m_id_user');
             $table->integer('m_id_parent');
+            $table->integer('ratings');
             $table->text('m_content');
             $table->text('answer_cmt')->nullable();
             $table->boolean('m_status')->default(0);

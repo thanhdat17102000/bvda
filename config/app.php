@@ -213,5 +213,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
-
+    // file này để thông báo cho người dùng biết thành công hay thâ
 ];

@@ -30,6 +30,9 @@ class product extends Model
     public function showdanhmuc(){
         return $this->hasOne(categoryModel::class,'id','m_id_category');
     }
+    public function showcountcomment(){
+        return $this->hasMany(Cmt_Product::class,'m_id_maloai','id');
+    }
 
     public function scopeSearch($query)
     {

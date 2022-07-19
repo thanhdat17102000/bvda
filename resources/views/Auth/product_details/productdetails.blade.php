@@ -1,4 +1,33 @@
 @extends('Auth.layouts.master')
+@push('scripts')
+    <script>
+         $('.cart-info').submit(function(e) {
+            e.preventDefault();
+            let data = new FormData(this);
+            data.append('quantity', $('input[name=quantity]').val())
+            $.ajax({
+                type: "post",
+                url: "{{ url('api/cart') }}",
+                data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    renderCart();
+                    toastr.success('',
+                        'Thêm giỏ hàng thành công')
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('.add-cart').click(function(e) {
+            e.preventDefault();
+            $('.cart-info').submit();
+        });
+    </script>
+@endpush
 @section('title')
     Chi tiết sản phẩm
 @endsection
@@ -54,7 +83,7 @@
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="pro-det-title">{{$showdetail->m_product_name}}</h3>
+                                    <h3 class="pro-det-title" data-idmaloai="{{$showdetail->id}}">{{$showdetail->m_product_name}}</h3>
                                     <div class="pro-review">
                                         <span><a href="#">1 đánh giá</a></span>
                                     </div>
@@ -65,10 +94,15 @@
                                     <p>{!!$showdetail->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                            <div class="pro-qty"><input name="quantity" type="text" value="1"></div>
                                         </div>
-                                        <a href="cart.html" class="btn btn-default">Thêm vào giỏ hàng</a>
+                                        <a href="#" class="add-cart" class="btn btn-default">Thêm vào giỏ hàng</a>
                                     </div>
+                                    <form action="" method="post" class="cart-info">
+                                        @csrf
+                                        <input type="hidden" name="productId"
+                                            value="{{ $showdetail->id }}">
+                                    </form>
                                     <div class="color-option mb-20">
                                         <h5 class="cat-title">Màu sắc :</h5>
                                         <ul>
@@ -179,27 +213,51 @@
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="tab_three">
-                                            <form action="#" class="review-form">
-                                                <h5>1 bình luận: <span>Chaz Kangeroo Hoodies</span></h5>
+                                            <!-- <form action="#" class="review-form"> -->
+                                                    @foreach($showproductdetailget as $showprd)
+                                                        <h5>{{$showprd->showcountcomment->count()}} Đánh giá:</h5>
+                                                    @endforeach
+                                                @foreach($showcomment as $showcm)
+                                                <!-- <span>{{$showcm->showiduser->name}}</span> -->
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
+                                                        @if($showcm->showiduser->m_avatar)
+                                                        <img src="{{asset('uploads')}}/{{$showcm->showiduser->m_avatar}}" alt="">
+                                                        @else
                                                         <img src="{{URL::asset('Auth/img/about/avatar.jpg')}}" alt="">
+                                                        @endif
                                                     </div>
-                                                    <div class="review-box">
+                                                    <div class="review-box" data-idbl="{{$showcm->idbl}}">
                                                         <div class="ratings">
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span><i class="fa fa-star"></i></span>
+                                                            @for($i = 1; $i <= $showcm->ratings; $i++)
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                            @endfor 
                                                         </div>
                                                         <div class="post-author">
-                                                            <p><span>admin -</span> 30 Nov, 2018</p>
+                                                            <p><span>{{$showcm->showiduser->name}} -</span> {{$showcm->updated_at->diffForHumans()}}</p>
                                                         </div>
-                                                        <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet sem varius ante feugiat lacinia. Nunc ipsum nulla, vulputate ut venenatis vitae, malesuada ut mi. Quisque iaculis, dui congue placerat pretium, augue erat accumsan lacus</p>
+                                                        <p>
+                                                            {{$showcm->m_content}}
+                                                        </p>
+                                                            @Auth
+                                                                @if($showcm->m_id_user == Auth::user()->id)
+                                                                    <a id="deletebl" data-iddelete="{{$showcm->idbl}}" style="float:right">xóa đánh giá</a>
+                                                                @endif
+                                                            @endauth
+                                                        <!-- admin trả lời nếu có -->
+                                                        @if($showcm->answer_cmt)
+                                                        <hr>
+                                                        <div class="post-author">
+                                                            <p><span>{{$showcm->showiduser->name}} trả lời -</span> {{$showcm->updated_at->diffForHumans()}}</p>
+                                                        </div>
+                                                        <p>
+                                                            {{$showcm->answer_cmt}}
+                                                        </p>
+                                                        @endif
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                @endforeach
+                                                <!-- <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Họ và tên</label>
                                                         <input type="text" class="form-control" required>
@@ -210,34 +268,47 @@
                                                         <label class="col-form-label"><span class="text-danger">*</span> Email</label>
                                                         <input type="email" class="form-control" required>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Nội dung</label>
-                                                        <textarea class="form-control" required></textarea>
+                                                        <textarea class="form-control" id="m_content" required></textarea>
                                                         <div class="help-block pt-10"><span class="text-danger">Ghi chú:</span> HTML is not translated!</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Đánh giá</label>
-                                                        &nbsp;&nbsp;&nbsp; Tệ&nbsp;
-                                                        <input type="radio" value="1" name="rating">
+                                                        <!-- &nbsp;&nbsp;&nbsp; Tệ&nbsp;
+                                                        <input type="radio" value="1" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="2" name="rating">
+                                                        <input type="radio" value="2" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="3" name="rating">
+                                                        <input type="radio" value="3" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="4" name="rating">
+                                                        <input type="radio" value="4" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="5" name="rating" checked>
-                                                        &nbsp;Rất tốt
+                                                        <input type="radio" value="5" name="rating" id="rating">
+                                                        &nbsp;Rất tốt -->
+                                                        <select class="form-control" id="rating">
+                                                            <option value="1">1 sao</option>
+                                                            <option value="2">2 sao</option>
+                                                            <option value="3">3 sao</option>
+                                                            <option value="4">4 sao</option>
+                                                            <option value="5">5 sao</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="buttons">
-                                                    <button class="sqr-btn" type="submit">Tiếp tục</button>
+                                                    @if(Route::has('login'))
+                                                    @Auth
+                                                    <button class="sqr-btn" type="submit" id="btnsubmitcomment" data-id="{{Auth::user()->id}}">Tiếp tục</button>
+                                                    @else
+                                                    <button class="sqr-btn" type="submit" onclick="alert('vui lòng kiểm tra đăng nhập hoặc bạn chưa mua sản phẩm này !!!')">Tiếp tục</button>
+                                                    @endif
+                                                    @endif
                                                 </div>
-                                            </form> <!-- end of review-form -->
+                                            <!-- </form> end of review-form -->
                                         </div>
                                     </div>
                                 </div>
@@ -374,7 +445,57 @@
     </div>
     @endforeach
     <!-- Quick view modal end -->
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('#btnsubmitcomment').click(function(event) {
+        var idmaloai = $('.pro-det-title').data('idmaloai');
+        var idbl = $('.review-box').data('idbl');
+        var iduser = $(this).data('id');
+        var noi_dung = $('#m_content').val();
+        var rating = $('#rating').val();
+        var _token = $('input[name="_token"]').val();
+        // alert(idmaloai);
+        // alert(iduser);
+        // alert(noi_dung);
+        // alert(rating);
+        // alert(_token);
+        $.ajax({
+            url:'{{route("postcomment")}}',
+            method:'post',
+            data:{
+                idmaloai:idmaloai,idbl:idbl,iduser:iduser,noi_dung:noi_dung,rating:rating,_token:_token
+            },
+            success: function(data){
+                if(data){
+                    alert('Đánh giá thành công');
+                    window.location.reload(true);
+                }else{
+                    alert('Đánh giá thất bại');
+                }
+            }
+        })
+    });
+</script>
+<script>
+    $(document).on('click','#deletebl',function(){
+        var iddelete = $(this).data('iddelete');
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:'{{route("showdelete")}}',
+            method:'post',
+            data:{
+                iddelete:iddelete,_token:_token
+            },
+            success: function(data){
+                if(data){
+                    alert('xóa đánh giá thành công');
+                    window.location.reload(true);
+                }else{
+                    alert('xóa đánh giá thất bại');
+                }
+            }
+        })
+    })
+</script>
 
 @endsection

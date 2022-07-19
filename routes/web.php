@@ -67,10 +67,10 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\profileController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     //ajax category
     Route::get('category', [CategoryController::class, 'index'])->name('category-admin');
-    Route::post('category_delete', [CategoryController::class, 'delete']);
+    Route::post('category/{id}/delete', [CategoryController::class, 'delete']);
     //category
     Route::get('category/add', [CategoryController::class, 'getAddCategory'])->name('category-add-admin');
-    Route::post('category/add', [CategoryController::class, 'postAddCategory']);
+    Route::post('category/add', [CategoryController::class, 'postAddCategory'])->name('category-post-admin');
     Route::get('category/{id}/edit', [CategoryController::class, 'getEditCategory'])->name('category-edit-admin');
     Route::post('category/{id}/edit', [CategoryController::class, 'postEditCategory']);
     Route::get('category_loadlist', [CategoryController::class, 'loadlist']);
@@ -85,7 +85,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
     Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
 
-    
+
     route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
 
     // file images
@@ -114,12 +114,14 @@ Route::get('/profile', function () {
 //     return view('Auth.product_details.productdetails');
 // });
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
+Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
+Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdelete');
 
 Route::get('/login', function () {
-    return view('Auth.account.login');
+    return view('Auth.login');
 });
 Route::get('/register', function () {
-    return view('Auth.account.register');
+    return view('Auth.register');
 });
 Route::get('/profile', function () {
     return view('Auth.account.profile');
@@ -157,3 +159,4 @@ Route::get('/get_data_cmt/{id}', [Comment_Product::class, 'get_data_cmt']);
 
 Route::get('/get_data_khachang/{id}',[Comment_Product::class,'get_data_khachang']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::patch('/product-favourite', [App\Http\Controllers\productController::class, 'productFavourite']);
