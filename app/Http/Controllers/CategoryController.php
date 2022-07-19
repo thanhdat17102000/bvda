@@ -72,7 +72,7 @@ class CategoryController extends Controller
         CategoryModel::insert([
             'm_title' => $request->nameCategory,
             'm_id_parent' => $request->parentCategory,
-            'm_index' => $request->numberCategory,
+            'm_index' => 1,
         ]);
         // return redirect()->route('category-admin')->with('alert_success', 'Thêm mới danh mục thành công.');
         // return response()->json(['success'=>'Thêm mới danh mục thành công.']);
@@ -103,7 +103,7 @@ class CategoryController extends Controller
         CategoryModel::where('id', $id)->update([
             'm_title' => $request->nameEditCategory,
             'm_id_parent' => $request->parentEditCategory,
-            'm_index' => $request->numberEditCategory,
+            'm_index' => 1,
         ]);
         // return redirect()->route('category-admin')->with('alert_success', 'Sửa danh mục thành công.');
         return response()->json([
