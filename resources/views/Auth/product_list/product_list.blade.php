@@ -65,30 +65,6 @@ Danh sách sản phẩm
         });
     });
 
-    // $('#add-favourite').submit(function(e) {
-    //     e.preventDefault();
-    //     var idProduct = $('#idProduct').val();
-    //     console.log(idProduct);
-    //     var idProduct = $('input[name=idProductFavourite]').val()
-    //     console.log(idProduct);
-    //     let user_id = $(this).data('id');
-    //     console.log('user_id', user_id);
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/product-favourite",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             'idProduct': idProduct,
-    //         },
-    //         success: function(response) {
-    //             console.log(response);
-    //         },
-    //         error: function(error) {
-    //             console.log(error);
-    //         }
-    //     });
-    // });
-
     $('.add-cart').click(function(e) {
         e.preventDefault();
         $(this).next('.cart-info').submit();
