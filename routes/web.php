@@ -152,3 +152,4 @@ Route::get('/get_data_cmt/{id}', [Comment_Product::class, 'get_data_cmt']);
 
 Route::get('/get_data_khachang/{id}',[Comment_Product::class,'get_data_khachang']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::patch('/product-favourite', [App\Http\Controllers\productController::class, 'productFavourite']);

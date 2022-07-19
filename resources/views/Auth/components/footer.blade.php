@@ -102,7 +102,7 @@
                             <ul class="useful-link">
                                 <!-- <li><a href="#">Ecommerce</a></li> -->
                                 <li><a href="/blog">Tin Khuyến Mãi</a></li>
-                                <li><a href="/product_list">Hợp Tác</a></li>
+                                <li><a href="/product_list">Sản phẩm yêu thích</a></li>
                                 <li><a href="/profile">CSKH</a></li>
                                 <li><a href="/blog">Blog</a></li>
                                 <li><a href="/contact_us"></a>Tuyển Dụng</li>
