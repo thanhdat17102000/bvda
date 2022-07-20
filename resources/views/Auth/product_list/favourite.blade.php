@@ -12,7 +12,6 @@ Danh sách sản phẩm
 @endpush
 @push('scripts')
 <script>
-    //Sản phẩm yêu thích FE của Yến
     $(document).ready(function() {
         $('.ion-android-favorite-outline').click(function(event) {
             event.preventDefault();
@@ -26,14 +25,11 @@ Danh sách sản phẩm
                     'idProduct': idProduct,
                 },
                 success: function(response) {
-                    // console.log(response);
-                    // toastr.success('',
-                    //     'Chọn sản phẩm yêu thích thành công')
                     if (response.status == 200) {
                         toastr.success('',
                             response.message)
                     } else {
-                        toastr.success('',
+                        toastr.error('',
                             response.message)
                     }
                 },
@@ -65,30 +61,6 @@ Danh sách sản phẩm
         });
     });
 
-    // $('#add-favourite').submit(function(e) {
-    //     e.preventDefault();
-    //     var idProduct = $('#idProduct').val();
-    //     console.log(idProduct);
-    //     var idProduct = $('input[name=idProductFavourite]').val()
-    //     console.log(idProduct);
-    //     let user_id = $(this).data('id');
-    //     console.log('user_id', user_id);
-    //     $.ajax({
-    //         type: "post",
-    //         url: "/product-favourite",
-    //         data: {
-    //             "_token": "{{ csrf_token() }}",
-    //             'idProduct': idProduct,
-    //         },
-    //         success: function(response) {
-    //             console.log(response);
-    //         },
-    //         error: function(error) {
-    //             console.log(error);
-    //         }
-    //     });
-    // });
-
     $('.add-cart').click(function(e) {
         e.preventDefault();
         $(this).next('.cart-info').submit();
@@ -96,124 +68,25 @@ Danh sách sản phẩm
 </script>
 @endpush
 @section('content')
-<!-- main wrapper start -->
 <main>
-    <!-- breadcrumb area start -->
     <div class="breadcrumb-area bg-img" data-bg="{{ URL::asset('Auth/img/banner/breadcrumb-banner.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb-wrap text-center">
                         <nav aria-label="breadcrumb">
-                            <h1 class="breadcrumb-title"> Danh sách Sản phẩm</h1>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">sản phẩm</li>
-                            </ul>
+                            <h1 class="breadcrumb-title"> Danh sách Sản phẩm yêu thích</h1>
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- breadcrumb area end -->
-
-    <!-- page main wrapper start -->
     <div class="shop-main-wrapper section-padding">
         <div class="container">
             <div class="row">
-                <!-- sidebar area start -->
-                <div class="col-lg-3 order-2">
-                    <div class="sidebar-wrapper">
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Danh mục </h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <ul class="color-list">
-                                    <li><a href="#">Nam <span>(10)</span></a></li>
-                                    <li><a href="#">Nữ <span>(05)</span></a></li>
-                                    <li><a href="#">Thể thao <span>(15)</span></a></li>
-                                    <li><a href="#">Boot <span>(12)</span></a></li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Lọc theo giá</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <div class="price-range-wrap">
-                                    <div class="price-range" data-min="20" data-max="400"></div>
-                                    <div class="range-slider">
-                                        <form action="#">
-                                            <div class="price-input">
-                                                <label for="amount">giá: </label>
-                                                <input type="text" id="amount">
-                                            </div>
-                                            <button class="filter-btn">lọc</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>màu</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <ul class="color-list">
-                                    <li><a href="#">vàng <span>(05)</span></a></li>
-                                    <li><a href="#">xanh <span>(12)</span></a></li>
-                                    <li><a href="#">trắng <span>(14)</span></a></li>
-                                    <li><a href="#">đen <span>(20)</span></a></li>
-                                    <li><a href="#">xám <span>(08)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Kích cỡ</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <ul class="size-list">
-                                    <li><a href="#">s <span>(05)</span></a></li>
-                                    <li><a href="#">M <span>(06)</span></a></li>
-                                    <li><a href="#">l <span>(02)</span></a></li>
-                                    <li><a href="#">XL <span>(01)</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-
-                        <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-banner">
-                                <a href="#">
-                                    <img src="{{ URL::asset('Auth/img/banner/banner_left.jpg') }}" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <!-- single sidebar end -->
-                    </div>
-                </div>
-                <!-- sidebar area end -->
-
-                <!-- shop main wrapper start -->
-                <div class="col-lg-9 order-1">
+                <div class="col-lg-12 order-1">
                     <div class="shop-product-wrapper">
-                        <!-- shop product top wrap start -->
                         <div class="shop-top-bar">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-4 col-md-3 order-2 order-md-1">
@@ -224,34 +97,11 @@ Danh sách sản phẩm
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-8 col-md-9 order-1 order-md-2">
-                                    <div class="top-bar-right">
-                                        <div class="product-short">
-                                            <p>Sắp xếp : </p>
-                                            <select class="nice-select" name="sortby">
-                                                <option value="trending">Liên quan</option>
-                                                <option value="sales">Tên (A - Z)</option>
-                                                <option value="sales">Tên (Z - A)</option>
-                                                <option value="rating">Giá (Thấp &gt; Cao)</option>
-                                                <option value="date">Đánh giá (Cao nhất)</option>
-                                                <option value="price-asc">Kiểu dáng (A - Z)</option>
-                                                <option value="price-asc">Kiểu dáng (Z - A)</option>
-                                            </select>
-                                        </div>
-                                        <div class="product-amount">
-                                            <p>đang xem 1-16 sản phẩm</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <!-- shop product top wrap start -->
-
-                        <!-- product item list start -->
                         <div class="shop-product-wrap grid-view row mbn-50">
-                            @foreach ($showproduct as $key => $showprd)
-                            <div class="col-lg-4 col-sm-6">
-                                <!-- product grid item start -->
+                            @foreach ($list_favourite as $key => $showprd)
+                            <div class="col-lg-3 col-sm-6">
                                 <div class="product-item mb-53">
                                     <div class="product-thumb">
                                         <a href="{{ route('productdetails', $showprd->m_product_slug) }}">
@@ -269,17 +119,6 @@ Danh sách sản phẩm
                                             <span class="price-old"><del>{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</del></span>
                                         </div>
                                         <div class="product-action-link">
-                                            <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                            <!-- @foreach($list_favourite as $item)
-                                                @if($item->id_product == $showprd->id)
-                                                    <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @elseif($item->id_product != $showprd->id)
-                                                    <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @else
-                                                <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @endif
-                                            @endforeach -->
-
                                             <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">
                                                 @csrf
@@ -291,9 +130,6 @@ Danh sách sản phẩm
                                         </div>
                                     </div>
                                 </div>
-                                <!-- product grid item end -->
-
-                                <!-- product list item start -->
                                 <div class="product-list-item mb-30">
                                     <div class="product-thumb">
                                         <a href="product-details.html">
@@ -319,19 +155,13 @@ Danh sách sản phẩm
                                         </div>
                                     </div>
                                 </div>
-                                <!-- product list item start -->
-                                {{-- add to cart --}}
                             </div>
                             @endforeach
                         </div>
-                        <!-- shop main wrapper end -->
                     </div>
                 </div>
             </div>
-            <!-- page main wrapper end -->
 </main>
-<!-- main wrapper end -->
-<!-- Quick view modal start -->
 <div class="modal" id="quick_view">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -339,7 +169,6 @@ Danh sách sản phẩm
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- product details inner end -->
                 <div class="product-details-inner">
                     <div class="row">
                         <div class="col-lg-5">
@@ -398,10 +227,8 @@ Danh sách sản phẩm
                         </div>
                     </div>
                 </div>
-                <!-- product details inner end -->
             </div>
         </div>
     </div>
 </div>
-<!-- Quick view modal end -->
 @endsection

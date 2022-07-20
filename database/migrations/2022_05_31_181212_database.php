@@ -24,6 +24,8 @@ class Database extends Migration
         Schema::dropIfExists('t_category');
         Schema::dropIfExists('t_product');
         Schema::dropIfExists('t_product_inventory');
+        Schema::dropIfExists('t_commentProduct');
+        Schema::dropIfExists('t_user_favourite');
 
         Schema::create('t_post', function (Blueprint $table) {
             $table->increments('id');
@@ -146,6 +148,10 @@ class Database extends Migration
             $table->integer('m_quanti');
             $table->string('m_size', 255);
             $table->foreign('m_id_product')->references('id')->on('t_product');
+        });
+        Schema::create('t_user_favourite', function (Blueprint $table) {
+            $table->unsignedInteger('id_user');
+            $table->unsignedInteger('id_product');
         });
         Schema::enableForeignKeyConstraints();
     }

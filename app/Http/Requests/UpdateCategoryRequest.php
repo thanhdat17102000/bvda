@@ -25,7 +25,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'nameEditCategory' => 'required|string|max:150',
-            'numberEditCategory' => 'required|numeric|min:1'
+            // 'numberEditCategory' => 'required|numeric|min:1'
         ];
     }
 
@@ -33,8 +33,8 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'nameEditCategory.required' => 'Tên danh mục là bắt buộc.',
-            'numberEditCategory.required' => 'Số thứ tự là bắt buộc.',
-            'numberEditCategory.min' => 'Số thứ tự phải lớn hơn 1.',
+            // 'numberEditCategory.required' => 'Số thứ tự là bắt buộc.',
+            // 'numberEditCategory.min' => 'Số thứ tự phải lớn hơn 1.',
         ];
     }
 }

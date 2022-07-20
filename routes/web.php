@@ -16,6 +16,7 @@ use App\Models\User;
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\DB;
 
 // end comment
 // start comment blog
@@ -96,7 +97,13 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 Route::get('/product_list', function () {
     $categories = CategoryModel::where('m_id_parent', 0)->get();
     $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->get();
-    return view('Auth.product_list.product_list', compact('categories','showproduct'));
+    if (Auth::user()) {
+        $userLogin = Auth::user()->id;
+        $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
+    } else {
+        $list_favourite = [];
+    }
+    return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
 });
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
@@ -157,6 +164,9 @@ Route::get(
 
 Route::get('/get_data_cmt/{id}', [Comment_Product::class, 'get_data_cmt']);
 
-Route::get('/get_data_khachang/{id}',[Comment_Product::class,'get_data_khachang']);
+Route::get('/get_data_khachang/{id}', [Comment_Product::class, 'get_data_khachang']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::patch('/product-favourite', [App\Http\Controllers\productController::class, 'productFavourite']);
+//Chọn sản phẩm yêu thích
+Route::post('/product-favourite', [App\Http\Controllers\productController::class, 'productFavourite']);
+//Danh sách sản phẩm yêu thích của user đã chọn
+Route::get('/list-product-favourite', [App\Http\Controllers\productController::class, 'listProductFavourite'])->name('list-favourite');

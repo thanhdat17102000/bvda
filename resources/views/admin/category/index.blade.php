@@ -56,13 +56,13 @@
                             <span style="font-size: 12px;" class="text-danger" id="nameErrorMsg"></span>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="" class="col-sm-4 col-form-label">Thứ tự *</label>
                         <div class="col-sm-8">
                             <input type="number" name="numberEditCategory" class="form-control" id="numberEditCategory" placeholder="Thứ tự">
                             <span style="font-size: 12px;" class="text-danger" id="numberErrorMsg"></span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         <button type="button" id="edit-category" class="btn btn-primary edit-category">Cập nhật</button>
@@ -101,13 +101,6 @@
                             <span style="font-size: 12px;" class="text-danger" id="nameErrorMsg"></span>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-4 col-form-label">Thứ tự *</label>
-                        <div class="col-sm-8">
-                            <input type="number" name="numberCategory" class="form-control" id="numberCategory" placeholder="Thứ tự">
-                            <span style="font-size: 12px;" class="text-danger" id="numberErrorMsg"></span>
-                        </div>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         <button type="submit" class="btn btn-primary add-category">Lưu</button>
@@ -120,10 +113,10 @@
 @endsection
 @push('scripts')
 <script>
+    //Add category
     $('#formCategory').on('submit', function(event) {
         event.preventDefault();
         nameCategory = $('#nameCategory').val();
-        numberCategory = $('#numberCategory').val();
         parentCategory = $('#parentCategory').val();
         $.ajaxSetup({
             headers: {
@@ -135,11 +128,10 @@
             type: "POST",
             data: {
                 nameCategory: nameCategory,
-                numberCategory: numberCategory,
                 parentCategory: parentCategory,
             },
             success: function(results) {
-                swal("Thành công!", results.message, "success");
+                swal("Thành công", results.message, "success");
                 location.reload();
             },
             error: function() {
@@ -151,12 +143,11 @@
             }
         });
     });
-    //Update
+    //Update category
     $(document).ready(function() {
         $('.edit-category').click(function() {
             event.preventDefault();
             nameEditCategory = $('#nameEditCategory').val();
-            numberEditCategory = $('#numberEditCategory').val();
             parentEditCategory = $('#parentEditCategory').val();
             id = $('#idEdit').val();
             $.ajaxSetup({
@@ -169,7 +160,6 @@
                 type: "POST",
                 data: {
                     nameEditCategory: nameEditCategory,
-                    numberEditCategory: numberEditCategory,
                     parentEditCategory: parentEditCategory,
                 },
                 success: function(results) {
@@ -187,7 +177,7 @@
         });
     });
 
-    //Edit
+    //Edit category
     $(document).ready(function() {
         $('.item-edit-btn').click(function() {
             $('#exampleModalCenter1').modal('show')
@@ -201,7 +191,6 @@
                 },
                 success: function(data) {
                     $('#nameEditCategory').val(data.category.m_title);
-                    $('#numberEditCategory').val(data.category.m_index);
                     $('#parentEditCategory').val(data.category.m_id_parent);
                     $('#idEdit').val(data.category.id);
                 }

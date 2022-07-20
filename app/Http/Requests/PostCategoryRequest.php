@@ -25,7 +25,7 @@ class PostCategoryRequest extends FormRequest
     {
         return [
             'nameCategory' => 'required|string|max:150',
-            'numberCategory' => 'required|numeric|min:1'
+            // 'numberCategory' => 'required|numeric|min:1'
         ];
     }
 
@@ -33,8 +33,8 @@ class PostCategoryRequest extends FormRequest
     {
         return [
             'nameCategory.required' => 'Tên danh mục là bắt buộc.',
-            'numberCategory.required' => 'Số thứ tự là bắt buộc.',
-            'numberCategory.min' => 'Số thứ tự phải lớn hơn 1.',
+            // 'numberCategory.required' => 'Số thứ tự là bắt buộc.',
+            // 'numberCategory.min' => 'Số thứ tự phải lớn hơn 1.',
         ];
     }
 }
