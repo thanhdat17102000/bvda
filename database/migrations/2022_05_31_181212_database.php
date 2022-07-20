@@ -24,6 +24,7 @@ class Database extends Migration
         Schema::dropIfExists('t_category');
         Schema::dropIfExists('t_product');
         Schema::dropIfExists('t_product_inventory');
+        Schema::dropIfExists('t_commentProduct');
         Schema::dropIfExists('t_user_favourite');
 
         Schema::create('t_post', function (Blueprint $table) {
@@ -151,7 +152,6 @@ class Database extends Migration
         Schema::create('t_user_favourite', function (Blueprint $table) {
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_product');
-            // $table->foreign('m_id_product')->references('id')->on('t_product');
         });
         Schema::enableForeignKeyConstraints();
     }

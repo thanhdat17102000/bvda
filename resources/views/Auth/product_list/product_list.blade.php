@@ -33,7 +33,7 @@ Danh sách sản phẩm
                         toastr.success('',
                             response.message)
                     } else {
-                        toastr.error('',
+                        toastr.success('',
                             response.message)
                     }
                 },
@@ -64,6 +64,30 @@ Danh sách sản phẩm
             }
         });
     });
+
+    // $('#add-favourite').submit(function(e) {
+    //     e.preventDefault();
+    //     var idProduct = $('#idProduct').val();
+    //     console.log(idProduct);
+    //     var idProduct = $('input[name=idProductFavourite]').val()
+    //     console.log(idProduct);
+    //     let user_id = $(this).data('id');
+    //     console.log('user_id', user_id);
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/product-favourite",
+    //         data: {
+    //             "_token": "{{ csrf_token() }}",
+    //             'idProduct': idProduct,
+    //         },
+    //         success: function(response) {
+    //             console.log(response);
+    //         },
+    //         error: function(error) {
+    //             console.log(error);
+    //         }
+    //     });
+    // });
 
     $('.add-cart').click(function(e) {
         e.preventDefault();
@@ -245,14 +269,17 @@ Danh sách sản phẩm
                                             <span class="price-old"><del>{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</del></span>
                                         </div>
                                         <div class="product-action-link">
-                                            <!-- <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a> -->
-                                            @foreach($list_favourite as $item)
+                                            <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
+                                            <!-- @foreach($list_favourite as $item)
                                                 @if($item->id_product == $showprd->id)
                                                     <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @else
+                                                @elseif($item->id_product != $showprd->id)
                                                     <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
+                                                @else
+                                                <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
                                                 @endif
-                                            @endforeach
+                                            @endforeach -->
+
                                             <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">
                                                 @csrf

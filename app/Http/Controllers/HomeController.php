@@ -22,7 +22,7 @@ class HomeController extends Controller
         $showproductdetailget = product::where('id', $showproductdetail->id)->where('m_status', 1)->get();
         $showproductrelated  = product::where('m_id_category', $showcategoryid->id)->where('id','!=',$showproductdetail->id)->inRandomOrder()->where('m_status', 1)->take(8)->get();
         $showcomment = Cmt_product::where('m_id_maloai', $showproductdetail->id)->get();
-        
+
         return view('Auth.product_details.productdetails', compact('showproductdetail','showproductdetailget','showproductrelated','showcomment'));
     }
     public function postcomment(Request $request){

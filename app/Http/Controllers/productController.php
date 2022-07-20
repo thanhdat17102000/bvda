@@ -230,7 +230,7 @@ class productController extends Controller
         if ($checkData) {
             return response()->json([
                 'status' => 401,
-                'message' => 'Sản phẩm yêu thích đã được chọn trước đó'
+                'message' => 'Sản phẩm này đã được chọn'
             ]);
         }
         $addFavourite = DB::table('t_user_favourite')->insert([
