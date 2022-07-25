@@ -79,7 +79,7 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade show active" id="home1">
                             <center> - Đổi mật khẩu - </center>
-                        <form action="{{route('profile.update', Auth::user()->id)}}">
+                        <form method="post" action="{{route('profile.update', Auth::user()->id)}}">
                             @csrf @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên tài khoản</label>

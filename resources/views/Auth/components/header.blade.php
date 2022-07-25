@@ -115,7 +115,7 @@
                                                         </ul>
                                                     @else
                                                         <ul class="dropdown-list">
-                                                            <li><a href="/profile">Tài khoản của bạn</a></li>
+                                                            <li><a href="/profile">Tài khoản</a></li>
                                                             <li><a href="">Thông tin Đơn hàng</a></li>
                                                             <li><a href="{{ route('logout') }}"
                                                                     onclick="event.preventDefault(); 
@@ -162,7 +162,7 @@
                             <div class="mobile-main-header">
                                 <div class="mobile-logo">
                                     <a href="index.html">
-                                        <img src="{{ URL::asset('Auth/img/logo/logo.png') }}" alt="Brand Logo">
+                                        <img src="{{ URL::asset('Auth/img/logo/logo.png') }}" alt="Brand Logo">                                    
                                     </a>
                                 </div>
                                 <div class="mobile-menu-toggler">

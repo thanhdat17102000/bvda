@@ -93,6 +93,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
 });
 
+
 // Client
 Route::get('/product_list', function () {
     $categories = CategoryModel::where('m_id_parent', 0)->get();
@@ -149,6 +150,8 @@ Route::get('/', function () {
 Route::get('/lien-he', function () {
     return view('Auth.contact.contact');
 });
+// Mail
+Route::get('/mail', [UserController::class, 'mail']);
 // Blog
 Route::get('/blog-detail/{m_slug}', [PostController::class, 'detail'])->name('blog-detail');
 Route::get('/blog', [PostController::class, 'blog_list'])->name('blog-list');

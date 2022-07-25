@@ -8,6 +8,7 @@ use App\Models\AccountModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -181,5 +182,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    // Gửi mail
+    public function mail(){
+        $name = 'forgot password';
+        Mail::send('Auth.test', compact('name'), function($email){
+            $email->to('kingdomsneakers80@gmail.com','Kingdom Sneakers');
+        });
     }
 }

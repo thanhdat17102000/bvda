@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::create([
-        //     'name' => 'admin',
-        //     'email' => 'admin@gmail.com',
-        //     'role' => 1,
-        //     'password' => Hash::make('admin@gmail.com')
-        // ]);
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'role' => 1,
+            'password' => Hash::make('admin@gmail.com')
+        ]);
         $this::call([
             UserSeeder::class
         ]);

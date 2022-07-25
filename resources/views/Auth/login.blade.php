@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@push('styles')
+    <link href=" {{ asset('Auth/css/login.css') }}" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-center h-100">
@@ -24,7 +27,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 input-group form-group">
                             <label for="password" class="text-light col-md-4 col-form-label text-md-end">{{ __('Mật khẩu') }}</label>
 
                             <div class="col-md-6">
