@@ -186,7 +186,7 @@ class UserController extends Controller
     // Gửi mail
     public function mail(){
         $name = 'forgot password';
-        Mail::send('Auth.test', compact('name'), function($email){
+        Mail::send('Auth.home', compact('name'), function($email){
             $email->to('kingdomsneakers80@gmail.com','Kingdom Sneakers');
         });
     }
