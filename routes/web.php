@@ -125,7 +125,7 @@ Route::post('/product_list_search', function (Request $request) {
         $keywork =  $request->input('keywork');
     }
     $categories = CategoryModel::where('m_id_parent', 0)->get();
-    $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status' , 1)->get();
+    $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status' , 1)->search()->paginate(10);
     // return $showproduct;
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
