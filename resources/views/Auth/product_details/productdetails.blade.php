@@ -104,34 +104,22 @@
                                             value="{{ $showdetail->id }}">
                                     </form>
                                     <div class="color-option mb-20">
-                                        <h5 class="cat-title">Màu sắc :</h5>
-                                        <ul>
-                                            <li>
-                                                <a class="c-black" href="#" title="Black"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-blue" href="#" title="Blue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-gray" href="#" title="Gray"></a>
-                                            </li>
-                                        </ul>
+                                        <h5 class="cat-title">Tổng lượng tồn kho :</h5>
+                                        @if(isset($showdetail->updatedsoluong->m_quanti))
+                                            <span>{{$showdetail->updatedsoluong->sum('m_quanti')}}</span>
+                                        @endif
                                     </div>
                                     <div class="pro-size mb-20">
                                         <h5 class="cat-title">Kích thước :</h5>
                                         <select class="nice-select">
-                                            <option>S</option>
-                                            <option>M</option>
-                                            <option>L</option>
-                                            <option>XL</option>
+                                            @foreach($showsize as $shows)
+                                            <option value="{{$shows->m_size}}">{{$shows->m_size}} - SL:{{$shows->m_quanti}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Tình trạng:</h5>
-                                        @if($showdetail->m_buy > 0)
+                                        @if(isset($showdetail->updatedsoluong->m_quanti) && $showdetail->updatedsoluong->sum('m_quanti') > 0)
                                         <span>Còn hàng</span>
                                         @else
                                         <span style="color:red">Hết hàng</span>
@@ -185,7 +173,7 @@
                                                             <li>{{$showdetail->m_product_name}}</li>
                                                             <li>Giá mặc định :{{number_format($showdetail->m_price,0,',','.')}}VND</li>
                                                             <li>Giá giảm : {{number_format($showdetail->m_original_price,0,',','.')}}VND</li>
-                                                            <li>@if($showdetail->m_buy > 0)
+                                                            <li>@if(isset($showdetail->updatedsoluong->m_quanti) && $showdetail->updatedsoluong->sum('m_quanti') > 0)
                                                                 <span>Còn hàng</span>
                                                                 @else
                                                                 <span>Hết hàng</span>
@@ -202,12 +190,18 @@
                                             <table class="table table-bordered">
                                                 <tbody>
                                                     <tr>
-                                                        <td>Màu sắc</td>
-                                                        <td>black, blue, red</td>
+                                                        <td>Tổng lượng tồn kho</td>
+                                                        @if(isset($showdetail->updatedsoluong->m_quanti))
+                                                        <td>{{$showproductdetail->updatedsoluong->sum('m_quanti')}}</td>
+                                                        @endif
                                                     </tr>
                                                     <tr>
                                                         <td>Kích thước</td>
-                                                        <td>L, M, S</td>
+                                                        <td>
+                                                            @foreach($showsize as $shows)
+                                                            - {{$shows->m_size}}
+                                                            @endforeach
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -290,7 +284,7 @@
                                                         &nbsp;
                                                         <input type="radio" value="5" name="rating" id="rating">
                                                         &nbsp;Rất tốt -->
-                                                        <select class="form-control" id="rating">
+                                                        <select class="form-control" id="rating" style="width:100px">
                                                             <option value="1">1 sao</option>
                                                             <option value="2">2 sao</option>
                                                             <option value="3">3 sao</option>

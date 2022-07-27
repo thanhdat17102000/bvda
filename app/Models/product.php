@@ -34,6 +34,18 @@ class product extends Model
         return $this->hasMany(Cmt_Product::class,'m_id_maloai','id');
     }
 
+    // public function themsize(){
+    //     return $this->belongsToMany(product_inventory::class,'t_product_inventory','m_id_product','m_size')->as('m_quanti');
+    // }
+    public function updatedsoluong(){
+        return $this->hasOne(product_inventory::class, 'm_id_product', 'id');
+    }
+    public function updatedsoluong1(){
+        return $this->hasMany(product_inventory::class, 'm_id_product', 'id');
+    }
+    public function themsoluong(){
+        return $this->belongsToMany(product_inventory::class,'t_product_inventory','m_id_product','m_quanti');
+    }
     public function scopeSearch($query)
     {
         if($key = request()->key){

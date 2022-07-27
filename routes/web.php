@@ -91,12 +91,31 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 // Client
 Route::get('/product_list', function () {
     $categories = CategoryModel::where('m_id_parent', 0)->get();
-    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->get();
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
         $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
     } else {
         $list_favourite = [];
+    }
+    if(isset($_GET['danhsach'])){
+        $sort_by = $_GET['danhsach'];
+        if($sort_by == 'sanphamaz'){
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }elseif($sort_by == 'sanphamza'){
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }elseif($sort_by == 'giathapdencao'){
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }elseif($sort_by == 'giacaodenthap'){
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }elseif($sort_by == 'moicapnhat'){
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }
     }
     return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
 });
@@ -116,6 +135,9 @@ Route::post('/product_list_search', function (Request $request) {
     }
     return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
 })->name('search');
+Route::get('/loc-gia-sp', [HomeController::class, 'locgiasp'])->name('locgia');
+Route::get('/product_list/{id}', [HomeController::class, 'showcategoryid'])->name('showcategoryid');
+
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
 });
