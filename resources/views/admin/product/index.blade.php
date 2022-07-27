@@ -154,7 +154,7 @@
                                         </p>
                                             <p><strong>Giá đã giảm: </strong><mark>{{number_format($dt->m_original_price, 0, '.', '.')}} Vnđ</mark></p>
                                             {{-- <p><strong>Ngày đăng sản phẩm: </strong><span>{{$dt->updated_at->diffForHumans()}}</span></p> --}}
-                                            <p><strong>Số lượng tồn kho: </strong><span>{{$dt->m_buy}}</span> 
+                                            <p><strong>Số lượng tồn kho: </strong><span>{{$dt->updatedsoluong1->sum('m_quanti')}}</span> 
                                             |
                                             <strong>lượt xem sản phẩm: </strong><span>{{$dt->m_view}}</span></p>
                                         </div>

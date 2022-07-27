@@ -126,46 +126,51 @@ Danh sách sản phẩm
                 <div class="col-lg-3 order-2">
                     <div class="sidebar-wrapper">
                         <!-- single sidebar start -->
+                        
                         <div class="sidebar-single">
                             <div class="sidebar-title">
                                 <h3>Danh mục </h3>
                             </div>
                             <div class="sidebar-body">
                                 <ul class="color-list">
-                                    <li><a href="#">Nam <span>(10)</span></a></li>
-                                    <li><a href="#">Nữ <span>(05)</span></a></li>
-                                    <li><a href="#">Thể thao <span>(15)</span></a></li>
-                                    <li><a href="#">Boot <span>(12)</span></a></li>
-
+                                    @foreach($categories as $cate)
+                                    <li><a href="{{URL::to('/product_list/'.$cate->id)}}">{{$cate->m_title}} <span>({{$cate->tongproduct->count()}})</span></a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
                         <!-- single sidebar end -->
 
                         <!-- single sidebar start -->
-                        <div class="sidebar-single">
-                            <div class="sidebar-title">
-                                <h3>Lọc theo giá</h3>
-                            </div>
-                            <div class="sidebar-body">
-                                <div class="price-range-wrap">
-                                    <div class="price-range" data-min="20" data-max="400"></div>
-                                    <div class="range-slider">
-                                        <form action="#">
-                                            <div class="price-input">
-                                                <label for="amount">giá: </label>
-                                                <input type="text" id="amount">
-                                            </div>
-                                            <button class="filter-btn">lọc</button>
-                                        </form>
+                        <form action="{{route('locgia')}}" method="get">
+                            @csrf
+                            <div class="sidebar-single">
+                                <div class="sidebar-title">
+                                    <h3>Lọc theo giá</h3>
+                                </div>
+                                <div class="sidebar-body">
+
+                                    <div class="price-range-wrap">
+                                        <div class="price-range" data-min="0" data-max="2000000"></div>
+                                        <div class="range-slider">
+                                            <form action="#">
+                                                <div class="price-input">
+                                                    <label for="amount">giá: </label>
+                                                        <input type="text" id="minamount" name="minamount">
+                                                        <input type="text" id="maxamount" name="maxamount">
+                                                </div>
+                                                <button class="filter-btn">lọc</button>
+                                                <br>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <!-- single sidebar end -->
 
                         <!-- single sidebar start -->
-                        <div class="sidebar-single">
+                        <!-- <div class="sidebar-single">
                             <div class="sidebar-title">
                                 <h3>màu</h3>
                             </div>
@@ -178,23 +183,27 @@ Danh sách sản phẩm
                                     <li><a href="#">xám <span>(08)</span></a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- single sidebar end -->
 
                         <!-- single sidebar start -->
-                        <div class="sidebar-single">
+                        <!-- <div class="sidebar-single">
                             <div class="sidebar-title">
                                 <h3>Kích cỡ</h3>
                             </div>
                             <div class="sidebar-body">
                                 <ul class="size-list">
-                                    <li><a href="#">s <span>(05)</span></a></li>
-                                    <li><a href="#">M <span>(06)</span></a></li>
-                                    <li><a href="#">l <span>(02)</span></a></li>
-                                    <li><a href="#">XL <span>(01)</span></a></li>
+                                    <li><a href="#">size 33</a></li>
+                                    <li><a href="#">size 34</a></li>
+                                    <li><a href="#">size 35</a></li>
+                                    <li><a href="#">size 36</a></li>
+                                    <li><a href="#">size 37</a></li>
+                                    <li><a href="#">size 38</a></li>
+                                    <li><a href="#">size 39</a></li>
+                                    <li><a href="#">size 40</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- single sidebar end -->
 
                         <!-- single sidebar start -->
@@ -228,14 +237,12 @@ Danh sách sản phẩm
                                     <div class="top-bar-right">
                                         <div class="product-short">
                                             <p>Sắp xếp : </p>
-                                            <select class="nice-select" name="sortby">
-                                                <option value="trending">Liên quan</option>
-                                                <option value="sales">Tên (A - Z)</option>
-                                                <option value="sales">Tên (Z - A)</option>
-                                                <option value="rating">Giá (Thấp &gt; Cao)</option>
-                                                <option value="date">Đánh giá (Cao nhất)</option>
-                                                <option value="price-asc">Kiểu dáng (A - Z)</option>
-                                                <option value="price-asc">Kiểu dáng (Z - A)</option>
+                                            <select class="nice-select sortne" id="sortne" name="sortne">
+                                                <option value="{{Request::url()}}?danhsach=sanphamaz">Tên (A - Z)</option>
+                                                <option value="{{Request::url()}}?danhsach=sanphamza">Tên (Z - A)</option>
+                                                <option value="{{Request::url()}}?danhsach=giathapdencao">Giá (Thấp &gt; Cao)</option>
+                                                <option value="{{Request::url()}}?danhsach=giacaodenthap">Giá (Cao &gt; Thấp)</option>
+                                                <option value="{{Request::url()}}?danhsach=moicapnhat">Mới cập nhật</option>
                                             </select>
                                         </div>
                                         <div class="product-amount">
@@ -286,7 +293,7 @@ Danh sách sản phẩm
                                                 <input type="hidden" name="quantity" value="1">
                                                 <input type="hidden" name="productId" value="{{ $showprd->id }}">
                                             </form>
-                                            <a href="#" data-toggle="modal" data-target="#quick_view">
+                                            <a href="#" data-toggle="modal" data-target="#quick_view{{ $showprd->id }}">
                                                 <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
                                     </div>
@@ -296,25 +303,25 @@ Danh sách sản phẩm
                                 <!-- product list item start -->
                                 <div class="product-list-item mb-30">
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
-                                            <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="product thumb">
+                                        <a href="{{ route('productdetails', $showprd->m_product_slug) }}">
+                                            @if (json_decode($showprd->m_picture))
+                                            <img src="{{ asset('uploads') }}/{{ json_decode($showprd->m_picture)[0] }}" alt="">
+                                            @endif
                                         </a>
                                     </div>
                                     <div class="product-content-list">
                                         <h5 class="product-name">
-                                            <a href="product-details.html">Leather Mens Slipper</a>
+                                        <a href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ $showprd->m_product_name }}</a>
                                         </h5>
                                         <div class="price-box">
-                                            <span class="price-regular">$80.00</span>
-                                            <span class="price-old"><del>$70.00</del></span>
+                                            <span class="price-regular">{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</span>
+                                            <span class="price-old"><del>{{ number_format($showprd->m_price, 0, ',', '.') }}VND</del></span>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere
-                                            metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet
-                                            sem vitae urna fringilla tempus.</p>
+                                        <p>{!!$showprd->m_short_description!!}</p>
                                         <div class="product-link-2 position-static">
                                             <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
                                             <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#quick_view">
+                                            <a href="#" data-toggle="modal" data-target="#quick_view{{$showprd->id}}">
                                                 <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
                                     </div>
@@ -328,11 +335,14 @@ Danh sách sản phẩm
                     </div>
                 </div>
             </div>
+            <br>
+            {{$showproduct->appends(request()->all())->links()}}
             <!-- page main wrapper end -->
 </main>
 <!-- main wrapper end -->
 <!-- Quick view modal start -->
-<div class="modal" id="quick_view">
+@foreach ($showproduct as $key => $showprd)
+<div class="modal" id="quick_view{{ $showprd->id }}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -344,58 +354,56 @@ Danh sách sản phẩm
                     <div class="row">
                         <div class="col-lg-5">
                             <div class="product-large-slider mb-20">
-                                <div class="pro-large-img img-zoom">
-                                    <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="product thumb" />
-                                </div>
-                                <div class="pro-large-img img-zoom">
-                                    <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="product thumb" />
-                                </div>
-                                <div class="pro-large-img img-zoom">
-                                    <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="product thumb" />
-                                </div>
-                                <div class="pro-large-img img-zoom">
-                                    <img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="product thumb" />
-                                </div>
+                                    @if(json_decode($showprd->m_picture))
+                                        @foreach(json_decode($showprd->m_picture) as $showimg)
+                                            <div class="pro-large-img img-zoom">
+                                                <img src="{{asset('uploads')}}/{{$showimg}}" alt="" />
+                                            </div>
+                                        @endforeach
+                                    @endif
                             </div>
                             <div class="pro-nav slick-row-5">
-                                <div class="pro-nav-thumb"><img src="{{ URL::asset('Auth/img/product/product-1.jpg') }}" alt="" />
-                                </div>
-                                <div class="pro-nav-thumb"><img src="{{ URL::asset('Auth/Auth/img/product/product-details-img2') }}.jpg" alt="" /></div>
-                                <div class="pro-nav-thumb"><img src="{{ URL::asset('Auth/Auth/img/product/product-details-img3') }}.jpg" alt="" /></div>
-                                <div class="pro-nav-thumb"><img src="{{ URL::asset('Auth/Auth/img/product/product-details-img4') }}.jpg" alt="" /></div>
+                                    @if(json_decode($showprd->m_picture))
+                                        @foreach(json_decode($showprd->m_picture) as $showimg)
+                                            <div class="pro-nav-thumb"><img src="{{asset('uploads')}}/{{$showimg}}" alt="" /></div>
+                                        @endforeach
+                                    @endif
                             </div>
                         </div>
                         <div class="col-lg-7">
-                            <div class="product-details-des">
-                                <h3 class="pro-det-title">Primitive Mens Premium Shoes</h3>
-                                <div class="pro-review">
-                                    <span><a href="#">1 Đánh giá(s)</a></span>
-                                </div>
-                                <div class="price-box">
-                                    <span class="regular-price">$70.00</span>
-                                    <span class="old-price"><del>$80.00</del></span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                                <div class="quantity-cart-box d-flex align-items-center mb-20">
-                                    <div class="quantity">
-                                        <div class="pro-qty"><input type="text" value="1"></div>
+                                <div class="product-details-des">
+                                    <h3 class="pro-det-title">{{$showprd->m_product_name}}</h3>
+                                    <div class="pro-review">
+                                        <span><a href="#">1 bình luận</a></span>
                                     </div>
-                                    <a href="cart.html" class="btn btn-default">Thêm Vào Giỏ</a>
-                                </div>
-                                <div class="availability mb-20">
-                                    <h5 class="cat-title">Trạng thái:</h5>
-                                    <span>Còn hàng</span>
-                                </div>
-                                <div class="share-icon">
-                                    <h5 class="cat-title">Chia sẻ:</h5>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinteret"></i></a>
-                                    <a href="#"><i class="fa fa-google-pluss"></i></a>
+                                    <div class="price-box">
+                                        <span class="price-regular">{{number_format($showprd->m_original_price,0,',','.')}}VND</span>
+                                        <span class="price-old"><del>{{number_format($showprd->m_price,0,',','.')}}VND</del></span>
+                                    </div>
+                                    <p>{!!$showprd->m_short_description!!}</p>
+                                    <div class="quantity-cart-box d-flex align-items-center mb-20">
+                                        <div class="quantity">
+                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                        </div>
+                                        <a href="cart.html" class="btn btn-default">Thêm vào giỏ hàng</a>
+                                    </div>
+                                    <div class="availability mb-20">
+                                        <h5 class="cat-title">Tình trạng: </h5>
+                                        @if($showprd->m_buy > 0)
+                                        <span>Còn hàng</span>
+                                        @else
+                                        <span style="color:red">Hết hàng</span>
+                                        @endif
+                                    </div>
+                                    <div class="share-icon">
+                                        <h5 class="cat-title">Chia sẻ:</h5>
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
                 <!-- product details inner end -->
@@ -403,5 +411,26 @@ Danh sách sản phẩm
         </div>
     </div>
 </div>
+@endforeach
 <!-- Quick view modal end -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+        jQuery(document).ready(function($) {
+        $('.sortne').change(function() {
+            var url = $(this).val();
+            // alert(url);
+            if(url){
+                window.location = url;
+            }
+            return false;
+        });
+        locdanhsach();
+        function locdanhsach() {
+            var url = window.location.href;
+            $('select[name="sortne"]').find('option[value="'+url+'"]').attr("selected",true);
+        }
+    });
+</script>
 @endsection
+
