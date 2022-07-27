@@ -48,12 +48,13 @@
                             <div class="main-menu mt-3">
                                 <!-- main menu navbar start -->
                                 <nav class="desktop-menu">
-                                    <form action="">
+                                    <form action="{{route('search')}}" method="POST">
+                                        @csrf
                                         <div class="input-group">
                                             <div class="form-outline">
-                                                <input type="search" id="form1" class="form-control" style="width: 610px; margin-left: 15px; margin-top:30px" placeholder="Nhập tên sản phẩm..." />
+                                                <input type="search" name="keywork" id="form1" class="form-control" style="width: 610px; margin-left: 15px; margin-top:30px" placeholder="Nhập tên sản phẩm..." />
                                             </div>
-                                            <button type="button" class="btn btn-primary" style="padding-bottom: 10px; height: 38px; padding-top: 10px; margin-top:30px">
+                                            <button type="submit" class="btn btn-primary" style="padding-bottom: 10px; height: 38px; padding-top: 10px; margin-top:30px">
                                                 Tìm Kiếm
                                             </button>
                                         </div>

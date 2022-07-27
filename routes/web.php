@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
 use App\Models\product;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Request;
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\productController;
+
 // end comment
 // start comment blog
 // emd comment blog
@@ -98,6 +100,22 @@ Route::get('/product_list', function () {
     }
     return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
 });
+Route::post('/product_list_search', function (Request $request) {
+    $keyword = '';
+    if(!empty($request->input('keywork'))){
+        $keywork =  $request->input('keywork');
+    }
+    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status' , 1)->get();
+    // return $showproduct;
+    if (Auth::user()) {
+        $userLogin = Auth::user()->id;
+        $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
+    } else {
+        $list_favourite = [];
+    }
+    return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
+})->name('search');
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
 });
@@ -163,3 +181,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/product-favourite', [App\Http\Controllers\productController::class, 'productFavourite']);
 //Danh sách sản phẩm yêu thích của user đã chọn
 Route::get('/list-product-favourite', [App\Http\Controllers\productController::class, 'listProductFavourite'])->name('list-favourite');
+//Search
+Route::post('search', [productController::class, 'search']);
