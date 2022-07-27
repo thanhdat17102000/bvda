@@ -7,7 +7,6 @@ use App\Models\product;
 use App\Models\CategoryModel;
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\product_inventory;
 use Auth;
 use DB;
 
@@ -59,6 +58,7 @@ class productController extends Controller
                 'file_upload' => 'required|max:2048',
                 'm_price' => 'required',
                 'm_original_price' => 'required',
+                'm_buy' => 'required',
             ],
             [
                 'm_product_name.required' => 'Tên sản phẩm không để trống',
@@ -69,10 +69,10 @@ class productController extends Controller
                 'file_upload.max' => 'hình ảnh tối đa là 2000kb',
                 'm_price.required' => 'giá gốc không được để trống',
                 'm_original_price.required' => 'giá khuyến mãi không được để trống',
+                'm_buy.required' => 'số lượng tồn kho không được để trống',
                 'm_product_name.unique' => 'Tên sản phẩm này đã có trong CSDL',
             ]
         );
-        $data = $request->all();
         $create = new product();
         $create->m_product_name = $request->m_product_name;
         $create->m_id_category = $request->m_id_category;
@@ -81,7 +81,7 @@ class productController extends Controller
         $create->m_description = $request->m_description;
         $create->m_price = $request->m_price;
         $create->m_original_price = $request->m_original_price;
-        $create->m_buy = 1;
+        $create->m_buy = $request->m_buy;
         $create->m_status = $request->m_status;
         $file_upload = array();
         if ($files = $request->file('file_upload')) {
@@ -100,22 +100,8 @@ class productController extends Controller
             $luuhinh = json_encode($chuyenhinh, JSON_UNESCAPED_SLASHES);
         }
         $create->m_picture = $luuhinh;
-        if($create->save()){
-            if($request->soluong){
-                if($data['soluong'] != null && $data['size']){
-                $syncdata = [];
-                $soluong = $data['soluong'];
-                $size = $data['size'];
-                for ($i=0; $i < count($data['soluong']); $i++) { 
-                    $syncdata[$soluong[$i]] = ['m_size' => $size[$i]];
-                }
-                $create->themsoluong()->attach($syncdata);
-                return redirect()->route('product.index')->with('alert_success', 'Thêm mới sản phẩm thành công.');
-            }
-        }else{
-            return redirect()->route('product.index')->with('alert_success', 'Thêm mới sản phẩm thành công. nhưng chưa có số lượng tồn kho sản phẩm');
-        }
-        }
+        $create->save();
+        return redirect()->route('product.index')->with('alert_success', 'Thêm mới sản phẩm thành công.');
     }
 
     /**
@@ -142,11 +128,8 @@ class productController extends Controller
             'action' => 'sửa sản phẩm'
         ];
         $updated = product::find($id);
-        $updatene = product::where('id', $updated->id)->first();
-        $soluongvasize = product_inventory::where('m_id_product', $updatene->id)->first();
-        $showsoluongvasize = product_inventory::where('m_id_product', $updatene->id)->get();
         $showcategory = CategoryModel::orderBy('id', 'asc')->get();
-        return view('admin.product.edit', compact('data', 'updated', 'showcategory','soluongvasize','showsoluongvasize'));
+        return view('admin.product.edit', compact('data', 'updated', 'showcategory'));
     }
 
     /**
@@ -166,6 +149,7 @@ class productController extends Controller
                 'file_upload' => 'max:2048',
                 'm_price' => 'required',
                 'm_original_price' => 'required',
+                'm_buy' => 'required',
             ],
             [
                 'm_product_name.required' => 'Tên sản phẩm không để trống',
@@ -175,9 +159,9 @@ class productController extends Controller
                 'file_upload.max' => 'hình ảnh tối đa là 2000kb',
                 'm_price.required' => 'giá gốc không được để trống',
                 'm_original_price.required' => 'giá khuyến mãi không được để trống',
+                'm_buy.required' => 'số lượng tồn kho không được để trống',
             ]
         );
-        $data = $request->all();
         $updated = product::find($id);
         $updated->m_product_name = $request->m_product_name;
         $updated->m_id_category = $request->m_id_category;
@@ -186,7 +170,7 @@ class productController extends Controller
         $updated->m_description = $request->m_description;
         $updated->m_price = $request->m_price;
         $updated->m_original_price = $request->m_original_price;
-        $updated->m_buy = 1;
+        $updated->m_buy = $request->m_buy;
         $updated->m_status = $request->m_status;
         $file_upload = array();
         if ($files = $request->file('file_upload')) {
@@ -212,22 +196,8 @@ class productController extends Controller
                 $updated->m_picture = $luuhinh;
             }
         }
-        if($updated->save()){
-            if($request->soluong && $request->size){
-                if($data['soluong'] != null && $data['size'] != null){
-                    $syncdatane = [];
-                    $soluong = $data['soluong'];
-                    $size = $data['size'];
-                    for ($i=0; $i < count($data['soluong']); $i++) { 
-                        $syncdatane[$soluong[$i]] = ['m_size' => $size[$i]];
-                    }
-                    $updated->themsoluong()->sync($syncdatane);
-                }
-                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công.');
-            }else{
-                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thất bại.');
-            }
-        }
+        $updated->save();
+        return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công.');
     }
 
     /**
@@ -247,9 +217,6 @@ class productController extends Controller
                 unlink($path);
             }
         }
-        DB::table('t_order_detail')->whereIn('m_id_product', [$delete->id])->delete();
-        DB::table('t_commentproduct')->whereIn('m_id_maloai', [$delete->id])->delete();
-        product_inventory::whereIn('m_id_product', [$delete->id])->delete();
         $delete->delete();
         return redirect()->back()->with('alert_success', 'Xóa sản phẩm thành công.');
     }
