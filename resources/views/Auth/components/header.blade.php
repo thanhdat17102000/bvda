@@ -45,44 +45,6 @@
                     <!-- main menu area start -->
                     <div class="col-lg-8 position-static">
                         <div class="main-menu-area">
-                            <div class="main-menu mt-3">
-                                <!-- main menu navbar start -->
-                                <nav class="desktop-menu">
-                                    <form action="{{route('search')}}" method="POST">
-                                        @csrf
-                                        <div class="input-group">
-                                            <div class="form-outline">
-                                                <input type="search" name="keywork" id="form1" class="form-control" style="width: 610px; margin-left: 15px; margin-top:30px" placeholder="Nhập tên sản phẩm..." />
-                                            </div>
-                                            <button type="submit" class="btn btn-primary" style="padding-bottom: 10px; height: 38px; padding-top: 10px; margin-top:30px">
-                                                Tìm Kiếm
-                                            </button>
-                                        </div>
-                                    </form>
-
-                                </nav>
-                                <!-- main menu navbar end -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- main menu area end -->
-
-                    <!-- mini cart area start -->
-                </div>
-                <div class="row align-items-center position-relative">
-                    <!-- start logo area -->
-                    <div class="col-lg-2">
-                        <div class="logo">
-                            <a href="/">
-                                <img src="{{ URL::asset('Auth/img/logo/logo.png') }}" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- start logo area -->
-
-                    <!-- main menu area start -->
-                    <div class="col-lg-8 position-static">
-                        <div class="main-menu-area">
                             <div class="main-menu">
                                 <!-- main menu navbar start -->
                                 <nav class="desktop-menu">
