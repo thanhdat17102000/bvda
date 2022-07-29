@@ -42,7 +42,7 @@ class productController extends Controller
         }
         return view('admin.product.index', compact('datas', 'data','showdanhmuc'));
     }
-
+    // giảm giá theo sản phẩm và giảm giá theo danh mục sản phẩm 
     public function capnhatprice(Request $request){
         $data = $request->all();
         if($data['idsotiengiam'] == 2 && isset($data['allids'])){
@@ -65,6 +65,7 @@ class productController extends Controller
             }
         }
     }
+    // xóa tất cả
     public function deleteallsp(Request $request){
         $data = $request->all();
         if(isset($data['ids'])){
@@ -282,7 +283,7 @@ class productController extends Controller
                 }
                 return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công.');
             }else{
-                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thất bại.');
+                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công. nhưng sản phẩm tồn kho và size vẫn đang được giữ nguyên.');
             }
         }
     }

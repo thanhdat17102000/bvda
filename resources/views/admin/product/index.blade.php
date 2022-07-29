@@ -324,6 +324,7 @@
                     $.each(allids,function(key,val){
                         $("#sid"+val).remove();
                     });
+                    window.location.reload(true);
                 }
             });
         });
@@ -358,6 +359,7 @@
                 },
                 success:function(data){
                         alert('thành công');
+                        window.location.reload(true);
                 }
             });
         });
