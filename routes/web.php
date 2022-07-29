@@ -86,6 +86,10 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 
     // file images
     Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
+
+    // chức năng nâng cao admin product
+    Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
+    Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
 });
 
 // Client
