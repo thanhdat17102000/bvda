@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\AccountModel;
+use App\Models\OrderModel;
 // use Auth;
 
 use Illuminate\Http\Request;

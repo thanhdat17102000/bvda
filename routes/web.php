@@ -98,7 +98,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 // Client
 Route::get('/product_list', function () {
     $categories = CategoryModel::where('m_id_parent', 0)->get();
-    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(6);
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
         $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
@@ -108,19 +108,19 @@ Route::get('/product_list', function () {
     if(isset($_GET['danhsach'])){
         $sort_by = $_GET['danhsach'];
         if($sort_by == 'sanphamaz'){
-            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'sanphamza'){
-            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'giathapdencao'){
-            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'giacaodenthap'){
-            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'moicapnhat'){
-            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }
     }
@@ -130,7 +130,7 @@ Route::get('/product_list_search', function (Request $request) {
     $keyword = '';
     if(!empty($request->input('keywork'))){
         $keywork =  $request->input('keywork');
-        $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status' , 1)->search()->paginate(10);
+        $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status' , 1)->search()->paginate(6);
     }
     $categories = CategoryModel::where('m_id_parent', 0)->get();
     // return $showproduct;
@@ -143,19 +143,19 @@ Route::get('/product_list_search', function (Request $request) {
     if(isset($_GET['danhsach'])){
         $sort_by = $_GET['danhsach'];
         if($sort_by == 'sanphamaz'){
-            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'sanphamza'){
-            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'giathapdencao'){
-            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'giacaodenthap'){
-            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }elseif($sort_by == 'moicapnhat'){
-            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(6);
             $showproduct->render();
         }
     }
@@ -173,12 +173,16 @@ Route::get('/cart', function () {
 Route::get('/checkout', function () {
     return view('Auth.checkout.checkout');
 });
-Route::get('/profile', function () {
-    return view('Auth.account.profile');
+
+// Profile Client
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+    Route::get('/chi-tiet-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'order']);
+    Route::get('/huy-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'cancelled']);
+    Route::post('/doi-thong-tin-profile', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
 });
-// Route::get('/productdetails', function () {
-//     return view('Auth.product_details.productdetails');
-// });
+
+
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
 Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
 Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdelete');
@@ -188,9 +192,6 @@ Route::get('/login', function () {
 });
 Route::get('/register', function () {
     return view('Auth.register');
-});
-Route::get('/profile', function () {
-    return view('Auth.account.profile');
 });
 Route::get('/blog', function () {
     $categories = CategoryModel::where('m_id_parent', 0)->get();

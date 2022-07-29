@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\product;
 use App\Models\CategoryModel;
-use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\product;
 use App\Models\product_inventory;
-use Auth;
-use DB;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class productController extends Controller
 {

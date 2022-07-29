@@ -8,23 +8,39 @@ class OrderModel extends Model {
      * Tên bảng trong hệ thống database là 'category'
      */
 
-    const TABLE_NAME = 't_order';
+    protected $table = 't_order';
     /*
-     * Các tên field trong bảng category
+     * Các tên field trong bảng t_order
      */
-    const FIELD_ID = 'id';
-    const FIELD_ID_USER = 'm_id_user';
-    const FIELD_NAME = 'm_name';
-    const FIELD_EMAIL = 'm_email';
-    const FIELD_PHONE = 'm_phone';
-    const FIELD_ADDRESS = 'm_address';
-    const FIELD_NOTE = 'm_note';
-    const FIELD_TOTAL_PRICE = 'm_total_price';
-    const FIELD_CREATE = 'm_create';
-    const FIELD_UPDATE = 'm_update';
-    const FIELD_STATUS_SHIP = 'm_status_ship';
-    const FIELD_STATUS_PURCHAR = 'm_status_pay';
-    const FIELD_STATUS = 'm_status';
+    protected $fillable = [
+        'id',
+        'm_id_user',
+        'm_name',
+        'm_email',
+        'm_phone',
+        'm_address',
+        'm_note',
+        'm_total_price',
+        'm_create',
+        'm_update',
+        'm_status_ship',
+        'm_status_pay',
+        'm_status',
+
+    ];
+    // const FIELD_ID = 'id';
+    // const FIELD_ID_USER = 'm_id_user';
+    // const FIELD_NAME = 'm_name';
+    // const FIELD_EMAIL = 'm_email';
+    // const FIELD_PHONE = 'm_phone';
+    // const FIELD_ADDRESS = 'm_address';
+    // const FIELD_NOTE = 'm_note';
+    // const FIELD_TOTAL_PRICE = 'm_total_price';
+    // const FIELD_CREATE = 'm_create';
+    // const FIELD_UPDATE = 'm_update';
+    // const FIELD_STATUS_SHIP = 'm_status_ship';
+    // const FIELD_STATUS_PURCHAR = 'm_status_pay';
+    // const FIELD_STATUS = 'm_status';
     // const VALUE_STATUS_READY = '1';
     // const VALUE_STATUS_ACCEPT = '2';
     // const VALUE_STATUS_FINISH = '3';
