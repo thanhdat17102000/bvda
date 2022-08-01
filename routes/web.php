@@ -11,9 +11,12 @@ use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
 use App\Models\product;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\productController;
+
 // end comment
 // start comment blog
 // emd comment blog
@@ -87,6 +90,10 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 
     // file images
     Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
+
+    // chức năng nâng cao admin product
+    Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
+    Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
 });
 
 // Client
@@ -95,6 +102,83 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/compare', function () {
     return view('Auth.home-compare.compare');
+});
+Route::get('/product_list', function () {
+    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+    if (Auth::user()) {
+        $userLogin = Auth::user()->id;
+        $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
+    } else {
+        $list_favourite = [];
+    }
+    if (isset($_GET['danhsach'])) {
+        $sort_by = $_GET['danhsach'];
+        if ($sort_by == 'sanphamaz') {
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'sanphamza') {
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'giathapdencao') {
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'giacaodenthap') {
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'moicapnhat') {
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }
+    }
+    return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
+});
+Route::get('/product_list_search', function (Request $request) {
+    $keyword = '';
+    if (!empty($request->input('keywork'))) {
+        $keywork =  $request->input('keywork');
+        $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status', 1)->search()->paginate(10);
+    }
+    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    // return $showproduct;
+    if (Auth::user()) {
+        $userLogin = Auth::user()->id;
+        $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
+    } else {
+        $list_favourite = [];
+    }
+    if (isset($_GET['danhsach'])) {
+        $sort_by = $_GET['danhsach'];
+        if ($sort_by == 'sanphamaz') {
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'sanphamza') {
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'giathapdencao') {
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'giacaodenthap') {
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        } elseif ($sort_by == 'moicapnhat') {
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct->render();
+        }
+    }
+    return view('Auth.product_list.product_list', compact('categories', 'showproduct', 'list_favourite'));
+})->name('search');
+Route::get('/loc-gia-sp', [HomeController::class, 'locgiasp'])->name('locgia');
+Route::get('/product_list/{id}', [HomeController::class, 'showcategoryid'])->name('showcategoryid');
+
+Route::get('/wishlist', function () {
+    return view('Auth.wishlist.wishlist');
+});
+Route::get('/cart', function () {
+    return view('Auth.cart.cart');
+});
+Route::get('/checkout', function () {
+    return view('Auth.checkout.checkout');
 });
 
 // User
@@ -141,3 +225,11 @@ Route::get('/get_data_khachang/{id}', [Comment_Product::class, 'get_data_khachan
 // Liên hệ phần người dùng
 Route::get('/contact', [ContactController::class, 'index'])->name('contact-auth');
 Route::post('/contact', [ContactController::class, 'postMessage']);
+Route::get('/get_data_khachang/{id}', [Comment_Product::class, 'get_data_khachang']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+//Chọn sản phẩm yêu thích
+Route::post('/product-favourite', [productController::class, 'productFavourite']);
+//Danh sách sản phẩm yêu thích của user đã chọn
+Route::get('/list-product-favourite', [productController::class, 'listProductFavourite'])->name('list-favourite');
+//Search
+Route::post('/search', [productController::class, 'search']);

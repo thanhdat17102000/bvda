@@ -54,4 +54,7 @@ class CategoryModel extends Model
         return $this->belongsTo(self::class, 'm_id_parent');
 
     }
+    public function tongproduct(){
+        return $this->hasMany(product::class, 'm_id_category', 'id');
+    }
 }

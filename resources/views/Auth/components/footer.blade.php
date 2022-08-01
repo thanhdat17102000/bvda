@@ -102,7 +102,7 @@
                             <ul class="useful-link">
                                 <!-- <li><a href="#">Ecommerce</a></li> -->
                                 <li><a href="/blog">Tin Khuyến Mãi</a></li>
-                                <li><a href="/product_list">Hợp Tác</a></li>
+                                <li><a href="{{route('list-favourite')}}">Sản phẩm yêu thích</a></li>
                                 <li><a href="/profile">CSKH</a></li>
                                 <li><a href="/blog">Blog</a></li>
                                 <li><a href="/contact_us"></a>Tuyển Dụng</li>
@@ -185,8 +185,9 @@
         </div>
         <div class="container">
             <div class="offcanvas-search-box">
-                <form class="d-flex bdr-bottom w-100">
-                    <input type="text" placeholder="Search entire storage here...">
+                <form class="d-flex bdr-bottom w-100" action="{{route('search')}}" method="get">
+                    @csrf
+                    <input type="text" name="keywork" placeholder="Search entire storage here...">
                     <button class="search-btn"><i class="ion-ios-search-strong"></i>Tìm kiếm</button>
                 </form>
             </div>
