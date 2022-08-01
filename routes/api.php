@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\BlogControllerApi;
 use App\Http\Controllers\Api\CartControllerApi;
+use App\Http\Controllers\Api\CheckoutControllerApi;
 use App\Http\Controllers\Api\PostControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/post', PostControllerApi::class);
 Route::apiResource('/blog', BlogControllerApi::class);
 Route::apiResource('/cart', CartControllerApi::class);
+Route::apiResource('/checkout', CheckoutControllerApi::class);

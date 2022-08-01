@@ -78,6 +78,7 @@ class Database extends Migration
             $table->string('m_product_name', 255);
             $table->foreign('m_id_order')->references('id')->on('t_order');
             $table->foreign('m_id_product')->references('id')->on('t_product');
+            $table->timestamps();
         });
         Schema::create('t_contact', function (Blueprint $table) {
             $table->increments('id');
@@ -93,10 +94,10 @@ class Database extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone',15)->nullable();
+            $table->string('phone', 15)->nullable();
             $table->boolean('role')->default(0);
             $table->boolean('multiple_role')->default(0);
-            $table->string('m_address',255)->nullable();
+            $table->string('m_address', 255)->nullable();
             $table->text('m_avatar')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

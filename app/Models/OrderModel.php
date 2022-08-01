@@ -8,10 +8,12 @@ class OrderModel extends Model {
      * Tên bảng trong hệ thống database là 'category'
      */
 
-    const TABLE_NAME = 't_order';
+    // const TABLE_NAME = 't_order';
+    public $table = 't_order';
     /*
      * Các tên field trong bảng category
      */
+    public $timestamps = true;
     const FIELD_ID = 'id';
     const FIELD_ID_USER = 'm_id_user';
     const FIELD_NAME = 'm_name';

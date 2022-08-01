@@ -11,15 +11,16 @@
                     data,
                     subtotal,
                     total,
-                    tax
+                    tax,
+                    totalNoTax
                 } = response;
                 let content = ``;
                 for (let key in data) {
                     content += `<tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid"
+                                    <td class="pro-thumbnail"><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}"><img class="img-fluid"
                                                 src="{{ asset('uploads') }}/${data[key].options.image}"
                                                 alt="Product" /></a></td>
-                                    <td class="pro-title"><a href="#">${data[key].name}</a></td>
+                                    <td class="pro-title"><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">${data[key].name}</a></td>
                                     <td class="pro-price" data-price="${data[key].price}"><span>${data[key].price.toLocaleString('en-US')}</span></td>
                                     <td class="pro-quantity">
                                         <div class="pro-qty">
@@ -114,7 +115,7 @@
                             <nav aria-label="breadcrumb">
                                 <h1 class="breadcrumb-title">GIỎ HÀNG</h1>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">TRANG CHỦ</a></li>
+                                    <li class="breadcrumb-item"><a href="/">TRANG CHỦ</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">GIỎ HÀNG</li>
                                 </ul>
                             </nav>
@@ -186,7 +187,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="checkout" class="btn d-block">Tiến hành thanh toán</a>
+                                <a href="{{ route('checkout') }}" class="btn d-block">Tiến hành thanh toán</a>
                             </div>
                         </div>
                     </div>

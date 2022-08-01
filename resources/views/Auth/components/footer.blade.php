@@ -24,13 +24,13 @@
             for (let key in data) {
                 content += `<li class="minicart-item">
                             <div class="minicart-thumb">
-                                <a href="product-details.html">
+                                <a href="{{url('chi-tiet-san-pham')}}/${data[key].options.slug}">
                                     <img src="{{ asset('uploads') }}/${data[key].options.image}" alt="product">
                                 </a>
                             </div>
                             <div class="minicart-content">
                                 <h3 class="product-name">
-                                    <a href="product-details.html">${data[key].name}</a>
+                                    <a href="{{url('chi-tiet-san-pham')}}/${data[key].options.slug}">${data[key].name}</a>
                                 </h3>
                                 <p>
                                     <span class="cart-quantity">${data[key].qty}<strong>&times;</strong></span>
@@ -232,8 +232,7 @@
                 </div>
 
                 <div class="minicart-button">
-                    <a href="/cart"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
-                    <!-- <a href="cart"><i class="fa fa-share"></i>Kiểm tra giỏ hàng</a> -->
+                    <a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
                 </div>
             </div>
         </div>
