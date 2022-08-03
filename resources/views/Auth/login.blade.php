@@ -1,9 +1,96 @@
-@extends('layouts.app')
-@push('styles')
-    <link href=" {{ asset('Auth/css/login.css') }}" rel="stylesheet" type="text/css" />
-@endpush
+@extends('Auth.layouts.master')
 @section('content')
-<div class="container">
+<!-- main wrapper start -->
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title">Đăng nhập</h1>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    @if(Session::has('error'))
+    <div class="alert alert-success" style="margin-top: 10px;">
+        {!! Session::get('') !!}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    <!-- login register wrapper start -->
+    <div class="login-register-wrapper section-padding">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row">
+                    <!-- Login Content Start -->
+                    <div class="col-lg-10 mx-auto">
+                        <div class="login-reg-form-wrap">
+                            <h2>Đăng nhập</h2>
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="single-input-item">
+                                    <label for="">{{ __('Email     ') }}</label>
+                                    <input class="@error('email') is-invalid @enderror" id="email" type="emai" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Email/Tên đăng nhập"/>
+                                    @error('email')
+                                        <span class="invalid-feedback input-group-text" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
+                                <div class="single-input-item">
+                                    <label for="">{{__('Mật khẩu ')}}</label>
+                                    <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" autocomplete="current-password" />
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="single-input-item">
+                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                        <div class="remember-meta">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="rememberMe">{{ __('Ghi nhớ tài khoản!') }}</label>
+                                            </div>
+                                        </div>
+                                        @if (Route::has('password.request'))
+                                            <a href="{{ route('password.request') }}" class="forget-pwd">Quên mật khẩu</a>
+                                        @endif
+                                        
+                                    </div>
+                                </div>
+                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                    <div class="single-input-item">
+                                        <button type="submit" class="btn">  {{ __('Đăng nhập') }}</button>
+                                    </div>
+                                    <p>Chưa có tài khoản? <a href="{{route('register')}}" class="forget-pwd">Đăng ký</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Login Content End -->
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- login register wrapper end -->
+</main>
+<!-- main wrapper end -->
+{{-- <div class="container">
     <div class="d-flex justify-content-center h-100">
         <div class="col-md-6 mt-5">
             <div style="background-color: rgba(0,0,0,0.5) !important;" class="card">
@@ -81,7 +168,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 {{-- @extends('layouts.app')
 @section('content')

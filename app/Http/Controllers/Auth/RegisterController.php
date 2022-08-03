@@ -53,6 +53,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:t_user'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ],
+        [
+            'name.required' => 'Họ và tên không được bỏ trống!',
+            'email.required'=> 'Email không được bỏ trống!', 
         ]);
     }
 
@@ -68,6 +72,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'm_address'=>$data['m_address'],
+            
         ]);
     }
+    
 }

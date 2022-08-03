@@ -103,6 +103,7 @@ class Database extends Migration
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('m_status')->default(0);
+            $table->text('m_token', 20)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

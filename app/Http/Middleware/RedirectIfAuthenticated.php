@@ -30,7 +30,7 @@ class RedirectIfAuthenticated
             if(Auth::guard($guard)->check() && Auth::user()->role == 1){
                 return redirect()->route('admintrator');
             }elseif (Auth::guard($guard)->check() && Auth::user()->role == 0) {
-                return redirect()->route('/profile');
+                return redirect()->route('profile');
             }
         }
 
