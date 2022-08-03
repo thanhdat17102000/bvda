@@ -25,8 +25,66 @@ class productController extends Controller
             'title' => 'Danh Mục',
             'action' => 'Sản phẩm'
         ];
+        $showdanhmuc = CategoryModel::orderBy('id','asc')->get();
         $datas = product::orderBy('id', 'asc')->search()->paginate(10);
-        return view('admin.product.index', compact('datas', 'data'));
+        if(isset($_GET['danhsach'])){
+            $sort_by = $_GET['danhsach'];
+            foreach ($showdanhmuc as $key => $value) {
+                $dataid = $value->id;
+                if($sort_by == $dataid){
+                    $datas = product::orderBy('id', 'asc')->where('m_id_category', $dataid)->search()->paginate(10);
+                    $datas->render();
+                }
+            }
+            if ($sort_by == 'tatca') {
+                $datas = product::orderBy('id', 'asc')->search()->paginate(10);
+                $datas->render();
+            }
+        }
+        return view('admin.product.index', compact('datas', 'data','showdanhmuc'));
+    }
+    // giảm giá theo sản phẩm và giảm giá theo danh mục sản phẩm 
+    public function capnhatprice(Request $request){
+        $data = $request->all();
+        if($data['idsotiengiam'] == 2 && isset($data['allids'])){
+            product::whereIn('id', $data['allids'])->update(['m_original_price' => $data['inputprice']]);
+        }elseif($data['idsotiengiam'] == 1 && isset($data['allids'])){
+            $input = $data['inputprice'];
+            $ids = $data['allids'];
+            foreach (product::whereIn('id', $data['allids'])->get() as $val) {
+                $updated = product::find($val->id);
+                $updated->m_original_price = $val->m_original_price - ($val->m_original_price * $data['inputprice'])/100;
+                $updated->save();
+            }
+        }elseif($data['iddanhmuc'] != 0 && !isset($data['allids']) && $data['idsotiengiam'] == 2){
+            product::where('m_id_category', $data['iddanhmuc'])->update(['m_original_price' => $data['inputprice']]);
+        }elseif($data['iddanhmuc'] != 0 && !isset($data['allids']) && $data['idsotiengiam'] == 1){
+            foreach (product::where('m_id_category', $data['iddanhmuc'])->get() as $val) {
+                $updated = product::find($val->id);
+                $updated->m_original_price = $val->m_original_price - ($val->m_original_price * $data['inputprice'])/100;
+                $updated->save();
+            }
+        }
+    }
+    // xóa tất cả
+    public function deleteallsp(Request $request){
+        $data = $request->all();
+        if(isset($data['ids'])){
+            foreach (product::whereIn('id', $data['ids'])->get() as $key => $val) {
+                $deleteimg = json_decode($val->m_picture);
+                $length = count($deleteimg);
+                for ($i = 0; $i < $length; $i++) {
+                    $path = public_path("uploads/" . $deleteimg[$i]);
+                    if (file_exists($path)) {
+                        unlink($path);
+                    }
+                }
+            }
+            DB::table('t_order_detail')->whereIn('m_id_product', $data['ids'])->delete();
+            DB::table('t_commentproduct')->whereIn('m_id_maloai', $data['ids'])->delete();
+            product_inventory::whereIn('m_id_product', $data['ids'])->delete();
+            product::whereIn('id', $data['ids'])->delete();
+        }
     }
 
     /**
@@ -226,7 +284,7 @@ class productController extends Controller
                 }
                 return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công.');
             }else{
-                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thất bại.');
+                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công. nhưng sản phẩm tồn kho và size vẫn đang được giữ nguyên.');
             }
         }
     }
@@ -254,6 +312,7 @@ class productController extends Controller
         $delete->delete();
         return redirect()->back()->with('alert_success', 'Xóa sản phẩm thành công.');
     }
+
 
     //chọn sản phẩm yêu thích
     public function productFavourite(Request $request)

@@ -73,11 +73,30 @@
     <div class="col-12">
     <section class="content-info">
     <div class="card-box">
-    <h4 class="mt-0 header-title"><b>Danh mục sản phẩm</b></h4>
+        <div class="row">
+            <div class="col-md-4">
+                <h4 class="mt-0 header-title"><b>Danh mục sản phẩm</b></h4>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <select class="form-control" id="chondanhmuc" name="sortne">
+                        <option value="{{Request::url()}}?danhsach=tatca" data-id="0">-- chọn danh mục --</option>
+                        @foreach($showdanhmuc as $showdm)
+                            <option value="{{Request::url()}}?danhsach={{$showdm->id}}" data-id="{{$showdm->id}}">{{$showdm->m_title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary" id="btnlocsp">lọc danh mục</button>
+                <button type="submit" class="btn btn-danger" id="btndeleteall">Delete All</button>
+            </div>
+        </div>
     <div class=" tablesaw-bar  tablesaw-all-cols-visible  tablesaw-mode-columntoggle">
     <table class="tablesaw table mb-0 tablesaw-columntoggle" data-tablesaw-mode="columntoggle" data-tablesaw-mode-switch="" data-tablesaw-minimap="" id="tablesaw-7261" style="">
         <thead>
         <tr>
+            <th ><input type="checkbox" id="checkAll" /></th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="persist" class=" tablesaw-swipe-cellpersist" style="width: 30px;">#</th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-sortable-default-col="" data-tablesaw-priority="0" class="tablesaw-priority-0 tablesaw-toggle-cellvisible">Images</th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-sortable-default-col="" data-tablesaw-priority="1" class="tablesaw-priority-1">Danh mục</th>
@@ -93,7 +112,8 @@
                 $i = 1;
             @endphp
             @foreach($datas as $key => $dt)
-                <tr>
+                <tr id="sid{{$dt->id}}">
+                    <td><input type="checkbox" class="checkboxclass" name="ids" value="{{$dt->id}}" data-id="{{$dt->m_original_price}}"></td>   
                     <td class=" tablesaw-swipe-cellpersist" style="width: 30px;">{{$i++}}</td>
                     <td class="tablesaw-priority-0 tablesaw-toggle-cellvisible">
                         @if(json_decode($dt->m_picture))
@@ -152,7 +172,7 @@
                                                 <span>{{number_format($dt->m_price, 0, '.', '.')}} Vnđ</span>
                                             @endif
                                         </p>
-                                            <p><strong>Giá đã giảm: </strong><mark>{{number_format($dt->m_original_price, 0, '.', '.')}} Vnđ</mark></p>
+                                            <p><strong>Giá đã giảm: </strong><mark id="price-giamgia" data-id="{{$dt->m_original_price}}">{{number_format($dt->m_original_price, 0, '.', '.')}} Vnđ</mark></p>
                                             {{-- <p><strong>Ngày đăng sản phẩm: </strong><span>{{$dt->updated_at->diffForHumans()}}</span></p> --}}
                                             <p><strong>Số lượng tồn kho: </strong><span>{{$dt->updatedsoluong1->sum('m_quanti')}}</span> 
                                             |
@@ -193,6 +213,24 @@
     </table>
     </div>
     </section>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select class="form-control" id="sotiengiam">
+                            <option value="1">giảm theo %</option>
+                            <option value="2">giảm theo tiền</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputprice" placeholder="vui lòng nhập số tiền muốn giảm">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-dark" id="updateprice">nhập</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- form-delete -->
@@ -261,5 +299,90 @@
             })
         });
     });
+</script>
+<script>
+    jQuery(document).ready(function($){
+        $('#checkAll').click(function(){
+            $(".checkboxclass").prop('checked', $(this).prop('checked'));
+        });
+        $('#btndeleteall').click(function(e){
+            e.preventDefault();
+            var allids = [];
+            var _token = $('input[name="_token"]').val();
+            $('input:checkbox[name=ids]:checked').each(function(){
+                allids.push($(this).val());
+            });
+            alert(allids);
+            $.ajax({
+                url:"{{route('deleteallsp')}}",
+                type:"delete",
+                data:{
+                    _token:_token,
+                    ids:allids
+                },
+                success:function(data){
+                    $.each(allids,function(key,val){
+                        $("#sid"+val).remove();
+                    });
+                    window.location.reload(true);
+                }
+            });
+        });
+        $('#updateprice').click(function(e){
+            e.preventDefault();
+            var allids = [];
+            var priceold = [];
+            var iddanhmuc = $('#chondanhmuc').find(':selected').data("id");
+            var idsotiengiam = $('#sotiengiam').val();
+            var inputprice = $('#inputprice').val();
+            // var priceold = $('#price-giamgia').data('id');
+            var _token = $('input[name="_token"]').val();
+            $('input:checkbox[name=ids]:checked').each(function(){
+                allids.push($(this).val());
+                priceold.push($(this).data('id'));
+            });
+            // alert(iddanhmuc);
+            // alert(idsotiengiam);
+            // alert(inputprice);
+            // alert(allids);
+            // alert(_token);
+            $.ajax({
+                url:"{{route('capnhatprice')}}",
+                type:"post",
+                data:{
+                    _token:_token,
+                    iddanhmuc:iddanhmuc,
+                    idsotiengiam:idsotiengiam,
+                    inputprice:inputprice,
+                    allids:allids,
+                    priceold:priceold,
+                },
+                success:function(data){
+                        alert('thành công');
+                        window.location.reload(true);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    jQuery(document).ready(function($){
+        $('#btnlocsp').click(function(e){
+            e.preventDefault();
+            // var iddanhmuc = $('#chondanhmuc').find(':selected').data("id");
+            var iddanhmuc = $('#chondanhmuc').val();
+            // alert(iddanhmuc);
+            if(iddanhmuc){
+                window.location = iddanhmuc;
+            }
+            return false;
+        });
+        locdanhsach();
+        function locdanhsach() {
+            var url = window.location.href;
+            $('select[name="sortne"]').find('option[value="'+url+'"]').attr("selected",true);
+        };
+    });
+        
 </script>
 @endpush

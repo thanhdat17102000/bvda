@@ -20,7 +20,11 @@ class CartControllerApi extends Controller
      */
     public function index(Request $request)
     {
-        return ["data" => Cart::content(), "subtotal" => Cart::subtotal(0), 'total' => Cart::total(0), 'tax' => Cart::tax(0), 'count' => Cart::count()];
+        return [
+            "data" => Cart::content(),
+            "subtotal" => Cart::subtotal(0), 'total' => Cart::total(0),
+            'tax' => Cart::tax(0), 'count' => Cart::count(), 'totalNoTax' => Cart::priceTotal()
+        ];
     }
 
     /**
@@ -39,6 +43,7 @@ class CartControllerApi extends Controller
         $data['price'] = $product->m_price;
         $data['name'] = $product->m_product_name;
         $data['options']['image'] = $product->m_picture ? json_decode($product->m_picture)[0] : '';
+        $data['options']['slug'] = $product->m_product_slug;
         $data['weight'] = 0;
         $result = Cart::add($data);
         return ["isError" => false, "message" => "Thêm giỏ hàng thành công", "data" => $result];

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\BlogControllerApi;
 use App\Http\Controllers\Api\CartControllerApi;
+use App\Http\Controllers\Api\CheckoutControllerApi;
 use App\Http\Controllers\Api\PostControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,4 @@ Route::apiResource('/blog', BlogControllerApi::class);
 Route::apiResource('/user',UserControllerApi::class);
 // Giỏ hàng
 Route::apiResource('/cart', CartControllerApi::class);
+Route::apiResource('/checkout', CheckoutControllerApi::class);
