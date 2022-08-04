@@ -88,8 +88,8 @@
                                         <span><a href="#">1 đánh giá</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="regular-price">{{number_format($showdetail->m_price,0,',','.')}}VND</span>
-                                        <span class="old-price"><del>{{number_format($showdetail->m_original_price,0,',','.')}}VND</del></span>
+                                        <span class="regular-price">{{number_format($showdetail->m_original_price, 0,',','.')}}VND</span>
+                                        <span class="old-price"><del>{{number_format($showdetail->m_price, 0,',','.')}}VND</del></span>
                                     </div>
                                     <p>{!!$showdetail->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
