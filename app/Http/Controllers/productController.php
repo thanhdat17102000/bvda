@@ -316,7 +316,8 @@ class productController extends Controller
     //chọn sản phẩm yêu thích
     public function productFavourite(Request $request)
     {
-        $userLogin = Auth::user()->id;
+        if(Auth::user()) {
+            $userLogin = Auth::user()->id;
         $idProduct = $request->idProduct;
         $checkData = DB::table('t_user_favourite')->where('id_user', $userLogin)->where('id_product', $idProduct)->first();
         if ($checkData) {
@@ -334,6 +335,13 @@ class productController extends Controller
             'message' => 'Bạn đã chọn sản phẩm yêu thích thành công',
             'data' =>  $addFavourite,
         ]);
+        } else {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Vui lòng đăng nhập để thực hiện chức năng này'
+            ]);
+        }
+        
     }
 
     public function listProductFavourite()

@@ -277,15 +277,7 @@ Danh sách sản phẩm
                                         </div>
                                         <div class="product-action-link">
                                             <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                            <!-- @foreach($list_favourite as $item)
-                                                @if($item->id_product == $showprd->id)
-                                                    <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @elseif($item->id_product != $showprd->id)
-                                                    <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @else
-                                                <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @endif
-                                            @endforeach -->
+                                            
 
                                             <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">
@@ -336,7 +328,7 @@ Danh sách sản phẩm
                 </div>
             </div>
             <br>
-            {{$showproduct->appends(request()->all())->links()}}
+            
             <!-- page main wrapper end -->
 </main>
 <!-- main wrapper end -->

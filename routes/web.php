@@ -104,13 +104,16 @@ Route::get('/compare', function () {
     return view('Auth.home-compare.compare');
 });
 Route::get('/product_list', function () {
+    // dd('123');
     $categories = CategoryModel::where('m_id_parent', 0)->get();
     $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
         $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
+        // dd($list_favourite);
     } else {
         $list_favourite = [];
+        // dd($list_favourite);
     }
     if (isset($_GET['danhsach'])) {
         $sort_by = $_GET['danhsach'];
