@@ -86,7 +86,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="{{route('logout')}}" class="dropdown-item notify-item">
+                        <a href="{{route('logout-admin')}}" class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
                             <span>Đăng xuất</span>
                         </a>
@@ -104,7 +104,6 @@
             <div class="logo-box">
                 <a href="index.html" class="logo logo-dark text-center">
                     <span class="logo-lg">
-                        <img src="{{ asset('admin/assets/images') }}/logo-dark.png" alt="" height="16">
                     </span>
                     <span class="logo-sm">
                         <img src="{{ asset('admin/assets/images') }}/logo-sm.png" alt="" height="24">
@@ -167,7 +166,7 @@
                             </a> --}}
 
                             <!-- item-->
-                            <a href="{{route('logout')}}" class="dropdown-item notify-item">
+                            <a href="{{route('logout-admin')}}" class="dropdown-item notify-item">
                                 <i class="fe-log-out mr-1"></i>
                                 <span>Đăng xuất</span>
                             </a>

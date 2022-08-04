@@ -7,9 +7,11 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Models\product;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -33,11 +35,19 @@ use Yajra\DataTables\Utilities\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// AuthAdmin
-Route::group(['prefix' => 'admintrator'], function () {
+// error
+Route::group(['prefix' => 'error'], function () {
+    Route::get('/404-error', [\App\Http\Controllers\ErrorController::class, 'error404'])->name('error404');
+});
+// AuthClients
+Route::group(['prefix' => 'account'], function () {
     Auth::routes();
     Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+});
+// AuthAdmin
+Route::group(['prefix' => 'admintrator'], function () {
+    Route::get('/login', [AdminLoginController::class, 'showLogin'])->name('login-admin-form');
+    Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout-admin');
 });
 // Admin
 Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']], function () {

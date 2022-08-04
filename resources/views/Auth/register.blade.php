@@ -33,23 +33,28 @@
                                     <form method="POST" action="{{ route('register') }}">
                                         @csrf
                                         <div class="single-input-item row">                                            
-                                            <label class="col-sm-2  col-form-label @error('name') is-invalid @enderror" for="">{{ __('Họ và tên') }}</label>
-                                            <input class="col-sm-10" id="name" type="text" name="name" value="{{ old('name') }}" 
-                                            autocomplete="name" autofocus />
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <label class="col-sm-2  col-form-label " for="">{{ __('Họ và tên') }}</label>
+                                            <div class="col-sm-10">
+                                                <input class="col-sm-12" id="name" type="text" name="name" value="{{ old('name') }}" 
+                                                autocomplete="name" autofocus />
+                                                @if ($errors->has('name'))
+                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
+                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            
                                         </div>
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label" for="">{{ __('Email') }}</label>
-                                            <input id="email" class="col-sm-10 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Email" />
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                            <div class="col-sm-10">
+                                                <input id="email" class="col-sm-12" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Email" />
+                                                @if ($errors->has('email'))
+                                                <span style="font-size: 12px;" role="alert" class="text-danger">
+                                                    <strong>{{ $errors->first('email') }}</strong>
                                                 </span>
-                                            @enderror
+                                            @endif
+                                            </div>
                                         </div>
                                         {{-- <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label" for="">Số điện thoại:</label>
@@ -82,16 +87,25 @@
                                         </div> --}}
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label"  for="">{{ __('Mật khẩu') }}</label>
-                                            <input id="password" class="col-sm-10 @error('password') is-invalid @enderror" name="password" autocomplete="new-password"" type="password" placeholder="Mật khẩu" />
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                            <div class="col-sm-10">
+                                                <input id="password" class="col-sm-12 @error('password') is-invalid @enderror" name="password" autocomplete="new-password"" type="password" placeholder="Mật khẩu" />
+                                                @if($errors->has('password'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label" for="">{{ __('Xác nhận MK') }}</label>
-                                            <input id="password-confirm" class="col-sm-10" type="password" name="password_confirmation" autocomplete="new-password" placeholder="Mật khẩu"/>
+                                            <div class="col-sm-10">
+                                                <input id="password-confirm" class="col-sm-12" type="password" name="password_confirmation" autocomplete="new-password" placeholder="Mật khẩu"/>
+                                                @if($errors->has('password'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                         <div class="single-input-item">
                                             <div class="login-reg-form-meta">

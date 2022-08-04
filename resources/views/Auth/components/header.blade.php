@@ -15,10 +15,10 @@
                         <div class="header-top-settings">
                             <ul class="nav align-items-center justify-content-end">
                                 <li class="curreny-wrap">
-                                    Hotline: 0978xxxxxx
+                                    Hotline: 0978261116
                                 </li>
                                 <li class="language">
-                                    Email: kingdomsneakers@gmail.com
+                                    Email: kingdomsneakers80@gmail.com
                                 </li>
                             </ul>
                         </div>

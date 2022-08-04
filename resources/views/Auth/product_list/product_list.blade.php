@@ -285,7 +285,7 @@ Danh sách sản phẩm
                                                 @else
                                                 <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
                                                 @endif
-                                            @endforeach -->
+                                                @endforeach -->
 
                                             <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">
