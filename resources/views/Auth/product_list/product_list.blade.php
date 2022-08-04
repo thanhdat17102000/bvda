@@ -336,7 +336,7 @@ Danh sách sản phẩm
                 </div>
             </div>
             <br>
-            {{$showproduct->appends(request()->all())->links()}}
+            
             <!-- page main wrapper end -->
 </main>
 <!-- main wrapper end -->
