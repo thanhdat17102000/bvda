@@ -188,7 +188,7 @@
                         </li>
 
                         <li class="list-inline-item">
-                            <a href="{{route('logout')}}">
+                            <a href="{{Route('logout-admin')}}">
                                 <i class="mdi mdi-power"></i>
                             </a>
                         </li>

@@ -15,6 +15,14 @@
         <div class="login-logo">
             <a href="../../index2.html"><b>Kingdom Sneakers</b> Admin</a>
         </div>
+        @if(Session::has('error'))
+        <div class="alert alert-success" style="margin-top: 10px;">
+            {!! Session::get('error') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <!-- /.login-logo -->
         <div class="card col-md-12">
             <div class="card-body login-card-body">
@@ -31,7 +39,7 @@
                     </div>
                 </div>
                 @error('email')
-                    <span class="invalid-feedback input-group-text" role="alert">
+                    <span class="invalid-feedback input-group-text mb-2" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
@@ -43,6 +51,11 @@
                         </div>
                     </div>
                 </div>
+                @error('password')
+                    <span class="invalid-feedback input-group-text mb-2" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
                 <div class="row">
                 <div class="col-6">
                     <div class="icheck-primary">
@@ -54,7 +67,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-6">
-                    <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                    <a href=""> <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button></a>
                 </div>
                 <!-- /.col -->
                 </div>
@@ -77,7 +90,7 @@
             @endif
             
             <p class="mb-0">
-                <a href="register.html" class="text-center">Đằng ký</a>
+                <a href="register.html" class="text-center">Đăng ký</a>
             </p>
             </div>
             <!-- /.login-card-body -->

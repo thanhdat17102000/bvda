@@ -54,7 +54,7 @@ class LoginController extends Controller
             'email.required'=> 'Email không được bỏ trống!', 
             'email.regex'=>'Email không đúng định dạng!',
             'password.required'=> 'Mật khẩu không được bỏ trống!', 
-            'password.max:55'=> 'Mật khẩu quá dài!',
+            'password.max'=> 'Mật khẩu quá dài!',
         ]);
         if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){
             if (auth()->user()->role == 1) {
@@ -65,7 +65,7 @@ class LoginController extends Controller
                 }
         }
         else{
-            return redirect()->route('login')->with('error', 'Kiểm tra lại email hoặc mật khẩu không đúng!');
+            return back()->with('error', 'Kiểm tra lại email hoặc mật khẩu không đúng!');
         }
     }
         // echo 'Đăng nhập thành công!';

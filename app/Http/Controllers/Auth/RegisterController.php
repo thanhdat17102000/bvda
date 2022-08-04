@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'password.required' => 'Mật khẩu không được bỏ trống!',
             'password.min' => 'Mật khẩu quá ngắn!',
             'password.max' => 'Mật khẩu quá dài!',
-            'passsword.confirmed' => 'Vui lòng gõ lại đúng mật khẩu xác nhận!'
+            'passsword.confirmed' => 'Vui lòng xác nhận lại mật khẩu!',
         ]);
     }
 

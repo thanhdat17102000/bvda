@@ -243,7 +243,7 @@
                                                                 <input type="email" value="{{Auth::user()->email}}" id="email" placeholder="{{Auth::user()->email}}"/>
                                                             </div>
                                                             <div class="single-input-item">
-                                                                <button id="update_profile" class="check-btn sqr-btn ">Lưu</button>
+                                                                <button type="submit" id="update_profile" class="check-btn sqr-btn ">Lưu</button>
                                                             </div>
                                                         </form>
                                                     </div>

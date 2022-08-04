@@ -66,7 +66,7 @@ class AdminLoginController extends Controller
                 }
         }
         else{
-            return redirect()->route('login')->with('error', 'Kiểm tra lại email hoặc mật khẩu không đúng!');
+            return back()->with('error', 'Kiểm tra lại email hoặc mật khẩu không đúng!');
         }
     }
         // echo 'Đăng nhập thành công!';

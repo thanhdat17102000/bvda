@@ -46,6 +46,7 @@ Route::group(['prefix' => 'account'], function () {
 });
 // AuthAdmin
 Route::group(['prefix' => 'admintrator'], function () {
+    Auth::routes();
     Route::get('/login', [AdminLoginController::class, 'showLogin'])->name('login-admin-form');
     Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout-admin');
 });

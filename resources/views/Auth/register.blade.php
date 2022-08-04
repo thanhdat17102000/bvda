@@ -36,7 +36,7 @@
                                             <label class="col-sm-2  col-form-label " for="">{{ __('Họ và tên') }}</label>
                                             <div class="col-sm-10">
                                                 <input class="col-sm-12" id="name" type="text" name="name" value="{{ old('name') }}" 
-                                                autocomplete="name" autofocus />
+                                                autocomplete="name" autofocus placeholder="Họ và tên" />
                                                 @if ($errors->has('name'))
                                                     <span style="font-size: 12px;" role="alert" class="text-danger">
                                                         <strong>{{ $errors->first('name') }}</strong>
@@ -50,61 +50,54 @@
                                             <div class="col-sm-10">
                                                 <input id="email" class="col-sm-12" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Email" />
                                                 @if ($errors->has('email'))
-                                                <span style="font-size: 12px;" role="alert" class="text-danger">
-                                                    <strong>{{ $errors->first('email') }}</strong>
-                                                </span>
-                                            @endif
+                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
                                         </div>
-                                        {{-- <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label" for="">Số điện thoại:</label>
-                                            <input class="col-sm-10" type="text" placeholder="Phone" required />
+                                        <div class="single-input-item row">
+                                            <label class="col-sm-2 col-form-label" for="">{{ __('Số điện thoại') }}</label>
+                                            <div class="col-sm-10">
+                                                <input id="email" class="col-sm-12" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Số điện thoại" />
+                                                @if ($errors->has('email'))
+                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                         <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label"  for="">Địa chỉ</label>
-                                            <input class="col-sm-10" type="address" placeholder="Địa chỉ chính " required />
-                                        </div> --}}
-                                        {{-- <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label"  for="">Tỉnh/Thành phố</label>
-                                            <select class="form-control col-sm-10" name="" id="">
-                                                <option value="">TPHCM</option>
-                                                <option value="">HN</option>
-                                            </select>
+                                            <label class="col-sm-2 col-form-label" for="">{{ __('Địa chỉ') }}</label>
+                                            <div class="col-sm-10">
+                                                <input id="email" class="col-sm-12" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Địa chỉ" />
+                                                @if ($errors->has('email'))
+                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label"  for="">Quận/Huyện</label>
-                                            <select class="form-control col-sm-10" name="" id="">
-                                                <option value="">TPHCM</option>
-                                                <option value="">HN</option>
-                                            </select>
-                                        </div>
-                                        <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label" for="">Phường/Xã</label>
-                                            <select class="form-control col-sm-10" name="" id="">
-                                                <option value="">TPHCM</option>
-                                                <option value="">HN</option>
-                                            </select>
-                                        </div> --}}
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label"  for="">{{ __('Mật khẩu') }}</label>
                                             <div class="col-sm-10">
                                                 <input id="password" class="col-sm-12 @error('password') is-invalid @enderror" name="password" autocomplete="new-password"" type="password" placeholder="Mật khẩu" />
-                                                @if($errors->has('password'))
-                                                    <span class="invalid-feedback" role="alert">
+                                                @if ($errors->has('password'))
+                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
                                                         <strong>{{ $errors->first('password') }}</strong>
                                                     </span>
-                                                @enderror
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label" for="">{{ __('Xác nhận MK') }}</label>
                                             <div class="col-sm-10">
                                                 <input id="password-confirm" class="col-sm-12" type="password" name="password_confirmation" autocomplete="new-password" placeholder="Mật khẩu"/>
-                                                @if($errors->has('password'))
-                                                    <span class="invalid-feedback" role="alert">
+                                                @if ($errors->has('password'))
+                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
                                                         <strong>{{ $errors->first('password') }}</strong>
                                                     </span>
-                                                @enderror
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="single-input-item">
@@ -112,7 +105,7 @@
                                                 <div class="remember-meta">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="subnewsletter">
-                                                        <label class="custom-control-label" for="subnewsletter">Nhận thông báo</label>
+                                                        <label class="custom-control-label" for="subnewsletter">Tôi đã đọc và đồng ý với <a class="text-danger" href=""><b>Quy định và hình thức thanh toán</b></a></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +114,7 @@
                                             <div class="single-input-item">
                                                 <button type="submit" class="btn">Đăng ký</button>
                                             </div>
-                                            <p>Đã có tài khoản? <a href="#" class="forget-pwd">Đăng nhập</a></p>
+                                            <p>Đã có tài khoản? <a href="{{route('login')}}" class="forget-pwd">Đăng nhập</a></p>
                                         </div>
                                     </form>
                                 </div>
