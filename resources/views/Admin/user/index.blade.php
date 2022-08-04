@@ -74,18 +74,13 @@
                                 <span class="d-none d-sm-block">Đổi thông tin</span> 
                             </a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a href="#messages1" data-toggle="tab" aria-expanded="false" class="nav-link">
-                                <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-                                <span class="d-none d-sm-block">Vai trò quản trị</span>    
-                            </a>
-                        </li> -->
                     </ul>
 
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade show active" id="home1">
                             <center> - Đổi mật khẩu - </center>
-                        <form>
+                        <form method="post" action="{{route('profile.update', Auth::user()->id)}}">
+                            @csrf @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên tài khoản</label>
                                 <input type="text" class="form-control" id="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
@@ -100,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Xác nhận mật khẩu mới</label>
-                                <input type="password" class="form-control" id="xacnhanmatkhau" name="xacnhanmatkhau" placeholder="xác nhận mật khẩu mới">
+                                <input type="password" class="form-control" id="xacnhanmatkhau" name="xacnhanmatkhau" placeholder="Xác nhận mật khẩu mới">
                             </div>
                             <button type="submit" id="btnluumk" class="btn btn-primary">Lưu mật khẩu</button>
                         </form>
@@ -135,18 +130,6 @@
                             <button type="submit" id="btnthongtin" class="btn btn-primary">Lưu Thông Tin</button>
                         </form>
                         </div>
-                        <!-- <div role="tabpanel" class="tab-pane fade" id="messages1">
-                            <p class="mb-0">Etsy mixtape wayfarers, ethical
-                                wes anderson tofu before they sold out mcsweeney's organic lomo
-                                retro fanny pack lo-fi farm-to-table readymade. Messenger bag
-                                gentrify pitchfork tattooed craft beer, iphone skateboard locavore
-                                carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy
-                                irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg
-                                banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy
-                                retro mlkshk vice blog. Scenester cred you probably haven't heard of
-                                them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu
-                                synth chambray yr.</p>
-                        </div> -->
                     </div>
             </div>
 
@@ -207,32 +190,6 @@
 <script src="{{asset('admin/assets/js/pages/tablesaw.init.js')}}"></script>
 <script src="{{asset('admin/assets/js/vendor.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/app.min.js')}}"></script>
-
-
-<!-- <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    });
-</script> -->
-<!-- <script type="text/javascript">
-
-     $('.btndelete').click(function(event) {
-          var form =  $(this).closest("form#form-delete");
-          var name = $(this).data("name");
-          event.preventDefault();
-          swal({
-              title: `Bạn muốn xóa chứ?`,
-              text: "Bạn không thể quay lại bước này.",
-              icon: "warning",
-              buttons: true,
-              dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              form.submit();
-            }
-          });
-      });
 
 </script> -->
 <!-- javascript -->

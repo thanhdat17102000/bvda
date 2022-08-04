@@ -49,11 +49,12 @@ class LoginController extends Controller
         $input = $request->all();
         $this->validate($request,[
             'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
-            'password' =>'required'
+            'password' =>['required', 'max:16'],
         ],[
             'email.required'=> 'Email không được bỏ trống!', 
-            'email.regex'=>'Email hổng đúng định dạng!',
+            'email.regex'=>'Email không đúng định dạng!',
             'password.required'=> 'Mật khẩu không được bỏ trống!', 
+            'password.max'=> 'Mật khẩu quá dài!',
         ]);
         if(auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))){
             if (auth()->user()->role == 1) {
@@ -64,7 +65,7 @@ class LoginController extends Controller
                 }
         }
         else{
-            return redirect()->route('login');
+            return back()->with('error', 'Kiểm tra lại email hoặc mật khẩu không đúng!');
         }
     }
         // echo 'Đăng nhập thành công!';

@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
             'role' => 1,
             'password' => Hash::make('admin@gmail.com')
         ]);
+        $this::call([
+            UserSeeder::class
+        ]);
     }
 }

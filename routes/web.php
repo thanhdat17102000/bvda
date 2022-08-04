@@ -7,15 +7,20 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Models\product;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
-use App\Http\Controllers\productController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Utilities\Request;
 
 // end comment
 // start comment blog
@@ -30,11 +35,20 @@ use App\Http\Controllers\productController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// error
+Route::group(['prefix' => 'error'], function () {
+    Route::get('/404-error', [\App\Http\Controllers\ErrorController::class, 'error404'])->name('error404');
+});
+// AuthClients
+Route::group(['prefix' => 'account'], function () {
+    Auth::routes();
+    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+});
 // AuthAdmin
 Route::group(['prefix' => 'admintrator'], function () {
     Auth::routes();
-    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+    Route::get('/login', [AdminLoginController::class, 'showLogin'])->name('login-admin-form');
+    Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout-admin');
 });
 // Admin
 Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']], function () {
@@ -48,13 +62,15 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
     Route::get('post/edit/{id}', [PostController::class, 'edit_form'])->name('edit-form');
     Route::post('/update-trangthai', [Comment_Product::class, 'update_trangthai']);
-
-    // Accounts
+    // Route::post("/update-trangthai", "Comment_Product@update_trangthai")->name('updatedh');
+    // Profile
     Route::resource('profile', App\Http\Controllers\UserController::class);
-    Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
     Route::post('doi-matkhau-admin', [App\Http\Controllers\UserController::class, 'doimatkhauadmin'])->name('doimatkhauadmin');
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
-
+    // Quản lý user
+    Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
+    Route::get('/user/add', [UserController::class,'add_user'])->name('add_user');
+    Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,
@@ -96,6 +112,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
 });
 
+
 // Client
 Route::get('/', function () {
     return view('Auth.home-compare.home_page');
@@ -106,7 +123,7 @@ Route::get('/compare', function () {
 Route::get('/product_list', function () {
     // dd('123');
     $categories = CategoryModel::where('m_id_parent', 0)->get();
-    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(6);
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
         $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
@@ -184,10 +201,19 @@ Route::get('/checkout', function () {
     return view('Auth.checkout.checkout');
 });
 
-// User
-Route::get('/profile', function () {
-    return view('Auth.account.profile');
+// Profile Client
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+    Route::get('/chi-tiet-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'order']);
+    Route::get('/huy-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'cancelled']);
+    Route::post('/doi-thong-tin-profile', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
 });
+
+
+Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
+Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
+Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdelete');
+
 Route::get('/login', function () {
     return view('Auth.login');
 });
@@ -218,7 +244,6 @@ Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdele
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
 });
-
 // Blog
 Route::get('/blog-detail/{m_slug}', [PostController::class, 'detail'])->name('blog-detail');
 Route::get('/blog', [PostController::class, 'blog_list'])->name('blog-list');

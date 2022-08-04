@@ -15,10 +15,10 @@
                         <div class="header-top-settings">
                             <ul class="nav align-items-center justify-content-end">
                                 <li class="curreny-wrap">
-                                    Hotline: 0978xxxxxx
+                                    Hotline: 0978261116
                                 </li>
                                 <li class="language">
-                                    Email: kingdomsneakers@gmail.com
+                                    Email: kingdomsneakers80@gmail.com
                                 </li>
                             </ul>
                         </div>
@@ -170,6 +170,71 @@
                                     <i class="ion-navicon"></i>
                                 </div>
                             </div>
+                        </div>
+                        <!-- main menu area end -->
+
+                        <!-- mini cart area start -->
+                        <div class="col-lg-2">
+                            <div class="header-configure-wrapper">
+                                <div class="header-configure-area">
+                                    <ul class="nav justify-content-end">
+                                        <li>
+                                            <a href="#" class="offcanvas-btn">
+                                                <i class="ion-ios-search-strong"></i>
+                                            </a>
+                                        </li>
+                                        <li class="user-hover">
+                                            <a href="#">
+                                                <i class="ion-ios-gear-outline"></i>
+                                            </a>
+                                            @if (Route::has('login'))
+                                                @auth
+                                                    @if (Auth::user()->role == 1)
+                                                        <ul class="dropdown-list">
+                                                            <li><a href="{{ route('admintrator') }}">chuyển admin</a></li>
+                                                            <!-- <li><a href="">Thông tin đơn hàng</a></li> -->
+                                                            <li><a href="{{ route('logout') }}"
+                                                                    onclick="event.preventDefault(); 
+                                                    document.getElementById('logout-form').submit();">Đăng
+                                                                    xuất</a></li>
+                                                            <form action="{{ route('logout') }}" method="post"
+                                                                id="logout-form">
+                                                                @csrf
+                                                            </form>
+                                                        </ul>
+                                                    @else
+                                                        <ul class="dropdown-list">
+                                                            <li><a href="/profile">Tài khoản</a></li>
+                                                            <li><a href="">Thông tin Đơn hàng</a></li>
+                                                            <li><a href="{{ route('logout') }}"
+                                                                    onclick="event.preventDefault(); 
+                                                    document.getElementById('logout-form').submit();">Đăng
+                                                                    xuất</a></li>
+                                                            <form action="{{ route('logout') }}" method="post"
+                                                                id="logout-form">
+                                                                @csrf
+                                                            </form>
+                                                        </ul>
+                                                    @endif
+                                                @else
+                                                    <ul class="dropdown-list">
+                                                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                                        <li><a href="{{ route('register') }}">đăng ký</a></li>
+                                                    </ul>
+                                                @endif
+                                                @endif
+                                            </li>
+                                            <li>
+                                                <a href="#" class="minicart-btn">
+                                                    <i class="ion-bag"></i>
+                                                    <div class="notification"></div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- mini cart area end -->
                         </div>
                     </div>
                 </div>

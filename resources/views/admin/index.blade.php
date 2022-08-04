@@ -86,7 +86,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="{{route('logout')}}" class="dropdown-item notify-item">
+                        <a href="{{route('logout-admin')}}" class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
                             <span>Đăng xuất</span>
                         </a>
@@ -104,7 +104,6 @@
             <div class="logo-box">
                 <a href="index.html" class="logo logo-dark text-center">
                     <span class="logo-lg">
-                        <img src="{{ asset('admin/assets/images') }}/logo-dark.png" alt="" height="16">
                     </span>
                     <span class="logo-sm">
                         <img src="{{ asset('admin/assets/images') }}/logo-sm.png" alt="" height="24">
@@ -167,7 +166,7 @@
                             </a> --}}
 
                             <!-- item-->
-                            <a href="{{route('logout')}}" class="dropdown-item notify-item">
+                            <a href="{{route('logout-admin')}}" class="dropdown-item notify-item">
                                 <i class="fe-log-out mr-1"></i>
                                 <span>Đăng xuất</span>
                             </a>
@@ -189,7 +188,7 @@
                         </li>
 
                         <li class="list-inline-item">
-                            <a href="{{route('logout')}}">
+                            <a href="{{Route('logout-admin')}}">
                                 <i class="mdi mdi-power"></i>
                             </a>
                         </li>
@@ -217,10 +216,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/admintrator/user">
+                            <a href="#">
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Người dùng</span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="/admintrator/user">Danh sách tài khoản</a></li>
+                                <li><a href="{{ route('add-form') }}">Thêm tài khoản</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">

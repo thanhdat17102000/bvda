@@ -61,7 +61,7 @@
                                         <img src="{{ asset('uploads/post/${item.m_image}') }}" width="150px" alt="Image post">
                                     </td>
                                     <td>${item.m_slug}</td>
-                                    <td>${item.m_content}</td>
+                                    <td>${item.m_desc}</td>
                                     <td>${item.m_meta_keyword}</td>
                                     <td>${item.m_status === 0 ? 'Ẩn' : 'Hiện'}</td>
                                     <td>

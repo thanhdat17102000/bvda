@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use App\Models\AccountModel;
+use App\Models\OrderModel;
 // use Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -32,14 +35,15 @@ class UserController extends Controller
         $thanhvien = AccountModel::orderBy('id','asc')->get();
         return view('admin.user.list', compact('data','thanhvien'));
     }
-    // public function list_user()
-    // {
-    //     $data = [
-    //         'title' => 'Người dùng',
-    //         'action' => 'người dùng'
-    //     ];
-    //     return view('admin.user.list_user');
-    // }
+    public function add_user(){
+        $data = [
+            'title' => 'Thêm tài khoản',
+            'action'=> ''
+        ];
+        return view('admin.user.add_user', compact('data'));
+    }
+
+
     public function doimatkhauadmin(Request $request){
         $id = $request->id;
         $data = $request->all();
@@ -49,7 +53,7 @@ class UserController extends Controller
                 $updated = accountModel::find($id);
                 $updated->password = Hash::make($data['matkhaumoi']);
                 if($updated->save()){
-                    echo 'Thanh cong';
+                    echo 'Đổi mật khẩu thành công!';
                 }
             }
         }
@@ -138,6 +142,38 @@ class UserController extends Controller
             return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');}
     }
 
+    // Xóa tài khoản
+    public function delete_user($id)
+    {
+        $id_user = $id;
+        $result = User::where('id','=',$id_user)->delete();
+        if($result) {
+            $message = 'Đã Xóa Thành Công người dùng!';
+        }
+        return redirect()->back()->with('alert_success','Đã xóa người dùng thành công!');
+
+
+    }
+
+    // Cập nhật profile
+    public function capnhat(){
+        $data = [
+        'title' => 'Cập nhật tài khoản',
+        'action' => 'Người dùng'
+        ];
+        return view('Admin.user.edit_user');
+    }
+    // Cập nhật tài khoản
+    public function update_form(Request $request, $id)
+    {   
+        $data = [
+            'title' => 'Cập nhật tài khoản',
+            'action' => '',
+            'id'=> $id,
+        ];
+        return view('Admin.user.edit_user')->with(compact('data'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -147,5 +183,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    // Gửi mail
+    public function mail(){
+        $name = 'forgot password';
+        Mail::send('Auth.home', compact('name'), function($email){
+            $email->to('kingdomsneakers80@gmail.com','Kingdom Sneakers');
+        });
     }
 }
