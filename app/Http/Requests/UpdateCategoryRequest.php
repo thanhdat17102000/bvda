@@ -24,17 +24,17 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:150',
-            'index' => 'required|numeric|min:1'
+            'nameEditCategory' => 'required|string|max:150',
+            // 'numberEditCategory' => 'required|numeric|min:1'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Tên danh mục là bắt buộc.',
-            'index.required' => 'Số thứ tự là bắt buộc.',
-            'index.min' => 'Số thứ tự phải lớn hơn 1.',
+            'nameEditCategory.required' => 'Tên danh mục là bắt buộc.',
+            // 'numberEditCategory.required' => 'Số thứ tự là bắt buộc.',
+            // 'numberEditCategory.min' => 'Số thứ tự phải lớn hơn 1.',
         ];
     }
 }

@@ -1,7 +1,59 @@
 @extends('Auth.layouts.master')
 @section('title')
-    Trang cá nhân
+    Tài khoản
 @endsection
+@push('styles')
+    <link href="{{asset('Auth/css/toast.css')}}" rel="stylesheet" type="text/css">
+@endpush
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script src="{{asset('admin/assets/libs/tablesaw/tablesaw.js')}}"></script>
+<script src="{{asset('admin/assets/js/pages/tablesaw.init.js')}}"></script>
+<script src="{{asset('admin/assets/js/vendor.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/app.min.js')}}"></script>
+
+<!-- javascript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+<script>
+    jQuery(document).ready(function($) {
+        // đổi thông tin
+        $('#update_profile').click(function(e){
+            e.preventDefault();
+            var name = $('#name').val();
+            var phone = $('#phone').val();
+            var m_address = $('#address').val();
+            var email = $('#email').val();
+            // var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:'/profile/doi-thong-tin-profile',
+                method:'post',
+                data:{
+                    name:name,phone:phone,m_address:m_address,email:email
+                },
+                console.log(data);
+                success: function(data){
+                    if(data = 'success'){
+                        alertify.success('Cập nhật thành công');
+                    }
+                }
+            })
+        });
+    });
+</script>
+
+@endpush
 @section('content')
         <!-- main wrapper start -->
         <main>
@@ -24,10 +76,17 @@
                 </div>
             </div>
             <!-- breadcrumb area end -->
-    
             <!-- my account wrapper start -->
             <div class="my-account-wrapper section-padding">
                 <div class="container custom-container">
+                    @if(Session::has('alert_success'))
+                        <div class="alert alert-success w-50 mr-0" style="margin-top: 10px;">
+                            {!! Session::get('alert_success') !!}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- My Account Page Start -->
@@ -38,12 +97,12 @@
                                         <div class="myaccount-tab-menu nav" role="tablist">
                                             <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
                                                 Dashboad</a>
-                                            <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Đơn hàng</a>
-                                            <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Lịch sử mua hàng</a>
+                                            <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Lịch sử mua hàng</a>
+                                            {{-- <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Lịch sử mua hàng</a> --}}
                                             <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i> Thanh toán</a>
-                                            <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i> Địa chỉ</a>
-                                            <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Chi tiết tài khoản</a>
-                                            <a href="login-register.html"><i class="fa fa-sign-out"></i> Đăng xuất</a>
+                                            <a href="#address-edit" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                            <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Đổi mật khẩu</a>
+                                            <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
                                         </div>
                                     </div>
                                     <!-- My Account Tab Menu End -->
@@ -54,15 +113,15 @@
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                                 <div class="myaccount-content">
-                                                    <h3></h3>
+                                                    <h3>Dashboad</h3>
                                                     <div class="welcome">
-                                                        <p>Xin chào, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
+                                                        <p>Xin chào, <strong>{{Auth::user()->name}}</strong> (Nếu không phải <strong>{{Auth::user()->name}} !</strong><a href="{{route('logout')}}" class="text-primary"> Đăng xuất</a></p>
                                                     </div>
-                                                    <p class="mb-0">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
+                                                    <p class="mb-0">Bạn có thể kiểm tra thông tin cá nhân, đơn hàng và chỉnh sửa</p>
                                                 </div>
                                             </div>
                                             <!-- Single Tab Content End -->
-            
+        
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="orders" role="tabpanel">
                                                 <div class="myaccount-content">
@@ -71,7 +130,7 @@
                                                         <table class="table table-bordered">
                                                             <thead class="thead-light">
                                                                 <tr>
-                                                                    <th>Đơn hàng</th>
+                                                                    <th>ID</th>
                                                                     <th>Ngày</th>
                                                                     <th>Trạng thái</th>
                                                                     <th>Tổng</th>
@@ -79,27 +138,30 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
+                                                                @foreach ($order as $item)
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>Aug 22, 2018</td>
-                                                                    <td>Pending</td>
-                                                                    <td>$3000</td>
-                                                                    <td><a href="cart.html" class="btn ">Chi tiết</a></td>
+                                                                    <td>{{$item->id}}</td>
+                                                                    <td>{{date('d-m-Y',strtotime($item->created_at))}}</td>
+                                                                    @if ($item->m_status==0)
+                                                                        <td >Đang xử lý</td>
+                                                                    @elseif($item->m_status==1)
+                                                                        <td>Đang vận chuyển</td>
+                                                                    @elseif($item->m_status==2)
+                                                                        <td>Hoàn thành</td>
+                                                                    @elseif($item->m_status==3)
+                                                                        <td>Đã hủy</td>
+                                                                    @endif
+                                                                    <td>{{$item->m_total_price}}</td>
+                                                                    <td>
+                                                                        @if ($item->m_status==0)
+                                                                            <a href="/profile/chi-tiet-don-hang/{{$item->id}}" value="show" class="btn rounded">Chi tiết</a>
+                                                                            <a  class="btn bg-danger text-light rounded" href="/profile/huy-don-hang/{{$item->id}}">Hủy</a>
+                                                                        @else
+                                                                            <a href="/profile/chi-tiet-don-hang/{{$item->id }}" value="show" class="btn rounded">Chi tiết</a>
+                                                                        @endif
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>July 22, 2018</td>
-                                                                    <td>Approved</td>
-                                                                    <td>$200</td>
-                                                                    <td><a href="cart.html" class="btn ">View</a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>June 12, 2017</td>
-                                                                    <td>On Hold</td>
-                                                                    <td>$990</td>
-                                                                    <td><a href="cart.html" class="btn ">View</a></td>
-                                                                </tr>
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -153,14 +215,38 @@
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="address-edit" role="tabpanel">
                                                 <div class="myaccount-content">
-                                                    <h3>Địa chỉ</h3>
-                                                    <address>
-                                                        <p><strong>Alex Tuntuni</strong></p>
-                                                        <p>1355 Market St, Suite 900 <br>
-                                                            San Francisco, CA 94103</p>
-                                                        <p>Mobile: (123) 456-7890</p>
-                                                    </address>
-                                                    <a href="#" class="check-btn sqr-btn "><i class="fa fa-edit"></i> Chỉnh sửa</a>
+                                                    <h3>Thông tin</h3>
+
+                                                    <div class="account-details-form">
+                                                        <form method="post" action="/profile/doi-thong-tin-profile">
+                                                            @csrf @method('PUT')
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="first-name" class="required">Tên hiển thị</label>
+                                                                        <input type="text" value="{{Auth::user()->name}}" id="name" placeholder="{{Auth::user()->name}}" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="last-name" class="required">Số điện thoại</label>
+                                                                        <input type="text" value="{{Auth::user()->phone}}" id="phone" placeholder="{{Auth::user()->phone}}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="single-input-item">
+                                                                <label for="display-name" class="required">Địa chỉ</label>
+                                                                <input type="text" value="{{Auth::user()->m_address}}" id="address" placeholder="{{Auth::user()->m_address}}" />
+                                                            </div>
+                                                            <div class="single-input-item">
+                                                                <label for="email" class="required">Địa chỉ email</label>
+                                                                <input type="email" value="{{Auth::user()->email}}" id="email" placeholder="{{Auth::user()->email}}"/>
+                                                            </div>
+                                                            <div class="single-input-item">
+                                                                <button type="submit" id="update_profile" class="check-btn sqr-btn ">Lưu</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- Single Tab Content End -->
@@ -171,30 +257,7 @@
                                                     <h3>Chi tiết tài khoản</h3>
                                                     <div class="account-details-form">
                                                         <form action="#">
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="first-name" class="required">Họ</label>
-                                                                        <input type="text" id="first-name" placeholder="First Name" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="last-name" class="required">Tên</label>
-                                                                        <input type="text" id="last-name" placeholder="Last Name" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="single-input-item">
-                                                                <label for="display-name" class="required">Tên hiển thị</label>
-                                                                <input type="text" id="display-name" placeholder="Display Name" />
-                                                            </div>
-                                                            <div class="single-input-item">
-                                                                <label for="email" class="required">Địa chỉ email</label>
-                                                                <input type="email" id="email" placeholder="Email Address" />
-                                                            </div>
                                                             <fieldset>
-                                                                <legend>Đổi mật khẩu</legend>
                                                                 <div class="single-input-item">
                                                                     <label for="current-pwd" class="required">Mật khẩu hiện tại</label>
                                                                     <input type="password" id="current-pwd" placeholder="Current Password" />
@@ -232,5 +295,4 @@
             <!-- my account wrapper end -->
         </main>
         <!-- main wrapper end -->
-    
 @endsection

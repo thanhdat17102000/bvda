@@ -5,7 +5,7 @@
 @section('content')
 <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -38,21 +38,21 @@
                                         <td class="first-column">SẢN PHẨM</td>
                                         <td class="product-image-title">
                                             <a href="product-details.html" class="image">
-                                                <img class="img-fluid" src="{{URL::asset('img/product/product-1.jpg')}}" alt="Compare Product">
+                                                <img class="img-fluid" src="{{URL::asset('Auth/img/product/product-1.jpg')}}" alt="Compare Product">
                                             </a>
                                             <a href="#" class="category">Silver</a>
                                             <a href="product-details.html" class="title">Endeavor Daytrip</a>
                                         </td>
                                         <td class="product-image-title">
                                             <a href="product-details.html" class="image">
-                                                <img class="img-fluid" src="{{URL::asset('img/product/product-2.jpg')}}" alt="Compare Product">
+                                                <img class="img-fluid" src="{{URL::asset('Auth/img/product/product-2.jpg')}}" alt="Compare Product">
                                             </a>
                                             <a href="#" class="category">Gold</a>
                                             <a href="product-details.html" class="title">Compete Track Totes</a>
                                         </td>
                                         <td class="product-image-title">
                                             <a href="product-details.html" class="image">
-                                                <img class="img-fluid" src="{{URL::asset('img/product/product-3.jpg')}}" alt="Compare Product">
+                                                <img class="img-fluid" src="{{URL::asset('Auth/img/product/product-3.jpg')}}" alt="Compare Product">
                                             </a>
                                             <a href="#" class="category">Ring</a>
                                             <a href="product-details.html" class="title">Bess Yoga Shorts</a>

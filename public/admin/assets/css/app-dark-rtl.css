@@ -89,7 +89,7 @@ body {
   position: relative;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
-  font-size: 0.925rem; }
+  font-size: 1.1rem; }
   #sidebar-menu > ul > li > a:hover, #sidebar-menu > ul > li > a:focus, #sidebar-menu > ul > li > a:active {
     color: #71b6f9;
     text-decoration: none; }
@@ -6567,6 +6567,7 @@ body[data-layout=horizontal].enlarged .content-page {
 
 .dataTables_wrapper .dataTables_filter {
   text-align: left !important; }
+  
   .dataTables_wrapper .dataTables_filter input {
     margin-left: 0px !important;
     margin-right: 0.5em; }

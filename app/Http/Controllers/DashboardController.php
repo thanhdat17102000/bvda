@@ -10,7 +10,21 @@ class DashboardController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+    // public function login(){
+    //     $data = [
+    //         'title' => 'Thống kê',
+    //         'action'=> 'dashboard'
+    //     ];
+        
+
+    //     if(!Auth::guest()){
+    //         return redirect()->route('admintrator');
+    //     }else{
+    //         return view('admin.account.login');
+    //     }
+    // }
     public function index()
     {   
         $data = [
@@ -18,6 +32,13 @@ class DashboardController extends Controller
             'action'=> 'dashboard'
         ];
         return view('admin.dashboard',compact('data'));
+    }
+    public function file(){
+        $data = [
+            'title' => 'file Hình',
+            'action'=> 'file'
+        ]; 
+        return view('admin.file',compact('data'));
     }
 
     /**

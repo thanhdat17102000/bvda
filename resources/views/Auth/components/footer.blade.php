@@ -1,3 +1,74 @@
+@push('scriptsPrev')
+    <script>
+        const callApiCart = async () => {
+            return await $.ajax({
+                type: "get",
+                url: "{{ url('api/cart') }}",
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        const renderCart = async () => {
+            const response = await callApiCart();
+            const {
+                data,
+                subtotal,
+                count,
+            } = response;
+            let content = ``;
+            for (let key in data) {
+                content += `<li class="minicart-item">
+                            <div class="minicart-thumb">
+                                <a href="{{url('chi-tiet-san-pham')}}/${data[key].options.slug}">
+                                    <img src="{{ asset('uploads') }}/${data[key].options.image}" alt="product">
+                                </a>
+                            </div>
+                            <div class="minicart-content">
+                                <h3 class="product-name">
+                                    <a href="{{url('chi-tiet-san-pham')}}/${data[key].options.slug}">${data[key].name}</a>
+                                </h3>
+                                <p>
+                                    <span class="cart-quantity">${data[key].qty}<strong>&times;</strong></span>
+                                    <span class="cart-price">${data[key].price}</span>
+                                </p>
+                            </div>
+                            <button class="minicart-remove" data-id="${data[key].rowId}"><i class="ion-android-close"></i></button>
+                        </li>`
+            }
+            $('.minicart-list').html(content);
+            $('.total-price').text(subtotal);
+            $('.total-all').text(subtotal);
+            $('.notification').text(count)
+
+            $('.minicart-remove').click(function(e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                $.ajax({
+                    type: "delete",
+                    url: `{{ url('api/cart') }}/${id}`,
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        renderCart();
+                        toastr.success('',
+                        'Xóa giỏ hàng thành công')
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        }
+        renderCart()
+    </script>
+@endpush
 <!-- Start Footer Area Wrapper -->
 <footer class="footer-wrapper">
     <!-- footer main area start -->
@@ -10,10 +81,13 @@
                         <h5 class="widget-title">Liên hệ</h5>
                         <div class="widget-body">
                             <ul class="location-wrap">
-                                <li><i class="ion-ios-location-outline"></i>Tòa nhà Innovation - Lô 24 Công viên phần mềm Quang Trung, 
+                                <li><i class="ion-ios-location-outline"></i>Tòa nhà Innovation - Lô 24 Công viên phần mềm
+                                    Quang Trung,
                                     P. Tân Chánh Hiệp, Q. 12, Tp. Hồ Chí Minh</li>
-                                <li><i class="ion-ios-email-outline"></i>Email: <a href="mailto:yourmail@gmail.com">kingdomshoes@gmail.com</a></li>
-                                <li><i class="ion-ios-telephone-outline"></i>Số điện thoại: <a href="%2b0025425456554.html">+ 00 254 254565</a></li>
+                                <li><i class="ion-ios-email-outline"></i>Email: <a
+                                        href="mailto:yourmail@gmail.com">kingdomshoes@gmail.com</a></li>
+                                <li><i class="ion-ios-telephone-outline"></i>Số điện thoại: <a
+                                        href="%2b0025425456554.html">+ 00 254 254565</a></li>
                             </ul>
                         </div>
                     </div>
@@ -28,11 +102,11 @@
                             <ul class="useful-link">
                                 <!-- <li><a href="#">Ecommerce</a></li> -->
                                 <li><a href="/blog">Tin Khuyến Mãi</a></li>
-                                <li><a href="/product_list">Hợp Tác</a></li>
+                                <li><a href="{{route('list-favourite')}}">Sản phẩm yêu thích</a></li>
                                 <li><a href="/profile">CSKH</a></li>
                                 <li><a href="/blog">Blog</a></li>
                                 <li><a href="/contact_us"></a>Tuyển Dụng</li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -67,7 +141,7 @@
                                 <li><a href="#">Đơn hàng</a></li>
                                 <li><a href="#">Hướng dẫn chọn size</a></li>
                                 <li><a href="#">Đánh giá</a></li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -84,7 +158,8 @@
             <div class="row">
                 <div class="col-md-6 order-2 order-md-1">
                     <div class="copyright-text text-center text-md-left">
-                        <p>&copy; 2022 <b>Kingdom Sneakers</b> Made with <i class="fa fa-heart text-danger"></i> by <a href="https://hasthemes.com/"><b>Team 2</b></a></p>
+                        <p>&copy; 2022 <b>Kingdom Sneakers</b> Made with <i class="fa fa-heart text-danger"></i> by <a
+                                href="https://hasthemes.com/"><b>Team 2</b></a></p>
                     </div>
                 </div>
                 <div class="col-md-6 order-1 order-md-2">
@@ -110,8 +185,9 @@
         </div>
         <div class="container">
             <div class="offcanvas-search-box">
-                <form class="d-flex bdr-bottom w-100">
-                    <input type="text" placeholder="Search entire storage here...">
+                <form class="d-flex bdr-bottom w-100" action="{{route('search')}}" method="get">
+                    @csrf
+                    <input type="text" name="keywork" placeholder="Search entire storage here...">
                     <button class="search-btn"><i class="ion-ios-search-strong"></i>Tìm kiếm</button>
                 </form>
             </div>
@@ -130,41 +206,8 @@
             </div>
             <div class="minicart-content-box">
                 <div class="minicart-item-wrapper">
-                    <ul>
-                        <li class="minicart-item">
-                            <div class="minicart-thumb">
-                                <a href="product-details.html">
-                                    <img src="assets/img/cart/cart-1.jpg" alt="product">
-                                </a>
-                            </div>
-                            <div class="minicart-content">
-                                <h3 class="product-name">
-                                    <a href="product-details.html">Flowers bouquet pink for all flower lovers</a>
-                                </h3>
-                                <p>
-                                    <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                    <span class="cart-price">$100.00</span>
-                                </p>
-                            </div>
-                            <button class="minicart-remove"><i class="ion-android-close"></i></button>
-                        </li>
-                        <li class="minicart-item">
-                            <div class="minicart-thumb">
-                                <a href="product-details.html">
-                                    <img src="assets/img/cart/cart-2.jpg" alt="product">
-                                </a>
-                            </div>
-                            <div class="minicart-content">
-                                <h3 class="product-name">
-                                    <a href="product-details.html">Jasmine flowers white for all flower lovers</a>
-                                </h3>
-                                <p>
-                                    <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                    <span class="cart-price">$80.00</span>
-                                </p>
-                            </div>
-                            <button class="minicart-remove"><i class="ion-android-close"></i></button>
-                        </li>
+                    <ul class="minicart-list">
+
                     </ul>
                 </div>
 
@@ -172,34 +215,33 @@
                     <ul>
                         <li>
                             <span>Tổng</span>
-                            <span><strong>$300.00</strong></span>
+                            <span><strong class="total-price"></strong></span>
                         </li>
-                        <li>
+                        {{-- <li>
                             <span>Eco Tax (-2.00)</span>
                             <span><strong>$10.00</strong></span>
                         </li>
                         <li>
                             <span>VAT (20%)</span>
                             <span><strong>$60.00</strong></span>
-                        </li>
+                        </li> --}}
                         <li class="total">
-                            <span>total</span>
-                            <span><strong>$370.00</strong></span>
+                            <span>Thành tiền</span>
+                            <span><strong class="total-all"></strong></span>
                         </li>
                     </ul>
                 </div>
 
                 <div class="minicart-button">
-                    <a href="cart"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
-                    <a href="cart"><i class="fa fa-share"></i>Kiểm tra giỏ hàng</a>
+                    <a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- offcanvas mini cart end -->
-    <!-- Scroll to top start -->
-    <div class="scroll-top not-visible">
-        <i class="fa fa-angle-up"></i>
-    </div>
-    <!-- Scroll to Top End -->
+<!-- Scroll to top start -->
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+<!-- Scroll to Top End -->

@@ -1,11 +1,40 @@
 @extends('Auth.layouts.master')
+@push('scripts')
+    <script>
+         $('.cart-info').submit(function(e) {
+            e.preventDefault();
+            let data = new FormData(this);
+            data.append('quantity', $('input[name=quantity]').val())
+            $.ajax({
+                type: "post",
+                url: "{{ url('api/cart') }}",
+                data,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    renderCart();
+                    toastr.success('',
+                        'Thêm giỏ hàng thành công')
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+        $('.add-cart').click(function(e) {
+            e.preventDefault();
+            $('.cart-info').submit();
+        });
+    </script>
+@endpush
 @section('title')
     Chi tiết sản phẩm
 @endsection
 @section('content')
 <main>
     <!-- breadcrumb area start -->
-    <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('img/banner/breadcrumb-banner.jpg')}}">
+    <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -33,75 +62,68 @@
                     <!-- product details inner end -->
                     <div class="product-details-inner">
                         <div class="row">
+                            @foreach($showproductdetailget as $showdetail)
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt=""/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt=""/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt=""/>
-                                    </div>
+                                    @if(json_decode($showdetail->m_picture))
+                                        @foreach(json_decode($showdetail->m_picture) as $showimg)
+                                            <div class="pro-large-img img-zoom">
+                                                <img src="{{asset('uploads')}}/{{$showimg}}" alt="" />
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt="" /></div>
+                                    @if(json_decode($showdetail->m_picture))
+                                        @foreach(json_decode($showdetail->m_picture) as $showimg)
+                                            <div class="pro-nav-thumb"><img src="{{asset('uploads')}}/{{$showimg}}" alt="" /></div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="pro-det-title">Primitive Mens Premium Shoes</h3>
+                                    <h3 class="pro-det-title" data-idmaloai="{{$showdetail->id}}">{{$showdetail->m_product_name}}</h3>
                                     <div class="pro-review">
                                         <span><a href="#">1 đánh giá</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="regular-price">$70.00</span>
-                                        <span class="old-price"><del>$80.00</del></span>
+                                        <span class="regular-price">{{number_format($showdetail->m_original_price, 0,',','.')}}VND</span>
+                                        <span class="old-price"><del>{{number_format($showdetail->m_price, 0,',','.')}}VND</del></span>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br>
-                                    Phasellus id nisi quis justo tempus mollis sed et dui. In hac habitasse platea dictumst. Suspendisse ultrices mauris diam. Nullam sed aliquet elit. Mauris consequat nisi ut mauris efficitur lacinia.</p>
+                                    <p>{!!$showdetail->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                            <div class="pro-qty"><input name="quantity" type="text" value="1"></div>
                                         </div>
-                                        <a href="cart.html" class="btn btn-default">Thêm vào giỏ hàng</a>
+                                        <a href="#" class="add-cart" class="btn btn-default">Thêm vào giỏ hàng</a>
                                     </div>
+                                    <form action="" method="post" class="cart-info">
+                                        @csrf
+                                        <input type="hidden" name="productId"
+                                            value="{{ $showdetail->id }}">
+                                    </form>
                                     <div class="color-option mb-20">
-                                        <h5 class="cat-title">Màu sắc :</h5>
-                                        <ul>
-                                            <li>
-                                                <a class="c-black" href="#" title="Black"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-blue" href="#" title="Blue"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-brown" href="#" title="Brown"></a>
-                                            </li>
-                                            <li>
-                                                <a class="c-gray" href="#" title="Gray"></a>
-                                            </li>
-                                        </ul>
+                                        <h5 class="cat-title">Tổng lượng tồn kho :</h5>
+                                        @if(isset($showdetail->updatedsoluong->m_quanti))
+                                            <span>{{$showdetail->updatedsoluong->sum('m_quanti')}}</span>
+                                        @endif
                                     </div>
                                     <div class="pro-size mb-20">
                                         <h5 class="cat-title">Kích thước :</h5>
                                         <select class="nice-select">
-                                            <option>S</option>
-                                            <option>M</option>
-                                            <option>L</option>
-                                            <option>XL</option>
+                                            @foreach($showsize as $shows)
+                                            <option value="{{$shows->m_size}}">{{$shows->m_size}} - SL:{{$shows->m_quanti}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Tình trạng:</h5>
+                                        @if(isset($showdetail->updatedsoluong->m_quanti) && $showdetail->updatedsoluong->sum('m_quanti') > 0)
                                         <span>Còn hàng</span>
+                                        @else
+                                        <span style="color:red">Hết hàng</span>
+                                        @endif
                                     </div>
                                     <div class="share-icon">
                                         <h5 class="cat-title">Chia sẻ:</h5>
@@ -112,6 +134,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <!-- product details inner end -->
@@ -133,64 +156,102 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content reviews-tab">
+                                        @foreach($showproductdetailget as $showdetail)
                                         <div class="tab-pane fade show active" id="tab_one">
                                             <div class="tab-one">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque.</p>
+                                                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque.</p> -->
                                                 <div class="review-description">
                                                     <div class="tab-thumb">
-                                                        <img src="{{URL::asset('img/about/services.jpg')}}" alt="">
+                                                        @if(json_decode($showdetail->m_picture))
+                                                        <img src="{{asset('uploads')}}/{{json_decode($showdetail->m_picture)[0]}}" alt="">
+                                                        @endif
                                                     </div>
                                                     <div class="tab-des">
                                                         <h3>Thông tin sản phẩm :</h3>
                                                         <ul>
-                                                            <li>Donec non est at libero vulputate rutrum</li>
-                                                            <li>Morbi ornare lectus quis justo gravida</li>
-                                                            <li>Pellentesque aliquet, sem eget laoreet</li>
-                                                            <li>Donec a neque libero</li>
-                                                            <li>Pellentesque aliquet, sem eget laoreet</li>
+                                                            <li>Thuộc sản phẩm : {{$showdetail->showdanhmuc->m_title}}</li>
+                                                            <li>{{$showdetail->m_product_name}}</li>
+                                                            <li>Giá mặc định :{{number_format($showdetail->m_price,0,',','.')}}VND</li>
+                                                            <li>Giá giảm : {{number_format($showdetail->m_original_price,0,',','.')}}VND</li>
+                                                            <li>@if(isset($showdetail->updatedsoluong->m_quanti) && $showdetail->updatedsoluong->sum('m_quanti') > 0)
+                                                                <span>Còn hàng</span>
+                                                                @else
+                                                                <span>Hết hàng</span>
+                                                                @endif
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <p>Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue. Nunc facilisis sagittis ullamcorper.</p>
-                                                <p>Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt.</p>
+                                                <p>{!!$showdetail->m_description!!}</p>
                                             </div>
                                         </div>
+                                        @endforeach
                                         <div class="tab-pane fade" id="tab_two">
                                             <table class="table table-bordered">
                                                 <tbody>
                                                     <tr>
-                                                        <td>Màu sắc</td>
-                                                        <td>black, blue, red</td>
+                                                        <td>Tổng lượng tồn kho</td>
+                                                        @if(isset($showdetail->updatedsoluong->m_quanti))
+                                                        <td>{{$showproductdetail->updatedsoluong->sum('m_quanti')}}</td>
+                                                        @endif
                                                     </tr>
                                                     <tr>
                                                         <td>Kích thước</td>
-                                                        <td>L, M, S</td>
+                                                        <td>
+                                                            @foreach($showsize as $shows)
+                                                            - {{$shows->m_size}}
+                                                            @endforeach
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="tab_three">
-                                            <form action="#" class="review-form">
-                                                <h5>1 bình luận: <span>Chaz Kangeroo Hoodies</span></h5>
+                                            <!-- <form action="#" class="review-form"> -->
+                                                    @foreach($showproductdetailget as $showprd)
+                                                        <h5>{{$showprd->showcountcomment->count()}} Đánh giá:</h5>
+                                                    @endforeach
+                                                @foreach($showcomment as $showcm)
+                                                <!-- <span>{{$showcm->showiduser->name}}</span> -->
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
-                                                        <img src="{{URL::asset('img/about/avatar.jpg')}}" alt="">
+                                                        @if($showcm->showiduser->m_avatar)
+                                                        <img src="{{asset('uploads')}}/{{$showcm->showiduser->m_avatar}}" alt="">
+                                                        @else
+                                                        <img src="{{URL::asset('Auth/img/about/avatar.jpg')}}" alt="">
+                                                        @endif
                                                     </div>
-                                                    <div class="review-box">
+                                                    <div class="review-box" data-idbl="{{$showcm->idbl}}">
                                                         <div class="ratings">
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span><i class="fa fa-star"></i></span>
+                                                            @for($i = 1; $i <= $showcm->ratings; $i++)
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                            @endfor 
                                                         </div>
                                                         <div class="post-author">
-                                                            <p><span>admin -</span> 30 Nov, 2018</p>
+                                                            <p><span>{{$showcm->showiduser->name}} -</span> {{$showcm->updated_at->diffForHumans()}}</p>
                                                         </div>
-                                                        <p>Aliquam fringilla euismod risus ac bibendum. Sed sit amet sem varius ante feugiat lacinia. Nunc ipsum nulla, vulputate ut venenatis vitae, malesuada ut mi. Quisque iaculis, dui congue placerat pretium, augue erat accumsan lacus</p>
+                                                        <p>
+                                                            {{$showcm->m_content}}
+                                                        </p>
+                                                            @Auth
+                                                                @if($showcm->m_id_user == Auth::user()->id)
+                                                                    <a id="deletebl" data-iddelete="{{$showcm->idbl}}" style="float:right">xóa đánh giá</a>
+                                                                @endif
+                                                            @endauth
+                                                        <!-- admin trả lời nếu có -->
+                                                        @if($showcm->answer_cmt)
+                                                        <hr>
+                                                        <div class="post-author">
+                                                            <p><span>{{$showcm->showiduser->name}} trả lời -</span> {{$showcm->updated_at->diffForHumans()}}</p>
+                                                        </div>
+                                                        <p>
+                                                            {{$showcm->answer_cmt}}
+                                                        </p>
+                                                        @endif
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
+                                                @endforeach
+                                                <!-- <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Họ và tên</label>
                                                         <input type="text" class="form-control" required>
@@ -201,34 +262,47 @@
                                                         <label class="col-form-label"><span class="text-danger">*</span> Email</label>
                                                         <input type="email" class="form-control" required>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Nội dung</label>
-                                                        <textarea class="form-control" required></textarea>
+                                                        <textarea class="form-control" id="m_content" required></textarea>
                                                         <div class="help-block pt-10"><span class="text-danger">Ghi chú:</span> HTML is not translated!</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Đánh giá</label>
-                                                        &nbsp;&nbsp;&nbsp; Tệ&nbsp;
-                                                        <input type="radio" value="1" name="rating">
+                                                        <!-- &nbsp;&nbsp;&nbsp; Tệ&nbsp;
+                                                        <input type="radio" value="1" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="2" name="rating">
+                                                        <input type="radio" value="2" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="3" name="rating">
+                                                        <input type="radio" value="3" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="4" name="rating">
+                                                        <input type="radio" value="4" name="rating" id="rating">
                                                         &nbsp;
-                                                        <input type="radio" value="5" name="rating" checked>
-                                                        &nbsp;Rất tốt
+                                                        <input type="radio" value="5" name="rating" id="rating">
+                                                        &nbsp;Rất tốt -->
+                                                        <select class="form-control" id="rating" style="width:100px">
+                                                            <option value="1">1 sao</option>
+                                                            <option value="2">2 sao</option>
+                                                            <option value="3">3 sao</option>
+                                                            <option value="4">4 sao</option>
+                                                            <option value="5">5 sao</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="buttons">
-                                                    <button class="sqr-btn" type="submit">Tiếp tục</button>
+                                                    @if(Route::has('login'))
+                                                    @Auth
+                                                    <button class="sqr-btn" type="submit" id="btnsubmitcomment" data-id="{{Auth::user()->id}}">Tiếp tục</button>
+                                                    @else
+                                                    <button class="sqr-btn" type="submit" onclick="alert('vui lòng kiểm tra đăng nhập hoặc bạn chưa mua sản phẩm này !!!')">Tiếp tục</button>
+                                                    @endif
+                                                    @endif
                                                 </div>
-                                            </form> <!-- end of review-form -->
+                                            <!-- </form> end of review-form -->
                                         </div>
                                     </div>
                                 </div>
@@ -252,128 +326,32 @@
                                 <div class="col-12">
                                     <div class="product-carousel-4 mbn-50 slick-row-15 slick-arrow-style">
                                         <!-- product single item start -->
+                                        @foreach($showproductrelated as $showrelated)
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
                                                 <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-1.jpg')}}" alt="">
+                                                    @if(json_decode($showrelated->m_picture))
+                                                        <img src="{{asset('uploads')}}/{{json_decode($showrelated->m_picture)[0]}}" alt="">
+                                                    @endif
                                                 </a>
                                             </div>
                                             <div class="product-content">
                                                 <h5 class="product-name">
-                                                    <a href="product-details.html">Leather Mens Slipper</a>
+                                                    <a href="product-details.html">{{$showrelated->m_product_name}}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
+                                                    <span class="price-regular">{{number_format($showrelated->m_price,0,',','.')}}VND</span>
+                                                    <span class="price-old"><del>{{number_format($showrelated->m_original_price,0,',','.')}}VND</del></span>
                                                 </div>
                                                 <div class="product-action-link">
                                                     <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
                                                     <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
+                                                    <a href="#" data-toggle="modal" data-target="#quick_view{{$showrelated->id}}"> <span data-toggle="tooltip"
                                                         title="Xem nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-2.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Quickiin Mens shoes</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Xem nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-3.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Rexpo Womens shoes</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-4.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Primitive Mens shoes</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- product single item start -->
-
-                                        <!-- product single item start -->
-                                        <div class="product-item mb-50">
-                                            <div class="product-thumb">
-                                                <a href="product-details.html">
-                                                    <img src="{{URL::asset('img/product/product-5.jpg')}}" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h5 class="product-name">
-                                                    <a href="product-details.html">Leather Mens Slipper</a>
-                                                </h5>
-                                                <div class="price-box">
-                                                    <span class="price-regular">$80.00</span>
-                                                    <span class="price-old"><del>$70.00</del></span>
-                                                </div>
-                                                <div class="product-action-link">
-                                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Add To Cart"><i class="ion-bag"></i></a>
-                                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip"
-                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                         <!-- product single item start -->
                                     </div>
                                 </div>
@@ -389,7 +367,8 @@
 </main>
 <!-- main wrapper end -->
     <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
+    @foreach($showproductrelated as $showrelated)
+    <div class="modal" id="quick_view{{$showrelated->id}}">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -401,37 +380,33 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="product-large-slider mb-20">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="product thumb" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt="product thumb"/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt="product thumb"/>
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt="product thumb"/>
-                                    </div>
+                                    @if(json_decode($showrelated->m_picture))
+                                        @foreach(json_decode($showrelated->m_picture) as $showimg)
+                                            <div class="pro-large-img img-zoom">
+                                                <img src="{{asset('uploads')}}/{{$showimg}}" alt="" />
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="pro-nav slick-row-5">
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img1.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img2.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img3.jpg')}}" alt="" /></div>
-                                    <div class="pro-nav-thumb"><img src="{{URL::asset('img/product/product-details-img4.jpg')}}" alt="" /></div>
+                                    @if(json_decode($showrelated->m_picture))
+                                        @foreach(json_decode($showrelated->m_picture) as $showimg)
+                                            <div class="pro-nav-thumb"><img src="{{asset('uploads')}}/{{$showimg}}" alt="" /></div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="pro-det-title">Primitive Mens Premium Shoes</h3>
+                                    <h3 class="pro-det-title">{{$showrelated->m_product_name}}</h3>
                                     <div class="pro-review">
                                         <span><a href="#">1 bình luận</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="regular-price">$70.00</span>
-                                        <span class="old-price"><del>$80.00</del></span>
+                                        <span class="price-regular">{{number_format($showrelated->m_original_price,0,',','.')}}VND</span>
+                                        <span class="price-old"><del>{{number_format($showrelated->m_price,0,',','.')}}VND</del></span>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                    <p>{!!$showrelated->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
                                             <div class="pro-qty"><input type="text" value="1"></div>
@@ -440,7 +415,11 @@
                                     </div>
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Tình trạng: </h5>
+                                        @if($showrelated->m_buy > 0)
                                         <span>Còn hàng</span>
+                                        @else
+                                        <span style="color:red">Hết hàng</span>
+                                        @endif
                                     </div>
                                     <div class="share-icon">
                                         <h5 class="cat-title">Chia sẻ:</h5>
@@ -458,8 +437,59 @@
             </div>
         </div>
     </div>
+    @endforeach
     <!-- Quick view modal end -->
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $('#btnsubmitcomment').click(function(event) {
+        var idmaloai = $('.pro-det-title').data('idmaloai');
+        var idbl = $('.review-box').data('idbl');
+        var iduser = $(this).data('id');
+        var noi_dung = $('#m_content').val();
+        var rating = $('#rating').val();
+        var _token = $('input[name="_token"]').val();
+        // alert(idmaloai);
+        // alert(iduser);
+        // alert(noi_dung);
+        // alert(rating);
+        // alert(_token);
+        $.ajax({
+            url:'{{route("postcomment")}}',
+            method:'post',
+            data:{
+                idmaloai:idmaloai,idbl:idbl,iduser:iduser,noi_dung:noi_dung,rating:rating,_token:_token
+            },
+            success: function(data){
+                if(data){
+                    alert('Đánh giá thành công');
+                    window.location.reload(true);
+                }else{
+                    alert('Đánh giá thất bại');
+                }
+            }
+        })
+    });
+</script>
+<script>
+    $(document).on('click','#deletebl',function(){
+        var iddelete = $(this).data('iddelete');
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url:'{{route("showdelete")}}',
+            method:'post',
+            data:{
+                iddelete:iddelete,_token:_token
+            },
+            success: function(data){
+                if(data){
+                    alert('xóa đánh giá thành công');
+                    window.location.reload(true);
+                }else{
+                    alert('xóa đánh giá thất bại');
+                }
+            }
+        })
+    })
+</script>
 
 @endsection

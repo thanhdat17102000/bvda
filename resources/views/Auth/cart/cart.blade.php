@@ -3,9 +3,111 @@
     Giỏ hàng
 @endsection
 @section('content')
-<main>
+    @push('scripts')
+        <script>
+            const renderCartTable = async () => {
+                const response = await callApiCart();
+                const {
+                    data,
+                    subtotal,
+                    total,
+                    tax,
+                    totalNoTax
+                } = response;
+                let content = ``;
+                for (let key in data) {
+                    content += `<tr>
+                                    <td class="pro-thumbnail"><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}"><img class="img-fluid"
+                                                src="{{ asset('uploads') }}/${data[key].options.image}"
+                                                alt="Product" /></a></td>
+                                    <td class="pro-title"><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">${data[key].name}</a></td>
+                                    <td class="pro-price" data-price="${data[key].price}"><span>${data[key].price.toLocaleString('en-US')}</span></td>
+                                    <td class="pro-quantity">
+                                        <div class="pro-qty">
+                                            <span class="dec qtybtn">-</span>
+                                            <input type="text" value="${data[key].qty}">
+                                            <span class="inc qtybtn">+</span>
+                                        </div>
+                                    </td>
+                                    <td class="pro-subtotal"><span>${(data[key].price * data[key].qty).toLocaleString('en-US') }</span></td>
+                                    <td class="pro-remove" data-id="${key}"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                </tr>`
+                }
+                $('.cart-content').html(content);
+                $('.pro-qty input').change(function(e) {
+                    let subtotal = Number($(this).val()) * Number($(this).parents('.pro-quantity').prev().data(
+                        'price'));
+                    $(this).parents('.pro-quantity').next('.pro-subtotal').text(subtotal.toLocaleString(
+                        'en-US'));
+                });
+                $('.subtotal-amount').text(subtotal)
+                $('.total-amount').text(total)
+                $('.tax').text(tax)
+
+                $('.pro-remove').click(function(e) {
+                    e.preventDefault();
+                    let id = $(this).data('id');
+                    $.ajax({
+                        type: "delete",
+                        url: `{{ url('api/cart') }}/${id}`,
+                        data: {
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            renderCart();
+                            renderCartTable();
+                            toastr.success('',
+                                'Xóa giỏ hàng thành công')
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                });
+
+                $('.dec').click(function(e) {
+                    if ($(this).next().val() > 1) {
+                        $(this).next().val($(this).next().val() - 1)
+                    }
+                })
+
+                $('.inc').click(function(e) {
+                    $(this).prev().val(Number($(this).prev().val()) + 1)
+                })
+            }
+            renderCartTable();
+            $('.cart-update').click(function(e) {
+                e.preventDefault();
+                $('.cart-content tr').each(function() {
+                    let qty = $(this).children('.pro-quantity').children().children('input').val();
+                    let id = $(this).children('.pro-remove').data('id');
+                    $.ajax({
+                        type: "post",
+                        url: `{{ url('api/cart') }}/${id}`,
+                        data: {
+                            _method: "PUT",
+                            _token: "{{ csrf_token() }}",
+                            id,
+                            qty,
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            renderCart();
+                            renderCartTable();
+                        },
+                        error: function(error) {
+                            console.error(error);
+                        }
+                    });
+                })
+                toastr.success("Cập nhật giỏ hàng thành công")
+            });
+        </script>
+    @endpush
+    <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="breadcrumb-area bg-img" data-bg="assets/Auth/img/banner/breadcrumb-banner.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -13,7 +115,7 @@
                             <nav aria-label="breadcrumb">
                                 <h1 class="breadcrumb-title">GIỎ HÀNG</h1>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">TRANG CHỦ</a></li>
+                                    <li class="breadcrumb-item"><a href="/">TRANG CHỦ</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">GIỎ HÀNG</li>
                                 </ul>
                             </nav>
@@ -43,51 +145,8 @@
                                             <th class="pro-remove">XÓA</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-1.jpg')}}" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Giày nam</a></td>
-                                            <td class="pro-price"><span>500.000đ</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>500.000đ</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-2.jpg')}}" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Giày nữ</a></td>
-                                            <td class="pro-price"><span>500.000đ</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="text" value="2"></div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>500.000đ</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-3.jpg')}}" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Giày gay</a></td>
-                                            <td class="pro-price"><span>500.000đ</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1" />
-                                                </div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>500.000đ</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{asset('img/product/product-4.jpg')}}" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Giày vip</a></td>
-                                            <td class="pro-price"><span>500.000đ</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="3" />
-                                                </div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>500.000đ</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
+                                    <tbody class="cart-content">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -115,20 +174,20 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Tổng tiền hàng</td>
-                                                <td>500.000đ</td>
+                                                <td class="subtotal-amount"></td>
                                             </tr>
                                             <tr>
-                                                <td>Phí vận chuyển</td>
-                                                <td>500.000đ</td>
+                                                <td>Thuế</td>
+                                                <td class="tax"></td>
                                             </tr>
                                             <tr class="total">
                                                 <td>Tổng tiền thanh toán</td>
-                                                <td class="total-amount">500.000đ</td>
+                                                <td class="total-amount"></td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
-                                <a href="checkout" class="btn d-block">Tiến hành thanh toán</a>
+                                <a href="{{ route('checkout') }}" class="btn d-block">Tiến hành thanh toán</a>
                             </div>
                         </div>
                     </div>
@@ -137,7 +196,4 @@
         </div>
         <!-- cart main wrapper end -->
     </main>
-
-
-
 @endsection

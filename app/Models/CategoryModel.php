@@ -9,14 +9,19 @@ use Illuminate\Support\Facades\DB;
 class CategoryModel extends Model
 {
     use HasFactory;
+
     protected $table = 't_category';
+
     const ID_ROOT = 0;
 
     const INDEX_START = 1;
 
     const FIELD_ID= 'id';
+
     const FIELD_ID_PARENT= 'm_id_parent';
+
     const FIELD_TITLE = 'm_title';
+
     const FIELD_INDEX = 'm_index';
 
     public $timestamps = false;
@@ -48,5 +53,8 @@ class CategoryModel extends Model
     {
         return $this->belongsTo(self::class, 'm_id_parent');
 
+    }
+    public function tongproduct(){
+        return $this->hasMany(product::class, 'm_id_category', 'id');
     }
 }

@@ -5,7 +5,7 @@
 @section('content')
 <main>
         <!-- breadcrumb area start -->
-        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+        <div class="breadcrumb-area bg-img" data-bg="{{URL::asset('Auth/img/banner/breadcrumb-banner.jpg')}}">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -45,21 +45,21 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-5.jpg"
+                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{URL::asset('Auth/img/product/product-5.jpg')}}"
                                                                                 alt="Product"/></a></td>
                                     <td class="pro-title"><a href="#">element snowboard</a></td>
                                     <td class="pro-price"><span>$295.00</span></td>
-                                    <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                    <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-white">Add to Cart</a></td>
+                                    <td class="pro-quantity"><span class="text-success">Còn hàng</span></td>
+                                    <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-black">Mua ngay</a></td>
                                     <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-6.jpg"
+                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{URL::asset('Auth/img/product/product-6.jpg')}}"
                                                                                 alt="Product"/></a></td>
                                     <td class="pro-title"><a href="#">raygun snowboard</a></td>
                                     <td class="pro-price"><span>$275.00</span></td>
-                                    <td class="pro-quantity"><span class="text-success">In Stock</span></td>
-                                    <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-white">Add to Cart</a></td>
+                                    <td class="pro-quantity"><span class="text-success">Còn hàng</span></td>
+                                    <td class="pro-subtotal"><a href="cart.html" class="sqr-btn text-black">Mua ngay</a></td>
                                     <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
                                 </tr>
                                 
