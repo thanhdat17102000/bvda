@@ -74,6 +74,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,
+        'slider' => App\Http\Controllers\sliderController::class,
     ]);
 
     // start Comment
@@ -102,7 +103,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('order', [AdminOrderController::class, 'index'])->name('order');
     Route::post('order/store', [AdminOrderController::class, 'store'])->name('order.store');
     Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
-    Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+    Route::get('order/detail/{id}', [AdminOrderController::class, 'detail'])->name('order.detail');
 
     // file images
     Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
@@ -110,6 +111,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     // chức năng nâng cao admin product
     Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
     Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
+
 });
 
 

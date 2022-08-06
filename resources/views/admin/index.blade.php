@@ -260,6 +260,23 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> Quản lí slider </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('slider.index') }}">Xem slider</a></li>
+                                <li><a href="{{ route('slider.create') }}">Thêm slider</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href='{{ route("order") }}'>
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> QL Đơn Hàng</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route("contact-admin") }}">
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Phản hồi </span>
