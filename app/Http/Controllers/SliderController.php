@@ -2,83 +2,165 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SliderAddRequest;
-use App\Traits\StorageImageTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\Models\sliderModel;
 
-class SliderController extends Controller
+class sliderController extends Controller
 {
-    //
-    use StorageImageTrait;
-    private $slider;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data = [
+            'title' => 'quản lý slider',
+            'action' => 'quản lý slider'
+        ];
+        $datas = sliderModel::orderBy('id','asc')->search()->paginate(10);
+        return view('admin.slider.index', compact('data','datas'));
+    }
 
-    function index()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
         $data = [
-            'title' => 'List slider',
-            'action'=> 'List slider'
-        ]; 
-        $sliders = DB::table('t_slider')->paginate(10);
-        return view('Admin.slider.index', compact('data', 'sliders'));
+            'title' => 'quản lý slider',
+            'action' => 'quản lý slider'
+        ];
+        return view('admin.slider.create', compact('data'));
     }
-    function add()
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $data = [
-            'title' => 'Add slider',
-            'action'=> 'Add slider'
-        ]; 
-        return view('Admin.slider.add', compact('data'));
-    }
-    public function store(Request $request){
-        try{
-            $dataInsert = [
-                'm_name' => $request->name,
-                'm_description' => $request->description,
-            ];
-            $dataImageSlider = $this->storageTraitUpload($request, 'image_path', 'slider');
-            if(!empty($dataImageSlider)){
-                $dataInsert['m_image_name'] = $dataImageSlider['file_name'];
-                $dataInsert['m_image_path'] = $dataImageSlider['file_path'];
-            }
-            $slider = DB::table('t_slider')->insert($dataInsert);
-            return redirect()->route('slider');
-        }catch(\Exception $exception){
-            Log::error('Lỗi: ' . $exception->getMessage() . '---Line: ' . $exception->getLine());
+        $request->validate([
+            'm_subtitle' => 'required',
+            'm_title' => 'required',
+            'm_link' => 'required',
+            'm_description' => 'required',
+            'file_upload' => 'required',
+        ],
+        [
+            'm_subtitle.required' => 'Tên phụ đề không để trống',
+            'm_title.required' => 'Tên tiêu đề không để trống',
+            'm_link.required' => 'link đường dẫn không để trống',
+            'm_description.required' => 'mô tả ngắn không để trống',
+            'file_upload.required' => 'hình ảnh không để trống'
+        ]);
+        $create = new sliderModel();
+        $create->m_subtitle = $request->m_subtitle;
+        $create->m_title = $request->m_title;
+        $create->m_link = $request->m_link;
+        $create->m_description = $request->m_description;
+        $create->m_status = $request->m_status;
+        if($request->file('file_upload')){
+            $file= $request->file_upload;
+            $ext = $request->file_upload->extension();
+            $file_name = time().'-'.'slider.'.$ext;
+            $file->move(public_path('uploads'), $file_name);
         }
-        
+        $create->m_images = $file_name;
+        $create->save();
+        return redirect()->route('slider.index')->with('alert_success', 'Thêm mới slide thành công.');
     }
-    function edit($id)
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $slider = DB::table('t_slider')->where('id', $id)->first();
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
         $data = [
-            'title' => 'Edit slider',
-            'action'=> 'Edit slider'
-        ]; 
-        return view('Admin.slider.edit', compact('data', 'slider'));
+            'title' => 'quản lý slider',
+            'action' => 'quản lý slider'
+        ];
+        $idslider = sliderModel::find($id);
+        return view('admin.slider.edit', compact('idslider','data'));
     }
-    function update(Request $request, $id)
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        try{
-            $dataInsert = [
-                'm_name' => $request->name,
-                'm_description' => $request->description,
-            ];
-            $dataImageSlider = $this->storageTraitUpload($request, 'image_path', 'slider');
-            if(!empty($dataImageSlider)){
-                $dataInsert['m_image_name'] = $dataImageSlider['file_name'];
-                $dataInsert['m_image_path'] = $dataImageSlider['file_path'];
-            }
-            $slider = DB::table('t_slider')->where('id', $id)->update($dataInsert);
-            return redirect()->route('slider');
-        }catch(\Exception $exception){
-            Log::error('Lỗi: ' . $exception->getMessage() . '---Line: ' . $exception->getLine());
+        $request->validate([
+            'm_subtitle' => 'required',
+            'm_title' => 'required',
+            'm_link' => 'required',
+            'm_description' => 'required',
+        ],
+        [
+            'm_subtitle.required' => 'Tên phụ đề không để trống',
+            'm_title.required' => 'Tên tiêu đề không để trống',
+            'm_link.required' => 'link đường dẫn không để trống',
+            'm_description.required' => 'mô tả ngắn không để trống',
+        ]);
+        $updated = sliderModel::find($id);
+        $updated->m_subtitle = $request->m_subtitle;
+        $updated->m_title = $request->m_title;
+        $updated->m_link = $request->m_link;
+        $updated->m_description = $request->m_description;
+        $updated->m_status = $request->m_status;
+        if($request->file('file_upload') == null)
+        {
+
+        }elseif($request->file('file_upload')){
+                $path = public_path('uploads').'/'.$updated->m_images;
+                if(file_exists($path)){
+                    unlink($path);
+                }
+                $file= $request->file_upload;
+                $ext = $request->file_upload->extension();
+                $file_name = time().'-'.'slider.'.$ext;
+                $file->move(public_path('uploads'), $file_name);
+                $updated->m_images = $file_name;
         }
+        $updated->save();
+        return redirect()->route('slider.index')->with('alert_success', 'sửa slide thành công.');
     }
-    function delete($id)
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $slider = DB::table('t_slider')->where('id', $id)->delete();
-        return redirect()->route('slider');
+        $remove = sliderModel::find($id);
+        $path = public_path('uploads').'/'.$remove->m_images;
+        if(file_exists($path)){
+                unlink($path);
+        }
+        $remove->delete();
+        return redirect()->route('slider.index')->with('alert_success', 'xóa slide thành công.');
     }
 }
