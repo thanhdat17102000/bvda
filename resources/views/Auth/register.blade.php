@@ -56,7 +56,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="single-input-item row">
+                                        {{-- <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label" for="">{{ __('Số điện thoại') }}</label>
                                             <div class="col-sm-10">
                                                 <input id="email" class="col-sm-12" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Số điện thoại" />
@@ -66,8 +66,8 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div>
-                                        <div class="single-input-item row">
+                                        </div> --}}
+                                        {{-- <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label" for="">{{ __('Địa chỉ') }}</label>
                                             <div class="col-sm-10">
                                                 <input id="email" class="col-sm-12" name="email" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Địa chỉ" />
@@ -77,7 +77,7 @@
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label"  for="">{{ __('Mật khẩu') }}</label>
                                             <div class="col-sm-10">

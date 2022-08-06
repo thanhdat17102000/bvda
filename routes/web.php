@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -261,3 +262,5 @@ Route::post('/product-favourite', [productController::class, 'productFavourite']
 Route::get('/list-product-favourite', [productController::class, 'listProductFavourite'])->name('list-favourite');
 //Search
 Route::post('/search', [productController::class, 'search']);
+// About us
+Route::get('/about-us', [AboutUsController::class, 'index']);
