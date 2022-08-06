@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\OrderDeTailModel;
+use App\Models\OrderModel;
 
 class AdminOrderController extends Controller
 {
@@ -16,25 +18,27 @@ class AdminOrderController extends Controller
         $list_check = $request->input('checkItem');
         if (!empty($list_check)) {
             $act = $request->input('actions');
-            if ($act == 'confirm') {
-                foreach ($list_check as $id) {
-                    DB::table('t_order')
-                        ->where('id', $id)
-                        ->update([
-                            'm_status' => 1
-                        ]);
+            if ($act) {
+                if($act == "none"){
+                    foreach ($list_check as $id) {
+                        DB::table('t_order')
+                            ->where('id', $id)
+                            ->update([
+                                'm_status' => 0
+                            ]);
+                    }   
+                }else{
+                    foreach ($list_check as $id) {
+                        DB::table('t_order')
+                            ->where('id', $id)
+                            ->update([
+                                'm_status' => $act
+                            ]);
+                    }
                 }
                 return redirect()->route('order')->with('status', 'Bạn đã áp dụng tác vụ thành công');
-            }
-            if ($act == 'cancel') {
-                foreach ($list_check as $id) {
-                    DB::table('t_order')
-                        ->where('id', $id)
-                        ->update([
-                            'm_status' => 0
-                        ]);
-                }
-                return redirect()->route('order')->with('status', 'Bạn đã áp dụng tác vụ thành công');
+            }else{
+                return redirect()->route('order')->with('error', 'Bạn chưa chọn tác vụ');
             }
         }else{
             return redirect()->route('order')->with('error', 'Bạn chưa chọn tác vụ');
@@ -48,14 +52,14 @@ class AdminOrderController extends Controller
         ];
         $status = $request->input('status');
         if ($status == 'confirm') {
-            $orders = DB::table('t_order')->where('m_status', 1)->get();
+            $orders = DB::table('t_order')->where('m_status', 4)->get();
         } elseif ($status == 'cancel') {
-            $orders = DB::table('t_order')->where('m_status', 0)->get();
+            $orders = DB::table('t_order')->where('m_status', 3)->get();
         } else {
             $orders = DB::table('t_order')->get();
         }
-        $count_confirm = DB::table('t_order')->where('m_status', 1)->count();
-        $count_cancel = DB::table('t_order')->where('m_status', 0)->count();
+        $count_confirm = DB::table('t_order')->where('m_status', 4)->count();
+        $count_cancel = DB::table('t_order')->where('m_status', 3)->count();
         $count = [$count_confirm, $count_cancel];
         $count_total = $count[0] + $count[1];
         return view('Admin.order.list', compact('data', 'orders', 'count', 'count_total'));
@@ -80,13 +84,29 @@ class AdminOrderController extends Controller
         );
         return view('Auth.checkout.success');
     }
-    public function detail()
+    public function detail($id, Request $request)
     {
         $data = [
             'title' => 'CHI TIẾT ĐƠN HÀNG',
             'action' => 'order_detail'
         ];
-        $orders = DB::table('t_order_detail')->get();
-        return view('Admin.order.detail', compact('orders', 'data'));
+        $orders = OrderModel::where('id', $id)->first();
+        $ordersr = OrderModel::where('id', $id)->get();
+        $orderdetails = OrderDeTailModel::where('m_id_order',$orders->id)->get();
+        $orderdetailfirst = OrderDeTailModel::where('m_id_order',$orders->id)->first();
+        
+        if($request->status){
+            if($request->status == 'none'){
+                $updated = OrderModel::find($orders->id);
+                $updated->m_status = 0;
+                $updated->save();
+            }else{
+                $updated = OrderModel::find($orders->id);
+                $updated->m_status = $request->status;
+                $updated->save();
+            }
+            return redirect()->back()->with('status', 'Bạn đã áp dụng tác vụ thành công');
+        }
+        return view('Admin.order.detail', compact('orders','ordersr','orderdetails','orderdetailfirst', 'data'));
     }
 }

@@ -19,4 +19,10 @@ class OrderDeTailModel extends Model
         'm_quanti',
         'm_product_name',
     ];
+    public function showimgproduct(){
+        return $this->hasOne(product::class, 'id', 'm_id_product');
+    }
+    public function showmasanpham(){
+        return $this->hasOne(OrderModel::class, 'id','m_id_order');
+    }
 }
