@@ -18,6 +18,7 @@ use App\Models\User;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Utilities\Request;
@@ -259,5 +260,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/product-favourite', [productController::class, 'productFavourite']);
 //Danh sách sản phẩm yêu thích của user đã chọn
 Route::get('/list-product-favourite', [productController::class, 'listProductFavourite'])->name('list-favourite');
+//Slider
+Route::get('/slider', [SliderController::class, 'index'])->name('slider');
+Route::get('/slider/add', [SliderController::class, 'add'])->name('add.slider');
+Route::post('/slider/store', [SliderController::class, 'store'])->name('store.slider');
+Route::get('/slider/edit/{id}', [SliderController::class, 'edit'])->name('edit.slider');
+Route::post('/slider/update/{id}', [SliderController::class, 'update'])->name('update.slider');
+Route::get('/slider/delete/{id}', [SliderController::class, 'delete'])->name('delete.slider');
 //Search
 Route::post('/search', [productController::class, 'search']);
