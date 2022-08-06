@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Models\product;
+use App\Http\Controllers\productController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
@@ -263,3 +264,5 @@ Route::post('/product-favourite', [productController::class, 'productFavourite']
 Route::get('/list-product-favourite', [productController::class, 'listProductFavourite'])->name('list-favourite');
 //Search
 Route::post('/search', [productController::class, 'search']);
+//Sản phẩm theo danh mục
+Route::get('category/{id}', [productController::class, 'categoryProduct'])->name('categoryProduct');
