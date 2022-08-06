@@ -75,7 +75,7 @@
     <div class="card-box">
         <div class="row">
             <div class="col-md-4">
-                <h4 class="mt-0 header-title"><b>Danh mục sản phẩm</b></h4>
+                <h4 class="mt-0 header-title"><b>Danh mục slider</b></h4>
             </div>
         </div>
     <div class=" tablesaw-bar  tablesaw-all-cols-visible  tablesaw-mode-columntoggle">

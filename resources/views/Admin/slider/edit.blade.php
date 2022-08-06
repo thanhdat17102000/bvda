@@ -10,7 +10,7 @@
 @endif
 <div class="card card-info">
     <div class="card-header">
-        <h3 class="card-title">Thêm sản phẩm</h3>
+        <h3 class="card-title">sửa slider</h3>
     </div>
     <form action="{{route('slider.update', $idslider->id)}}" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
         @csrf @method('PUT')
