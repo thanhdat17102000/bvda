@@ -56,11 +56,11 @@
                                         <li><a href="/product_list">Danh mục <i class="fa fa-angle-down"></i> </a>
                                             <ul class="dropdown">
                                                 @foreach ($categories as $category)
-                                                <li><a href="#">{{ $category->m_title }}<i class="fa fa-angle-right"></i></a>
+                                                <li><a href="{{ route('categoryProduct', ['id' => $category->id]) }}">{{ $category->m_title }}<i class="fa fa-angle-right"></i></a>
                                                     @if (count($category->children) > 0)
                                                     <ul class="dropdown">
                                                         @foreach ($category->children as $sub)
-                                                        <li><a href="shop-list-left-sidebar.html">{{ $sub->m_title }}</a>
+                                                        <li><a href="{{ route('categoryProduct', ['id' => $sub->id]) }}">{{ $sub->m_title }}</a>
                                                         </li>
                                                         @endforeach
                                                     </ul>
@@ -101,7 +101,7 @@
                                         <ul class="dropdown-list">
                                             <li><a href="{{ route('admintrator') }}">chuyển admin</a></li>
                                             <!-- <li><a href="">Thông tin đơn hàng</a></li> -->
-                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); 
+                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Đăng
                                                     xuất</a></li>
                                             <form action="{{ route('logout') }}" method="post" id="logout-form">
@@ -112,7 +112,7 @@
                                         <ul class="dropdown-list">
                                             <li><a href="/profile">Tài khoản của bạn</a></li>
                                             <li><a href="">Thông tin Đơn hàng</a></li>
-                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); 
+                                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Đăng
                                                     xuất</a></li>
                                             <form action="{{ route('logout') }}" method="post" id="logout-form">
@@ -194,7 +194,7 @@
                                                             <li><a href="{{ route('admintrator') }}">chuyển admin</a></li>
                                                             <!-- <li><a href="">Thông tin đơn hàng</a></li> -->
                                                             <li><a href="{{ route('logout') }}"
-                                                                    onclick="event.preventDefault(); 
+                                                                    onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Đăng
                                                                     xuất</a></li>
                                                             <form action="{{ route('logout') }}" method="post"
@@ -207,7 +207,7 @@
                                                             <li><a href="/profile">Tài khoản</a></li>
                                                             <li><a href="">Thông tin Đơn hàng</a></li>
                                                             <li><a href="{{ route('logout') }}"
-                                                                    onclick="event.preventDefault(); 
+                                                                    onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Đăng
                                                                     xuất</a></li>
                                                             <form action="{{ route('logout') }}" method="post"
