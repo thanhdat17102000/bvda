@@ -18,6 +18,7 @@ use App\Models\User;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Utilities\Request;
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     ]);
 
     // start Comment
-    Route::get('/list', [Comment_Product::class, 'index'])->name('list_comment');
+    Route::get('/list_cmt', [Comment_Product::class, 'index'])->name('list_comment');
     Route::get('/delete_cmt/{id}', [Comment_Product::class, 'delete_comment'])->name('delete_cmtpro');
     Route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
 
@@ -106,6 +107,13 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 
     // file images
     Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
+
+    // delivery
+    Route::get('/delivery', [DeliveryController::class, 'delivery'])->name('delivery');
+    Route::post('/delivery/select-location', [DeliveryController::class, 'select_location'])->name('select-location');
+    Route::post('/delivery/insert', [DeliveryController::class, 'insert_delivery'])->name('insert-fee');
+    Route::post('/delivery/list', [DeliveryController::class, 'list_delivery'])->name('list-delivery');
+    Route::post('/delivery/edit', [DeliveryController::class, 'edit_delivery'])->name('edit-delivery');
 
     // chức năng nâng cao admin product
     Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
