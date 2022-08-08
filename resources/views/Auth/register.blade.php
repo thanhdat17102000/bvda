@@ -56,28 +56,6 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        {{-- <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label" for="">{{ __('Số điện thoại') }}</label>
-                                            <div class="col-sm-10">
-                                                <input id="text" class="col-sm-12" name="phone" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Số điện thoại" />
-                                                @if ($errors->has('email'))
-                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
-                                                        <strong>{{ $errors->first('email') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div> --}}
-                                        {{-- <div class="single-input-item row">
-                                            <label class="col-sm-2 col-form-label" for="">{{ __('Địa chỉ') }}</label>
-                                            <div class="col-sm-10">
-                                                <input id="text" class="col-sm-12" name="m_address" value="{{ old('email') }}" autocomplete="email"" type="text" placeholder="Địa chỉ" />
-                                                @if ($errors->has('email'))
-                                                    <span style="font-size: 12px;" role="alert" class="text-danger">
-                                                        <strong>{{ $errors->first('email') }}</strong>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div> --}}
                                         <div class="single-input-item row">
                                             <label class="col-sm-2 col-form-label"  for="">{{ __('Mật khẩu') }}</label>
                                             <div class="col-sm-10">
