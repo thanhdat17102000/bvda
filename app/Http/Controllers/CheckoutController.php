@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         $orderId = time() . "";
         $redirectUrl = route('checkout-success');
         $ipnUrl = route('checkout-success');
-        $extraData = "";
+        $extraData = $request -> txnRef;
 
         $requestId = time() . "";
         $requestType = "payWithATM";
@@ -177,14 +177,51 @@ class CheckoutController extends Controller
                     $result = "Thanh toán đơn hàng thành công!";
                     $orderId = $inputData['vnp_TxnRef'] - 20000;
                     $order = OrderModel::find($orderId);
-                    $order -> m_status_pay = 1;
-                    $order -> save();
+                    $order->m_status_pay = 1;
+                    $order->save();
                 } else {
                     $result = "Thanh toán đơn hàng không thành công!";
                 }
             } else {
                 $result = "Chữ ký VNPay không hợp lệ!";
             }
+            $data = ["message" => $result];
+        }
+        if (isset($request->partnerCode)) {
+            $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+            
+            $partnerCode = $_GET["partnerCode"];
+            $orderId = $_GET["orderId"];
+            $message = $_GET["message"];
+            $transId = $_GET["transId"];
+            $orderInfo = utf8_encode($_GET["orderInfo"]);
+            $amount = $_GET["amount"];
+            $resultCode = $_GET["resultCode"];
+            $responseTime = $_GET["responseTime"];
+            $requestId = $_GET["requestId"];
+            $extraData = $_GET["extraData"];
+            $payType = $_GET["payType"];
+            $orderType = $_GET["orderType"];
+            $m2signature = $_GET["signature"]; //MoMo signature
+
+            //Checksum
+            $rawHash = "partnerCode=" . $partnerCode . "&requestId=" . $requestId . "&amount=" . $amount . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo .
+                "&orderType=" . $orderType . "&transId=" . $transId . "&message=" . $message . "&responseTime=" . $responseTime . "&resultCode=" . $resultCode .
+                "&payType=" . $payType . "&extraData=" . $extraData;
+
+            $partnerSignature = hash_hmac("sha256", $rawHash, $secretKey);
+            // if ($m2signature == $partnerSignature) {
+                if ($resultCode == '0') {
+                    $result = 'Thanh toán đơn hàng thành công!';
+                    $order = OrderModel::find($extraData);
+                    $order->m_status_pay = 1;
+                    $order->save();
+                } else {
+                    $result = 'Thanh toán đơn hàng không thành công!';
+                }
+            // } else {
+            //     $result = 'Chữ ký MoMo không hợp lệ!';
+            // }
             $data = ["message" => $result];
         }
         Cart::destroy();

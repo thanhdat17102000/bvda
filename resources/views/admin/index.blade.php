@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title')</title>
+    <title>{{$data['title']}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -19,13 +19,13 @@
     <!-- Notification css (Toastr) -->
     <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+
     <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -203,8 +203,8 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-                            <a href="{{ route("dashboard.index") }}" class=" {{ $data['action'] === 'dashboard' ? 'active' : '' }} ">
-                                <i class="mdi mdi-view-dashboard"></i>
+                            <a href="{{ route("dashboard.index") }}">
+                                <i class="mdi mdi-chart-bar"></i>
                                 <span> Thống kê </span>
                             </a>
                         </li>
@@ -217,7 +217,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-account"></i>
                                 <span> Người dùng</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -228,7 +228,7 @@
                         </li>
                         <li>
                             <a href="javascript: void(0);">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-post-outline"></i>
                                 <span> Bài viết </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -239,7 +239,7 @@
                         </li>
                         <li>
                             <a href="javascript: void(0);">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-shoe-formal"></i>
                                 <span> Sản phẩm </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -249,14 +249,20 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="{{ route("delivery") }}">
+                                <i class="mdi mdi-truck"></i>
+                                <span> Vận chuyển </span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="javascript: void(0);">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-comment-account"></i>
                                 <span> Quản lí bình luận </span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level mm-collapse" aria-expanded="false">
-                                <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
-                                <li><a href="">Bình luận Blog</a></li>
+                                <li><a href="{{ route('list_comment') }}">Bình luận sản phẩm</a></li>
+                                <li><a href="#">Bình luận Blog</a></li>
                             </ul>
                         </li>
                         <li>
@@ -278,13 +284,13 @@
                         </li>
                         <li>
                             <a href="{{ route("contact-admin") }}">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-comment-question"></i>
                                 <span> Phản hồi </span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route("file") }}">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-file-image"></i>
                                 <span> QL hình ảnh </span>
                             </a>
                         </li>

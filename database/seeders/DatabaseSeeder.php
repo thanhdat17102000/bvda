@@ -17,12 +17,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'admin',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'm_avatar' => 'admin.png',
             'role' => 1,
             'password' => Hash::make('admin@gmail.com')
         ]);
-        $this::call([
+        $this -> call([
             UserSeeder::class
         ]);
     }

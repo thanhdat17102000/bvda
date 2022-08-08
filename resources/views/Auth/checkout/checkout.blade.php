@@ -39,7 +39,7 @@
             e.preventDefault();
             let data = new FormData(this);
             let total = $('.total-price:first').text().replace(/,/g, "");
-            data.append('m_total_price', Number(total))
+            data.append('m_total_price', Number(total));
             $.ajax({
                 type: "post",
                 url: "{{ url('api/checkout') }}",
@@ -348,6 +348,7 @@
                                         </div>
                                         <form action="{{ route('momo-payment') }}" id="momo-payment" method="post">
                                             @csrf
+                                            <input type="hidden" name="txnRef">
                                             <input type="hidden" name="total_momo" id="total_momo"
                                                 value="{{ str_replace(',', '', Cart::total(0)) }}">
                                         </form>

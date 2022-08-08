@@ -43,7 +43,7 @@ class productController extends Controller
         }
         return view('admin.product.index', compact('datas', 'data','showdanhmuc'));
     }
-    // giảm giá theo sản phẩm và giảm giá theo danh mục sản phẩm 
+    // giảm giá theo sản phẩm và giảm giá theo danh mục sản phẩm
     public function capnhatprice(Request $request){
         $data = $request->all();
         if($data['idsotiengiam'] == 2 && isset($data['allids'])){
@@ -165,7 +165,7 @@ class productController extends Controller
                 $syncdata = [];
                 $soluong = $data['soluong'];
                 $size = $data['size'];
-                for ($i=0; $i < count($data['soluong']); $i++) { 
+                for ($i=0; $i < count($data['soluong']); $i++) {
                     $syncdata[$soluong[$i]] = ['m_size' => $size[$i]];
                 }
                 $create->themsoluong()->attach($syncdata);
@@ -277,7 +277,7 @@ class productController extends Controller
                     $syncdatane = [];
                     $soluong = $data['soluong'];
                     $size = $data['size'];
-                    for ($i=0; $i < count($data['soluong']); $i++) { 
+                    for ($i=0; $i < count($data['soluong']); $i++) {
                         $syncdatane[$soluong[$i]] = ['m_size' => $size[$i]];
                     }
                     $updated->themsoluong()->sync($syncdatane);
@@ -342,7 +342,7 @@ class productController extends Controller
                 'message' => 'Vui lòng đăng nhập để thực hiện chức năng này'
             ]);
         }
-        
+
     }
 
     public function listProductFavourite()
@@ -355,5 +355,16 @@ class productController extends Controller
             $list_favourite = [];
             return view('Auth.product_list.favourite', compact('list_favourite'));
        }
+    }
+
+    //Lấy danh sách sản phẩm theo danh mục
+    public function categoryProduct($id) {
+        $category = DB::table('t_category')->where('m_id_parent', $id)->first();
+        if($category) {
+            $showproduct = DB::table('t_product')->where('m_id_category', $id)->orWhere('m_id_category', $category->id)->get();
+        } else {
+            $showproduct = DB::table('t_product')->where('m_id_category', $id)->get();
+        }
+        return view('Auth.category.index', compact('showproduct'));
     }
 }

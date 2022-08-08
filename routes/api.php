@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Reset password
 Route::post('reset-password', [ResetPasswordController::class,'sendMail']);
 Route::put('reset-password/{token}', [ResetPasswordController::class, 'reset']);
-// Bài biết 
+// Bài viết 
 Route::apiResource('/post', PostControllerApi::class);
 Route::apiResource('/blog', BlogControllerApi::class);
 // Người dùng

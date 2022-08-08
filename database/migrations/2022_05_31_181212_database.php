@@ -160,6 +160,13 @@ class Database extends Migration
             $table->string('m_size', 255);
             $table->foreign('m_id_product')->references('id')->on('t_product');
         });
+        Schema::create('t_transport_fee', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('m_province_id');
+            $table->integer('m_district_id');
+            $table->integer('m_ward_id');
+            $table->double('m_fee_ship');
+        });
         Schema::create('t_user_favourite', function (Blueprint $table) {
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_product');
