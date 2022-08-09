@@ -288,7 +288,7 @@
                                             <span class="badge badge-success">Hoàn thành đơn</span>
                                             @endif
                                         </td>
-                                        <td>Coderthemes</td>
+                                        <td>{{number_format($showdh->m_total_price, 0, '.', '.')}} Vnđ</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
