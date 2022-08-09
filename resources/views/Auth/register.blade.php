@@ -83,7 +83,7 @@
                                                 <div class="remember-meta">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="subnewsletter">
-                                                        <label class="custom-control-label" for="subnewsletter">Tôi đã đọc và đồng ý với <a class="text-danger" href=""><b>Quy định và hình thức thanh toán</b></a></label>
+                                                        <label class="custom-control-label" for="subnewsletter">Tôi đã đọc và đồng ý với <a class="text-danger" href="{{route('quydinh')}}"><b>Quy định và hình thức thanh toán</b></a></label>
                                                     </div>
                                                 </div>
                                             </div>

@@ -121,7 +121,7 @@
                             <ul class="useful-link">
                                 <li><a href="/">Trang chủ</a></li>
                                 <li><a href="#">Giới Thiệu</a></li>
-                                <li><a href="#">Chính Sách Đổi Trả</a></li>
+                                <li><a href="{{route('chinhsachdoitra')}}">Chính Sách Đổi Trả</a></li>
                                 <li><a href="#">Vận Chuyển</a></li>
                                 <li><a href="#">Chính Sách Bảo Mật</a></li>
                             </ul>

@@ -273,3 +273,15 @@ Route::post('/product-favourite', [productController::class, 'productFavourite']
 Route::get('/list-product-favourite', [productController::class, 'listProductFavourite'])->name('list-favourite');
 //Search
 Route::post('/search', [productController::class, 'search']);
+//Sản phẩm theo danh mục
+Route::get('category/{id}', [productController::class, 'categoryProduct'])->name('categoryProduct');
+// pages 
+Route::get('/quydinh', function(){
+    return view('pages.quydinh');
+})->name('quydinh');
+Route::get('/chinh-sach-doi-tra', function(){
+    return view('pages.chinhsachdoitra');
+})->name('chinhsachdoitra');
+Route::get('huong-dan-chon-size', function(){
+    return view('pages.hdsize');
+})->name('hdsize');
