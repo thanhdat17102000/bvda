@@ -272,7 +272,7 @@
                                     @foreach($showdonhangganday as $key => $showdh)
                                     <tr>
                                         <td>{{$key+=1}}</td>
-                                        <td>{{$showdh->showuser->name}}</td>
+                                        <td>{{$showdh->m_name}}</td>
                                         <td>{{$showdh->updated_at}}</td>
                                         <td>{{$showdh->m_phone}}</td>
                                         <td>
