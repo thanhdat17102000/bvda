@@ -95,5 +95,9 @@ class OrderModel extends Model {
         return $this->hasOne(OrderDeTailModel::class, 'm_id_order', 'id');
     }
 
+    public function showuser(){
+        return $this->hasOne(User::class, 'id', 'm_id_user');
+    }
+
 }
 
