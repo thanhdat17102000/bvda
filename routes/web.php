@@ -269,3 +269,8 @@ Route::post('/slider/update/{id}', [SliderController::class, 'update'])->name('u
 Route::get('/slider/delete/{id}', [SliderController::class, 'delete'])->name('delete.slider');
 //Search
 Route::post('/search', [productController::class, 'search']);
+
+//Tuyển dụng
+Route::get('/tuyendung', [HomeController::class, 'tuyendung'])->name('tuyendung');
+//Bảo mật
+Route::get('/baomat', [HomeController::class, 'baomat'])->name('baomat');

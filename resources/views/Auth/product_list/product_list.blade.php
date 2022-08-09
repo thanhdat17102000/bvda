@@ -289,7 +289,7 @@ Danh sách sản phẩm
                                                 @endforeach
                                             @endif
 
-                                            <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
+                                            <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏa"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">
                                                 @csrf
                                                 <input type="hidden" name="quantity" value="1">
@@ -322,7 +322,7 @@ Danh sách sản phẩm
                                         <p>{!!$showprd->m_short_description!!}</p>
                                         <div class="product-link-2 position-static">
                                             <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
-                                            <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
+                                            <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏa"><i class="ion-bag"></i></a>
                                             <a href="#" data-toggle="modal" data-target="#quick_view{{$showprd->id}}">
                                                 <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                         </div>
@@ -387,7 +387,7 @@ Danh sách sản phẩm
                                         <div class="quantity">
                                             <div class="pro-qty"><input type="text" value="1"></div>
                                         </div>
-                                        <a href="cart.html" class="btn btn-default">Thêm vào giỏ hàng</a>
+                                        <a href="cart.html" class="btn btn-default">Thêm vào giỏa hàng</a>
                                     </div>
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Tình trạng: </h5>
