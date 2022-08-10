@@ -144,12 +144,28 @@ class Database extends Migration
             $table->foreign('m_id_maloai')->references('id')->on('t_product');
             $table->foreign('m_id_user')->references('id')->on('t_user');
         });
+        Schema::create('t_slider', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('m_images');
+            $table->string('m_subtitle', 255);
+            $table->string('m_title', 255);
+            $table->string('m_description', 255);
+            $table->string('m_link', 255);
+            $table->boolean('m_status');
+        });
         Schema::create('t_product_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('m_id_product');
             $table->integer('m_quanti');
             $table->string('m_size', 255);
             $table->foreign('m_id_product')->references('id')->on('t_product');
+        });
+        Schema::create('t_transport_fee', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('m_province_id');
+            $table->integer('m_district_id');
+            $table->integer('m_ward_id');
+            $table->double('m_fee_ship');
         });
         Schema::create('t_user_favourite', function (Blueprint $table) {
             $table->unsignedInteger('id_user');

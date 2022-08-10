@@ -3191,6 +3191,7 @@ fieldset {
     text-transform: capitalize;
     font-size: 14px; }
     .single-input-item label.required:after {
+      content: '*';
       color: red;
       font-size: 14px;
       margin-left: 3px;
@@ -3680,4 +3681,3 @@ fieldset {
     color: #e3a51e; }
 
 /*------- footer bottom end -------*/
-/* From uiverse.io by @barisdogansutcu */

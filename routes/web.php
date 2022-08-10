@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryModel;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Models\product;
+use App\Http\Controllers\productController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Utilities\Request;
@@ -58,6 +60,10 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
     Route::resource('dashboard', DashboardController::class);
 
+    // thống kê
+
+    Route::post('/order-date', [App\Http\Controllers\DashboardController::class, 'orderdate'])->name('orderdate');
+    Route::post('/order-filter-date', [App\Http\Controllers\DashboardController::class, 'filterdate'])->name('filterdate');
     // Post
     Route::get('post', [PostController::class, 'index'])->name('post-list');
     Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
@@ -70,15 +76,16 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     // Quản lý user
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
-    Route::get('/user/add', [UserController::class,'add_user'])->name('add_user');
+    Route::get('/user/add', [UserController::class, 'add_user'])->name('add_user');
     Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([
         'product' => App\Http\Controllers\productController::class,
+        'slider' => App\Http\Controllers\sliderController::class,
     ]);
 
     // start Comment
-    Route::get('/list', [Comment_Product::class, 'index'])->name('list_comment');
+    Route::get('/list_cmt', [Comment_Product::class, 'index'])->name('list_comment');
     Route::get('/delete_cmt/{id}', [Comment_Product::class, 'delete_comment'])->name('delete_cmtpro');
     Route::post('/answer_data/{id}', [Comment_Product::class, 'answer_data']);
 
@@ -103,10 +110,17 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('order', [AdminOrderController::class, 'index'])->name('order');
     Route::post('order/store', [AdminOrderController::class, 'store'])->name('order.store');
     Route::post('order/action', [AdminOrderController::class, 'action'])->name('order.action');
-    Route::get('order/detail', [AdminOrderController::class, 'detail'])->name('order.detail');
+    Route::get('order/detail/{id}', [AdminOrderController::class, 'detail'])->name('order.detail');
 
     // file images
     Route::get('/file', [App\Http\Controllers\DashboardController::class, 'file'])->name('file');
+
+    // delivery
+    Route::get('/delivery', [DeliveryController::class, 'delivery'])->name('delivery');
+    Route::post('/delivery/select-location', [DeliveryController::class, 'select_location'])->name('select-location');
+    Route::post('/delivery/insert', [DeliveryController::class, 'insert_delivery'])->name('insert-fee');
+    Route::post('/delivery/list', [DeliveryController::class, 'list_delivery'])->name('list-delivery');
+    Route::post('/delivery/edit', [DeliveryController::class, 'edit_delivery'])->name('edit-delivery');
 
     // chức năng nâng cao admin product
     Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
@@ -195,12 +209,6 @@ Route::get('/product_list/{id}', [HomeController::class, 'showcategoryid'])->nam
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
 });
-Route::get('/cart', function () {
-    return view('Auth.cart.cart');
-});
-Route::get('/checkout', function () {
-    return view('Auth.checkout.checkout');
-});
 
 // Profile Client
 Route::group(['prefix' => 'profile'], function () {
@@ -226,10 +234,10 @@ Route::get('/register', function () {
 Route::get('/cart', function () {
     return view('Auth.cart.cart');
 })->name('cart');
-Route::get('/checkout', function () {
-    return view('Auth.checkout.checkout');
-})->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/checkout-success', [CheckoutController::class, 'checkout_success'])->name('checkout-success');
+Route::post('/checkout/location', [CheckoutController::class, 'select_location'])->name('checkout-location');
+Route::post('/checkout/delivery', [CheckoutController::class, 'delivery'])->name('checkout-delivery');
 Route::post('/momo-payment', [CheckoutController::class, 'momo_payment'])->name('momo-payment');
 Route::post('/vnpay-payment', [CheckoutController::class, 'vnpay_payment'])->name('vnpay-payment');
 
@@ -269,8 +277,9 @@ Route::post('/slider/update/{id}', [SliderController::class, 'update'])->name('u
 Route::get('/slider/delete/{id}', [SliderController::class, 'delete'])->name('delete.slider');
 //Search
 Route::post('/search', [productController::class, 'search']);
-
 //Tuyển dụng
 Route::get('/tuyendung', [HomeController::class, 'tuyendung'])->name('tuyendung');
 //Bảo mật
 Route::get('/baomat', [HomeController::class, 'baomat'])->name('baomat');
+//Sản phẩm theo danh mục
+Route::get('category/{id}', [productController::class, 'categoryProduct'])->name('categoryProduct');

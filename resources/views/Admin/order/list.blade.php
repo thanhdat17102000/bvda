@@ -54,17 +54,15 @@ Danh sách đơn hàng
             <form action="{{url('admintrator/order/action')}}" method="POST">
                 @csrf
                 <div class="actions">
-                    <select name="actions" style="border: 1px solid #ccc;
-    padding: 4px 10px;
-    border-radius: 3px;">
+                    <select name="actions" style="border: 1px solid #ccc;padding: 4px 10px;border-radius: 3px;">
                         <option>Tác vụ</option>
-                        <option value="confirm">Hoàn thành đơn hàng</option>
-                        <option value="cancel">Hủy đơn hàng</option>
+                        <option value="none">Đang chờ</option>
+                        <option value="1">Đang vận chuyển</option>
+                        <option value="2">Đã chuyển</option>
+                        <option value="3">Hủy đơn hàng</option>
+                        <option value="4">Đã Hoàn Thành</option>
                     </select>
-                    <input type="submit" name="sm_action" value="Áp dụng" style="border-radius: 3px;
-    border: 1px solid #afafaf;
-    padding: 2px 15px;
-    background: #fafafa;">
+                    <input type="submit" name="sm_action" value="Áp dụng" style="border-radius: 3px;border: 1px solid #afafaf;padding: 2px 15px;background: #fafafa;">
                 </div><br>
                 <table id="datatable" class="table table-bordered dt-responsive nowrap">
                     <thead>
@@ -78,7 +76,7 @@ Danh sách đơn hàng
                             <th>Tên khách hàng</th>
                             <th>Email</th>
                             <th>Số điện thoại</th>
-                            <th style="width:230px">Trạng thái</th>
+                            <th style="width:180px">Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -104,13 +102,20 @@ Danh sách đơn hàng
                             <td>{{$order->m_email}}</td>
                             <td>{{$order->m_phone}}</td>
                             <td>@if($order->m_status == 0)
-                                <span class="bg bg-danger text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Chưa hoàn thành</span>
+                                <span class="bg bg-info text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Chưa hoàn thành</span>
                                 @elseif($order->m_status == 1)
-                                <span class="bg bg-success text-white font-weight-bold" style="padding: 10px 10px; padding-right: 30px;">Đã hoàn thành</span>
+                                <span class="bg bg-warning text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Đang vận chuyển</span>
+                                @elseif($order->m_status == 2)
+                                <span class="bg bg-dark text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Đã được giao</span>
+                                @elseif($order->m_status == 3)
+                                <span class="bg bg-danger text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Đã hủy đơn</span>
+                                @elseif($order->m_status == 4)
+                                <span class="bg bg-success text-white font-weight-bold" style="padding: 10px 10px; padding-right: 30px;">hoàn thành đơn</span>
                                 @endif
                             </td>
-                            <td><a href="{{route('order.detail')}}">
-                                    <i class="fas fa-file"></i>
+                            <td>
+                                <a href="{{route('order.detail',$order->id)}}" class="btn btn-warning btn-xs">
+                                    chi tiết
                                 </a>
                                 <button type="button" class="btn btn-info btn-xs" id="sa-params">Xóa</button>
                             </td>

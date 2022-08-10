@@ -2,12 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\OrderModel;
+use App\Models\Province;
+use App\Models\TransportFee;
+use App\Models\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
+    public function index()
+    {
+        $province = Province::orderby('_name', 'ASC')->get();
+        return view('Auth.checkout.checkout')->with(compact('province'));
+    }
+    public function select_location(Request $request)
+    {
+        $result = '';
+        if ($request->action == "province") {
+            $districtList = District::where('_province_id', $request->id)->orderby('_prefix', 'ASC')->orderby('_name', 'ASC')->get();
+            $result = '<option>-- Chọn quận/huyện --</option>';
+            foreach ($districtList as $key => $district) {
+                $result .= '<option value="' . $district->id . '">' . $district->_prefix . " " . $district->_name . '</option>';
+            }
+            return $result;
+        } else {
+            $wardList = Ward::where('_district_id', $request->id)->orderby('_prefix', 'ASC')->orderby('_name', 'ASC')->get();
+            $result = '<option>-- Chọn xã/phường/thị trấn --</option>';
+            foreach ($wardList as $key => $ward) {
+                $result .= '<option value="' . $ward->id . '">' . $ward->_prefix . " " . $ward->_name . '</option>';
+            }
+            return $result;
+        }
+    }
+    public function delivery(Request $request)
+    {
+        try {
+            $fee = TransportFee::where('m_province_id', $request->pro)->where('m_district_id', $request->dis)->where('m_ward_id', $request->war)->first();
+            return ['m_fee_ship'=> number_format($fee->m_fee_ship), 'total'=>number_format(Cart::total(0, '.', '') + $fee->m_fee_ship)];
+        } catch (\Throwable $th) {
+            return ['m_fee_ship'=> number_format(50000), 'total'=>number_format(Cart::total(0, '.', '') + 50000)];
+        }
+    }
     public function execPostRequest($url, $data)
     {
         $ch = curl_init($url);
@@ -43,7 +80,7 @@ class CheckoutController extends Controller
         $orderId = time() . "";
         $redirectUrl = route('checkout-success');
         $ipnUrl = route('checkout-success');
-        $extraData = "";
+        $extraData = $request->txnRef;
 
         $requestId = time() . "";
         $requestType = "payWithATM";
@@ -177,14 +214,51 @@ class CheckoutController extends Controller
                     $result = "Thanh toán đơn hàng thành công!";
                     $orderId = $inputData['vnp_TxnRef'] - 20000;
                     $order = OrderModel::find($orderId);
-                    $order -> m_status_pay = 1;
-                    $order -> save();
+                    $order->m_status_pay = 1;
+                    $order->save();
                 } else {
                     $result = "Thanh toán đơn hàng không thành công!";
                 }
             } else {
                 $result = "Chữ ký VNPay không hợp lệ!";
             }
+            $data = ["message" => $result];
+        }
+        if (isset($request->partnerCode)) {
+            $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+
+            $partnerCode = $_GET["partnerCode"];
+            $orderId = $_GET["orderId"];
+            $message = $_GET["message"];
+            $transId = $_GET["transId"];
+            $orderInfo = utf8_encode($_GET["orderInfo"]);
+            $amount = $_GET["amount"];
+            $resultCode = $_GET["resultCode"];
+            $responseTime = $_GET["responseTime"];
+            $requestId = $_GET["requestId"];
+            $extraData = $_GET["extraData"];
+            $payType = $_GET["payType"];
+            $orderType = $_GET["orderType"];
+            $m2signature = $_GET["signature"]; //MoMo signature
+
+            //Checksum
+            $rawHash = "partnerCode=" . $partnerCode . "&requestId=" . $requestId . "&amount=" . $amount . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo .
+                "&orderType=" . $orderType . "&transId=" . $transId . "&message=" . $message . "&responseTime=" . $responseTime . "&resultCode=" . $resultCode .
+                "&payType=" . $payType . "&extraData=" . $extraData;
+
+            $partnerSignature = hash_hmac("sha256", $rawHash, $secretKey);
+            // if ($m2signature == $partnerSignature) {
+            if ($resultCode == '0') {
+                $result = 'Thanh toán đơn hàng thành công!';
+                $order = OrderModel::find($extraData);
+                $order->m_status_pay = 1;
+                $order->save();
+            } else {
+                $result = 'Thanh toán đơn hàng không thành công!';
+            }
+            // } else {
+            //     $result = 'Chữ ký MoMo không hợp lệ!';
+            // }
             $data = ["message" => $result];
         }
         Cart::destroy();

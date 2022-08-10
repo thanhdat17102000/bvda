@@ -2,7 +2,9 @@
 @push('scripts')
     <script>
         let payMethod = "cash";
-
+        let pro = "";
+        let dis = "";
+        let war = "";
         // render cart info
         const renderCheckout = async () => {
             const response = await callApiCart();
@@ -33,13 +35,12 @@
             e.preventDefault();
             payMethod = $(this).val();
         });
-
         // submit checkout info
         $('#form-checkout').submit(function(e) {
             e.preventDefault();
             let data = new FormData(this);
             let total = $('.total-price:first').text().replace(/,/g, "");
-            data.append('m_total_price', Number(total))
+            data.append('m_total_price', Number(total));
             $.ajax({
                 type: "post",
                 url: "{{ url('api/checkout') }}",
@@ -51,19 +52,73 @@
                     const {
                         data
                     } = response;
-                    $('input[name=txnRef]').val(data.id);
-                    if (payMethod == 'cash') {
-                        window.location.href = "{{ route('checkout-success') }}";
-                    } else if (payMethod == 'momo') {
-                        $('#momo-payment').submit();
-                    } else {
-                        $('#vnpay-payment').submit();
-                    }
+                    // $('input[name=txnRef]').val(data.id);
+                    // if (payMethod == 'cash') {
+                    //     window.location.href = "{{ route('checkout-success') }}";
+                    // } else if (payMethod == 'momo') {
+                    //     $('#momo-payment').submit();
+                    // } else {
+                    //     $('#vnpay-payment').submit();
+                    // }
                 },
                 error: function(error) {
                     console.log(error);
                 }
             });
+        });
+        $('select').change(function(e) {
+            e.preventDefault();
+            let result = '';
+            let action = $(this).attr('id');
+            let id = $(this).val();
+
+            if (action == "province") {
+                result = "district"
+                $('#ward').html('<option value="">-- Chọn xã/phường/thị trấn --</option>');
+                $('#ward').niceSelect('update');
+            } else {
+                result = 'ward'
+            }
+            if (action != "ward") {
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('checkout-location') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        action,
+                        id,
+                    },
+                    success: function(response) {
+                        $('#' + result).html(response);
+                        $('#' + result).niceSelect('update');
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+
+                });
+            } else {
+                let pro = $('#province').val();
+                let dis = $('#district').val();
+                let war = $('#ward').val();
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('checkout-delivery') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        pro,
+                        dis,
+                        war
+                    },
+                    success: function(response) {
+                        $('.delivery').text(response.m_fee_ship);
+                        $('.total-price').text(response.total);
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            }
         });
     </script>
 @endpush
@@ -216,51 +271,24 @@
                                     </div>
 
                                     <div class="single-input-item">
-                                        <label for="country" class="required">Tỉnh/Thành phố</label>
-                                        <select name="country nice-select" id="country">
-                                            <option value="Vietnam">Việt Nam</option>
-                                            <option value="Albania">Albania</option>
-                                            <option value="Algeria">Algeria</option>
-                                            <option value="Armenia">Armenia</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="India">India</option>
-                                            <option value="Pakistan">Pakistan</option>
-                                            <option value="England">England</option>
-                                            <option value="London">London</option>
-                                            <option value="London">London</option>
-                                            <option value="Chaina">China</option>
+                                        <label for="province" class="required">Tỉnh/Thành phố</label>
+                                        <select name="province nice-select" id="province">
+                                            <option value="">-- Chọn tỉnh/thành phố --</option>
+                                            @foreach ($province as $key => $prov)
+                                                <option value="{{ $prov->id }}">{{ $prov->_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="single-input-item">
-                                        <label for="country" class="required">Quận/Huyện</label>
-                                        <select name="country nice-select" id="country">
-                                            <option value="Vietnam">Việt Nam</option>
-                                            <option value="Albania">Albania</option>
-                                            <option value="Algeria">Algeria</option>
-                                            <option value="Armenia">Armenia</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="India">India</option>
-                                            <option value="Pakistan">Pakistan</option>
-                                            <option value="England">England</option>
-                                            <option value="London">London</option>
-                                            <option value="London">London</option>
-                                            <option value="Chaina">China</option>
+                                        <label for="district" class="required">Quận/Huyện</label>
+                                        <select name="district nice-select" id="district">
+                                            <option value="">-- Chọn quận/huyện --</option>
                                         </select>
                                     </div>
                                     <div class="single-input-item">
-                                        <label for="country" class="required">Xã phường</label>
-                                        <select name="country nice-select" id="country">
-                                            <option value="Vietnam">Việt Nam</option>
-                                            <option value="Albania">Albania</option>
-                                            <option value="Algeria">Algeria</option>
-                                            <option value="Armenia">Armenia</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="India">India</option>
-                                            <option value="Pakistan">Pakistan</option>
-                                            <option value="England">England</option>
-                                            <option value="London">London</option>
-                                            <option value="London">London</option>
-                                            <option value="Chaina">China</option>
+                                        <label for="ward" class="required">Xã phường</label>
+                                        <select name="ward nice-select" id="ward">
+                                            <option value="">-- Chọn xã/phường/thị trấn --</option>
                                         </select>
                                     </div>
 
@@ -304,7 +332,7 @@
                                         <tfoot>
                                             <tr>
                                                 <td>Phí vận chuyển</td>
-                                                <td><strong>0</strong></td>
+                                                <td><strong class="delivery">0</strong></td>
                                             </tr>
                                             <tr>
                                                 <td>Thuế</td>
@@ -348,6 +376,7 @@
                                         </div>
                                         <form action="{{ route('momo-payment') }}" id="momo-payment" method="post">
                                             @csrf
+                                            <input type="hidden" name="txnRef">
                                             <input type="hidden" name="total_momo" id="total_momo"
                                                 value="{{ str_replace(',', '', Cart::total(0)) }}">
                                         </form>

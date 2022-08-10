@@ -277,17 +277,15 @@ Danh sách sản phẩm
                                         </div>
                                         <div class="product-action-link">
                                             <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                            @if(isset($list_favourite))
-                                                @foreach($list_favourite as $item)
-                                                    @if($item->id_product == $showprd->id)
-                                                        <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                    @elseif($item->id_product != $showprd->id)
-                                                        <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                    @else
+                                            {{-- @foreach($list_favourite as $item)
+                                                @if($item->id_product == $showprd->id)
+                                                    <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
+                                                @elseif($item->id_product != $showprd->id)
                                                     <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                    @endif
-                                                @endforeach
-                                            @endif
+                                                @else
+                                                <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
+                                                @endif
+                                            @endforeach --}}
 
                                             <a href="#" class="add-cart" data-toggle="tooltip" title="Thêm Vào Giỏa"><i class="ion-bag"></i></a>
                                             <form action="" method="post" class="cart-info">

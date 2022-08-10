@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title')</title>
+    <title>{{$data['title']}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -19,13 +19,17 @@
     <!-- Notification css (Toastr) -->
     <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+
     <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -203,8 +207,8 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-                            <a href="{{ route("dashboard.index") }}" class=" {{ $data['action'] === 'dashboard' ? 'active' : '' }} ">
-                                <i class="mdi mdi-view-dashboard"></i>
+                            <a href="{{ route("dashboard.index") }}">
+                                <i class="mdi mdi-chart-bar"></i>
                                 <span> Thống kê </span>
                             </a>
                         </li>
@@ -217,7 +221,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-account"></i>
                                 <span> Người dùng</span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -228,7 +232,7 @@
                         </li>
                         <li>
                             <a href="javascript: void(0);">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-post-outline"></i>
                                 <span> Bài viết </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -239,7 +243,7 @@
                         </li>
                         <li>
                             <a href="javascript: void(0);">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-shoe-formal"></i>
                                 <span> Sản phẩm </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -249,25 +253,48 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="{{ route("delivery") }}">
+                                <i class="mdi mdi-truck"></i>
+                                <span> Vận chuyển </span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="javascript: void(0);">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-comment-account"></i>
                                 <span> Quản lí bình luận </span>
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="nav-second-level mm-collapse" aria-expanded="false">
-                                <li><a href="{{ url('admintrator/list') }}">Bình luận sản phẩm</a></li>
-                                <li><a href="">Bình luận Blog</a></li>
+                                <li><a href="{{ route('list_comment') }}">Bình luận sản phẩm</a></li>
+                                <li><a href="#">Bình luận Blog</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route("contact-admin") }}">
+                            <a href="javascript: void(0);">
                                 <i class="mdi mdi-view-dashboard"></i>
+                                <span> Quản lí slider </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('slider.index') }}">Xem slider</a></li>
+                                <li><a href="{{ route('slider.create') }}">Thêm slider</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href='{{ route("order") }}'>
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span> QL Đơn Hàng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route("contact-admin") }}">
+                                <i class="mdi mdi-comment-question"></i>
                                 <span> Phản hồi </span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route("file") }}">
-                                <i class="mdi mdi-view-dashboard"></i>
+                                <i class="mdi mdi-file-image"></i>
                                 <span> QL hình ảnh </span>
                             </a>
                         </li>
@@ -377,6 +404,79 @@
 
     <!-- App js -->
     <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
+    <!-- morrisjs vs jqueryui -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<script>
+    jQuery(document).ready(function($) {
+        $('#btn-dashboard-filter').on('click',function(){
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:'{{route("filterdate")}}',
+                method:"post",
+                dataType:"JSON",
+                data:{from_date:from_date ,to_date:to_date, _token:_token },
+
+                success:function(data)
+                {
+                    chart.setData(data);
+                }
+            });
+        });
+            chart7day();
+        var chart = new Morris.Bar({
+            element: 'myfirstchart',
+            // option thống kê
+            barColors: ['#435ebe', '#fc8710','#FF6541','#A4ADD3'],
+            gridTextColor:['#000000'],
+            // pointFillColors: ['#ffffff'],
+            // pointStrokeColors:['black'],
+            fillOpacity:0.8,
+            hideHover: 'auto',
+            parseTime: false,
+
+            xkey: 'name',
+            ykeys: ['tongtien'],
+            // behaveLikeLine: true,
+
+            labels: ['giá tiền']
+        });
+
+    // autoload 30 ngày đơn hàng
+    function chart7day(){
+        var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:'{{route("orderdate")}}',
+                method:"post",
+                dataType:"JSON",
+                data:{_token:_token},
+
+                success:function(data)
+                {
+                    chart.setData(data);
+                }
+            });
+        }
+    });
+    // onclick lọc theo ngày tháng
+</script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+</script>
+<script>
+  $( function() {
+    $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+</script>
 </body>
 
 </html>

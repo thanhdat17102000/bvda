@@ -1,4 +1,7 @@
 @extends('admin.index')
+@push('title')
+    Quản lý bài viết
+@endpush
 @push('styles')
     <!-- third party css -->
 

@@ -91,6 +91,13 @@ class OrderModel extends Model {
     //         self::VALUE_STATUS_SHIP_DONE => 'Đã giao hàng'
     //     ];
     // }
+    public function showprice(){
+        return $this->hasOne(OrderDeTailModel::class, 'm_id_order', 'id');
+    }
+
+    public function showuser(){
+        return $this->hasOne(User::class, 'id', 'm_id_user');
+    }
 
 }
 
