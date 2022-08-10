@@ -7,6 +7,8 @@ use App\Models\product;
 use App\Models\Cmt_product;
 use App\Models\product_inventory;
 use App\Models\OrderModel;
+use App\Models\Post;
+use App\Models\sliderModel;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -16,7 +18,11 @@ class HomeController extends Controller
 {
     public function index() {
         $categories = CategoryModel::where('m_id_parent', 0)->get();
-        return view('Auth.home-compare.home_page',compact('categories'));
+        $sliders = sliderModel::where('m_status', 1)->get();
+        $myProducts = product::where('m_status', 1)->get();
+        $myProductSells = product::where('m_status', 1)->orderBy('m_buy', 'DESC')->paginate(6);
+        $blogs = Post::where('m_status', 1)->paginate(4);
+        return view('Auth.home-compare.home_page',compact('categories', 'sliders','myProducts','myProductSells', 'blogs'));
     }
     public function locgiasp(){
         if(isset($_GET['minamount']) && isset($_GET['maxamount'])){
