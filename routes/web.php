@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     // Quản lý user
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
-    Route::get('/user/add', [UserController::class,'add_user'])->name('add_user');
+    Route::get('/user/add', [UserController::class, 'add_user'])->name('add_user');
     Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([
@@ -120,7 +120,6 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     // chức năng nâng cao admin product
     Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
     Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
-
 });
 
 
@@ -205,12 +204,6 @@ Route::get('/product_list/{id}', [HomeController::class, 'showcategoryid'])->nam
 Route::get('/wishlist', function () {
     return view('Auth.wishlist.wishlist');
 });
-Route::get('/cart', function () {
-    return view('Auth.cart.cart');
-});
-Route::get('/checkout', function () {
-    return view('Auth.checkout.checkout');
-});
 
 // Profile Client
 Route::group(['prefix' => 'profile'], function () {
@@ -236,10 +229,10 @@ Route::get('/register', function () {
 Route::get('/cart', function () {
     return view('Auth.cart.cart');
 })->name('cart');
-Route::get('/checkout', function () {
-    return view('Auth.checkout.checkout');
-})->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/checkout-success', [CheckoutController::class, 'checkout_success'])->name('checkout-success');
+Route::post('/checkout/location', [CheckoutController::class, 'select_location'])->name('checkout-location');
+Route::post('/checkout/delivery', [CheckoutController::class, 'delivery'])->name('checkout-delivery');
 Route::post('/momo-payment', [CheckoutController::class, 'momo_payment'])->name('momo-payment');
 Route::post('/vnpay-payment', [CheckoutController::class, 'vnpay_payment'])->name('vnpay-payment');
 

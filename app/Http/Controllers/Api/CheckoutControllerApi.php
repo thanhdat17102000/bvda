@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\OrderDetailModel;
 use App\Models\OrderModel;
+use App\Models\Province;
+use App\Models\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
@@ -28,10 +31,14 @@ class CheckoutControllerApi extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        $province = Province::find($data['province_nice-select']);
+        $district = District::find($data['district_nice-select']);
+        $ward = Ward::find($data['ward_nice-select']);
         $order = new OrderModel();
         $order->m_name = $request->m_name;
         $order->m_email = $request->m_email;
-        $order->m_address = $request->m_address;
+        $order->m_address = $data['m_address'] . "," . $ward->_prefix . " " . $ward->_name . "," . $district->_prefix . " " . $district->_name . "," . $province->_name;
         $order->m_phone = $request->m_phone;
         $order->m_note = $request->m_note;
         $order->m_total_price = $request->m_total_price;
@@ -50,7 +57,7 @@ class CheckoutControllerApi extends Controller
             $orderDetail->m_product_name = $item->name;
             $orderDetail->save();
         }
-        return ["IsError" => false, "message" => "Đặt hàng thành công !", "data" => OrderModel::find($id)];
+        return ["IsError" => false, "message" => "Đặt hàng thành công !", "data" => $result];
     }
 
     /**
