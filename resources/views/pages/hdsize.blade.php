@@ -11,8 +11,19 @@
             <br>
         </p>
         <h5>Bảng quy đổi size giày Converse và chi tiết cách đo:</h4>
-            <div class="mx-auto">
+            <div  class="ms-auto">
                 <iframe  width="560" height="315" src="https://www.youtube.com/embed/3Al7Hd8Kbo0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <img src="https://drake.vn/image/catalog/Size-chart-2020/converse-CTAS-sizechart.jpg" alt="">
             </div>
+        <h5>Bảng quy đổi size giày Vans và chi tiết cách đo:</h5>
+        <div  class="ms-auto">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Jw31XOTF1gY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>            
+            <img src="https://drake.vn/image/catalog/Size-chart-2020/vans-sizechart.jpg" alt="">
+        </div>
+        <h5 class="text-center">CẬP NHẬT BẢNG SIZE CÁC LOẠI PHỤ TRANG</h5>
+        <div class="mx-auto">
+            <img src="https://drake.vn/image/catalog/Size-chart-2020/Size%20%C3%A1o%20Converse%20nam.jpg" alt="">
+            <img src="https://drake.vn/image/catalog/Size-chart-2020/size%20ao%20somi%20vans.jpg" alt="">
+        </div>
     </main>
 @endsection
