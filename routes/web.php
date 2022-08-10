@@ -59,6 +59,10 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('admintrator');
     Route::resource('dashboard', DashboardController::class);
 
+    // thống kê
+
+    Route::post('/order-date', [App\Http\Controllers\DashboardController::class, 'orderdate'])->name('orderdate');
+    Route::post('/order-filter-date', [App\Http\Controllers\DashboardController::class, 'filterdate'])->name('filterdate');
     // Post
     Route::get('post', [PostController::class, 'index'])->name('post-list');
     Route::get('post/add', [PostController::class, 'add_form'])->name('add-form');
