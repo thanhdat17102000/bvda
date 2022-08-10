@@ -105,7 +105,7 @@
                                 <li><a href="{{route('list-favourite')}}">Sản phẩm yêu thích</a></li>
                                 <li><a href="/profile">CSKH</a></li>
                                 <li><a href="/blog">Blog</a></li>
-                                <li><a href="/contact_us"></a>Tuyển Dụng</li>
+                                <li><a href="{{ route('tuyendung') }}">Tuyển Dụng</a></li>
 
                             </ul>
                         </div>
@@ -123,7 +123,7 @@
                                 <li><a href="#">Giới Thiệu</a></li>
                                 <li><a href="{{route('chinhsachdoitra')}}">Chính Sách Đổi Trả</a></li>
                                 <li><a href="#">Vận Chuyển</a></li>
-                                <li><a href="#">Chính Sách Bảo Mật</a></li>
+                                <li><a href="{{ route('baomat') }}">Chính Sách Bảo Mật</a></li>
                             </ul>
                         </div>
                     </div>

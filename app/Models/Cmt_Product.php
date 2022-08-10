@@ -26,6 +26,9 @@ class Cmt_Product extends Model
    public function showiduser(){
       return $this->hasOne(User::class,'id','m_id_user');
    }
+   public function showavatar(){
+      return $this->hasMany(User::class,'id','m_id_user');
+   }
    public function testorder(){
       return $this->hasOne(OrderModel::class,'m_id_user','m_id_user');
    }

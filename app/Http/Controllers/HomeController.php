@@ -10,6 +10,7 @@ use App\Models\OrderModel;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -122,5 +123,13 @@ class HomeController extends Controller
         $deleted = Cmt_product::find($data['iddelete']);
         $deleted->delete();
         echo 'thanhcong';
+    }
+
+    // Các chính sách
+    public function tuyendung(){
+        return view('Auth.policy.tuyendung');
+    }
+    public function baomat(){
+        return view('Auth.policy.baomat');
     }
 }
