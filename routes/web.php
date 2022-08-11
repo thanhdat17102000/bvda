@@ -218,7 +218,7 @@ Route::group(['prefix' => 'profile'], function () {
     Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
     Route::get('/chi-tiet-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'order']);
     Route::get('/huy-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'cancelled']);
-    Route::post('/doi-thong-tin-profile', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
+    Route::post('/doi-thong-tin-profile/{id}', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
 });
 
 
@@ -285,3 +285,11 @@ Route::get('/chinh-sach-doi-tra', function(){
 Route::get('huong-dan-chon-size', function(){
     return view('pages.hdsize');
 })->name('hdsize');
+//Tuyển dụng
+Route::get('/tuyendung', [HomeController::class, 'tuyendung'])->name('tuyendung');
+//Bảo mật
+Route::get('/baomat', [HomeController::class, 'baomat'])->name('baomat');
+// about us
+Route::get('/ve-kingdom-sneakers', function(){
+    return view('Auth.about-us.index');
+})->name('about-us');

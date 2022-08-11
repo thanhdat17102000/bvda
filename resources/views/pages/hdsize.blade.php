@@ -1,6 +1,23 @@
 @extends('Auth.layouts.master')
 @section('content')
     <main class="m-5">
+        <div class="breadcrumb-area bg-img" data-bg="assets/img/banner/breadcrumb-banner.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-wrap text-center">
+                            <nav aria-label="breadcrumb">
+                                <h1 class="breadcrumb-title">Chính sách đổi trả</h1>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Chính sách đổi trả</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
         <h5 class="text-center">Một vài bước đơn giản để bạn có thể sở hữu đôi giày vừa vặn với bàn chân nhất nhé!</h5>
         <p>
             Bước 1: Chuẩn bị một tờ giấy A4 rồi đặt chúng vào sát cạnh tường. Bước chân vào chính giữa tờ giấy sao cho phần gót chân chạm vào tường.

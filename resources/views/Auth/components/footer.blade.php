@@ -139,7 +139,7 @@
                                 <li><a href="#">Cửa hàng</a></li>
                                 <li><a href="#">Tài khoản</a></li>
                                 <li><a href="#">Đơn hàng</a></li>
-                                <li><a href="#">Hướng dẫn chọn size</a></li>
+                                <li><a href="{{route('hdsize')}}">Hướng dẫn chọn size</a></li>
                                 <li><a href="#">Đánh giá</a></li>
 
                             </ul>

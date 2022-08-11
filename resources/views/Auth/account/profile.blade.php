@@ -218,13 +218,13 @@
                                                     <h3>Thông tin</h3>
 
                                                     <div class="account-details-form">
-                                                        <form method="post" action="/profile/doi-thong-tin-profile">
+                                                        <form method="post" action="method="post" action="{{route('profile.update', Auth::user()->id)}}">
                                                             @csrf @method('PUT')
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="first-name" class="required">Tên hiển thị</label>
-                                                                        <input type="text" value="{{Auth::user()->name}}" id="name" placeholder="{{Auth::user()->name}}" />
+                                                                        <input type="text" value="{{Auth::user()->name}}" id="idMK" placeholder="{{Auth::user()->name}}" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
@@ -256,7 +256,8 @@
                                                 <div class="myaccount-content">
                                                     <h3>Đổi mật khẩu</h3>
                                                     <div class="account-details-form">
-                                                        <form action="#">
+                                                        <form method="post" action="{{route('profile.update', Auth::user()->id)}}">
+                                                            @csrf @method('PUT')
                                                             <fieldset>
                                                                 <div class="single-input-item">
                                                                     <label for="exampleInputEmail1">Tên tài khoản</label>
@@ -319,7 +320,6 @@
 <script src="{{asset('admin/assets/js/vendor.min.js')}}"></script>
 <script src="{{asset('admin/assets/js/app.min.js')}}"></script>
 
-</script> -->
 <!-- javascript -->
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <!-- CSS -->
@@ -335,6 +335,7 @@
         // đổi mật khẩu
         $('#btnluumk').click(function(e){
             e.preventDefault();
+            var id = $('#idadmin').data('id');
             var matkhaucu = $('#matkhaucu').val();
             var matkhaumoi = $('#matkhaumoi').val();
             var xacnhanmatkhau = $('#xacnhanmatkhau').val();
@@ -354,5 +355,6 @@
         });
     });
 </script>
+
 
 @endpush

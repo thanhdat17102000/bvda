@@ -33,17 +33,15 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $updated = accountModel::find($id);
-        if($file = $request->file('avatar')){
-            $ext= $request->avatar->getClientOriginalName();
-            $file_name = time().'-'.'avatar.'.$ext;
-            $file->move('uploads/avatar', $file_name);
-            $updated->m_avatar = $file_name;
-        }
         $updated->email = $request->email;
         $updated->phone = $request->phone;
         $updated->m_address = $request->m_address;
         if($updated->save()){
             return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');}
+    }
+    public function updateMK(Request $request, $id)
+    {
+
     }
 
 }
