@@ -298,13 +298,6 @@
                                 <span> QL hình ảnh </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route("slider") }}">
-                                <i class="mdi mdi-view-dashboard"></i>
-                                <span> QL slider </span>
-                            </a>
-                        </li>
-
                     </ul>
 
                 </div>

@@ -83,7 +83,7 @@
                             @csrf @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên tài khoản</label>
-                                <input type="text" class="form-control" id="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
+                                <input type="text" class="form-control" idid="matkhaumoi"="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mật khẩu cũ</label>

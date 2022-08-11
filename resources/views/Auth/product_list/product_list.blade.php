@@ -244,10 +244,12 @@ Danh sách sản phẩm
                                                 <option value="{{Request::url()}}?danhsach=giacaodenthap">Giá (Cao &gt; Thấp)</option>
                                                 <option value="{{Request::url()}}?danhsach=moicapnhat">Mới cập nhật</option>
                                             </select>
+                                            <button class="btn btn-sm-primary" id="locsanpham">lọc</button>
+
                                         </div>
-                                        <div class="product-amount">
-                                            <p>đang xem 1-16 sản phẩm</p>
-                                        </div>
+                                        <!-- <div class="product-amount">
+                                            <button class="btn btn-primary" id="locsanpham">lọc</button>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -417,8 +419,8 @@ Danh sách sản phẩm
 
 <script>
         jQuery(document).ready(function($) {
-        $('.sortne').change(function() {
-            var url = $(this).val();
+        $('#locsanpham').click(function() {
+            var url = $('.sortne').val();
             // alert(url);
             if(url){
                 window.location = url;
@@ -428,7 +430,7 @@ Danh sách sản phẩm
         locdanhsach();
         function locdanhsach() {
             var url = window.location.href;
-            $('select[name="sortne"]').find('option[value="'+url+'"]').attr("selected",true);
+            $('ul[class="list"]').find('option[value="'+url+'"]').attr("selected",true);
         }
     });
 </script>

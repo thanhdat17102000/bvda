@@ -218,13 +218,13 @@
                                                     <h3>Thông tin</h3>
 
                                                     <div class="account-details-form">
-                                                        <form method="post" action="/profile/doi-thong-tin-profile">
+                                                        <form method="post" action="method="post" action="{{route('profile.update', Auth::user()->id)}}">
                                                             @csrf @method('PUT')
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="first-name" class="required">Tên hiển thị</label>
-                                                                        <input type="text" value="{{Auth::user()->name}}" id="name" placeholder="{{Auth::user()->name}}" />
+                                                                        <input type="text" value="{{Auth::user()->name}}" id="idMK" placeholder="{{Auth::user()->name}}" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
@@ -254,31 +254,36 @@
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="account-info" role="tabpanel">
                                                 <div class="myaccount-content">
-                                                    <h3>Chi tiết tài khoản</h3>
+                                                    <h3>Đổi mật khẩu</h3>
                                                     <div class="account-details-form">
-                                                        <form action="#">
+                                                        <form method="post" action="{{route('profile.update', Auth::user()->id)}}">
+                                                            @csrf @method('PUT')
                                                             <fieldset>
                                                                 <div class="single-input-item">
+                                                                    <label for="exampleInputEmail1">Tên tài khoản</label>
+                                                                    <input type="text" class="form-control" idid="matkhaumoi"="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
+                                                                </div>
+                                                                <div class="single-input-item">
                                                                     <label for="current-pwd" class="required">Mật khẩu hiện tại</label>
-                                                                    <input type="password" id="current-pwd" placeholder="Current Password" />
+                                                                    <input type="password" id="matkhaucu" placeholder="Current Password" />
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
                                                                             <label for="new-pwd" class="required">Mật khẩu mới</label>
-                                                                            <input type="password" id="new-pwd" placeholder="New Password" />
+                                                                            <input type="password" id="matkhaumoi" placeholder="New Password" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
                                                                             <label for="confirm-pwd" class="required">Xác nhận mật khẩu</label>
-                                                                            <input type="password" id="confirm-pwd" placeholder="Confirm Password" />
+                                                                            <input type="password" id="xacnhanmatkhau" placeholder="Confirm Password" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </fieldset>
                                                             <div class="single-input-item">
-                                                                <button class="check-btn sqr-btn ">Lưu</button>
+                                                                <button type="submit" id="luumk" class="check-btn sqr-btn ">Lưu</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -295,4 +300,61 @@
             <!-- my account wrapper end -->
         </main>
         <!-- main wrapper end -->
+        @if(Session::has('alert_success'))
+    <div class="alert alert-success" style="margin-top: 10px;">
+        {!! Session::get('alert_success') !!}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 @endsection
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+<script src="{{asset('admin/assets/libs/tablesaw/tablesaw.js')}}"></script>
+<script src="{{asset('admin/assets/js/pages/tablesaw.init.js')}}"></script>
+<script src="{{asset('admin/assets/js/vendor.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/app.min.js')}}"></script>
+
+<!-- javascript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+<script>
+    jQuery(document).ready(function($) {
+        // đổi mật khẩu
+        $('#btnluumk').click(function(e){
+            e.preventDefault();
+            var id = $('#idadmin').data('id');
+            var matkhaucu = $('#matkhaucu').val();
+            var matkhaumoi = $('#matkhaumoi').val();
+            var xacnhanmatkhau = $('#xacnhanmatkhau').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:'{{route("doimatkhauadmin")}}',
+                method:'post',
+                data:{
+                    id:id,matkhaucu:matkhaucu,matkhaumoi:matkhaumoi,xacnhanmatkhau:xacnhanmatkhau,_token:_token
+                },
+                success: function(data){
+                    if(data = 'thanhcong'){
+                        alertify.success('Cập nhật mật khẩu thành công');
+                    }
+                }
+            })
+        });
+    });
+</script>
+
+
+@endpush
