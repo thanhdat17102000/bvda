@@ -13,7 +13,7 @@ TRANG CHỦ
                         @foreach($sliders as $slider)
                         <!-- single slider item start -->
                         <div class="hero-single-slide">
-                            <div class="hero-slider-item bg-img" data-bg="{{isset('uploads')}}/{{$slider->m_images}}">
+                            <div class="hero-slider-item bg-img" data-bg="{{ $slider->m_images }}">
                                 <div class="hero-slider-content slide-1">
                                     <h5 class="slide-subtitle">{{ $slider->m_subtitle }}!</h5>
                                     <h2 class="slide-title">{{ $slider->m_title }}</h2>
