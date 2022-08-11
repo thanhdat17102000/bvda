@@ -80,6 +80,8 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
         'slider' => App\Http\Controllers\sliderController::class,
     ]);
 
+    Route::post('filterdate', [App\Http\Controllers\DashboardController::class, 'filterdate'])->name('filterdate');
+    Route::post('orderdate', [App\Http\Controllers\DashboardController::class, 'orderdate'])->name('orderdate');
     // start Comment
     Route::get('/list_cmt', [Comment_Product::class, 'index'])->name('list_comment');
     Route::get('/delete_cmt/{id}', [Comment_Product::class, 'delete_comment'])->name('delete_cmtpro');
