@@ -52,14 +52,14 @@
                     const {
                         data
                     } = response;
-                    // $('input[name=txnRef]').val(data.id);
-                    // if (payMethod == 'cash') {
-                    //     window.location.href = "{{ route('checkout-success') }}";
-                    // } else if (payMethod == 'momo') {
-                    //     $('#momo-payment').submit();
-                    // } else {
-                    //     $('#vnpay-payment').submit();
-                    // }
+                    $('input[name=txnRef]').val(data.id);
+                    if (payMethod == 'cash') {
+                        window.location.href = "{{ route('checkout-success') }}";
+                    } else if (payMethod == 'momo') {
+                        $('#momo-payment').submit();
+                    } else {
+                        $('#vnpay-payment').submit();
+                    }
                 },
                 error: function(error) {
                     console.log(error);

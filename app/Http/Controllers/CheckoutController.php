@@ -9,6 +9,7 @@ use App\Models\TransportFee;
 use App\Models\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -184,7 +185,9 @@ class CheckoutController extends Controller
     public function checkout_success(Request $request)
     {
         $data = [];
+        $pay = "Thanh toán bằng tiền mặt khi nhận hàng";
         if (isset($request->vnp_SecureHash)) {
+            
             $result = "";
             $vnp_HashSecret = "CJRTNUCTOILPABSOZDOITQERKIMEGDYI";
             $vnp_SecureHash = $_GET['vnp_SecureHash'];
@@ -212,6 +215,7 @@ class CheckoutController extends Controller
             if ($secureHash == $vnp_SecureHash) {
                 if ($_GET['vnp_ResponseCode'] == '00') {
                     $result = "Thanh toán đơn hàng thành công!";
+                    $pay = "Thanh toán qua VNPay";
                     $orderId = $inputData['vnp_TxnRef'] - 20000;
                     $order = OrderModel::find($orderId);
                     $order->m_status_pay = 1;
@@ -225,6 +229,7 @@ class CheckoutController extends Controller
             $data = ["message" => $result];
         }
         if (isset($request->partnerCode)) {
+           
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
 
             $partnerCode = $_GET["partnerCode"];
@@ -250,6 +255,7 @@ class CheckoutController extends Controller
             // if ($m2signature == $partnerSignature) {
             if ($resultCode == '0') {
                 $result = 'Thanh toán đơn hàng thành công!';
+                $pay = "Thanh toán qua MoMo";
                 $order = OrderModel::find($extraData);
                 $order->m_status_pay = 1;
                 $order->save();
@@ -261,6 +267,16 @@ class CheckoutController extends Controller
             // }
             $data = ["message" => $result];
         }
+
+        // send mail
+        $lastOrder = OrderModel::orderby('created_at', "DESC")->limit(1)->get();
+        $to_name = "Kingdom Sneakers Shop";
+        $to_mail = $lastOrder[0]->m_email;
+        $data = array("order" => $lastOrder[0], 'pay' => $pay);
+        Mail::send('Auth.checkout.order-mail', $data, function($message) use ($to_name, $to_mail, $lastOrder){
+            $message->to($to_mail)->subject('Xác nhận đơn hàng #' . $lastOrder[0]->id);
+            $message->from('kingdomsneakers80@gmail.com', $to_name);
+        });
         Cart::destroy();
         return view('Auth.checkout.success', $data);
     }
