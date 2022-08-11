@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
         ],
         [
-            'name.required' => 'Họ và tên không được bỏ trống!',
+            'name.required' => 'Vui lòng nhập họ và tên!',
             'name.max:55' => 'Họ và tên quá dài!',
             'email.email' => 'Email không đúng định dạng! Vui lòng kiểm tra lại',
             'email.unique'=> 'Email đã được đăng ký!',
@@ -78,9 +78,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'm_address'=>$data['m_address'],
-            
+            'password' => Hash::make($data['password']),            
         ]);
     }
     

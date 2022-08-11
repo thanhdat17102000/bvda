@@ -19,7 +19,6 @@
     <!--=== Main Style CSS ===-->
     <link href="{{ URL::asset('Auth/css/style.css') }}" rel="stylesheet">
     {{-- Custom style --}}
-    @stack('styles')
     <!-- Modernizer JS -->
     <script src="{{ URL::asset('Auth/js/modernizr-2.8.3.min.js') }}"></script>
     <!-- Notification css (Toastr) -->

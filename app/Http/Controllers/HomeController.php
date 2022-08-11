@@ -133,9 +133,9 @@ class HomeController extends Controller
 
     // Các chính sách
     public function tuyendung(){
-        return view('Auth.policy.tuyendung');
+        return view('pages.tuyendung');
     }
     public function baomat(){
-        return view('Auth.policy.baomat');
+        return view('pages.baomat');
     }
 }
