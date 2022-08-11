@@ -13,11 +13,11 @@ TRANG CHỦ
                         @foreach($sliders as $slider)
                         <!-- single slider item start -->
                         <div class="hero-single-slide">
-                            <div class="hero-slider-item bg-img" data-bg="{{isset('uploads')}}/{{$slider->m_images}}">
+                            <div class="hero-slider-item bg-img" data-bg="{{ asset('uploads') }}/{{$slider->m_images}}">
                                 <div class="hero-slider-content slide-1">
                                     <h5 class="slide-subtitle">{{ $slider->m_subtitle }}!</h5>
                                     <h2 class="slide-title">{{ $slider->m_title }}</h2>
-                                    <p class="slide-desc">{{ $slider->m_description }}</p>
+                                    <p class="slide-desc">{!! $slider->m_description !!}</p>
                                     <a href="{{ $slider->m_link }}" class="btn btn-hero">XEM NGAY</a>
                                 </div>
                             </div>
@@ -102,7 +102,9 @@ TRANG CHỦ
                         <div class="product-item mb-50">
                             <div class="product-thumb">
                                 <a href="product-details.html">
-                                    <img src="{{URL::asset('Auth/img/product/').'/'.$myProductItem->m_picture}}" alt="">
+                                    @if(json_decode($myProductItem->m_picture))
+                                        <img src="{{asset('uploads')}}/{{ json_decode($myProductItem->m_picture)[0] }}" alt="">
+                                    @endif
                                 </a>
                             </div>
                             <div class="product-content">
@@ -187,7 +189,9 @@ TRANG CHỦ
                             <div class="pro-item-small mt-30">
                                 <div class="product-thumb">
                                     <a href="product-details.html">
-                                        <img src="{{URL::asset('Auth/img/product/').'/'.$myProductSellItem->m_picture}}" alt="">
+                                    @if(json_decode($myProductItem->m_picture))
+                                        <img src="{{asset('uploads')}}/{{ json_decode($myProductSellItem->m_picture)[0] }}" alt="">
+                                    @endif
                                     </a>
                                 </div>
                                 <div class="pro-small-content">
@@ -233,8 +237,8 @@ TRANG CHỦ
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h2 class="title">blog</h2>
-                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                        <h2 class="title">Tin Tức</h2>
+                        <p class="sub-title">Tổng hợp tin tức sớm nhất</p>
                     </div>
                 </div>
             </div>
@@ -247,7 +251,7 @@ TRANG CHỦ
                         <div class="blog-post-item">
                             <div class="blog-thumb">
                                 <a href="blog-details.html">
-                                    <img src="{{URL::asset('Auth/img/blog/').'/'.$blogItem->m_image}}" alt="blog thumb">
+                                    <img src="{{asset('uploads/post')}}/{{$blogItem->m_image}}" alt="{{$blogItem->m_image}}">
                                 </a>
                             </div>
                             <div class="blog-content">

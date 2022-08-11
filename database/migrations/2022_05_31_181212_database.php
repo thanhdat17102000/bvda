@@ -144,6 +144,7 @@ class Database extends Migration
             $table->foreign('m_id_maloai')->references('id')->on('t_product');
             $table->foreign('m_id_user')->references('id')->on('t_user');
         });
+        // table slider
         Schema::create('t_slider', function (Blueprint $table) {
             $table->increments('id');
             $table->text('m_images');

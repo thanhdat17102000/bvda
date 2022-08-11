@@ -129,9 +129,8 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
 
 
 // Client
-Route::get('/', function () {
-    return view('Auth.home-compare.home_page');
-})->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/compare', function () {
     return view('Auth.home-compare.compare');
 });
