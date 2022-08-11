@@ -22,7 +22,7 @@ class HomeController extends Controller
         $myProducts = product::where('m_status', 1)->get();
         $myProductSells = product::where('m_status', 1)->orderBy('m_buy', 'DESC')->paginate(6);
         $blogs = Post::where('m_status', 1)->paginate(4);
-        return view('Auth.home-compare.home_page',compact('categories', 'sliders','myProducts','myProductSells', 'blogs'));
+        return view('Auth.home-compare.home_page', compact('categories','sliders','myProducts','myProductSells', 'blogs'));
     }
     public function locgiasp(){
         if(isset($_GET['minamount']) && isset($_GET['maxamount'])){
@@ -133,9 +133,9 @@ class HomeController extends Controller
 
     // Các chính sách
     public function tuyendung(){
-        return view('Auth.policy.tuyendung');
+        return view('pages.tuyendung');
     }
     public function baomat(){
-        return view('Auth.policy.baomat');
+        return view('pages.baomat');
     }
 }
