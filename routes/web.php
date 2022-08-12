@@ -238,10 +238,10 @@ Route::get('/register', function () {
 Route::get('/cart', function () {
     return view('Auth.cart.cart');
 })->name('cart');
-Route::get('/checkout', function () {
-    return view('Auth.checkout.checkout');
-})->name('checkout');
+Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
 Route::get('/checkout-success', [CheckoutController::class, 'checkout_success'])->name('checkout-success');
+Route::post('/checkout-location', [CheckoutController::class, 'select_location'])->name('checkout-location');
+Route::post('/checkout-delivery', [CheckoutController::class, 'delivery'])->name('checkout-delivery');
 Route::post('/momo-payment', [CheckoutController::class, 'momo_payment'])->name('momo-payment');
 Route::post('/vnpay-payment', [CheckoutController::class, 'vnpay_payment'])->name('vnpay-payment');
 

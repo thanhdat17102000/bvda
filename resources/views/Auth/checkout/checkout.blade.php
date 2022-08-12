@@ -254,20 +254,20 @@
                                             <div class="single-input-item">
                                                 <label for="m_name" class="required">Họ và tên</label>
                                                 <input type="text" id="m_name" name="m_name"
-                                                    placeholder="Nhập họ và tên" />
+                                                    placeholder="Nhập họ và tên" value="{{Auth::check() ? Auth::user()->name : ""}}"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="email" class="required">Email</label>
-                                        <input type="email" id="email" name="m_email" placeholder="Nhập email" />
+                                        <input type="email" id="email" name="m_email" placeholder="Nhập email" value="{{Auth::check() ? Auth::user()->email : ""}}" />
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="com-name">Số điện thoại</label>
                                         <input type="text" id="com-name" name="m_phone"
-                                            placeholder="Nhập số điện thoại" />
+                                            placeholder="Nhập số điện thoại" value="{{Auth::check() ? Auth::user()->phone : ""}}"/>
                                     </div>
 
                                     <div class="single-input-item">

@@ -11,6 +11,7 @@ use App\Models\TransportFee;
 use App\Models\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutControllerApi extends Controller
 {
@@ -44,6 +45,7 @@ class CheckoutControllerApi extends Controller
         }else {
             $fee_ship = 50000;
         }
+        if(Auth::check()){$order->m_id_user = Auth::user()->id;}
         $order->m_name = $request->m_name;
         $order->m_email = $request->m_email;
         $order->m_address = $data['m_address'] . "," . $ward->_prefix . " " . $ward->_name . "," . $district->_prefix . " " . $district->_name . "," . $province->_name;
