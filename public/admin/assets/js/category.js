@@ -17,12 +17,16 @@ function deleteData(id) {
     })
         .then((result) => {
             if (result.value == true) {
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name=" csrf-token"]').attr('content')
+                //     }
+                // });
+                var _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "/admintrator/category/" + id + "/delete",
                     type: "POST",
-                    data: {
-                        // '_method': 'DELETE'
-                    },
+                    data:{_token:_token},
                     success: function (results) {
                         swal("Thành công!", results.message, "success");
                         location.reload();
