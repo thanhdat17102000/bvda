@@ -27,24 +27,7 @@
     <script src=" {{ asset('admin/assets/libs/select2/select2.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/jquery-mask-plugin/jquery.mask.min.js') }}"></script>
     <script>
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "newestOnTop": false,
-            "progressBar": false,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-
+        let table = "";
         $(".select2").select2()
 
         function fetchDelivery() {
@@ -79,6 +62,7 @@
                                 success: function(response) {
                                     toastr.success('Thay đổi phí ship thành công!');
                                     console.log(response);
+                                    table.destroy();
                                     fetchDelivery();
                                 },
                                 error: function(error) {
@@ -89,6 +73,7 @@
                         }
 
                     });
+                    table = $("#datatable").DataTable();
                 },
                 error: function(error) {
                     console.error(error);
@@ -110,6 +95,7 @@
                     console.log(response);
                     toastr.success('Thêm phí ship thành công!')
                     $('button[type=reset]').click();
+                    table.destroy();
                     fetchDelivery();
                 },
                 error: function(error) {
@@ -151,25 +137,6 @@
 
 
         });
-
-        $("#datatable").DataTable();
-        var a = $("#datatable-buttons").DataTable({
-            lengthChange: !1,
-            buttons: ["copy", "excel", "pdf"],
-        });
-        $("#key-table").DataTable({
-                keys: !0
-            }),
-            $("#responsive-datatable").DataTable(),
-            $("#selection-datatable").DataTable({
-                select: {
-                    style: "multi"
-                }
-            }),
-            a
-            .buttons()
-            .container()
-            .appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
     </script>
     <!-- third party js ends -->
 @endpush

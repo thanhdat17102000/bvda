@@ -18,6 +18,11 @@ class CheckoutController extends Controller
         $province = Province::orderby('_name', 'ASC')->get();
         return view('Auth.checkout.checkout')->with(compact('province'));
     }
+
+    public function check_coupon(Request $request){
+        print_r($request->all());
+    }
+
     public function select_location(Request $request)
     {
         $result = '';

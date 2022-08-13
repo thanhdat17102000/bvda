@@ -20,6 +20,7 @@ use App\Models\User;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +73,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     // Quản lý user
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
-    Route::get('/user/add', [UserController::class,'add_user'])->name('add_user');
+    Route::get('/user/add', [UserController::class, 'add_user'])->name('add_user');
     Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([
@@ -120,10 +121,16 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('/delivery/list', [DeliveryController::class, 'list_delivery'])->name('list-delivery');
     Route::post('/delivery/edit', [DeliveryController::class, 'edit_delivery'])->name('edit-delivery');
 
+    //coupon
+    Route::get('/coupon', [CouponController::class, 'index'])->name('coupon');
+    Route::get('/coupon/load', [CouponController::class, 'load_coupon'])->name('coupon-load');
+    Route::get('/coupon/delete/{id}', [CouponController::class, 'delete_coupon'])->name('coupon-delete');
+    Route::get('/coupon/insert', [CouponController::class, 'insert_coupon'])->name('coupon-insert');
+    Route::post('/coupon/save', [CouponController::class, 'save_coupon'])->name('save-coupon');
+
     // chức năng nâng cao admin product
     Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
     Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
-
 });
 
 
@@ -238,7 +245,8 @@ Route::get('/register', function () {
 Route::get('/cart', function () {
     return view('Auth.cart.cart');
 })->name('cart');
-Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout-coupon', [CheckoutController::class, 'check_coupon'])->name('checkout-coupon');
 Route::get('/checkout-success', [CheckoutController::class, 'checkout_success'])->name('checkout-success');
 Route::post('/checkout-location', [CheckoutController::class, 'select_location'])->name('checkout-location');
 Route::post('/checkout-delivery', [CheckoutController::class, 'delivery'])->name('checkout-delivery');
@@ -277,13 +285,13 @@ Route::post('/search', [productController::class, 'search']);
 //Sản phẩm theo danh mục
 Route::get('category/{id}', [productController::class, 'categoryProduct'])->name('categoryProduct');
 // pages 
-Route::get('/quydinh', function(){
+Route::get('/quydinh', function () {
     return view('pages.quydinh');
 })->name('quydinh');
-Route::get('/chinh-sach-doi-tra', function(){
+Route::get('/chinh-sach-doi-tra', function () {
     return view('pages.chinhsachdoitra');
 })->name('chinhsachdoitra');
-Route::get('huong-dan-chon-size', function(){
+Route::get('huong-dan-chon-size', function () {
     return view('pages.hdsize');
 })->name('hdsize');
 //Tuyển dụng
@@ -291,6 +299,6 @@ Route::get('/tuyendung', [HomeController::class, 'tuyendung'])->name('tuyendung'
 //Bảo mật
 Route::get('/baomat', [HomeController::class, 'baomat'])->name('baomat');
 // about us
-Route::get('/ve-kingdom-sneakers', function(){
+Route::get('/ve-kingdom-sneakers', function () {
     return view('Auth.about-us.index');
 })->name('about-us');

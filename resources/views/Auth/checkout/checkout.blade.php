@@ -221,15 +221,16 @@
                             </div>
 
                             <div class="card">
-                                <h5>Bạn đã có mã giảm giá? <span data-toggle="collapse" data-target="#couponaccordion">Click
+                                <h5>Bạn đã có mã giảm giá? <span data-toggle="collapse" data-target="#couponaccordion">Nhấn
                                         vào đây để nhập mã</span></h5>
                                 <div id="couponaccordion" class="collapse" data-parent="#checkOutAccordion">
                                     <div class="card-body">
                                         <div class="cart-update-option">
                                             <div class="apply-coupon-wrapper">
-                                                <form action="#" method="post" class=" d-block d-md-flex">
-                                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                                    <button class="btn btn-sqr">Apply Coupon</button>
+                                                <form action="{{route('checkout-coupon')}}" method="post" class=" d-block d-md-flex">
+                                                    @csrf
+                                                    <input type="text" placeholder="Nhập mã giảm giá của bạn" name="coupon"/>
+                                                    <button class="btn btn-sqr" type="submit" name="check-coupon">Áp dụng mã giảm giá</button>
                                                 </form>
                                             </div>
                                         </div>

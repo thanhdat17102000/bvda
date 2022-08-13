@@ -153,10 +153,10 @@
                             <!-- Cart Update Option -->
                             <div class="cart-update-option d-block d-md-flex justify-content-between">
                                 <div class="apply-coupon-wrapper">
-                                    <form action="#" method="post" class=" d-block d-md-flex">
+                                    {{-- <form action="#" method="post" class=" d-block d-md-flex">
                                         <input type="text" placeholder="Nhập mã giảm giá" required />
                                         <button class="btn">ÁP DỤNG</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                                 <div class="cart-update">
                                     <a href="#" class="btn">CẬP NHẬT GIỎ HÀNG</a>
