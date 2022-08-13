@@ -27,10 +27,6 @@
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
@@ -397,78 +393,7 @@
     <!-- App js -->
     <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
     <!-- morrisjs vs jqueryui -->
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
-<script>
-    jQuery(document).ready(function($) {
-        $('#btn-dashboard-filter').on('click',function(){
-            var from_date = $('#datepicker').val();
-            var to_date = $('#datepicker2').val();
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url:'{{route("filterdate")}}',
-                method:"post",
-                dataType:"JSON",
-                data:{from_date:from_date ,to_date:to_date, _token:_token },
-
-                success:function(data)
-                {
-                    chart.setData(data);
-                }
-            });
-        });
-            chart7day();
-        var chart = new Morris.Bar({
-            element: 'myfirstchart',
-            // option thống kê
-            barColors: ['#435ebe', '#fc8710','#FF6541','#A4ADD3'],
-            gridTextColor:['#000000'],
-            // pointFillColors: ['#ffffff'],
-            // pointStrokeColors:['black'],
-            fillOpacity:0.8,
-            hideHover: 'auto',
-            parseTime: false,
-
-            xkey: 'name',
-            ykeys: ['tongtien'],
-            // behaveLikeLine: true,
-
-            labels: ['giá tiền']
-        });
-
-    // autoload 30 ngày đơn hàng
-    function chart7day(){
-        var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url:'{{route("orderdate")}}',
-                method:"post",
-                dataType:"JSON",
-                data:{_token:_token},
-
-                success:function(data)
-                {
-                    chart.setData(data);
-                }
-            });
-        }
-    });
-    // onclick lọc theo ngày tháng
-</script>
-<script>
-  $( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-</script>
-<script>
-  $( function() {
-    $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-</script>
 </body>
 
 </html>
