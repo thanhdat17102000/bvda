@@ -101,7 +101,7 @@ TRANG CHỦ
                         
                         <div class="product-item mb-50">
                             <div class="product-thumb">
-                                <a href="product-details.html">
+                                <a href="{{ route('productdetails', $myProductItem->m_product_slug) }}">
                                     @if(json_decode($myProductItem->m_picture))
                                         <img src="{{asset('uploads')}}/{{ json_decode($myProductItem->m_picture)[0] }}" alt="">
                                     @endif
@@ -109,7 +109,7 @@ TRANG CHỦ
                             </div>
                             <div class="product-content">
                                 <h5 class="product-name">
-                                    <a href="product-details.html">{{$myProductItem->m_product_name}}</a>
+                                    <a href="{{ route('productdetails', $myProductItem->m_product_slug) }}">{{$myProductItem->m_product_name}}</a>
                                 </h5>
                                 <div class="price-box">
                                     <span class="price-regular">{{$myProductItem->m_price}} vnđ</span>
@@ -118,7 +118,8 @@ TRANG CHỦ
                                 <div class="product-action-link">
                                     <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
                                     <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
+                                    <!-- <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a> -->
+                                    <a href="{{ route('productdetails', $myProductItem->m_product_slug) }}"><span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +189,7 @@ TRANG CHỦ
                         <div class="slide-item">
                             <div class="pro-item-small mt-30">
                                 <div class="product-thumb">
-                                    <a href="product-details.html">
+                                    <a href="{{ route('productdetails', $myProductSellItem->m_product_slug) }}">
                                     @if(json_decode($myProductItem->m_picture))
                                         <img src="{{asset('uploads')}}/{{ json_decode($myProductSellItem->m_picture)[0] }}" alt="">
                                     @endif
@@ -196,11 +197,11 @@ TRANG CHỦ
                                 </div>
                                 <div class="pro-small-content">
                                     <h6 class="product-name">
-                                        <a href="product-details.html">{{$myProductItem->m_product_name}}</a>
+                                        <a href="{{ route('productdetails', $myProductSellItem->m_product_slug) }}">{{$myProductSellItem->m_product_name}}</a>
                                     </h6>
                                     <div class="price-box">
-                                        <span class="price-regular">{{$myProductItem->m_price}} vnđ</span>
-                                        <span class="price-old"><del>{{$myProductItem->m_original_price}} vnđ</del></span>
+                                        <span class="price-regular">{{$myProductSellItem->m_price}} vnđ</span>
+                                        <span class="price-old"><del>{{$myProductSellItem->m_original_price}} vnđ</del></span>
                                     </div>
                                     <div class="ratings">
                                         <span><i class="ion-android-star"></i></span>
@@ -212,7 +213,7 @@ TRANG CHỦ
                                     <div class="product-link-2">
                                         <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
                                         <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                        <a href="{{ route('productdetails', $myProductSellItem->m_product_slug) }}"> <span data-toggle="tooltip" title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
