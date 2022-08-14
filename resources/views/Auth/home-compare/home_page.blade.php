@@ -261,8 +261,8 @@ TRANG CHỦ
                                     </a>
                                 </h5>
                                 <ul class="blog-meta">
-                                    <!-- <li><span>By: </span>DJ Thành Đạt</li> -->
-                                    <li><span>Ngày viết: </span>{{ $blogItem->created_at->format('d/m/Y') }}</li>
+                                    <li><span>By: </span>{{ $blogItem->user->name }}</li>
+                                    <li><span>On: </span>{{ $blogItem->created_at->format('d/m/Y') }}</li>
                                 </ul>
                                 <a href="{{ route('blog-detail', $blogItem->m_slug) }}" class="read-more">Đọc ngay...</a>
                             </div>
