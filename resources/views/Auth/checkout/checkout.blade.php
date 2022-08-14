@@ -26,6 +26,7 @@
             $('.checkout-content').html(content)
             $('.tax').text(tax);
             $('.total-price').text(total);
+            $('.total-price').data('price', total.replace(/,/g, ''));
         }
 
         renderCheckout()
@@ -66,6 +67,7 @@
                 }
             });
         });
+
         $('select').change(function(e) {
             e.preventDefault();
             let result = '';
@@ -120,6 +122,36 @@
                 });
             }
         });
+
+        $('#check-coupon').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "post",
+                url: "{{ route('checkout-coupon') }}",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    if (!response.data) {
+                        $('.error-coupon').text(response.message);
+                    }else {
+                        if(response.data.coupon_method == 1){
+                            $('.coupon').text(response.data.coupon_value + "%");
+                            let price = Number($('.total-price').data('price')) * (100 - Number(response.data.coupon_value) ) / 100;
+                            console.log(price);
+                            $('.total-price').text(price);
+                        }
+                        else {
+                            $('.coupon').text(response.data.coupon_value.toLocaleString());
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
     </script>
 @endpush
 @push('styles')
@@ -165,60 +197,84 @@
                     <div class="col-12">
                         <!-- Checkout Login Coupon Accordion Start -->
                         <div class="checkoutaccordion" id="checkOutAccordion">
-                            <div class="card">
-
-                                <div id="logInaccordion" class="collapse" data-parent="#checkOutAccordion">
-                                    <div class="card-body">
-                                        <p>If you have shopped with us before, please enter your details in the boxes
-                                            below. If you are a new customer, please proceed to the Billing &amp;
-                                            Shipping section.</p>
-                                        <div class="login-reg-form-wrap mt-20">
-                                            <div class="row">
-                                                <div class="col-lg-7 m-auto">
-                                                    <form action="#" method="post">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="single-input-item">
-                                                                    <input type="email" placeholder="Enter your Email"
-                                                                        required />
-                                                                </div>
+                            @if (!Auth::check())
+                                <div class="card">
+                                    <h5>Đã có tài khoản? <span data-toggle="collapse" data-target="#logInaccordion"
+                                            aria-expanded="false" class="collapsed">Click
+                                            Nhấn vào đây để đăng nhập</span></h5>
+                                    <div id="logInaccordion" class="collapse" data-parent="#checkOutAccordion"
+                                        style="">
+                                        <div class="card-body">
+                                            <p>Nếu bạn đã từng mua hàng trước đây vui lòng đăng nhập tài khoản bên dưới. Nếu
+                                                bạn là khách hàng mới vui lòng đăng ký tài khoản mới hoặc tiếp tục đặt hàng
+                                                và thanh toán.</p>
+                                            <div class="login-reg-form-wrap mt-20">
+                                                <div class="row">
+                                                    <div class="col-lg-7 m-auto">
+                                                        <form method="POST" action="{{ route('login') }}">
+                                                            @csrf
+                                                            <div class="single-input-item">
+                                                                <label for="">{{ __('Email     ') }}</label>
+                                                                <input class="@error('email') is-invalid @enderror"
+                                                                    id="email" type="emai" name="email"
+                                                                    value="{{ old('email') }}" autocomplete="email"
+                                                                    autofocus placeholder="Email/Tên đăng nhập" />
+                                                                @error('email')
+                                                                    <span class="invalid-feedback input-group-text"
+                                                                        role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
                                                             </div>
 
-                                                            <div class="col-md-12">
-                                                                <div class="single-input-item">
-                                                                    <input type="password" placeholder="Enter your Password"
-                                                                        required />
+                                                            <div class="single-input-item">
+                                                                <label for="">{{ __('Mật khẩu ') }}</label>
+                                                                <input id="password" type="password"
+                                                                    class="@error('password') is-invalid @enderror"
+                                                                    name="password" autocomplete="current-password" />
+                                                                @error('password')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="single-input-item">
+                                                                <div
+                                                                    class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                                                    <div class="remember-meta">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input class="form-check-input" type="checkbox"
+                                                                                name="remember" id="remember"
+                                                                                {{ old('remember') ? 'checked' : '' }}>
+                                                                            <label class="custom-control-label"
+                                                                                for="rememberMe">{{ __('Ghi nhớ tài khoản!') }}</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    @if (Route::has('password.request'))
+                                                                        <a href="{{ route('password.request') }}"
+                                                                            class="forget-pwd">Quên mật khẩu</a>
+                                                                    @endif
+
                                                                 </div>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="single-input-item">
                                                             <div
                                                                 class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                                                <div class="remember-meta">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input"
-                                                                            id="rememberMe" required />
-                                                                        <label class="custom-control-label"
-                                                                            for="rememberMe">Remember
-                                                                            Me</label>
-                                                                    </div>
+                                                                <div class="single-input-item">
+                                                                    <button type="submit" class="btn">
+                                                                        {{ __('Đăng nhập') }}</button>
                                                                 </div>
-
-                                                                <a href="#" class="forget-pwd">Forget Password?</a>
+                                                                <p>Chưa có tài khoản? <a href="{{ route('register') }}"
+                                                                        class="forget-pwd">Đăng ký</a></p>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="single-input-item">
-                                                            <button class="btn btn-sqr">Login</button>
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
 
                             <div class="card">
                                 <h5>Bạn đã có mã giảm giá? <span data-toggle="collapse" data-target="#couponaccordion">Nhấn
@@ -227,15 +283,21 @@
                                     <div class="card-body">
                                         <div class="cart-update-option">
                                             <div class="apply-coupon-wrapper">
-                                                <form action="{{route('checkout-coupon')}}" method="post" class=" d-block d-md-flex">
+                                                <form action="" method="post" id="check-coupon"
+                                                    class="d-block d-md-flex">
                                                     @csrf
-                                                    <input type="text" placeholder="Nhập mã giảm giá của bạn" name="coupon"/>
-                                                    <button class="btn btn-sqr" type="submit" name="check-coupon">Áp dụng mã giảm giá</button>
+                                                    <input type="text" placeholder="Nhập mã giảm giá của bạn"
+                                                        name="coupon_code" required />
+                                                    <button class="btn btn-sqr" type="submit">Áp dụng mã giảm giá</button>
                                                 </form>
                                             </div>
                                         </div>
+                                        <div class="text-danger">
+                                            <strong class="error-coupon"></strong>
+                                        </div>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <!-- Checkout Login Coupon Accordion End -->
@@ -255,20 +317,23 @@
                                             <div class="single-input-item">
                                                 <label for="m_name" class="required">Họ và tên</label>
                                                 <input type="text" id="m_name" name="m_name"
-                                                    placeholder="Nhập họ và tên" value="{{Auth::check() ? Auth::user()->name : ""}}"/>
+                                                    placeholder="Nhập họ và tên"
+                                                    value="{{ Auth::check() ? Auth::user()->name : '' }}" />
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="email" class="required">Email</label>
-                                        <input type="email" id="email" name="m_email" placeholder="Nhập email" value="{{Auth::check() ? Auth::user()->email : ""}}" />
+                                        <input type="email" id="email" name="m_email" placeholder="Nhập email"
+                                            value="{{ Auth::check() ? Auth::user()->email : '' }}" />
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="com-name">Số điện thoại</label>
                                         <input type="text" id="com-name" name="m_phone"
-                                            placeholder="Nhập số điện thoại" value="{{Auth::check() ? Auth::user()->phone : ""}}"/>
+                                            placeholder="Nhập số điện thoại"
+                                            value="{{ Auth::check() ? Auth::user()->phone : '' }}" />
                                     </div>
 
                                     <div class="single-input-item">
@@ -345,7 +410,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Tổng tiền thanh toán</td>
-                                                <td><strong class="total-price"></strong></td>
+                                                <td><strong class="total-price" data-price="0"></strong></td>
                                             </tr>
                                         </tfoot>
                                     </table>

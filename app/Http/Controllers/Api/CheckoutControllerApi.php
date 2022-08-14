@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use App\Models\OrderDetailModel;
 use App\Models\OrderModel;
+use App\Models\product;
 use App\Models\Province;
 use App\Models\TransportFee;
 use App\Models\Ward;
@@ -60,6 +61,9 @@ class CheckoutControllerApi extends Controller
         $id = $order->id;
         $content = Cart::content();
         foreach ($content as $item) {
+            $product = product::find($item->id);
+            $product -> m_buy += 1;
+            $product->save();
             $orderDetail = new OrderDetailModel();
             $orderDetail->m_id_order = $id;
             $orderDetail->m_id_product = $item->id;

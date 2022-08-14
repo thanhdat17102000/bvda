@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
 use App\Models\District;
 use App\Models\OrderModel;
 use App\Models\Province;
@@ -20,7 +21,13 @@ class CheckoutController extends Controller
     }
 
     public function check_coupon(Request $request){
-        print_r($request->all());
+        // 
+        $coupon = Coupon::where('coupon_code', $request->coupon_code)->where('coupon_expired', '>' , date("Y/m/d"))->where('coupon_time', '>', 0)->first();
+        if($coupon){
+            return ['data' => $coupon, 'message' => 'Mã giảm giá hợp lệ!'];
+        }else {
+            return ['message' => 'Mã giảm giá không hợp hợp lệ!'];
+        }
     }
 
     public function select_location(Request $request)
