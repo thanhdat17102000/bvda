@@ -109,7 +109,9 @@ Danh mục sản phẩm
                             </div>
                             <div class="sidebar-body">
                                 <ul class="color-list">
-
+                                    @foreach($categories as $cate)
+                                        <li><a href="{{URL::to('/product_list/'.$cate->id)}}">{{$cate->m_title}} <span>({{$cate->tongproduct->count()}})</span></a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>

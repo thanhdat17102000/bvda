@@ -142,7 +142,7 @@ Route::get('/compare', function () {
 });
 Route::get('/product_list', function () {
     // dd('123');
-    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    $categories = CategoryModel::orderBy('id','desc')->get();
     $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
@@ -179,7 +179,7 @@ Route::get('/product_list_search', function (Request $request) {
         $keywork =  $request->input('keywork');
         $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status', 1)->search()->paginate(9);
     }
-    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    $categories = CategoryModel::orderBy('id','desc')->get();
     // return $showproduct;
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
@@ -255,7 +255,7 @@ Route::post('/vnpay-payment', [CheckoutController::class, 'vnpay_payment'])->nam
 
 // Product
 Route::get('/product_list', function () {
-    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    $categories = CategoryModel::orderBy('id','desc')->get();
     $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
     return view('Auth.product_list.product_list', compact('categories', 'showproduct'));
 });

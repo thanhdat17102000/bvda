@@ -30,7 +30,7 @@ class HomeController extends Controller
             $maxprice=$_GET['maxamount'];
             $showproduct = product::whereBetween('m_original_price', [$minprice, $maxprice])->orderBy('id', 'asc')->search()->paginate(9);
         }
-        $categories = CategoryModel::where('m_id_parent', 0)->get();
+        $categories = CategoryModel::orderBy('id','desc')->get();
         if (\Auth::user()) {
             $userLogin = \Auth::user()->id;
             $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
@@ -59,7 +59,7 @@ class HomeController extends Controller
         return view('Auth.product_list.product_list', compact('showproduct','categories','list_favourite'));
     }
     public function showcategoryid($id){
-        $categories = CategoryModel::where('m_id_parent', 0)->get();
+        $categories = CategoryModel::orderBy('id','desc')->get();
         $showproduct = product::orderBy('updated_at', 'desc')->where('m_id_category', $id)->where('m_status', 1)->search()->paginate(9);
         if (\Auth::user()) {
             $userLogin = \Auth::user()->id;
