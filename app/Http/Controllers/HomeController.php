@@ -28,9 +28,9 @@ class HomeController extends Controller
         if(isset($_GET['minamount']) && isset($_GET['maxamount'])){
             $minprice=$_GET['minamount'];
             $maxprice=$_GET['maxamount'];
-            $showproduct = product::whereBetween('m_original_price', [$minprice, $maxprice])->orderBy('id', 'asc')->search()->paginate(10);
+            $showproduct = product::whereBetween('m_original_price', [$minprice, $maxprice])->orderBy('id', 'asc')->search()->paginate(9);
         }
-        $categories = CategoryModel::where('m_id_parent', 0)->get();
+        $categories = CategoryModel::orderBy('id','desc')->get();
         if (\Auth::user()) {
             $userLogin = \Auth::user()->id;
             $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
@@ -40,27 +40,27 @@ class HomeController extends Controller
         if(isset($_GET['danhsach'])){
             $sort_by = $_GET['danhsach'];
             if($sort_by == 'sanphamaz'){
-                $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+                $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'sanphamza'){
-                $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+                $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'giathapdencao'){
-                $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+                $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'giacaodenthap'){
-                $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+                $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'moicapnhat'){
-                $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+                $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
                 $showproduct->render();
             }
         }
         return view('Auth.product_list.product_list', compact('showproduct','categories','list_favourite'));
     }
     public function showcategoryid($id){
-        $categories = CategoryModel::where('m_id_parent', 0)->get();
-        $showproduct = product::orderBy('updated_at', 'desc')->where('m_id_category', $id)->where('m_status', 1)->search()->paginate(10);
+        $categories = CategoryModel::orderBy('id','desc')->get();
+        $showproduct = product::orderBy('updated_at', 'desc')->where('m_id_category', $id)->where('m_status', 1)->search()->paginate(9);
         if (\Auth::user()) {
             $userLogin = \Auth::user()->id;
             $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
@@ -70,19 +70,19 @@ class HomeController extends Controller
         if(isset($_GET['danhsach'])){
             $sort_by = $_GET['danhsach'];
             if($sort_by == 'sanphamaz'){
-                $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(10);
+                $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'sanphamza'){
-                $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(10);
+                $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'giathapdencao'){
-                $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(10);
+                $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'giacaodenthap'){
-                $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(10);
+                $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(9);
                 $showproduct->render();
             }elseif($sort_by == 'moicapnhat'){
-                $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(10);
+                $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->where('m_id_category', $id)->search()->paginate(9);
                 $showproduct->render();
             }
         }

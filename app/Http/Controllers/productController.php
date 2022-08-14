@@ -6,6 +6,7 @@ use App\Models\CategoryModel;
 use App\Models\product;
 use App\Models\product_inventory;
 use App\Models\User;
+use App\Models\categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -359,12 +360,13 @@ class productController extends Controller
 
     //Lấy danh sách sản phẩm theo danh mục
     public function categoryProduct($id) {
-        $category = DB::table('t_category')->where('m_id_parent', $id)->first();
+    $categories = CategoryModel::orderBy('id','desc')->get();
+    $category = DB::table('t_category')->where('m_id_parent', $id)->first();
         if($category) {
             $showproduct = DB::table('t_product')->where('m_id_category', $id)->orWhere('m_id_category', $category->id)->get();
         } else {
             $showproduct = DB::table('t_product')->where('m_id_category', $id)->get();
         }
-        return view('Auth.category.index', compact('showproduct'));
+        return view('Auth.category.index', compact('showproduct','categories'));
     }
 }

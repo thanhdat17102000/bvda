@@ -30,7 +30,7 @@
     @endif
     @endforeach
 </div>
-<!-- <div class=" modal fade" id="themmoi" tabindex="-1" role="dialog" aria-labelledby="themoi" aria-hidden="true">
+<div class=" modal fade" id="themmoi" tabindex="-1" role="dialog" aria-labelledby="themoi" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <form id="formEditCategory" method="POST">
