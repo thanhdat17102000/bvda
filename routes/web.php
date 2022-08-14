@@ -272,10 +272,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/product-favourite', [productController::class, 'productFavourite']);
 //Danh sách sản phẩm yêu thích của user đã chọn
 Route::get('/list-product-favourite', [productController::class, 'listProductFavourite'])->name('list-favourite');
-<<<<<<< HEAD
-
-=======
->>>>>>> 02e5228893d07998bda1b38731cd1cf7f687d697
 //Search
 Route::post('/search', [productController::class, 'search']);
 //Sản phẩm theo danh mục

@@ -89,7 +89,7 @@ TRANG CHỦ
                 <div class="col-12">
                     <div class="section-title text-center">
                         <h2 class="title">Sản Phẩm Của Chúng Tôi</h2>
-                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                        <!-- <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p> -->
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@ TRANG CHỦ
                 <div class="col-12">
                     <div class="section-title text-center">
                         <h2 class="title">sản phẩm bán chạy</h2>
-                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                        <!-- <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p> -->
                     </div>
                 </div>
             </div>
@@ -250,22 +250,21 @@ TRANG CHỦ
                         <!-- blog single item start -->
                         <div class="blog-post-item">
                             <div class="blog-thumb">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog-detail', $blogItem->m_slug) }}">
                                     <img src="{{asset('uploads/post')}}/{{$blogItem->m_image}}" alt="{{$blogItem->m_image}}">
                                 </a>
                             </div>
                             <div class="blog-content">
                                 <h5 class="blog-title">
-                                    <a href="blog-details.html">
+                                    <a href="{{ route('blog-detail', $blogItem->m_slug) }}">
                                         {{ $blogItem->m_title }}
                                     </a>
                                 </h5>
                                 <ul class="blog-meta">
-                                    <li><span>By: </span>DJ Thành Đạt</li>
-                                    <li><span>Lượt xem: </span>{{ $blogItem->m_view }}</li>
-                                    <li><span>Ngày viết: </span>{{ $blogItem->created_at }}</li>
+                                    <!-- <li><span>By: </span>DJ Thành Đạt</li> -->
+                                    <li><span>Ngày viết: </span>{{ $blogItem->created_at->format('d/m/Y') }}</li>
                                 </ul>
-                                <a href="blog-details.html" class="read-more">Đọc ngay...</a>
+                                <a href="{{ route('blog-detail', $blogItem->m_slug) }}" class="read-more">Đọc ngay...</a>
                             </div>
                         </div>
                         @endforeach
