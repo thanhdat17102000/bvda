@@ -3,33 +3,32 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{$data['title']}}</title>
+    <title>{{ $data['title'] }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images') }}/favicon.ico">
+
     <!-- third party css -->
     @stack('styles')
     <!-- third party css end -->
+
     <!-- Notification css (Toastr) -->
     <link href="{{ asset('admin/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.css" id="app-stylesheet" rel="stylesheet"
+        type="text/css" />
 
-    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/assets/css') }}/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet"
+        type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/icons.min.css" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('admin/assets/css') }}/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -57,16 +56,18 @@
                     </form>
                 </li>
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="user-image" class="rounded-circle">
+                    <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
+                        role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="{{ asset('uploads/avatar') }}/{{ Auth::user()->m_avatar }}" alt="user-image"
+                            class="rounded-circle">
                         <span class="pro-user-name ml-1">
-                            <i class="mdi mdi-chevron-down">{{Auth::user()->m_name}}</i>
+                            <i class="mdi mdi-chevron-down">{{ Auth::user()->m_name }}</i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
                         <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Chào mừng {{Auth::user()->name}}</h6>
+                            <h6 class="text-overflow m-0">Chào mừng {{ Auth::user()->name }}</h6>
                         </div>
 
                         <!-- item-->
@@ -90,7 +91,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="{{route('logout-admin')}}" class="dropdown-item notify-item">
+                        <a href="{{ route('logout-admin') }}" class="dropdown-item notify-item">
                             <i class="fe-log-out"></i>
                             <span>Đăng xuất</span>
                         </a>
@@ -131,7 +132,7 @@
                 </li>
 
                 <li>
-                    <h4 class="page-title-main">{{$data['title']}}</h4>
+                    <h4 class="page-title-main">{{ $data['title'] }}</h4>
                 </li>
 
             </ul>
@@ -146,9 +147,11 @@
 
                 <!-- User box -->
                 <div class="user-box text-center">
-                    <img src="{{asset('uploads/avatar')}}/{{Auth::user()->m_avatar}}" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+                    <img src="{{ asset('uploads/avatar') }}/{{ Auth::user()->m_avatar }}" alt="user-img"
+                        title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
-                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-toggle="dropdown" aria-expanded="false">{{Auth::user()->name}}</a>
+                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block"
+                            data-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
@@ -170,7 +173,7 @@
                             </a> --}}
 
                             <!-- item-->
-                            <a href="{{route('logout-admin')}}" class="dropdown-item notify-item">
+                            <a href="{{ route('logout-admin') }}" class="dropdown-item notify-item">
                                 <i class="fe-log-out mr-1"></i>
                                 <span>Đăng xuất</span>
                             </a>
@@ -178,10 +181,11 @@
                         </div>
                     </div>
                     <p class="text-muted">
-                        @if(Auth::user()->role == 1)
-                        Admintrator
-                        @else if(Auth::user()->role == 2)
-                        Nhân viên
+                        @if (Auth::user()->role == 1)
+                            Admintrator
+                        @else
+                            if(Auth::user()->role == 2)
+                            Nhân viên
                         @endif
                     </p>
                     <ul class="list-inline">
@@ -192,7 +196,7 @@
                         </li>
 
                         <li class="list-inline-item">
-                            <a href="{{Route('logout-admin')}}">
+                            <a href="{{ Route('logout-admin') }}">
                                 <i class="mdi mdi-power"></i>
                             </a>
                         </li>
@@ -207,14 +211,14 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-                            <a href="{{ route("dashboard.index") }}">
+                            <a href="{{ route('dashboard.index') }}">
                                 <i class="mdi mdi-chart-bar"></i>
                                 <span> Thống kê </span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="{{ route("category-admin") }}">
+                            <a href="{{ route('category-admin') }}">
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> Danh mục </span>
                             </a>
@@ -227,7 +231,7 @@
                             </a>
                             <ul class="nav-second-level mm-collapse" aria-expanded="false">
                                 <li><a href="/admintrator/user">Danh sách tài khoản</a></li>
-                                <li><a href="{{ route('add-form') }}">Thêm tài khoản</a></li>
+                                <li><a href="{{ route('add_user') }}">Thêm tài khoản</a></li>
                             </ul>
                         </li>
                         <li>
@@ -253,10 +257,21 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{ route("delivery") }}">
+                            <a href="{{ route('delivery') }}">
                                 <i class="mdi mdi-truck"></i>
                                 <span> Vận chuyển </span>
                             </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="mdi mdi-brightness-percent"></i>
+                                <span> Mã giảm giá </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li><a href="{{ route('coupon') }}">Danh sách mã giảm giá</a></li>
+                                <li><a href="{{ route('coupon-insert') }}">Thêm mã giảm giá</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="javascript: void(0);">
@@ -281,19 +296,19 @@
                             </ul>
                         </li>
                         <li>
-                            <a href='{{ route("order") }}'>
+                            <a href='{{ route('order') }}'>
                                 <i class="mdi mdi-view-dashboard"></i>
                                 <span> QL Đơn Hàng</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route("contact-admin") }}">
+                            <a href="{{ route('contact-admin') }}">
                                 <i class="mdi mdi-comment-question"></i>
                                 <span> Phản hồi </span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route("file") }}">
+                            <a href="{{ route('file') }}">
                                 <i class="mdi mdi-file-image"></i>
                                 <span> QL hình ảnh </span>
                             </a>
@@ -342,38 +357,49 @@
                     <strong>Customize </strong> the overall color scheme, layout, etc.
                 </div>
                 <div class="mb-2">
-                    <img src="{{ asset('admin/assets/images') }}/layouts/light.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{ asset('admin/assets/images') }}/layouts/light.png" class="img-fluid img-thumbnail"
+                        alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
+                    <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch"
+                        checked />
                     <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
                 </div>
 
                 <div class="mb-2">
-                    <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{ asset('admin/assets/images') }}/layouts/dark.png" class="img-fluid img-thumbnail"
+                        alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css" data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
+                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch"
+                        data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
+                        data-appStyle="{{ asset('admin/assets/css') }}/app-dark.min.css" />
                     <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
                 </div>
 
                 <div class="mb-2">
-                    <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{ asset('admin/assets/images') }}/layouts/rtl.png" class="img-fluid img-thumbnail"
+                        alt="">
                 </div>
                 <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="{{ asset('admin/assets/css') }}/app-rtl.min.css" />
+                    <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch"
+                        data-appStyle="{{ asset('admin/assets/css') }}/app-rtl.min.css" />
                     <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
                 </div>
 
                 <div class="mb-2">
-                    <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png" class="img-fluid img-thumbnail" alt="">
+                    <img src="{{ asset('admin/assets/images') }}/layouts/dark-rtl.png"
+                        class="img-fluid img-thumbnail" alt="">
                 </div>
                 <div class="custom-control custom-switch mb-5">
-                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch" data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css" data-appStyle="{{ asset('admin/assets/css') }}/app-dark-rtl.min.css" />
+                    <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch"
+                        data-bsStyle="{{ asset('admin/assets/css') }}/bootstrap-dark.min.css"
+                        data-appStyle="{{ asset('admin/assets/css') }}/app-dark-rtl.min.css" />
                     <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
                 </div>
 
-                <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-download mr-1"></i> Download Now</a>
+                <a href="https://1.envato.market/k0YEM" class="btn btn-danger btn-block mt-3" target="_blank"><i
+                        class="mdi mdi-download mr-1"></i> Download Now</a>
             </div>
         </div> <!-- end slimscroll-menu-->
     </div>
@@ -386,90 +412,42 @@
     <script src="{{ asset('admin/assets/libs/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/pages/toastr.init.js') }}"></script>
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+
     {{-- Another JS --}}
     @stack('scripts')
-    <!-- Toastr js -->
 
     <script src="{{ asset('admin/assets/libs') }}/sweetalert2/sweetalert2.min.js"></script>
     <script src="{{ asset('admin/assets/js') }}/pages/sweet-alerts.init.js"></script>
     <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
-    <script src="{{ asset('admin/assets/js') }}/{{ $data['action'] }}.js"></script>
-
     <!-- App js -->
     <script src="{{ asset('admin/assets/js') }}/app.min.js"></script>
-    <!-- morrisjs vs jqueryui -->
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
-<script>
-    jQuery(document).ready(function($) {
-        $('#btn-dashboard-filter').on('click',function(){
-            var from_date = $('#datepicker').val();
-            var to_date = $('#datepicker2').val();
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url:'{{route("filterdate")}}',
-                method:"post",
-                dataType:"JSON",
-                data:{from_date:from_date ,to_date:to_date, _token:_token },
-
-                success:function(data)
-                {
-                    chart.setData(data);
-                }
-            });
-        });
-            chart7day();
-        var chart = new Morris.Bar({
-            element: 'myfirstchart',
-            // option thống kê
-            barColors: ['#435ebe', '#fc8710','#FF6541','#A4ADD3'],
-            gridTextColor:['#000000'],
-            // pointFillColors: ['#ffffff'],
-            // pointStrokeColors:['black'],
-            fillOpacity:0.8,
-            hideHover: 'auto',
-            parseTime: false,
-
-            xkey: 'name',
-            ykeys: ['tongtien'],
-            // behaveLikeLine: true,
-
-            labels: ['giá tiền']
-        });
-
-    // autoload 30 ngày đơn hàng
-    function chart7day(){
-        var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url:'{{route("orderdate")}}',
-                method:"post",
-                dataType:"JSON",
-                data:{_token:_token},
-
-                success:function(data)
-                {
-                    chart.setData(data);
-                }
-            });
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         }
-    });
-    // onclick lọc theo ngày tháng
-</script>
-<script>
-  $( function() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-</script>
-<script>
-  $( function() {
-    $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-</script>
+    </script>
 </body>
 
 </html>

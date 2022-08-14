@@ -20,6 +20,7 @@ use App\Models\User;
 
 //  start Comment sent
 use App\Http\Controllers\Comment_Product;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +73,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('doi-thongtin-admin', [App\Http\Controllers\UserController::class, 'doithongtinadmin'])->name('doithongtinadmin');
     // Quản lý user
     Route::get('user', [App\Http\Controllers\UserController::class, 'list'])->name('list-user');
-    Route::get('/user/add', [UserController::class,'add_user'])->name('add_user');
+    Route::get('/user/add', [UserController::class, 'add_user'])->name('add_user');
     Route::get('user/edit/{id}', [UserController::class, 'update_form'])->name('update_user');
     // Product
     Route::resources([
@@ -120,10 +121,16 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
     Route::post('/delivery/list', [DeliveryController::class, 'list_delivery'])->name('list-delivery');
     Route::post('/delivery/edit', [DeliveryController::class, 'edit_delivery'])->name('edit-delivery');
 
+    //coupon
+    Route::get('/coupon', [CouponController::class, 'index'])->name('coupon');
+    Route::get('/coupon/load', [CouponController::class, 'load_coupon'])->name('coupon-load');
+    Route::get('/coupon/delete/{id}', [CouponController::class, 'delete_coupon'])->name('coupon-delete');
+    Route::get('/coupon/insert', [CouponController::class, 'insert_coupon'])->name('coupon-insert');
+    Route::post('/coupon/save', [CouponController::class, 'save_coupon'])->name('save-coupon');
+
     // chức năng nâng cao admin product
     Route::post('/cap-nhat-gia-san-pham', [App\Http\Controllers\productController::class, 'capnhatprice'])->name('capnhatprice');
     Route::delete('/delete-all-san-pham', [App\Http\Controllers\productController::class, 'deleteallsp'])->name('deleteallsp');
-
 });
 
 
@@ -135,8 +142,8 @@ Route::get('/compare', function () {
 });
 Route::get('/product_list', function () {
     // dd('123');
-    $categories = CategoryModel::where('m_id_parent', 0)->get();
-    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(6);
+    $categories = CategoryModel::orderBy('id','desc')->get();
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
         $list_favourite = DB::table('t_product')->join('t_user_favourite', 't_user_favourite.id_product', '=', 't_product.id')->where('t_user_favourite.id_user', $userLogin)->get();
@@ -148,19 +155,19 @@ Route::get('/product_list', function () {
     if (isset($_GET['danhsach'])) {
         $sort_by = $_GET['danhsach'];
         if ($sort_by == 'sanphamaz') {
-            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'sanphamza') {
-            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'giathapdencao') {
-            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'giacaodenthap') {
-            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'moicapnhat') {
-            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         }
     }
@@ -170,9 +177,9 @@ Route::get('/product_list_search', function (Request $request) {
     $keyword = '';
     if (!empty($request->input('keywork'))) {
         $keywork =  $request->input('keywork');
-        $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status', 1)->search()->paginate(10);
+        $showproduct = product::orderBy('updated_at', 'desc')->where("m_product_name", 'LIKE', "%{$keywork}%")->where('m_status', 1)->search()->paginate(9);
     }
-    $categories = CategoryModel::where('m_id_parent', 0)->get();
+    $categories = CategoryModel::orderBy('id','desc')->get();
     // return $showproduct;
     if (Auth::user()) {
         $userLogin = Auth::user()->id;
@@ -183,19 +190,19 @@ Route::get('/product_list_search', function (Request $request) {
     if (isset($_GET['danhsach'])) {
         $sort_by = $_GET['danhsach'];
         if ($sort_by == 'sanphamaz') {
-            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'ASC')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'sanphamza') {
-            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('id', 'desc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'giathapdencao') {
-            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'asc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'giacaodenthap') {
-            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('m_original_price', 'desc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         } elseif ($sort_by == 'moicapnhat') {
-            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(10);
+            $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
             $showproduct->render();
         }
     }
@@ -222,6 +229,9 @@ Route::group(['prefix' => 'profile'], function () {
     Route::post('/doi-thong-tin-profile/{id}', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
 });
 
+Route::post('doi-mat-khau-user',[App\Http\Controllers\ProfileController::class, 'doimatkhauuser'])->name('doimatkhauuser');
+Route::post('doi-thong-tin-user',[App\Http\Controllers\ProfileController::class, 'doithongtinuser'])->name('doithongtinuser');
+
 
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
 Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
@@ -238,19 +248,31 @@ Route::get('/register', function () {
 Route::get('/cart', function () {
     return view('Auth.cart.cart');
 })->name('cart');
-Route::get('/checkout', function () {
-    return view('Auth.checkout.checkout');
-})->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout-coupon', [CheckoutController::class, 'check_coupon'])->name('checkout-coupon');
 Route::get('/checkout-success', [CheckoutController::class, 'checkout_success'])->name('checkout-success');
+Route::post('/checkout-location', [CheckoutController::class, 'select_location'])->name('checkout-location');
+Route::post('/checkout-delivery', [CheckoutController::class, 'delivery'])->name('checkout-delivery');
 Route::post('/momo-payment', [CheckoutController::class, 'momo_payment'])->name('momo-payment');
 Route::post('/vnpay-payment', [CheckoutController::class, 'vnpay_payment'])->name('vnpay-payment');
 
 // Product
 Route::get('/product_list', function () {
-    $categories = CategoryModel::where('m_id_parent', 0)->get();
-    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->get();
+    $categories = CategoryModel::orderBy('id','desc')->get();
+    $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
     return view('Auth.product_list.product_list', compact('categories', 'showproduct'));
 });
+
+
+
+
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+    Route::get('/chi-tiet-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'order']);
+    Route::get('/huy-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'cancelled']);
+    Route::post('/doi-thong-tin-profile', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
+});
+
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
 Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
 Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdelete');
@@ -277,13 +299,13 @@ Route::post('/search', [productController::class, 'search']);
 //Sản phẩm theo danh mục
 Route::get('category/{id}', [productController::class, 'categoryProduct'])->name('categoryProduct');
 // pages 
-Route::get('/quydinh', function(){
+Route::get('/quydinh', function () {
     return view('pages.quydinh');
 })->name('quydinh');
-Route::get('/chinh-sach-doi-tra', function(){
+Route::get('/chinh-sach-doi-tra', function () {
     return view('pages.chinhsachdoitra');
 })->name('chinhsachdoitra');
-Route::get('huong-dan-chon-size', function(){
+Route::get('huong-dan-chon-size', function () {
     return view('pages.hdsize');
 })->name('hdsize');
 //Tuyển dụng
@@ -291,6 +313,6 @@ Route::get('/tuyendung', [HomeController::class, 'tuyendung'])->name('tuyendung'
 //Bảo mật
 Route::get('/baomat', [HomeController::class, 'baomat'])->name('baomat');
 // about us
-Route::get('/ve-kingdom-sneakers', function(){
+Route::get('/ve-kingdom-sneakers', function () {
     return view('Auth.about-us.index');
 })->name('about-us');

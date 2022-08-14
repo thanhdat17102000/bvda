@@ -18,7 +18,7 @@ class CategoryController extends Controller
             'title' => 'Danh Mục',
             'action' => 'category'
         ];
-        return view('admin.category.index', compact('data', 'categorySelect'));
+        return view('Admin.category.index', compact('data', 'categorySelect'));
     }
 
     public function loadlist()

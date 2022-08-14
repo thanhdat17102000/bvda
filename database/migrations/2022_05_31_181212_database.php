@@ -65,6 +65,7 @@ class Database extends Migration
             $table->string('m_phone', 15);
             $table->text('m_note')->nullable();
             $table->double('m_total_price');
+            $table->double('m_fee_ship');
             $table->boolean('m_status_ship')->default(0);
             $table->boolean('m_status_pay')->default(0);
             $table->boolean('m_status')->default(0);
@@ -161,6 +162,18 @@ class Database extends Migration
             $table->string('m_size', 255);
             $table->foreign('m_id_product')->references('id')->on('t_product');
         });
+
+        Schema::create('t_coupon', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('coupon_name', 150);
+            $table->integer('coupon_time');
+            $table->integer('coupon_method');
+            $table->string('coupon_code', 50);
+            $table->integer('coupon_value');
+            $table->date('coupon_expired');
+            $table->timestamps();
+        });
+
         Schema::create('t_transport_fee', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('m_province_id');
@@ -168,6 +181,7 @@ class Database extends Migration
             $table->integer('m_ward_id');
             $table->double('m_fee_ship');
         });
+
         Schema::create('t_user_favourite', function (Blueprint $table) {
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_product');

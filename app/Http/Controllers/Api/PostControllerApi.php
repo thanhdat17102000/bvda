@@ -18,7 +18,7 @@ class PostControllerApi extends Controller
      */
     public function index(Request $request)
     {
-        return Post::all()->paginate();
+        return Post::all();
     }
 
     /**

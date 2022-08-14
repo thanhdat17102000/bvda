@@ -22,29 +22,29 @@
     <script src=" {{ asset('admin/assets/libs/datatables/dataTables.select.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/pdfmake/vfs_fonts.js') }}"></script>
+    <script src=" {{ asset('admin/assets/libs/moment/moment.js') }}"></script>
     <!-- third party js ends -->
     <script>
         let table = "";
         const renderData = () => {
             $.ajax({
-                url: "{{ url('api/post') }}",
+                url: "{{ route('coupon-load') }}",
                 type: "get",
                 success: function(response) {
                     console.log('list-post', response);
                     let tbody = ``;
-                    response.map((item, index) => {
+                    response.data.map((item, index) => {
                         tbody += `
                                 <tr>
-                                    <td>${item.m_title}</td>
+                                    <td>${item.coupon_name}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/post/${item.m_image}') }}" width="150px" alt="Image post">
+                                        ${item.coupon_code}
                                     </td>
-                                    <td>${item.m_slug}</td>
-                                    <td>${item.m_desc}</td>
-                                    <td>${item.m_meta_keyword}</td>
-                                    <td>${item.m_status === 0 ? 'Ẩn' : 'Hiện'}</td>
+                                    <td>${item.coupon_method == 1 ? "Giảm theo phần trăm" : "Giảm theo số tiền"}</td>
+                                    <td>${item.coupon_time}</td>
+                                    <td>${item.coupon_method == 1 ? item.coupon_value+"%" : item.coupon_value.toLocaleString()}</td>
+                                    <td>${moment(item.coupon_expired).format('DD/MM/YYYY')}</td>
                                     <td>
-                                        <button type="button" data-id="${item.id}" class="btn-edit btn btn-icon waves-effect waves-light btn-success"><i class="far fa-edit"></i></button>
                                         <button type="button" data-id="${item.id}" class="btn-delete btn btn-icon waves-effect waves-light btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`
@@ -53,28 +53,19 @@
                     $('.btn-delete').click(function(e) {
                         let id = $(this).data('id');
                         $.ajax({
-                            type: "delete",
-                            url: `{{ url('api/post/${id}') }}`,
-                            processData: false,
-                            contentType: false,
+                            type: "get",
+                            url: `{{ url('admintrator/coupon/delete/${id}') }}`,
                             success: function(response) {
-                                console.log("result", response);
                                 table.destroy();
                                 renderData();
-                                toastr.success('Xóa thành công!',
-                                    'Xem danh sách để kiểm tra')
+                                toastr.success('Xóa thành công!')
                             },
                             error: function(e) {
-                                console.log(e);
+                                console.error(e);
                                 toastr.error('Lỗi xóa!');
                             }
                         });
                     });
-                    $('.btn-edit').click(function(e) {
-                        let id = $(this).data('id');
-                        $(location).attr('href', `{{ url('admintrator/post/edit/${id}') }}`)
-                    });
-
                 },
                 error: function(e) {
                     console.error(e);
@@ -86,7 +77,7 @@
                             "width": "10%"
                         },
                         {
-                            "width": "10%"
+                            "width": "14%"
                         },
                         null,
                         null,
@@ -94,7 +85,7 @@
                             "width": "10%"
                         },
                         {
-                            "width": "10%"
+                            "width": "14%"
                         },
                         {
                             "width": "12%"
@@ -116,12 +107,12 @@
                         <table id="datatable" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Tiêu đề</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Slug</th>
-                                    <th>Nội dung</th>
-                                    <th>Từ khóa</th>
-                                    <th>Hiển thị</th>
+                                    <th>Tên mã</th>
+                                    <th>Mã giảm giá</th>
+                                    <th>Phương thức giảm</th>
+                                    <th>Số lượng mã</th>
+                                    <th>Giá trị mã</th>
+                                    <th>Ngày hết hạn</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>

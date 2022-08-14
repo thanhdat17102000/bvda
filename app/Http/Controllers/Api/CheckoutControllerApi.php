@@ -7,9 +7,11 @@ use App\Models\District;
 use App\Models\OrderDetailModel;
 use App\Models\OrderModel;
 use App\Models\Province;
+use App\Models\TransportFee;
 use App\Models\Ward;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutControllerApi extends Controller
 {
@@ -36,12 +38,21 @@ class CheckoutControllerApi extends Controller
         $district = District::find($data['district_nice-select']);
         $ward = Ward::find($data['ward_nice-select']);
         $order = new OrderModel();
+        $fee_ship = 0;
+        if(TransportFee::where('m_province_id',  $province)->where('m_district_id', $district)->where('m_ward_id', $ward)->first()){
+            $fee = TransportFee::where('m_province_id',  $province)->where('m_district_id', $district)->where('m_ward_id', $ward)->first();
+            $fee_ship = $fee->m_fee_ship;
+        }else {
+            $fee_ship = 50000;
+        }
+        if(Auth::check()){$order->m_id_user = Auth::user()->id;}
         $order->m_name = $request->m_name;
         $order->m_email = $request->m_email;
         $order->m_address = $data['m_address'] . "," . $ward->_prefix . " " . $ward->_name . "," . $district->_prefix . " " . $district->_name . "," . $province->_name;
         $order->m_phone = $request->m_phone;
         $order->m_note = $request->m_note;
         $order->m_total_price = $request->m_total_price;
+        $order->m_fee_ship = $fee_ship;
         $order->m_status_ship = 0;
         $order->m_status_pay = 0;
         $result = $order->save();

@@ -1,8 +1,23 @@
 @extends('admin.index')
 @push('styles')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 @endpush
 @push('scripts')
     <script src=https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
+    <script>
+        jQuery(document).ready(function(){
+            $( function() {
+                $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+            } );
+            $( function() {
+                $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd' });
+            } );
+        })
+    </script>
+
+
     <script>
     jQuery(document).ready(function($) {
         var colorDanger = "#FF1744";
@@ -197,10 +212,10 @@
                         @csrf
                     <div class="row">
                         <div class="col-md-3">
-                            <p>Từ ngày<input type="text" id="datepicker" class="form-control"></p>
+                            <p>Từ ngày<input type="date" id="datepicker" class="form-control"></p>
                         </div>
                         <div class="col-md-3">
-                            <p>Đến ngày <input type="text" id="datepicker2" class="form-control"></p>
+                            <p>Đến ngày <input type="date" id="datepicker2" class="form-control"></p>
                         </div>
                         <div class="col-md-3 mt-3">
                             <input type="button" id="btn-dashboard-filter" class="btn btn-info btn-sm" value="lọc kết quả">
@@ -323,5 +338,66 @@
     </footer>
     <!-- end Footer -->
 
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+    jQuery(document).ready(function($) {
+        $('#btn-dashboard-filter').on('click',function(){
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:'{{route("filterdate")}}',
+                method:"post",
+                dataType:"JSON",
+                data:{from_date:from_date ,to_date:to_date, _token:_token },
+
+                success:function(data)
+                {
+                    chart.setData(data);
+                }
+            });
+        });
+            chart7day();
+        var chart = new Morris.Bar({
+            element: 'myfirstchart',
+            // option thống kê
+            barColors: ['#435ebe', '#fc8710','#FF6541','#A4ADD3'],
+            gridTextColor:['#000000'],
+            // pointFillColors: ['#ffffff'],
+            // pointStrokeColors:['black'],
+            fillOpacity:0.8,
+            hideHover: 'auto',
+            parseTime: false,
+
+            xkey: 'name',
+            ykeys: ['tongtien'],
+            // behaveLikeLine: true,
+
+            labels: ['giá tiền']
+        });
+
+    // autoload 30 ngày đơn hàng
+    function chart7day(){
+        var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:'{{route("orderdate")}}',
+                method:"post",
+                dataType:"JSON",
+                data:{_token:_token},
+
+                success:function(data)
+                {
+                    chart.setData(data);
+                }
+            });
+        }
+    });
+    // onclick lọc theo ngày tháng
+</script>
 
 @endsection
