@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Mail;
 
+
 class UserController extends Controller
 {
     /**
@@ -48,9 +49,11 @@ class UserController extends Controller
         $id = $request->id;
         $data = $request->all();
         $passold = $data['matkhaucu'];
-        if(Hash::check($passold, Auth::user()->password)){
+        // dd($data['matkhaucu']);
+        // dd($data['xacnhanmatkhau']);
+        if(Hash::check($passold, \Auth::user()->password)){
             if($data['matkhaumoi'] == $data['xacnhanmatkhau']){
-                $updated = accountModel::find($id);
+                $updated = accountModel::find(\Auth::user()->id);
                 $updated->password = Hash::make($data['matkhaumoi']);
                 if($updated->save()){
                     echo 'Đổi mật khẩu thành công!';

@@ -229,6 +229,9 @@ Route::group(['prefix' => 'profile'], function () {
     Route::post('/doi-thong-tin-profile/{id}', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
 });
 
+Route::post('doi-mat-khau-user',[App\Http\Controllers\ProfileController::class, 'doimatkhauuser'])->name('doimatkhauuser');
+Route::post('doi-thong-tin-user',[App\Http\Controllers\ProfileController::class, 'doithongtinuser'])->name('doithongtinuser');
+
 
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
 Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
@@ -259,6 +262,17 @@ Route::get('/product_list', function () {
     $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
     return view('Auth.product_list.product_list', compact('categories', 'showproduct'));
 });
+
+
+
+
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+    Route::get('/chi-tiet-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'order']);
+    Route::get('/huy-don-hang/{id}', [App\Http\Controllers\ProfileController::class, 'cancelled']);
+    Route::post('/doi-thong-tin-profile', [App\Http\Controllers\ProfileController::class, 'updateProfile']);
+});
+
 Route::get('/chi-tiet-san-pham/{slug}', [HomeController::class, 'productdetail'])->name('productdetails');
 Route::post('postcomment', [HomeController::class, 'postcomment'])->name('postcomment');
 Route::post('showdelete', [HomeController::class, 'showdelete'])->name('showdelete');

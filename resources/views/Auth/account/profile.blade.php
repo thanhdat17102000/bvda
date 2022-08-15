@@ -26,32 +26,6 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 <!-- Bootstrap theme -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-<script>
-    jQuery(document).ready(function($) {
-        // đổi thông tin
-        $('#update_profile').click(function(e){
-            e.preventDefault();
-            var name = $('#name').val();
-            var phone = $('#phone').val();
-            var m_address = $('#address').val();
-            var email = $('#email').val();
-            // var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url:'/profile/doi-thong-tin-profile',
-                method:'post',
-                data:{
-                    name:name,phone:phone,m_address:m_address,email:email
-                },
-                console.log(data);
-                success: function(data){
-                    if(data = 'success'){
-                        alertify.success('Cập nhật thành công');
-                    }
-                }
-            })
-        });
-    });
-</script>
 
 @endpush
 @section('content')
@@ -218,8 +192,6 @@
                                                     <h3>Thông tin</h3>
 
                                                     <div class="account-details-form">
-                                                        <form method="post" action="method="post" action="{{route('profile.update', Auth::user()->id)}}">
-                                                            @csrf @method('PUT')
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
@@ -245,7 +217,6 @@
                                                             <div class="single-input-item">
                                                                 <button type="submit" id="update_profile" class="check-btn sqr-btn ">Lưu</button>
                                                             </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,36 +227,33 @@
                                                 <div class="myaccount-content">
                                                     <h3>Đổi mật khẩu</h3>
                                                     <div class="account-details-form">
-                                                        <form method="post" action="{{route('profile.update', Auth::user()->id)}}">
-                                                            @csrf @method('PUT')
                                                             <fieldset>
                                                                 <div class="single-input-item">
                                                                     <label for="exampleInputEmail1">Tên tài khoản</label>
-                                                                    <input type="text" class="form-control" idid="matkhaumoi"="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
+                                                                    <input type="text" class="form-control" id="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
                                                                 </div>
                                                                 <div class="single-input-item">
                                                                     <label for="current-pwd" class="required">Mật khẩu hiện tại</label>
-                                                                    <input type="password" id="matkhaucu" placeholder="Current Password" />
+                                                                    <input type="password" name="matkhaucu" id="matkhaucu" placeholder="Current Password" />
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
                                                                             <label for="new-pwd" class="required">Mật khẩu mới</label>
-                                                                            <input type="password" id="matkhaumoi" placeholder="New Password" />
+                                                                            <input type="password" name="matkhaumoi" id="matkhaumoi" placeholder="New Password" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
                                                                             <label for="confirm-pwd" class="required">Xác nhận mật khẩu</label>
-                                                                            <input type="password" id="xacnhanmatkhau" placeholder="Confirm Password" />
+                                                                            <input type="password" name="xacnhanmatkhau" id="xacnhanmatkhau" placeholder="Confirm Password" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="single-input-item">
+                                                                    <button type="submit" id="luumk" class="check-btn sqr-btn ">Lưu</button>
+                                                                </div>
                                                             </fieldset>
-                                                            <div class="single-input-item">
-                                                                <button type="submit" id="luumk" class="check-btn sqr-btn ">Lưu</button>
-                                                            </div>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div> <!-- Single Tab Content End -->
@@ -333,15 +301,20 @@
 <script>
     jQuery(document).ready(function($) {
         // đổi mật khẩu
-        $('#btnluumk').click(function(e){
+        $('#luumk').click(function(e){
             e.preventDefault();
             var id = $('#idadmin').data('id');
             var matkhaucu = $('#matkhaucu').val();
             var matkhaumoi = $('#matkhaumoi').val();
             var xacnhanmatkhau = $('#xacnhanmatkhau').val();
             var _token = $('input[name="_token"]').val();
+            alert(id)
+            alert(matkhaucu)
+            alert(matkhaumoi)
+            alert(xacnhanmatkhau)
+            alert(_token)
             $.ajax({
-                url:'{{route("doimatkhauadmin")}}',
+                url:'{{route("doimatkhauuser")}}',
                 method:'post',
                 data:{
                     id:id,matkhaucu:matkhaucu,matkhaumoi:matkhaumoi,xacnhanmatkhau:xacnhanmatkhau,_token:_token
@@ -355,6 +328,31 @@
         });
     });
 </script>
+<script>
+    jQuery(document).ready(function($) {
+        // đổi thông tin
+        $('#update_profile').click(function(e){
+            e.preventDefault();
+            var name = $('#idMK').val();
+            var phone = $('#phone').val();
+            var m_address = $('#address').val();
+            var email = $('#email').val();
+            var _token = $('input[name="_token"]').val();
 
+            $.ajax({
+                url:'{{route("doithongtinuser")}}',
+                method:'post',
+                data:{
+                    name:name,phone:phone,m_address:m_address,email:email,_token:_token
+                },
+                success: function(data){
+                    if(data = 'success'){
+                        alertify.success('Cập nhật thành công');
+                    }
+                }
+            })
+        });
+    });
+</script>
 
 @endpush
