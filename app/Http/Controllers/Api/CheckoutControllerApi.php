@@ -56,6 +56,7 @@ class CheckoutControllerApi extends Controller
         $order->m_fee_ship = $fee_ship;
         $order->m_status_ship = 0;
         $order->m_status_pay = 0;
+        $order->m_coupon = $request->m_coupon;
         $result = $order->save();
 
         $id = $order->id;
@@ -72,7 +73,7 @@ class CheckoutControllerApi extends Controller
             $orderDetail->m_product_name = $item->name;
             $orderDetail->save();
         }
-        return ["IsError" => false, "message" => "Đặt hàng thành công !", "data" => $result];
+        return ["IsError" => false, "message" => "Đặt hàng thành công !", "data" => $order];
     }
 
     /**

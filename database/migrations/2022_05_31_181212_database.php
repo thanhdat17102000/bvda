@@ -65,7 +65,8 @@ class Database extends Migration
             $table->string('m_phone', 15);
             $table->text('m_note')->nullable();
             $table->double('m_total_price');
-            $table->double('m_fee_ship');
+            $table->integer('m_fee_ship');
+            $table->integer('m_coupon')->nullable();
             $table->boolean('m_status_ship')->default(0);
             $table->boolean('m_status_pay')->default(0);
             $table->boolean('m_status')->default(0);

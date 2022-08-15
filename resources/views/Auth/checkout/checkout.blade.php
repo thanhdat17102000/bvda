@@ -5,6 +5,9 @@
         let pro = "";
         let dis = "";
         let war = "";
+        let totalGlobal = 0;
+        let couponGlobal = 0;
+        let shipGlobal = 0;
         // render cart info
         const renderCheckout = async () => {
             const response = await callApiCart();
@@ -16,6 +19,7 @@
                 tax,
             } = response;
             let content = ``;
+            totalGlobal = total.replace(/,/g, '');
             for (let key in data) {
                 content += `<tr>
                                 <td><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">${data[key].name} <strong> × ${data[key].qty}</strong></a>
@@ -26,7 +30,6 @@
             $('.checkout-content').html(content)
             $('.tax').text(tax);
             $('.total-price').text(total);
-            $('.total-price').data('price', total.replace(/,/g, ''));
         }
 
         renderCheckout()
@@ -41,7 +44,8 @@
             e.preventDefault();
             let data = new FormData(this);
             let total = $('.total-price:first').text().replace(/,/g, "");
-            data.append('m_total_price', Number(total));
+            data.append('m_total_price', Number(totalGlobal));
+            data.append('m_coupon', couponGlobal);
             $.ajax({
                 type: "post",
                 url: "{{ url('api/checkout') }}",
@@ -113,8 +117,10 @@
                         war
                     },
                     success: function(response) {
+                        shipGlobal = response.m_fee_ship.replace(/,/g, "");
                         $('.delivery').text(response.m_fee_ship);
-                        $('.total-price').text(response.total);
+                        $('.total-price').text((totalGlobal * 1 + shipGlobal * 1 - couponGlobal)
+                            .toLocaleString());
                     },
                     error: function(error) {
                         console.error(error);
@@ -135,15 +141,18 @@
                     console.log(response);
                     if (!response.data) {
                         $('.error-coupon').text(response.message);
-                    }else {
-                        if(response.data.coupon_method == 1){
+                    } else {
+                        $('.success-coupon').text(response.message);
+                        if (response.data.coupon_method == 1) {
                             $('.coupon').text(response.data.coupon_value + "%");
-                            let price = Number($('.total-price').data('price')) * (100 - Number(response.data.coupon_value) ) / 100;
-                            console.log(price);
-                            $('.total-price').text(price);
-                        }
-                        else {
+                            couponGlobal = totalGlobal * Number(response.data.coupon_value) / 100;
+                            $('.total-price').text((totalGlobal * 1 + shipGlobal * 1 - couponGlobal)
+                                .toLocaleString());
+                        } else {
                             $('.coupon').text(response.data.coupon_value.toLocaleString());
+                            couponGlobal = response.data.coupon_value;
+                            $('.total-price').text((totalGlobal * 1 + shipGlobal * 1 - couponGlobal)
+                                .toLocaleString());
                         }
                     }
                 },
@@ -292,12 +301,15 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="text-danger">
+                                        <div class="text-danger mt-1">
                                             <strong class="error-coupon"></strong>
+                                        </div>
+                                        <div class="text-success mt-1">
+                                            <strong class="success-coupon"></strong>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <!-- Checkout Login Coupon Accordion End -->
@@ -359,9 +371,9 @@
                                     </div>
 
                                     <div class="single-input-item">
-                                        <label for="street-address" class="required mt-20">Địa chỉ</label>
+                                        <label for="street-address" class="required mt-20">Tên đường, số nhà</label>
                                         <input type="text" id="street-address" name="m_address"
-                                            placeholder="Nhập địa chỉ" />
+                                            placeholder="Nhập tên đường, số nhà" />
                                     </div>
 
                                     <div class="single-input-item">

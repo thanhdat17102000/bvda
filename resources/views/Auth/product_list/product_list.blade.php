@@ -271,7 +271,7 @@ Danh sách sản phẩm
                                     </div>
                                     <div class="product-content">
                                         <h5 class="product-name">
-                                            <a href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ $showprd->m_product_name }}</a>
+                                            <a href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ Str::length($showprd->m_product_name) > 10 ? Str::substr($showprd->m_product_name, 0, 15)."..." :  $showprd->m_product_name}}</a>
                                         </h5>
                                         <div class="price-box">
                                             <span class="price-regular">{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</span>
