@@ -104,7 +104,7 @@
                                 <li><a href="/blog">Tin Khuyến Mãi</a></li>
                                 <li><a href="{{route('list-favourite')}}">Sản phẩm yêu thích</a></li>
                                 <li><a href="/profile">CSKH</a></li>
-                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="{{ route('blog-list') }}">Blog</a></li>
                                 <li><a href="{{ route('tuyendung') }}">Tuyển Dụng</a></li>
 
                             </ul>

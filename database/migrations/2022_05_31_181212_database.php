@@ -187,13 +187,6 @@ class Database extends Migration
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_product');
         });
-        Schema::create('t_slider', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('m_name');
-            $table->string('m_description');
-            $table->string('m_image_path');
-            $table->string('m_image_name');
-        });
         Schema::enableForeignKeyConstraints();
     }
 
