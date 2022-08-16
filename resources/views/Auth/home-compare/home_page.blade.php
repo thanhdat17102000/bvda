@@ -2,7 +2,9 @@
 @section('title')
 TRANG CHỦ
 @endsection
+
 @section('content')
+
 <main>
     <!-- hero slider section start -->
     <section class="hero-slider">
@@ -98,12 +100,12 @@ TRANG CHỦ
                     <div class="product-carousel-4 mbn-50 slick-row-15 slick-arrow-style">
                         <!-- product single item start -->
                         @foreach($myProducts as $myProductItem)
-                        
+
                         <div class="product-item mb-50">
                             <div class="product-thumb">
                                 <a href="{{ route('productdetails', $myProductItem->m_product_slug) }}">
                                     @if(json_decode($myProductItem->m_picture))
-                                        <img src="{{asset('uploads')}}/{{ json_decode($myProductItem->m_picture)[0] }}" alt="">
+                                    <img src="{{asset('uploads')}}/{{ json_decode($myProductItem->m_picture)[0] }}" alt="">
                                     @endif
                                 </a>
                             </div>
@@ -116,15 +118,16 @@ TRANG CHỦ
                                     <span class="price-old"><del>{{$myProductItem->m_original_price}} vnđ</del></span>
                                 </div>
                                 <div class="product-action-link">
-                                    <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a>
+                                    <a href="javascript:void(0);" data-id="{{$myProductItem->id}}" id="product-favourite-{{$myProductItem->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$myProductItem->id}}" class="ion-android-favorite-outline product-{{$myProductItem->id}}"></i></a>
+                                    <!-- <a href="#" data-toggle="tooltip" title="Yêu Thích"><i class="ion-android-favorite-outline"></i></a> -->
                                     <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i class="ion-bag"></i></a>
-                                    <!-- <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a> -->
-                                    <a href="{{ route('productdetails', $myProductItem->m_product_slug) }}"><span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
+                                    <a href="#" data-toggle="modal" data-target="#quick_view{{ $myProductItem->id }}"> <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
+                                    <!-- <a href="{{ route('productdetails', $myProductItem->m_product_slug) }}"><span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a> -->
                                 </div>
                             </div>
                         </div>
                         @endforeach
-                        
+
 
                     </div>
                 </div>
@@ -190,9 +193,9 @@ TRANG CHỦ
                             <div class="pro-item-small mt-30">
                                 <div class="product-thumb">
                                     <a href="{{ route('productdetails', $myProductSellItem->m_product_slug) }}">
-                                    @if(json_decode($myProductItem->m_picture))
+                                        @if(json_decode($myProductItem->m_picture))
                                         <img src="{{asset('uploads')}}/{{ json_decode($myProductSellItem->m_picture)[0] }}" alt="">
-                                    @endif
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="pro-small-content">
@@ -211,16 +214,16 @@ TRANG CHỦ
                                         <span><i class="ion-android-star"></i></span>
                                     </div>
                                     <div class="product-link-2">
-                                        <a href="#" data-toggle="tooltip" title="Yêu thích"><i class="ion-android-favorite-outline"></i></a>
+                                        <a href="javascript:void(0);" data-id="{{$myProductSellItem->id}}" id="product-favourite-{{$myProductSellItem->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$myProductSellItem->id}}" class="ion-android-favorite-outline product-{{$myProductSellItem->id}}"></i></a>
                                         <a href="#" data-toggle="tooltip" title="Thêm vào giỏ hàng"><i class="ion-bag"></i></a>
-                                        <a href="{{ route('productdetails', $myProductSellItem->m_product_slug) }}"> <span data-toggle="tooltip" title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
+                                        <a href="#" data-toggle="modal" data-target="#quick_view{{ $myProductSellItem->id }}"> <span data-toggle="tooltip" title="Xem Nhanh"><i class="ion-ios-eye-outline"></i></span> </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                         <!-- product item start -->
-                        
+
 
                         <!-- lưu ý chỉ có 6 hoặc 8 sản phẩm ở đây thôi nhé -->
 
@@ -247,7 +250,7 @@ TRANG CHỦ
                 <div class="col-12">
                     <div class="blog-carousel-active slick-row-15">
                         @foreach($blogs as $blogItem)
-                        
+
                         <!-- blog single item start -->
                         <div class="blog-post-item">
                             <div class="blog-thumb">
@@ -258,7 +261,7 @@ TRANG CHỦ
                             <div class="blog-content">
                                 <h5 class="blog-title">
                                     <a href="{{ route('blog-detail', $blogItem->m_slug) }}">
-                                        {{ $blogItem->m_title }}
+                                        {{ Str::length($blogItem->m_title) > 30 ? Str::substr($blogItem->m_title, 0, 30)."..." : $blogItem->m_title }}
                                     </a>
                                 </h5>
                                 <ul class="blog-meta">
@@ -316,4 +319,113 @@ TRANG CHỦ
     <!-- brand area end -->
 </main>
 
+<!-- Quick view modal start -->
+@foreach ($myProducts as $key => $myProductItem)
+<div class="modal" id="quick_view{{ $myProductItem->id }}">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- product details inner end -->
+                <div class="product-details-inner">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="product-large-slider mb-20">
+                                @if(json_decode($myProductItem->m_picture))
+                                @foreach(json_decode($myProductItem->m_picture) as $showimg)
+                                <div class="pro-large-img img-zoom">
+                                    <img src="{{asset('uploads')}}/{{$showimg}}" alt="" />
+                                </div>
+                                @endforeach
+                                @endif
+                            </div>
+                            <div class="pro-nav slick-row-5">
+                                @if(json_decode($myProductItem->m_picture))
+                                @foreach(json_decode($myProductItem->m_picture) as $showimg)
+                                <div class="pro-nav-thumb"><img src="{{asset('uploads')}}/{{$showimg}}" alt="" /></div>
+                                @endforeach
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="product-details-des">
+                                <h3 class="pro-det-title">{{$myProductItem->m_product_name}}</h3>
+                                <div class="pro-review">
+                                    <span><a href="#">1 bình luận</a></span>
+                                </div>
+                                <div class="price-box">
+                                    <span class="price-regular">{{number_format($myProductItem->m_original_price,0,',','.')}}VND</span>
+                                    <span class="price-old"><del>{{number_format($myProductItem->m_price,0,',','.')}}VND</del></span>
+                                </div>
+                                <p>{!!$myProductItem->m_short_description!!}</p>
+                                <div class="quantity-cart-box d-flex align-items-center mb-20">
+                                    <div class="quantity">
+                                        <div class="pro-qty"><input type="text" value="1"></div>
+                                    </div>
+                                    <a href="cart.html" class="btn btn-default">Thêm vào giỏa hàng</a>
+                                </div>
+                                <div class="availability mb-20">
+                                    <h5 class="cat-title">Tình trạng: </h5>
+                                    @if($myProductItem->m_buy > 0)
+                                    <span>Còn hàng</span>
+                                    @else
+                                    <span style="color:red">Hết hàng</span>
+                                    @endif
+                                </div>
+                                <div class="share-icon">
+                                    <h5 class="cat-title">Chia sẻ:</h5>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- product details inner end -->
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- Quick view modal end -->
+@push('scripts')
+<script>
+    //Sản phẩm yêu thích FE của Yến
+    $(document).ready(function() {
+        $('.ion-android-favorite-outline').click(function(event) {
+            event.preventDefault();
+            var idProduct = $(this).data('id');
+            $("#product-favourite-" + idProduct).addClass("active-favourite");
+            $.ajax({
+                type: "post",
+                url: "/product-favourite",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    'idProduct': idProduct,
+                },
+                success: function(response) {
+                    // console.log(response);
+                    // toastr.success('',
+                    //     'Chọn sản phẩm yêu thích thành công')
+                    if (response.status == 200) {
+                        toastr.success('',
+                            response.message)
+                    } else {
+                        toastr.success('',
+                            response.message)
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+        });
+    });
+</script>
+@endpush
 @endsection
