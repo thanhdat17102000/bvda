@@ -515,7 +515,7 @@
 
                                                                 <div
                                                                     style="line-height: 140%; text-align: left; word-wrap: break-word;">
-                                                                    <p style="font-size: 14px; line-height: 140%;">
+                                                                    <p style="font-size: 14px; line-height: 140%; padding-left: 30px">
                                                                         <span
                                                                             style="font-size: 16px; line-height: 22.4px;">{{ number_format($item->qty) }}</span>
                                                                     </p>
@@ -816,7 +816,7 @@
                                                                 <p
                                                                     style="font-size: 14px; line-height: 140%; text-align: right;">
                                                                     <span
-                                                                        style="font-size: 16px; line-height: 22.4px;">{{ Cart::subtotal(0) }}</span>
+                                                                        style="font-size: 16px; line-height: 22.4px;">{{ number_format($order->m_coupon) }}</span>
                                                                 </p>
                                                             </div>
 
@@ -990,7 +990,7 @@
                                                                 <p
                                                                     style="font-size: 14px; line-height: 140%; text-align: right;">
                                                                     <span
-                                                                        style="font-size: 16px; line-height: 22.4px;"><strong>{{  }}</strong></span>
+                                                                        style="font-size: 16px; line-height: 22.4px;"><strong>{{ number_format($order->m_total_price*1 + $order->m_fee_ship*1 - $order->m_coupon*1) }}</strong></span>
                                                                 </p>
                                                             </div>
 

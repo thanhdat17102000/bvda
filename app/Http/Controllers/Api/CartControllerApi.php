@@ -23,7 +23,7 @@ class CartControllerApi extends Controller
         return [
             "data" => Cart::content(),
             "subtotal" => Cart::subtotal(0), 'total' => Cart::total(0),
-            'tax' => Cart::tax(0), 'count' => Cart::count(), 'totalNoTax' => Cart::priceTotal()
+            'tax' => Cart::tax(0), 'count' => count(Cart::content()), 'totalNoTax' => Cart::priceTotal()
         ];
     }
 
@@ -36,8 +36,11 @@ class CartControllerApi extends Controller
     public function store(Request $request)
     {
         $id = $request->productId;
-        $quantity = $request->quantity;
         $product = product::find($id);
+        if($product == null || $product->m_status != 1){
+            return ["isError" => true, "message" => "Sản phẩm không tồn tại, vui lòng chọn sản phẩm khác"];
+        }
+        $quantity = $request->quantity;
         $data['id'] = $id;
         $data['qty'] = $quantity;
         $data['price'] = $product->m_price;
