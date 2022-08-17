@@ -4,14 +4,22 @@
 @endsection
 @push('scripts')
     <script>
-        $.ajax({
-            url: '{{ url('api/blog') }}',
-            type: "get",
-            success: function(response) {
-                console.log("result", response);
-                const {data} = response;
-                data.map((item, index) => {
-                    $('#list').append(`<div class="col-xl-4 col-md-6">
+        const loadBlog = (page) => {
+            $.ajax({
+                url: `{{ url('api/blog?page=') }}${page}`,
+                type: "get",
+                success: function(response) {
+                    console.log("result", response);
+                    let pagination = '';
+                    let content = '';
+                    const {
+                        data,
+                        links,
+                        next_page_url,
+                        prev_page_url
+                    } = response;
+                    data.map((item, index) => {
+                        content += `<div class="col-xl-4 col-md-6">
                                 <!-- blog single item start -->
                                 <div class="blog-post-item mb-30">
                                     <div class="blog-thumb">
@@ -33,13 +41,35 @@
                                     </div>
                                 </div>
                                 <!-- blog single item start -->
-                            </div>`);
-                })
-            },
-            error: function(error){
-                console.log(error);
-            }
-        });
+                            </div>`;
+                    })
+                    $('#list').html(content);
+                    links.map((item, index) => {
+                        if (item.label == '&laquo; Previous') {
+                            pagination +=
+                                `<li data-page=${item.url != null ? item.url.slice(-1): ""}><a class="Previous"><i class="ion-ios-arrow-left"></i></a></li>`
+                        } else if (item.label == 'Next &raquo;') {
+                            pagination +=
+                                `<li data-page=${item.url != null ? item.url.slice(-1): ""}><a class="Next" href="#"><i class="ion-ios-arrow-right"></i></a></li>`
+                        } else {
+                            pagination +=
+                                `<li data-page=${item.url.slice(-1)} class="${item.active ? 'active' : ''}"><a  href="#">${item.label}</a></li>`
+                        }
+                    })
+                    $('.pagination-box').html(pagination);
+                    $('.pagination-box li').click(function(e) {
+                        e.preventDefault();
+                        loadBlog($(this).data("page"))
+                    });
+
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+        loadBlog(1);
     </script>
 @endpush
 @section('content')
@@ -76,11 +106,7 @@
                         <!-- start pagination area -->
                         <div class="paginatoin-area text-center">
                             <ul class="pagination-box">
-                                <li><a class="Previous"><i class="ion-ios-arrow-left"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a class="Next" href="#"><i class="ion-ios-arrow-right"></i></a></li>
+
                             </ul>
                         </div>
                         <!-- end pagination area -->
