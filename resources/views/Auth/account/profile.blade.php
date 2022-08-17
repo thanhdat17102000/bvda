@@ -73,9 +73,9 @@
                                                 Dashboad</a>
                                             <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Lịch sử mua hàng</a>
                                             {{-- <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Lịch sử mua hàng</a> --}}
-                                            <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i> Thanh toán</a>
+                                            <a href="{{route('list-favourite')}}"><i class="fa fa-heart"></i> Sản phẩm yêu thích</a>
                                             <a href="#address-edit" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
-                                            <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Đổi mật khẩu</a>
+                                            <a href="#account-info" data-toggle="tab"><i class="fa fa-key"></i>Đổi mật khẩu</a>
                                             <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
                                         </div>
                                     </div>
@@ -91,7 +91,11 @@
                                                     <div class="welcome">
                                                         <p>Xin chào, <strong>{{Auth::user()->name}}</strong> (Nếu không phải <strong>{{Auth::user()->name}} !</strong><a href="{{route('logout')}}" class="text-primary"> Đăng xuất</a></p>
                                                     </div>
+<<<<<<< Updated upstream
                                                     <p class="mb-0">Bạn có thể kiểm tra thông tin cá nhân, đơn hàng và chỉnh sửa</p>
+=======
+                                                        <p class="mb-0">Bạn có thể kiểm tra thông tin cá nhân, đơn hàng và chỉnh sửa</p>
+>>>>>>> Stashed changes
                                                 </div>
                                             </div>
                                             <!-- Single Tab Content End -->

@@ -24,17 +24,17 @@
             for (let key in data) {
                 content += `<li class="minicart-item">
                             <div class="minicart-thumb">
-                                <a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">
+                                <a href="{{url('chi-tiet-san-pham')}}/${data[key].options.slug}">
                                     <img src="{{ asset('uploads') }}/${data[key].options.image}" alt="product">
                                 </a>
                             </div>
                             <div class="minicart-content">
                                 <h3 class="product-name">
-                                    <a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">${data[key].name}</a>
+                                    <a href="{{url('chi-tiet-san-pham')}}/${data[key].options.slug}">${data[key].name}</a>
                                 </h3>
                                 <p>
                                     <span class="cart-quantity">${data[key].qty}<strong>&times;</strong></span>
-                                    <span class="cart-price">${data[key].price.toLocaleString()}</span>
+                                    <span class="cart-price">${data[key].price}</span>
                                 </p>
                             </div>
                             <button class="minicart-remove" data-id="${data[key].rowId}"><i class="ion-android-close"></i></button>
@@ -58,7 +58,7 @@
                         console.log(response);
                         renderCart();
                         toastr.success('',
-                            'Xóa giỏ hàng thành công')
+                        'Xóa giỏ hàng thành công')
                     },
                     error: function(error) {
                         console.log(error);
@@ -85,9 +85,9 @@
                                     Quang Trung,
                                     P. Tân Chánh Hiệp, Q. 12, Tp. Hồ Chí Minh</li>
                                 <li><i class="ion-ios-email-outline"></i>Email: <a
-                                        href="mailto:yourmail@gmail.com">kingdomshoes@gmail.com</a></li>
+                                        href="mailto:yourmail@gmail.com">kingdomsneakers08@gmail.com</a></li>
                                 <li><i class="ion-ios-telephone-outline"></i>Số điện thoại: <a
-                                        href="%2b0025425456554.html">+ 00 254 254565</a></li>
+                                        href="%2b0025425456554.html">0978261116</a></li>
                             </ul>
                         </div>
                     </div>
@@ -95,17 +95,18 @@
                 <!-- footer widget item end -->
 
                 <!-- footer widget item start -->
-                <div class="col-xl-2 col-lg-3 col-md-6">
+                <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="widget-item mt-40">
-                        <h5 class="widget-title">Hạng mục</h5>
+                        <h5 class="widget-title">Hạng Mục</h5>
                         <div class="widget-body">
                             <ul class="useful-link">
                                 <!-- <li><a href="#">Ecommerce</a></li> -->
-                                <li><a href="/blog">Tin Khuyến Mãi</a></li>
-                                <li><a href="{{ route('list-favourite') }}">Sản phẩm yêu thích</a></li>
-                                <li><a href="/profile">CSKH</a></li>
-                                <li><a href="{{ route('blog-list') }}">Blog</a></li>
-                                <li><a href="{{ route('tuyendung') }}">Tuyển Dụng</a></li>
+                                <li><a href="/product_list">Cửa hàng</a></li>
+                                <li><a href="/profile">Tài khoản</a></li>
+                                <li><a href="{{route('list-favourite')}}">Sản phẩm yêu thích</a></li>
+                                
+                                <li><a href="{{ route('blog-list') }}">Tin tức</a></li>
+                                <li><a href="{{ route('tuyendung') }}">Tuyển dụng</a></li>
 
                             </ul>
                         </div>
@@ -114,15 +115,16 @@
                 <!-- footer widget item end -->
 
                 <!-- footer widget item start -->
-                <div class="col-xl-2 col-lg-3 col-md-6">
+                <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="widget-item mt-40">
-                        <h5 class="widget-title">Thông tin</h5>
+                        <h5 class="widget-title">Thông Tin</h5>
                         <div class="widget-body">
                             <ul class="useful-link">
                                 <li><a href="/">Trang chủ</a></li>
-                                <li><a href="#">Giới Thiệu</a></li>
-                                <li><a href="{{ route('chinhsachdoitra') }}">Chính Sách Đổi Trả</a></li>
-                                <li><a href="#">Vận Chuyển</a></li>
+                                <li><a href="#">Giới thiệu</a></li>
+                                <li><a href="{{route('hdsize')}}">Hướng dẫn chọn size</a></li>
+                                <li><a href="{{route('chinhsachdoitra')}}">Chính Sách Đổi Trả</a></li>
+                                
                                 <li><a href="{{ route('baomat') }}">Chính Sách Bảo Mật</a></li>
                             </ul>
                         </div>
@@ -131,21 +133,20 @@
                 <!-- footer widget item end -->
 
                 <!-- footer widget item start -->
-                <div class="col-xl-2 col-lg-3 offset-xl-1 col-md-6">
+                <!-- <div class="col-xl-2 col-lg-3 offset-xl-1 col-md-6">
                     <div class="widget-item mt-40">
                         <h5 class="widget-title">Liên hệ</h5>
                         <div class="widget-body">
                             <ul class="useful-link">
-                                <li><a href="#">Cửa hàng</a></li>
-                                <li><a href="#">Tài khoản</a></li>
-                                <li><a href="#">Đơn hàng</a></li>
-                                <li><a href="{{ route('hdsize') }}">Hướng dẫn chọn size</a></li>
-                                <li><a href="#">Đánh giá</a></li>
+                               
+                                
+                                
+                                
 
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- footer widget item end -->
             </div>
         </div>
@@ -158,18 +159,18 @@
             <div class="row">
                 <div class="col-md-6 order-2 order-md-1">
                     <div class="copyright-text text-center text-md-left">
-                        <p>&copy; 2022 <b>Kingdom Sneakers</b> Made with <i class="fa fa-heart text-danger"></i> by <a
-                                href="https://hasthemes.com/"><b>Team 2</b></a></p>
+                        <p>&copy; 2022 <b>Phát triển</b> Bởi  <a
+                                href="https://hasthemes.com/"><b>Kingdom Sneakers Team</b></a></p>
                     </div>
                 </div>
-                <div class="col-md-6 order-1 order-md-2">
+                <!-- <div class="col-md-6 order-1 order-md-2">
                     <div class="footer-social-link text-center text-md-right">
                         <a href="#"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
                         <a href="#"><i class="fa fa-linkedin"></i></a>
                         <a href="#"><i class="fa fa-instagram"></i></a>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -185,7 +186,7 @@
         </div>
         <div class="container">
             <div class="offcanvas-search-box">
-                <form class="d-flex bdr-bottom w-100" action="{{ route('search') }}" method="get">
+                <form class="d-flex bdr-bottom w-100" action="{{route('search')}}" method="get">
                     @csrf
                     <input type="text" name="keywork" placeholder="Search entire storage here...">
                     <button class="search-btn"><i class="ion-ios-search-strong"></i>Tìm kiếm</button>
@@ -204,11 +205,10 @@
             <div class="minicart-close">
                 <i class="ion-android-close"></i>
             </div>
-
             <div class="minicart-content-box">
-
                 <div class="minicart-item-wrapper">
                     <ul class="minicart-list">
+
                     </ul>
                 </div>
 
@@ -218,6 +218,14 @@
                             <span>Tổng</span>
                             <span><strong class="total-price"></strong></span>
                         </li>
+                        {{-- <li>
+                            <span>Eco Tax (-2.00)</span>
+                            <span><strong>$10.00</strong></span>
+                        </li>
+                        <li>
+                            <span>VAT (20%)</span>
+                            <span><strong>$60.00</strong></span>
+                        </li> --}}
                         <li class="total">
                             <span>Thành tiền</span>
                             <span><strong class="total-all"></strong></span>
@@ -226,12 +234,9 @@
                 </div>
 
                 <div class="minicart-button">
-                    <a href="{{ route('cart') }}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
+                    <a href="{{route('cart')}}"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 </div>

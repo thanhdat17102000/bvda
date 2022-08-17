@@ -308,7 +308,7 @@
                                             @endforeach --}}
 
                                                     <a href="#" class="add-cart" data-toggle="tooltip"
-                                                        title="Thêm Vào Giỏa"><i class="ion-bag"></i></a>
+                                                        title="Thêm Vào Giỏ Hàng"><i class="ion-bag"></i></a>
                                                     <form action="" method="post" class="cart-info">
                                                         @csrf
                                                         <input type="hidden" name="quantity" value="1">

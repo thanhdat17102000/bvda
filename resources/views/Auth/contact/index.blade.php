@@ -89,13 +89,13 @@
                                 est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum
                                 formas human.</p> -->
                             <ul>
-                                <li><i class="fa fa-fax"></i> Địc chỉ : 18E Cộng Hòa, Tân Bình, TP. Hồ Chí Minh</li>
-                                <li><i class="fa fa-phone"></i> contact@fpt.com</li>
-                                <li><i class="fa fa-envelope-o"></i> 0969.969.969</li>
+                            <li><i class="fa fa-map-marker"></i> Địa chỉ: Tòa nhà Innovation - Lô 24 Công viên phần mềm Quang Trung, P. Tân Chánh Hiệp, Q. 12, Tp. Hồ Chí Minh</li>
+                                    <li><i class="fa fa-phone"></i> 0978216116 </li>
+                                    <li><i class="fa fa-envelope-o"></i> kingdomsneakers08@gmail.com</li>
                             </ul>
                             <div class="working-time">
                                 <h3>Giờ làm việc</h3>
-                                <p class="pb-0"><span>Thứ 2 – Thứ 6:</span>08AM – 22PM</p>
+                                <p class="pb-0"><span>Thứ 2 – CN:</span>08AM – 08PM</p>
                             </div>
                         </div>
                     </div>

@@ -103,7 +103,7 @@
                             </td>
                             <td>
                                 <button type='button'  value="{{$row->idbl}}" class='answer_queston btn btn-secondary' style='outline: none;' data-toggle='modal' data-target='#exampleModal1'>
-                                     Trả lời
+                                    Trả lời
                                 </button>
                             </td>
                             <td>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="modal-body">
                     <p id="content_user">
-                       
+                    
                     </p>
                 </div>
                 <div class="modal-footer">
