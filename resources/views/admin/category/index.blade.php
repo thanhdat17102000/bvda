@@ -35,7 +35,7 @@
         <div class="modal-content">
             <form id="formEditCategory" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">sửa danh mục</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sửa danh mục</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

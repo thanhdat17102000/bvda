@@ -15,7 +15,7 @@ class BlogControllerApi extends Controller
      */
     public function index()
     {
-        return Post::with('user')->where('m_status', 1)->orderBy('created_at')->paginate(5);
+        return Post::with('user')->where('m_status', 1)->orderBy('created_at')->paginate(6);
     }
 
     /**

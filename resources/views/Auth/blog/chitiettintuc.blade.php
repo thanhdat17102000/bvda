@@ -60,13 +60,8 @@
                                 </div>
                                 <div class="blog-author-title text-center">
                                     <h5>Erik Jhonson</h5>
-                                    <span>UI UX Designer</span>
-                                    <div class="blog-widget-icon">
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-vimeo"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                                    </div>
+                                    <span>Admin</span>
+                                    
                                 </div>
                             </div>
                             <!-- widget item end -->
@@ -75,14 +70,14 @@
                             <div class="blog-widget">
                                 <h4 class="blog-widget-title">Tìm kiếm</h4>
                                 <form class="widget-search-form">
-                                    <input placeholder="Search keyword" type="text" class="search-field">
+                                    <input placeholder="Tìm kiếm" type="text" class="search-field">
                                     <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                             <!-- widget item end -->
 
                             <!-- widget item start -->
-                            <div class="blog-widget">
+                            <!-- <div class="blog-widget">
                                 <h4 class="blog-widget-title">Recent Posts</h4>
                                 <ul class="recent-posts-inner">
                                     <li class="recent-posts">
@@ -130,11 +125,11 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <!-- widget item end -->
 
                             <!-- widget item start -->
-                            <div class="blog-widget">
+                            <!-- <div class="blog-widget">
                                 <h4 class="blog-widget-title">Categories</h4>
                                 <ul class="blog-categories">
                                     <li><a href="blog-details.html">Shoes</a><span>(20)</span></li>
@@ -144,11 +139,11 @@
                                     <li><a href="blog-details.html">Electronics</a><span>(66)</span></li>
                                     <li><a href="blog-details.html">Jewellery & Cosmetics</a><span>(30)</span></li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <!-- widget item end -->
 
                             <!-- widget item start -->
-                            <div class="blog-widget">
+                            <!-- <div class="blog-widget">
                                 <h4 class="blog-widget-title">Tags</h4>
                                 <div class="blog-tag">
                                     <a href="blog-details.html">Fashion</a>
@@ -157,7 +152,7 @@
                                     <a href="blog-details.html">Bags</a>
                                     <a href="blog-details.html">Jewelery</a>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- widget item end -->
                         </div>
                     </div>
@@ -183,7 +178,7 @@
                                 <!-- blog single item start -->
 
                                 <!-- comment area start -->
-                                <div class="comment-section section-padding">
+                                <!-- <div class="comment-section section-padding">
                                     <h5>03 bình luận</h5>
                                     <ul>
                                         <li>
@@ -226,11 +221,11 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <!-- comment area end -->
 
                                 <!-- start blog comment box -->
-                                <div class="blog-comment-wrapper">
+                                <!-- <div class="blog-comment-wrapper">
                                     <h5>Góp Ý</h5>
                                     <p>Địa chỉ email sẽ không được công bố. Các trường bắt buộc được đánh dấu *</p>
                                     <form action="#">
@@ -261,7 +256,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
+                                </div> -->
                                 <!-- start blog comment box -->
                             </div>
                         </div>

@@ -22,7 +22,8 @@
                                     <div class="blog-content">
                                         <h5 class="blog-title">
                                             <a href="{{ url('/blog-detail/') }}/${item.m_slug}">
-                                                ${item.m_title}
+                                             
+                                             ${item.m_title.substring(0,60)}...
                                             </a>
                                         </h5>
                                         <ul class="blog-meta">
