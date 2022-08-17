@@ -24,7 +24,7 @@ class CheckoutController extends Controller
         // 
         $coupon = Coupon::where('coupon_code', $request->coupon_code)->where('coupon_expired', '>' , date("Y/m/d"))->where('coupon_time', '>', 0)->first();
         if($coupon){
-            return ['data' => $coupon, 'message' => 'Áp dụng mã giảm giá thành công'];
+            return ['data' => $coupon, 'message' => 'Áp dụng mã giảm giá thành công', 'coupon_id' => $coupon->id];
         }else {
             return ['message' => 'Mã giảm giá không hợp hợp lệ!'];
         }

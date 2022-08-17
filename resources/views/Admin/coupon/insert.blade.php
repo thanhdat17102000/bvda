@@ -9,7 +9,7 @@
     <script src=" {{ asset('admin/assets/libs/moment/moment.js') }}"></script>
     <script>
         $("#datepicker-autoclose").datepicker({
-                format: "dd/mm/yyyy",
+                format: "yyyy/mm/dd",
                 autoclose: !0,
                 todayHighlight: !0,
             }),
@@ -17,7 +17,8 @@
         $('#form-insert').submit(function(e) {
             e.preventDefault();
             let data = new FormData(this);
-            data.set('coupon_expired', moment(new Date($('input[name=coupon_expired]').val())).format('YYYY/MM/DD'))
+            // let date = new Date($('input[name=coupon_expired]').val());
+            // data.set('coupon_expired', moment(date).format('YYYY/MM/DD'))
             $.ajax({
                 type: "post",
                 url: "{{ route('save-coupon') }}",
@@ -84,7 +85,7 @@
                                             <div class="col-md-10">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="coupon_expired"
-                                                        placeholder="dd/mm/yyyy" id="datepicker-autoclose">
+                                                        placeholder="yyyy/mm/dd" id="datepicker-autoclose">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="ti-calendar"></i></span>
                                                     </div>

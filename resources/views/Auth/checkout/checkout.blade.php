@@ -54,17 +54,22 @@
                 contentType: false,
                 success: function(response) {
                     console.log(response);
-                    const {
-                        data
-                    } = response;
-                    $('input[name=txnRef]').val(data.id);
-                    if (payMethod == 'cash') {
-                        window.location.href = "{{ route('checkout-success') }}";
-                    } else if (payMethod == 'momo') {
-                        $('#momo-payment').submit();
+                    if (response.IsError) {
+                        toastr.error('', response.message)
                     } else {
-                        $('#vnpay-payment').submit();
+                        const {
+                            data
+                        } = response;
+                        $('input[name=txnRef]').val(data.id);
+                        if (payMethod == 'cash') {
+                            window.location.href = "{{ route('checkout-success') }}";
+                        } else if (payMethod == 'momo') {
+                            $('#momo-payment').submit();
+                        } else {
+                            $('#vnpay-payment').submit();
+                        }
                     }
+
                 },
                 error: function(error) {
                     console.log(error);
@@ -142,6 +147,7 @@
                     if (!response.data) {
                         $('.error-coupon').text(response.message);
                     } else {
+                        $('#coupon_id').val(response.coupon_id);
                         $('.success-coupon').text(response.message);
                         if (response.data.coupon_method == 1) {
                             $('.coupon').text(response.data.coupon_value + "%");
@@ -321,6 +327,7 @@
                     <div class="col-md-6 float-left" style="width: 600px;">
                         <form id="form-checkout" method="POST">
                             @csrf
+                            <input type="hidden" name="coupon_id" id="coupon_id">
                             <div class="checkout-billing-details-wrap">
                                 <h4 class="checkout-title">Thông tin liên hệ</h4>
                                 <div class="billing-form-wrap">

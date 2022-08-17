@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\District;
 use App\Models\OrderDetailModel;
 use App\Models\OrderModel;
@@ -34,19 +35,29 @@ class CheckoutControllerApi extends Controller
      */
     public function store(Request $request)
     {
+        $content = Cart::content();
+        foreach ($content as $item) {
+            $product = product::find($item->id);
+            if ($product == null || $product->m_status != 1) {
+                return ["IsError" => true, "message" => "Sản phẩm không tồn tại, vui lòng chọn sản phẩm khác"];
+            }
+        }
+        
         $data = $request->all();
         $province = Province::find($data['province_nice-select']);
         $district = District::find($data['district_nice-select']);
         $ward = Ward::find($data['ward_nice-select']);
         $order = new OrderModel();
         $fee_ship = 0;
-        if(TransportFee::where('m_province_id',  $province)->where('m_district_id', $district)->where('m_ward_id', $ward)->first()){
+        if (TransportFee::where('m_province_id',  $province)->where('m_district_id', $district)->where('m_ward_id', $ward)->first()) {
             $fee = TransportFee::where('m_province_id',  $province)->where('m_district_id', $district)->where('m_ward_id', $ward)->first();
             $fee_ship = $fee->m_fee_ship;
-        }else {
+        } else {
             $fee_ship = 50000;
         }
-        if(Auth::check()){$order->m_id_user = Auth::user()->id;}
+        if (Auth::check()) {
+            $order->m_id_user = Auth::user()->id;
+        }
         $order->m_name = $request->m_name;
         $order->m_email = $request->m_email;
         $order->m_address = $data['m_address'] . "," . $ward->_prefix . " " . $ward->_name . "," . $district->_prefix . " " . $district->_name . "," . $province->_name;
@@ -57,13 +68,12 @@ class CheckoutControllerApi extends Controller
         $order->m_status_ship = 0;
         $order->m_status_pay = 0;
         $order->m_coupon = $request->m_coupon;
-        $result = $order->save();
-
+        $order->save();
         $id = $order->id;
-        $content = Cart::content();
+
         foreach ($content as $item) {
             $product = product::find($item->id);
-            $product -> m_buy += 1;
+            $product->m_buy += 1;
             $product->save();
             $orderDetail = new OrderDetailModel();
             $orderDetail->m_id_order = $id;
@@ -73,6 +83,10 @@ class CheckoutControllerApi extends Controller
             $orderDetail->m_product_name = $item->name;
             $orderDetail->save();
         }
+
+        $coupon = Coupon::find($request->coupon_id);
+        $coupon->coupon_time -= 1;
+        $coupon->save();
         return ["IsError" => false, "message" => "Đặt hàng thành công !", "data" => $order];
     }
 

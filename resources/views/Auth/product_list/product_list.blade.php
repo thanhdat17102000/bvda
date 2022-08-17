@@ -33,7 +33,7 @@
                             toastr.success('',
                                 response.message)
                         } else {
-                            toastr.success('',
+                            toastr.error('',
                                 response.message)
                         }
                     },
