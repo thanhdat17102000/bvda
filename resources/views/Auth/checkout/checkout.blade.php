@@ -156,7 +156,11 @@
                                 .toLocaleString());
                         } else {
                             $('.coupon').text(response.data.coupon_value.toLocaleString());
-                            couponGlobal = response.data.coupon_value;
+                            if (couponGlobal > totalGlobal) {
+                                couponGlobal = totalGlobal
+                            } else {
+                                couponGlobal = response.data.coupon_value;
+                            }
                             $('.total-price').text((totalGlobal * 1 + shipGlobal * 1 - couponGlobal)
                                 .toLocaleString());
                         }
@@ -344,7 +348,7 @@
 
                                     <div class="single-input-item">
                                         <label for="email" class="required">Email</label>
-                                        <input type="email" id="email" name="m_email" placeholder="Nhập email"
+                                        <input type="text" id="email" name="m_email" placeholder="Nhập email"
                                             value="{{ Auth::check() ? Auth::user()->email : '' }}" />
                                     </div>
 
