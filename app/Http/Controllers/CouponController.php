@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CouponRequest;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,7 @@ class CouponController extends Controller
         return view('Admin.coupon.insert')->with(compact('data'));
     }
 
-    public function save_coupon(Request $request)
+    public function save_coupon(CouponRequest $request)
     {
         $coupon = new Coupon();
         $coupon->coupon_name = $request->coupon_name;

@@ -43,7 +43,7 @@ class CheckoutControllerApi extends Controller
                 return ["IsError" => true, "message" => "Sản phẩm không tồn tại, vui lòng chọn sản phẩm khác"];
             }
         }
-        
+
         $data = $request->all();
         $province = Province::find($data['province_nice-select']);
         $district = District::find($data['district_nice-select']);
@@ -84,10 +84,11 @@ class CheckoutControllerApi extends Controller
             $orderDetail->m_product_name = $item->name;
             $orderDetail->save();
         }
-
-        $coupon = Coupon::find($request->coupon_id);
-        $coupon->coupon_time -= 1;
-        $coupon->save();
+        if ((int)$request->m_coupon > 0) {
+            $coupon = Coupon::find($request->coupon_id);
+            $coupon->coupon_time -= 1;
+            $coupon->save();
+        }
         return ["IsError" => false, "message" => "Đặt hàng thành công !", "data" => $order];
     }
 

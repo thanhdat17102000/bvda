@@ -93,12 +93,27 @@
                 contentType: false,
                 success: function(response) {
                     console.log(response);
+                    ["province", "district", "ward", "m_fee_ship"].map((item) => {
+                        $(`.${item}`).empty();
+                    })
                     toastr.success('Thêm phí ship thành công!')
                     $('button[type=reset]').click();
                     table.destroy();
                     fetchDelivery();
                 },
                 error: function(error) {
+                    ["province", "district", "ward", "m_fee_ship"].map((item) => {
+                        $(`.${item}`).empty();
+                    })
+                    let validate = error.responseJSON.errors;
+                    for (const key in validate) {
+                        console.log("key", key);
+                        let content = '';
+                        validate[key].map((item) => {
+                            content += `<li>${item}</li>`
+                        })
+                        $(`.${key}`).html(content)
+                    }
                     toastr.error('Thêm phí ship thất bại!')
                     console.error(error);
                 }
@@ -159,20 +174,26 @@
                                             <option value="{{ $prov->id }}">{{ $prov->_name }}</option>
                                         @endforeach
                                     </select>
+                                    <ul class="parsley-errors-list province">
+                                    </ul>
                                 </div>
                                 <div class="col-3">
                                     <h5>Quận/Huyện</h5>
 
                                     <select class="form-control select2 choose" name="district" id="district">
-                                        <option>-- Chọn quận/huyện --</option>
+                                        <option value="">-- Chọn quận/huyện --</option>
                                     </select>
+                                    <ul class="parsley-errors-list district">
+                                    </ul>
                                 </div>
                                 <div class="col-3">
                                     <h5>Xã/Phường/Thị trấn</h5>
 
                                     <select class="form-control select2 choose" name="ward" id="ward">
-                                        <option>-- Chọn xã/phường/thị trấn --</option>
+                                        <option value="">-- Chọn xã/phường/thị trấn --</option>
                                     </select>
+                                    <ul class="parsley-errors-list ward">
+                                    </ul>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group mt-1">
@@ -180,6 +201,8 @@
                                         <input type="text" class="form-control" data-toggle="input-mask"
                                             data-mask-format="000,000,000,000,000" data-reverse="true" name="m_fee_ship"
                                             placeholder="Nhập phí vận chuyển">
+                                        <ul class="parsley-errors-list m_fee_ship">
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="col-6">

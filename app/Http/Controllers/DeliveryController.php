@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeliveryRequest;
 use App\Models\District;
 use App\Models\Province;
 use App\Models\TransportFee;
@@ -56,7 +57,7 @@ class DeliveryController extends Controller
         }
     }
 
-    public function insert_delivery(Request $request)
+    public function insert_delivery(DeliveryRequest $request)
     {
         $fee = new TransportFee();
         $fee->m_province_id = $request->province;

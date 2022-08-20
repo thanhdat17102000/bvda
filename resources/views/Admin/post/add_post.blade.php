@@ -25,7 +25,13 @@
                     console.log("post", response);
                     $(':reset').click();
                     $('.dropify-clear:first').click();
-                    toastr.success('Thêm thành công!')
+                    toastr.success('Thêm thành công!'),
+                        ["m_title", "m_slug", "m_desc", "m_content",
+                            "m_meta_keyword", "m_meta_desc",
+                            "m_image"
+                        ].map((item) => {
+                            $(`.${item}`).empty();
+                        })
                 },
                 error: function(error) {
                     console.error(error);

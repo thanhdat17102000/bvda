@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class EditPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,21 +16,16 @@ class PostRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
             'm_title' => ['required', 'between:10,100', 'string'],
-            'm_slug' => ['required', 'unique:t_post,m_slug', 'string'],
+            'm_slug' => ['required', 'string'],
             'm_desc' => ['required', 'between:10,200', 'string'],
             'm_content' => ['required', 'string'],
             'm_meta_keyword' => ['required', 'between:10,200', 'string'],
             'm_meta_desc' => ['required', 'between:10,200', 'string'],
-            'm_image' => ['required', 'image']
+            'm_image' => ['image']
         ];
     }
 
@@ -48,8 +42,6 @@ class PostRequest extends FormRequest
             'm_meta_keyword.between' => 'Thẻ meta keyword phải dài từ 10 đến 200 kí tự!',
             'm_meta_desc.between' => 'Thẻ meta desc phải dài từ 10 đến 200 kí tự!',
             'm_meta_desc.required' => 'Thẻ meta desc không để trống!',
-            'm_image.required' => 'Hình ảnh không được bỏ trống!',
-            'm_slug.unique' => 'Slug phải là duy nhất!',
             'm_title.string' => 'Tiêu đề phải là chuỗi kí tự!',
             'm_slug.string' => 'Slug phải là chuỗi kí tự!',
             'm_desc.string' => 'Mô tả ngắn phải là chuỗi kí tự!',

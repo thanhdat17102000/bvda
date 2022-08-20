@@ -72,7 +72,21 @@
 
                 },
                 error: function(error) {
-                    console.log(error);
+                    console.error(error);
+                    ["m_name", "m_email", "m_desc", "m_phone", "province_nice-select",
+                        "district_nice-select", "ward_nice-select",
+                        "m_address"
+                    ].map((item) => {
+                        $(`.${item}`).empty();
+                    })
+                    let validate = error.responseJSON.errors;
+                    for (const key in validate) {
+                        let content = '';
+                        validate[key].map((item) => {
+                            content += `<li style="font-size: 14px" class="mt-1">${item}</li>`
+                        })
+                        $(`.${key}`).html(content)
+                    }
                 }
             });
         });
@@ -342,6 +356,8 @@
                                                 <input type="text" id="m_name" name="m_name"
                                                     placeholder="Nhập họ và tên"
                                                     value="{{ Auth::check() ? Auth::user()->name : '' }}" />
+                                                <ul class="m_name text-danger">
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -350,6 +366,8 @@
                                         <label for="email" class="required">Email</label>
                                         <input type="text" id="email" name="m_email" placeholder="Nhập email"
                                             value="{{ Auth::check() ? Auth::user()->email : '' }}" />
+                                        <ul class="m_email text-danger">
+                                        </ul>
                                     </div>
 
                                     <div class="single-input-item">
@@ -357,6 +375,8 @@
                                         <input type="text" id="com-name" name="m_phone"
                                             placeholder="Nhập số điện thoại"
                                             value="{{ Auth::check() ? Auth::user()->phone : '' }}" />
+                                        <ul class="m_phone text-danger">
+                                        </ul>
                                     </div>
 
                                     <div class="single-input-item">
@@ -367,24 +387,32 @@
                                                 <option value="{{ $prov->id }}">{{ $prov->_name }}</option>
                                             @endforeach
                                         </select>
+                                        <ul class="province_nice-select pt-1 text-danger">
+                                        </ul>
                                     </div>
                                     <div class="single-input-item">
                                         <label for="district" class="required">Quận/Huyện</label>
                                         <select name="district nice-select" id="district">
                                             <option value="">-- Chọn quận/huyện --</option>
                                         </select>
+                                        <ul class="district_nice-select pt-1 text-danger">
+                                        </ul>
                                     </div>
                                     <div class="single-input-item">
                                         <label for="ward" class="required">Xã phường</label>
                                         <select name="ward nice-select" id="ward">
                                             <option value="">-- Chọn xã/phường/thị trấn --</option>
                                         </select>
+                                        <ul class="ward_nice-select pt-1 text-danger">
+                                        </ul>
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="street-address" class="required mt-20">Tên đường, số nhà</label>
                                         <input type="text" id="street-address" name="m_address"
                                             placeholder="Nhập tên đường, số nhà" />
+                                        <ul class="m_address text-danger">
+                                        </ul>
                                     </div>
 
                                     <div class="single-input-item">
@@ -392,6 +420,8 @@
                                         <label for="m_note">Ghi chú đơn hàng của bạn</label>
                                         <textarea name="m_note" id="ordernote" cols="30" rows="3"
                                             placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
+                                        <ul class="m_note text-danger">
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
