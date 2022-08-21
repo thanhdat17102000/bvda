@@ -1,4 +1,7 @@
 @extends('Auth.layouts.master')
+@section('title')
+    Đăng nhập
+@endsection
 @section('content')
 <!-- main wrapper start -->
 <main>
@@ -62,9 +65,9 @@
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
                                         <div class="remember-meta">
-                                            <div class="custom-control custom-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                <label class="custom-control-label" for="rememberMe">{{ __('Ghi nhớ tài khoản!') }}</label>
+                                            <div class="custom-control">
+                                                <input style="width: 20px" class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                <label class="" for="rememberMe">{{ __('Ghi nhớ tài khoản!') }}</label>
                                             </div>
                                         </div>
                                         @if (Route::has('password.request'))

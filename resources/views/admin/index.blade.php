@@ -208,7 +208,7 @@
 
                     <ul class="metismenu" id="side-menu">
 
-                        <li class="menu-title">Navigation</li>
+                        <li class="menu-title">Điều hướng</li>
 
                         <li>
                             <a href="{{ route('dashboard.index') }}">
@@ -231,7 +231,7 @@
                             </a>
                             <ul class="nav-second-level mm-collapse" aria-expanded="false">
                                 <li><a href="/admintrator/user">Danh sách tài khoản</a></li>
-                                <li><a href="{{ route('add_user') }}">Thêm tài khoản</a></li>
+                                {{-- <li><a href="{{ route('add_user') }}">Thêm tài khoản</a></li> --}}
                             </ul>
                         </li>
                         <li>
@@ -281,7 +281,6 @@
                             </a>
                             <ul class="nav-second-level mm-collapse" aria-expanded="false">
                                 <li><a href="{{ route('list_comment') }}">Bình luận sản phẩm</a></li>
-                                <li><a href="#">Bình luận Blog</a></li>
                             </ul>
                         </li>
                         <li>

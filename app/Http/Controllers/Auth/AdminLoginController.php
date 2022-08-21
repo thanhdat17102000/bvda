@@ -85,7 +85,7 @@ class AdminLoginController extends Controller
         // // ->with('error', 'Email hoặc mật khẩu không đúng');  
     public function logout(){
         Auth::logout();
-        return redirect()->route('login-admin-form');
+        return redirect()->route('home');
     }
 	/**
 	 * Where to redirect users after login.

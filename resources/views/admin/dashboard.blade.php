@@ -21,7 +21,7 @@
     <script>
     jQuery(document).ready(function($) {
         var colorDanger = "#FF1744";
-          var donut = Morris.Donut({
+            var donut = Morris.Donut({
             element: 'donut',
             resize: true,
             colors: [
@@ -37,11 +37,11 @@
             //labelColor:"#cccccc", // text color
             //backgroundColor: '#333333', // border color
             data: [
-                {label:"đánh giá 5*", value:<?php echo $cmtproduct5sao ?>},
-                {label:"đánh giá 4*", value:<?php echo $cmtproduct4sao ?>},
-                {label:"đánh giá 3*", value:<?php echo $cmtproduct3sao ?>},
-                {label:"đánh giá 2*", value:<?php echo $cmtproduct2sao ?>},
-                {label:"đánh giá 1*", value:<?php echo $cmtproduct1sao ?>},
+                {label:"Đánh giá 5*", value:<?php echo $cmtproduct5sao ?>},
+                {label:"Đánh giá 4*", value:<?php echo $cmtproduct4sao ?>},
+                {label:"Đánh giá 3*", value:<?php echo $cmtproduct3sao ?>},
+                {label:"Đánh giá 2*", value:<?php echo $cmtproduct2sao ?>},
+                {label:"Đánh giá 1*", value:<?php echo $cmtproduct1sao ?>},
             ]
         });
     });
@@ -64,13 +64,9 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <a href="{{ route('product.index') }}" class="dropdown-item">Xem sản phẩm</a>
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                <a href="{{ route('product.create') }}" class="dropdown-item">Thêm sản phẩm</a>
                             </div>
                         </div>
 
@@ -101,13 +97,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                <a href="{{ route('category-admin') }}" class="dropdown-item">Xem danh mục</a>
                             </div>
                         </div>
 
@@ -138,13 +128,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                <a href="{{ route('order') }}" class="dropdown-item">Xem đơn hàng</a>
                             </div>
                         </div>
 
@@ -174,13 +158,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                <a href="{{ route('list_comment') }}" class="dropdown-item">Xem đánh giá</a>
                             </div>
                         </div>
 
@@ -218,7 +196,7 @@
                             <p>Đến ngày <input type="date" id="datepicker2" class="form-control"></p>
                         </div>
                         <div class="col-md-3 mt-3">
-                            <input type="button" id="btn-dashboard-filter" class="btn btn-info btn-sm" value="lọc kết quả">
+                            <input type="button" id="btn-dashboard-filter" class="btn btn-info btn-sm" value="Lọc kết quả">
                         </div>
                     </div>
                     </form>
@@ -232,7 +210,7 @@
 
                 <div class="col-xl-4">
                     <div class="card-box">
-                        <h4 class="header-title mt-0">thống kê đánh giá</h4>
+                        <h4 class="header-title mt-0">Thống kê đánh giá</h4>
                         <div id="donut" class="morris-donut-inverse" style="height:373px">
 
                         </div>
@@ -292,11 +270,11 @@
                                         <td>{{$showdh->m_phone}}</td>
                                         <td>
                                             @if($showdh->m_status == 0)
-                                            <span class="badge badge-info">chưa hoàn thành</span>
+                                            <span class="badge badge-info">Chưa hoàn thành</span>
                                             @elseif($showdh->m_status == 1)
                                             <span class="badge badge-warning">Đang vận chuyển</span>
                                             @elseif($showdh->m_status == 2)
-                                            <span class="badge badge-dark">đã được giao</span>
+                                            <span class="badge badge-dark">Đã được giao</span>
                                             @elseif($showdh->m_status == 3)
                                             <span class="badge badge-danger">Đơn đã hủy</span>
                                             @elseif($showdh->m_status == 4)
@@ -324,13 +302,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    2016 - 2020 &copy; Adminto theme by <a href="">Coderthemes</a>
+                    2022 &copy; Phát triển bởi <a href="{{route('about-us')}}">Kingdom Sneakers Team</a>
                 </div>
                 <div class="col-md-6">
                     <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript:void(0);">About Us</a>
-                        <a href="javascript:void(0);">Help</a>
-                        <a href="javascript:void(0);">Contact Us</a>
+                        <a href="{{route('about-us')}}">Về Kingdom Sneakers</a>
+                        <a href="{{route('contact-auth')}}">Liên hệ</a>
                     </div>
                 </div>
             </div>
@@ -378,7 +355,7 @@
             ykeys: ['tongtien'],
             // behaveLikeLine: true,
 
-            labels: ['giá tiền']
+            labels: ['Giá tiền']
         });
 
     // autoload 30 ngày đơn hàng

@@ -80,7 +80,7 @@ Route::group(['prefix' => 'admintrator', 'middleware' => ['checkAdmin', 'auth']]
         'product' => App\Http\Controllers\productController::class,
         'slider' => App\Http\Controllers\sliderController::class,
     ]);
-
+    // lọc sản phẩm
     Route::post('filterdate', [App\Http\Controllers\DashboardController::class, 'filterdate'])->name('filterdate');
     Route::post('orderdate', [App\Http\Controllers\DashboardController::class, 'orderdate'])->name('orderdate');
     // start Comment
@@ -262,9 +262,6 @@ Route::get('/product_list', function () {
     $showproduct = product::orderBy('updated_at', 'desc')->where('m_status', 1)->search()->paginate(9);
     return view('Auth.product_list.product_list', compact('categories', 'showproduct'));
 });
-
-
-
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');

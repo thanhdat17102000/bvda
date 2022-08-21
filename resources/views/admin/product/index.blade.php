@@ -80,7 +80,7 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <select class="form-control" id="chondanhmuc" name="sortne">
-                        <option value="{{Request::url()}}?danhsach=tatca" data-id="0">-- chọn danh mục --</option>
+                        <option value="{{Request::url()}}?danhsach=tatca" data-id="0">-- Chọn danh mục --</option>
                         @foreach($showdanhmuc as $showdm)
                             <option value="{{Request::url()}}?danhsach={{$showdm->id}}" data-id="{{$showdm->id}}">{{$showdm->m_title}}</option>
                         @endforeach
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary" id="btnlocsp">lọc danh mục</button>
+                <button type="submit" class="btn btn-primary" id="btnlocsp">Lọc danh mục</button>
                 <button type="submit" class="btn btn-danger" id="btndeleteall">Delete All</button>
             </div>
         </div>
@@ -98,13 +98,13 @@
         <tr>
             <th ><input type="checkbox" id="checkAll" /></th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="persist" class=" tablesaw-swipe-cellpersist" style="width: 30px;">#</th>
-            <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-sortable-default-col="" data-tablesaw-priority="0" class="tablesaw-priority-0 tablesaw-toggle-cellvisible">Images</th>
+            <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-sortable-default-col="" data-tablesaw-priority="0" class="tablesaw-priority-0 tablesaw-toggle-cellvisible">Hình ảnh</th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-sortable-default-col="" data-tablesaw-priority="1" class="tablesaw-priority-1">Danh mục</th>
-            <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="2" class="tablesaw-priority-2 tablesaw-toggle-cellvisible">Name</th>
+            <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="2" class="tablesaw-priority-2 tablesaw-toggle-cellvisible">Tên</th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="3" class=" tablesaw-priority-3">Slug</th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="4" class=" tablesaw-priority-4">Giá gốc</th>
             <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="5" class=" tablesaw-priority-5">Trạng thái</th>
-            <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="6" class=" tablesaw-priority-6" style="width:306px;">Action</th>
+            <th scope="col" data-tablesaw-sortable-col="" data-tablesaw-priority="6" class=" tablesaw-priority-6" style="width:306px;">Thao tác</th>
         </tr>
         </thead>
         <tbody>
@@ -176,7 +176,7 @@
                                             {{-- <p><strong>Ngày đăng sản phẩm: </strong><span>{{$dt->updated_at->diffForHumans()}}</span></p> --}}
                                             <p><strong>Số lượng tồn kho: </strong><span>{{$dt->updatedsoluong1->sum('m_quanti')}}</span> 
                                             |
-                                            <strong>lượt xem sản phẩm: </strong><span>{{$dt->m_view}}</span></p>
+                                            <strong>Lượt xem sản phẩm: </strong><span>{{$dt->m_view}}</span></p>
                                         </div>
                                         <div class="col-md-5">
                                         <p><strong>Mô tả ngắn: </strong></p>
@@ -217,18 +217,18 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <select class="form-control" id="sotiengiam">
-                            <option value="1">giảm theo %</option>
-                            <option value="2">giảm theo tiền</option>
+                            <option value="1">Giảm theo %</option>
+                            <option value="2">Giảm theo tiền</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="inputprice" placeholder="vui lòng nhập số tiền muốn giảm">
+                    <input type="text" class="form-control" id="inputprice" placeholder="Vui lòng nhập số tiền muốn giảm">
                 </div>
             </div>
             <div class="col-md-2">
-                <button type="submit" class="btn btn-dark" id="updateprice">nhập</button>
+                <button type="submit" class="btn btn-dark" id="updateprice">Nhập</button>
             </div>
         </div>
     </div>

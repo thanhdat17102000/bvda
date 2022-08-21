@@ -160,11 +160,11 @@
                                             <div class="range-slider">
                                                 <form action="#">
                                                     <div class="price-input">
-                                                        <label for="amount">giá: </label>
+                                                        <label for="amount">Giá: </label>
                                                         <input type="text" id="minamount" name="minamount">
                                                         <input type="text" id="maxamount" name="maxamount">
                                                     </div>
-                                                    <button class="filter-btn">lọc</button>
+                                                    <button class="filter-btn">Lọc</button>
                                                     <br>
                                                 </form>
                                             </div>

@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $order = OrderModel::find($id);
         $order->m_status = "3";
         $order->update();
-        return redirect()->route('updateProfile')->with('alert_success', 'Hủy đơn hàng thành công thành công.');
+        return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');
     }
     // Cập nhật thông tin profile
     public function updateProfile(Request $request)

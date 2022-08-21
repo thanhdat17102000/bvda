@@ -75,35 +75,33 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($orderDetail as $item)
+                                            @php
+                                            $tong = $item->m_price * $item->m_quanti
+                                            @endphp
                                                 <tr>
                                                     <td><a href="#">{{$item->m_product_name}} <strong>* {{$item->m_quanti}} </strong></a></td>
-                                                    <td>{{$item->m_price * $item->m_quanti}}</td>
+                                                    <td>{{number_format($tong, 0, '.', '.')}} VNĐ</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
-                                            @foreach ($order as $item)
+                                            @foreach ($orderDetail as $item)
+                                            @php
+                                            $tongorder = $item->m_price * $item->m_quanti
+                                            @endphp
                                                 <tr>
                                                     <td>Tổng tiền hàng</td>
-                                                    <td><strong>{{$item->m_total_price}}</strong></td>
+                                                    <td><strong>{{number_format($tongorder, 0, '.', '.')}} VNĐ</strong></td>
                                                 </tr>
                                             @endforeach
+                                            @foreach ($order as $item)
                                             <tr>
                                                 <td>Phí giao hàng</td>
                                                 <td class="d-flex justify-content-center">
                                                     <ul class="shipping-type">
                                                         <li>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="flatrate" name="shipping" class="custom-control-input" checked />
-                                                                <label class="custom-control-label" for="flatrate">Flat
-                                                                    Rate: $70.00</label>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" id="freeshipping" name="shipping" class="custom-control-input" />
-                                                                <label class="custom-control-label" for="freeshipping">Free
-                                                                    Shipping</label>
+                                                            <div class="custom-control">
+                                                                {{number_format($item->m_fee_ship, 0, '.', '.')}} VNĐ
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -111,8 +109,9 @@
                                             </tr>
                                             <tr>
                                                 <td>Tổng đơn</td>
-                                                <td><strong>$470</strong></td>
+                                                    <td><strong>{{number_format($item->m_total_price,0,'.','.')}} VNĐ</strong></td>
                                             </tr>
+                                            @endforeach
                                         </tfoot>
                                     </table>
                                 </div>
@@ -121,8 +120,15 @@
                                     <div class="single-payment-method show">
                                         <div class="payment-method-name">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
-                                                <label class="custom-control-label" for="cashon">Cash On Delivery</label>
+                                                @foreach ($order as $item)
+                                                    @if ($item->m_status_pay==0)
+                                                        <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="cashon">Chưa thanh toán</label>
+                                                    @else
+                                                        <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
+                                                        <label class="custom-control-label" for="cashon">Đã thanh toán</label>
+                                                    @endif
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>

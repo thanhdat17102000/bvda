@@ -110,12 +110,12 @@ Danh sách đơn hàng
                                 @elseif($order->m_status == 3)
                                 <span class="bg bg-danger text-white font-weight-bold" style="padding: 10px 10px; padding-right: 14px">Đã hủy đơn</span>
                                 @elseif($order->m_status == 4)
-                                <span class="bg bg-success text-white font-weight-bold" style="padding: 10px 10px; padding-right: 30px;">hoàn thành đơn</span>
+                                <span class="bg bg-success text-white font-weight-bold" style="padding: 10px 10px; padding-right: 30px;">Hoàn thành đơn</span>
                                 @endif
                             </td>
                             <td>
                                 <a href="{{route('order.detail',$order->id)}}" class="btn btn-warning btn-xs">
-                                    chi tiết
+                                    Chi tiết
                                 </a>
                                 <button type="button" class="btn btn-info btn-xs" id="sa-params">Xóa</button>
                             </td>

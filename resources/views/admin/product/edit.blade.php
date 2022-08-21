@@ -10,7 +10,7 @@
 @endif
 <div class="card card-info">
     <div class="card-header">
-        <h3 class="card-title">sửa sản phẩm</h3>
+        <h3 class="card-title">Sửa sản phẩm</h3>
     </div>
     <form action="{{route('product.update',$updated->id)}}" class="form-horizontal" method="post" role="form" enctype="multipart/form-data">
         @csrf @method('PUT')
@@ -78,14 +78,14 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-11">
                                 @foreach($showsoluongvasize as $valshow)
-                                    <span style="color:red">size và số lượng đang có </span>: {{$valshow->m_size}} -- {{$valshow->m_quanti}}/sản phẩm;
+                                    <span style="color:red">Size và số lượng đang có </span>: {{$valshow->m_size}} -- {{$valshow->m_quanti}}/sản phẩm;
                                     <hr>
                                 @endforeach
                             </div>
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize33" {{($updated->updatedsoluong1->contains('m_size',33)) ? 'checked':''}} value="33"  name="size[]">
-                                    <label class="custom-control-label" for="idsize33">size 33</label>
+                                    <label class="custom-control-label" for="idsize33">Size 33</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -97,7 +97,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize34" {{($updated->updatedsoluong1->contains('m_size',34)) ? 'checked':''}} value="34" name="size[]">
-                                    <label class="custom-control-label" for="idsize34">size 34</label>
+                                    <label class="custom-control-label" for="idsize34">Size 34</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -109,7 +109,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize35" {{($updated->updatedsoluong1->contains('m_size',35)) ? 'checked':''}} value="35" name="size[]">
-                                    <label class="custom-control-label" for="idsize35">size 35</label>
+                                    <label class="custom-control-label" for="idsize35">Size 35</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -121,7 +121,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize36" {{($updated->updatedsoluong1->contains('m_size',36)) ? 'checked':''}} value="36" name="size[]">
-                                    <label class="custom-control-label" for="idsize36">size 36</label>
+                                    <label class="custom-control-label" for="idsize36">Size 36</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -133,7 +133,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" {{($updated->updatedsoluong1->contains('m_size',37)) ? 'checked':''}} id="idsize37" value="37" name="size[]">
-                                    <label class="custom-control-label" for="idsize37">size 37</label>
+                                    <label class="custom-control-label" for="idsize37">Size 37</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -145,7 +145,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize38" {{($updated->updatedsoluong1->contains('m_size',38)) ? 'checked':''}} value="38" name="size[]">
-                                    <label class="custom-control-label" for="idsize38">size 38</label>
+                                    <label class="custom-control-label" for="idsize38">Size 38</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -157,7 +157,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize39" value="39" {{($updated->updatedsoluong1->contains('m_size',39)) ? 'checked':''}} name="size[]">
-                                    <label class="custom-control-label" for="idsize39">size 39</label>
+                                    <label class="custom-control-label" for="idsize39">Size 39</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -169,7 +169,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize40" {{($updated->updatedsoluong1->contains('m_size',40)) ? 'checked':''}} value="40" name="size[]">
-                                    <label class="custom-control-label" for="idsize40">size 40</label>
+                                    <label class="custom-control-label" for="idsize40">Size 40</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -238,8 +238,8 @@
             </div>
         </div>
         <div class="card-footer text-right mb-0">
-            <button type="submit" class="btn btn-info">Submit</button>
-            <button type="reset" class="btn btn-secondary waves-effect waves-light">Clear</button>
+            <button type="submit" class="btn btn-info">Lưu</button>
+            <button type="reset" class="btn btn-secondary waves-effect waves-light">Hủy</button>
         </div>
     </form>
 </div>

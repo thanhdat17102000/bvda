@@ -56,7 +56,7 @@
                     @if(Session::has('alert_success'))
                         <div class="alert alert-success w-50 mr-0" style="margin-top: 10px;">
                             {!! Session::get('alert_success') !!}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -70,10 +70,10 @@
                                     <div class="col-lg-3 col-md-4">
                                         <div class="myaccount-tab-menu nav" role="tablist">
                                             <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
-                                                Dashboad</a>
+                                                Tài khoản</a>
                                             <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Lịch sử mua hàng</a>
                                             {{-- <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Lịch sử mua hàng</a> --}}
-                                            <a href="{{route('list-favourite')}}"><i class="fa fa-heart"></i> Sản phẩm yêu thích</a>
+                                            <a href="{{route('list-favourite')}}" data-toggle="tab"><i class="fa fa-heart"></i> Sản phẩm yêu thích</a>
                                             <a href="#address-edit" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
                                             <a href="#account-info" data-toggle="tab"><i class="fa fa-key"></i>Đổi mật khẩu</a>
                                             <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a>
@@ -87,15 +87,11 @@
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                                 <div class="myaccount-content">
-                                                    <h3>Dashboad</h3>
+                                                    <h3>Tài khoản</h3>
                                                     <div class="welcome">
                                                         <p>Xin chào, <strong>{{Auth::user()->name}}</strong> (Nếu không phải <strong>{{Auth::user()->name}} !</strong><a href="{{route('logout')}}" class="text-primary"> Đăng xuất</a></p>
                                                     </div>
-<<<<<<< Updated upstream
-                                                    <p class="mb-0">Bạn có thể kiểm tra thông tin cá nhân, đơn hàng và chỉnh sửa</p>
-=======
-                                                        <p class="mb-0">Bạn có thể kiểm tra thông tin cá nhân, đơn hàng và chỉnh sửa</p>
->>>>>>> Stashed changes
+<p class="mb-0">Bạn có thể kiểm tra thông tin cá nhân, đơn hàng và chỉnh sửa</p>
                                                 </div>
                                             </div>
                                             <!-- Single Tab Content End -->
@@ -131,7 +127,7 @@
                                                                     @endif
                                                                     <td>{{$item->m_total_price}}</td>
                                                                     <td>
-                                                                        @if ($item->m_status==0)
+@if ($item->m_status==0)
                                                                             <a href="/profile/chi-tiet-don-hang/{{$item->id}}" value="show" class="btn rounded">Chi tiết</a>
                                                                             <a  class="btn bg-danger text-light rounded" href="/profile/huy-don-hang/{{$item->id}}">Hủy</a>
                                                                         @else
@@ -147,48 +143,9 @@
                                             </div>
                                             <!-- Single Tab Content End -->
             
-                                            <!-- Single Tab Content Start -->
-                                            <div class="tab-pane fade" id="download" role="tabpanel">
-                                                <div class="myaccount-content">
-                                                    <h3>Downloads</h3>
-                                                    <div class="myaccount-table table-responsive text-center">
-                                                        <table class="table table-bordered">
-                                                            <thead class="thead-light">
-                                                            <tr>
-                                                                <th>Product</th>
-                                                                <th>Date</th>
-                                                                <th>Expire</th>
-                                                                <th>Download</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Haven - Free Real Estate PSD Template</td>
-                                                                    <td>Aug 22, 2018</td>
-                                                                    <td>Yes</td>
-                                                                    <td><a href="#" class="btn "><i class="fa fa-cloud-download"></i> Download File</a></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>HasTech - Profolio Business Template</td>
-                                                                    <td>Sep 12, 2018</td>
-                                                                    <td>Never</td>
-                                                                    <td><a href="#" class="btn "><i class="fa fa-cloud-download"></i> Download File</a></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Single Tab Content End -->
+                                        
             
-                                            <!-- Single Tab Content Start -->
-                                            <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                                <div class="myaccount-content">
-                                                    <h3>Thanh toán</h3>
-                                                    <p class="saved-message">You Can't Saved Your Payment Method yet.</p>
-                                                </div>
-                                            </div>
-                                            <!-- Single Tab Content End -->
+                                            
             
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="address-edit" role="tabpanel">
@@ -203,7 +160,7 @@
                                                                         <input type="text" value="{{Auth::user()->name}}" id="idMK" placeholder="{{Auth::user()->name}}" />
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-lg-6">
+<div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="last-name" class="required">Số điện thoại</label>
                                                                         <input type="text" value="{{Auth::user()->phone}}" id="phone" placeholder="{{Auth::user()->phone}}" />
@@ -234,23 +191,23 @@
                                                             <fieldset>
                                                                 <div class="single-input-item">
                                                                     <label for="exampleInputEmail1">Tên tài khoản</label>
-                                                                    <input type="text" class="form-control" id="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
+                                                        <input type="text"  id="idadmin" data-id="{{Auth::user()->id}}" value="{{Auth::user()->name}}" Readonly>
                                                                 </div>
                                                                 <div class="single-input-item">
                                                                     <label for="current-pwd" class="required">Mật khẩu hiện tại</label>
-                                                                    <input type="password" name="matkhaucu" id="matkhaucu" placeholder="Current Password" />
+                                                                    <input type="password" name="matkhaucu" id="matkhaucu" placeholder="Mật khẩu hiện tại" />
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
                                                                             <label for="new-pwd" class="required">Mật khẩu mới</label>
-                                                                            <input type="password" name="matkhaumoi" id="matkhaumoi" placeholder="New Password" />
+                                                                            <input type="password" name="matkhaumoi" id="matkhaumoi" placeholder="Mật khẩu mới" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
                                                                             <label for="confirm-pwd" class="required">Xác nhận mật khẩu</label>
-                                                                            <input type="password" name="xacnhanmatkhau" id="xacnhanmatkhau" placeholder="Confirm Password" />
+                                                                            <input type="password" name="xacnhanmatkhau" id="xacnhanmatkhau" placeholder="Xác nhận mật khẩu" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -266,20 +223,20 @@
                                 </div>
                             </div> <!-- My Account Page End -->
                         </div>
-                    </div>
+</div>
                 </div>
             </div>
             <!-- my account wrapper end -->
         </main>
         <!-- main wrapper end -->
-        @if(Session::has('alert_success'))
+        {{-- @if(Session::has('alert_success'))
     <div class="alert alert-success" style="margin-top: 10px;">
         {!! Session::get('alert_success') !!}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-@endif
+@endif --}}
 @endsection
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -312,11 +269,6 @@
             var matkhaumoi = $('#matkhaumoi').val();
             var xacnhanmatkhau = $('#xacnhanmatkhau').val();
             var _token = $('input[name="_token"]').val();
-            alert(id)
-            alert(matkhaucu)
-            alert(matkhaumoi)
-            alert(xacnhanmatkhau)
-            alert(_token)
             $.ajax({
                 url:'{{route("doimatkhauuser")}}',
                 method:'post',
@@ -325,7 +277,7 @@
                 },
                 success: function(data){
                     if(data = 'thanhcong'){
-                        alertify.success('Cập nhật mật khẩu thành công');
+                        alertify.success('Cập nhật thành công!');
                     }
                 }
             })
@@ -340,7 +292,7 @@
             var name = $('#idMK').val();
             var phone = $('#phone').val();
             var m_address = $('#address').val();
-            var email = $('#email').val();
+var email = $('#email').val();
             var _token = $('input[name="_token"]').val();
 
             $.ajax({

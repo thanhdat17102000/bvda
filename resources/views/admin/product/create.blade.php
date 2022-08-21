@@ -61,7 +61,7 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Số lượng tồn kho</label>
                 <div class="col-sm-10" style="">
-                <a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">click để thêm size giày và số lượng tồn kho</a>
+                <a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Click để thêm size giày và số lượng tồn kho</a>
                     @error('m_buy')
                         <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
                             <li class="parsley-required">{{$message}}</li>
@@ -77,7 +77,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" value="33" id="idsize33" name="size[]">
-                                    <label class="custom-control-label" for="idsize33">size 33</label>
+                                    <label class="custom-control-label" for="idsize33">Size 33</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -89,7 +89,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize34" value="34" name="size[]">
-                                    <label class="custom-control-label" for="idsize34">size 34</label>
+                                    <label class="custom-control-label" for="idsize34">Size 34</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -101,7 +101,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize35" value="35" name="size[]">
-                                    <label class="custom-control-label" for="idsize35">size 35</label>
+                                    <label class="custom-control-label" for="idsize35">Size 35</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -113,7 +113,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize36" value="36" name="size[]">
-                                    <label class="custom-control-label" for="idsize36">size 36</label>
+                                    <label class="custom-control-label" for="idsize36">Size 36</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -125,7 +125,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize37" value="37" name="size[]">
-                                    <label class="custom-control-label" for="idsize37">size 37</label>
+                                    <label class="custom-control-label" for="idsize37">Size 37</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -137,7 +137,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize38" value="38" name="size[]">
-                                    <label class="custom-control-label" for="idsize38">size 38</label>
+                                    <label class="custom-control-label" for="idsize38">Size 38</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -149,7 +149,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize39" value="39" name="size[]">
-                                    <label class="custom-control-label" for="idsize39">size 39</label>
+                                    <label class="custom-control-label" for="idsize39">Size 39</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -161,7 +161,7 @@
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="idsize40" value="40" name="size[]">
-                                    <label class="custom-control-label" for="idsize40">size 40</label>
+                                    <label class="custom-control-label" for="idsize40">Size 40</label>
                                 </div>
                             </div>
                             <div class="col-md-11">
@@ -225,8 +225,8 @@
             </div>
         </div>
         <div class="card-footer text-right mb-0">
-            <button type="submit" class="btn btn-info">Submit</button>
-            <button type="reset" class="btn btn-secondary waves-effect waves-light">Clear</button>
+            <button type="submit" class="btn btn-info">Thêm</button>
+            <button type="reset" class="btn btn-secondary waves-effect waves-light">Hủy</button>
         </div>
     </form>
 </div>

@@ -1,4 +1,7 @@
 @extends('Auth.layouts.master')
+@section('title')
+    Đăng ký
+@endsection
 @section('content')
         <!-- main wrapper start -->
         <main>

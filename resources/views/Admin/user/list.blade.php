@@ -66,7 +66,7 @@
                                     <td>${item.role === 1 ? 'Admin' : 'Khách hàng'}</td>
                                     <td>
                                         <button type="button" data-id="${item.id}" class="btn-edit btn btn-icon waves-effect waves-light btn-success"><i class="far fa-edit"></i></button>
-                                        <button type="button" data-id="${item.id}" class="btn-delete btn btn-icon waves-effect waves-light btn-danger mt-2"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="button" data-id="${item.id}" class="btn-delete btn btn-icon waves-effect waves-light btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`
                     });

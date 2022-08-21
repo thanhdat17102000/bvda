@@ -72,7 +72,7 @@
                                         <li><a href="{{ route('blog-list') }}">Tin tức</a>
                                         </li>
                                         <li><a href="{{ route('contact-auth') }}">Liên hệ</a></li>
-                                        <li><a href="#">Về chúng tôi</a></li>
+                                        <li><a href="{{ route('about-us')}}">Về chúng tôi</a></li>
                                     </ul>
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -99,7 +99,8 @@
                                         @auth
                                         @if (Auth::user()->role == 1)
                                         <ul class="dropdown-list">
-                                            <li><a href="{{ route('admintrator') }}">chuyển admin</a></li>
+                                            <li><a href="{{ route('profile') }}">Tài khoản của bạn</a></li>
+                                            <li><a href="{{ route('admintrator') }}">Chuyển admin</a></li>
                                             <!-- <li><a href="">Thông tin đơn hàng</a></li> -->
                                             <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Đăng
@@ -110,8 +111,7 @@
                                         </ul>
                                         @else
                                         <ul class="dropdown-list">
-                                            <li><a href="/profile">Tài khoản của bạn</a></li>
-                                            <li><a href="">Thông tin Đơn hàng</a></li>
+                                            <li><a href="{{route('profile')}}">Tài khoản của bạn</a></li>
                                             <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">Đăng
                                                     xuất</a></li>
@@ -269,7 +269,7 @@
                 <!-- mobile menu navigation start -->
                 <nav>
                     <ul class="mobile-menu">
-                        <li class="menu-item-has-children"><a href="index.html">Trang chủ</a>
+                        <li class="menu-item-has-children"><a href="{{route('home')}}">Trang chủ</a>
                         </li>
                         <li class="menu-item-has-children"><a href="#">Cửa hàng</a></a>
                             <ul class="megamenu dropdown">
@@ -305,18 +305,18 @@
                                 </li>
                                 <li class="mega-title menu-item-has-children"><a href="#">column 04</a>
                                     <ul class="dropdown">
-                                        <li><a href="my-account.html">my-account</a></li>
+                                        <li><a href="my-account.html">Tài khoản</a></li>
                                         <li><a href="login-register.html">login-register</a></li>
                                         <li><a href="contact-us.html">contact us</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <li class="menu-item-has-children "><a href="#">Tin tức</a>
+                        <li class="menu-item-has-children "><a href="">Tin tức</a>
                         </li>
-                        <li class="menu-item-has-children "><a href="/blog">Liên hệ</a>
+                        <li class="menu-item-has-children "><a href="">Liên hệ</a>
                         </li>
-                        <li><a href="">Contact us</a></li>
+                        <li><a href="">Về chúng tôi</a></li>
                     </ul>
                 </nav>
                 <!-- mobile menu navigation end -->
@@ -328,26 +328,14 @@
                 <ul class="nav">
                     <li>
                         <div class="dropdown mobile-top-dropdown">
-                            <a href="#" class="dropdown-toggle" id="currency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Currency
-                                <i class="fa fa-angle-down"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="currency">
-                                <a class="dropdown-item" href="#">$ USD</a>
-                                <a class="dropdown-item" href="#">$ EURO</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="dropdown mobile-top-dropdown">
                             <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tài khoản
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="myaccount">
                                 <a class="dropdown-item" href="/profile">Tài khoản</a>
-                                <a class="dropdown-item" href="/login">đăng nhập</a>
-                                <a class="dropdown-item" href="/register">đăng ký</a>
+                                <a class="dropdown-item" href="/login">Đăng nhập</a>
+                                <a class="dropdown-item" href="/register">Đăng ký</a>
                             </div>
                         </div>
                     </li>
@@ -360,19 +348,12 @@
                 <div class="off-canvas-contact-widget">
                     <ul>
                         <li><i class="fa fa-mobile"></i>
-                            <a href="#">0123456789/a>
+                            <a href="#">0123456789</a>
                         </li>
                         <li><i class="fa fa-envelope-o"></i>
-                            <a href="#">info@yourdomain.com</a>
+                            <a href="#">kingdomsneakers80@gmail.com</a>
                         </li>
                     </ul>
-                </div>
-                <div class="off-canvas-social-widget">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                    <a href="#"><i class="fa fa-youtube-play"></i></a>
                 </div>
             </div>
             <!-- offcanvas widget area end -->

@@ -125,13 +125,6 @@
                                         <span style="color:red">Hết hàng</span>
                                         @endif
                                     </div>
-                                    <div class="share-icon">
-                                        <h5 class="cat-title">Chia sẻ:</h5>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    </div>
                                 </div>
                             </div>
                             @endforeach
@@ -267,7 +260,6 @@
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Nội dung</label>
                                                         <textarea class="form-control" id="m_content" required></textarea>
-                                                        <div class="help-block pt-10"><span class="text-danger">Ghi chú:</span> HTML is not translated!</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -318,7 +310,7 @@
                                 <div class="col-12">
                                     <div class="section-title text-center">
                                         <h2 class="title">Sản phẩm liên quan</h2>
-                                        <p class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                                        <p class="sub-title"></p>
                                     </div>
                                 </div>
                             </div>
@@ -337,7 +329,7 @@
                                             </div>
                                             <div class="product-content">
                                                 <h5 class="product-name">
-                                                    <a href="product-details.html">{{$showrelated->m_product_name}}</a>
+                                                    <a href="product-details.html">{{ Str::length($showrelated->m_product_name) > 10 ? Str::substr($showrelated->m_product_name, 0, 15) . '...' : $showrelated->m_product_name }}</a>
                                                 </h5>
                                                 <div class="price-box">
                                                     <span class="price-regular">{{number_format($showrelated->m_price,0,',','.')}}VND</span>
