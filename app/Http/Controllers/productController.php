@@ -167,7 +167,7 @@ class productController extends Controller
                 $soluong = $data['soluong'];
                 $size = $data['size'];
                 for ($i=0; $i < count($data['soluong']); $i++) {
-                    $syncdata[$soluong[$i]] = ['m_size' => $size[$i]];
+                    $syncdata[$size[$i]] = ['m_quanti' => $soluong[$i], 'm_size' => $size[$i]];
                 }
                 $create->themsoluong()->attach($syncdata);
                 return redirect()->route('product.index')->with('alert_success', 'Thêm mới sản phẩm thành công.');
@@ -279,7 +279,7 @@ class productController extends Controller
                     $soluong = $data['soluong'];
                     $size = $data['size'];
                     for ($i=0; $i < count($data['soluong']); $i++) {
-                        $syncdatane[$soluong[$i]] = ['m_size' => $size[$i]];
+                        $syncdatane[$size[$i]] = ['m_quanti' => $soluong[$i], 'm_size' => $size[$i]];
                     }
                     $updated->themsoluong()->sync($syncdatane);
                 }

@@ -185,7 +185,7 @@
                                                     <tr>
                                                         <td>Tổng lượng tồn kho</td>
                                                         @if(isset($showdetail->updatedsoluong->m_quanti))
-                                                        <td>{{$showproductdetail->updatedsoluong->sum('m_quanti')}}</td>
+                                                        <td>{{$showdetail->updatedsoluong->sum('m_quanti')}}</td>
                                                         @endif
                                                     </tr>
                                                     <tr>
@@ -321,7 +321,7 @@
                                         @foreach($showproductrelated as $showrelated)
                                         <div class="product-item mb-50">
                                             <div class="product-thumb">
-                                                <a href="product-details.html">
+                                                <a href="{{ route('productdetails', $showrelated->m_product_slug) }}">
                                                     @if(json_decode($showrelated->m_picture))
                                                         <img src="{{asset('uploads')}}/{{json_decode($showrelated->m_picture)[0]}}" alt="">
                                                     @endif
@@ -329,7 +329,7 @@
                                             </div>
                                             <div class="product-content">
                                                 <h5 class="product-name">
-                                                    <a href="product-details.html">{{ Str::length($showrelated->m_product_name) > 10 ? Str::substr($showrelated->m_product_name, 0, 15) . '...' : $showrelated->m_product_name }}</a>
+                                                    <a href="{{ route('productdetails', $showrelated->m_product_slug) }}">{{ Str::length($showrelated->m_product_name) > 10 ? Str::substr($showrelated->m_product_name, 0, 15) . '...' : $showrelated->m_product_name }}</a>
                                                 </h5>
                                                 <div class="price-box">
                                                     <span class="price-regular">{{number_format($showrelated->m_price,0,',','.')}}VND</span>

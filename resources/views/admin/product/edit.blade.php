@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize33" {{($updated->updatedsoluong1->contains('m_size',33)) ? 'checked':''}} value="33"  name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize33" value="33"  name="size[]">
                                     <label class="custom-control-label" for="idsize33">Size 33</label>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             <!-- size 34 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize34" {{($updated->updatedsoluong1->contains('m_size',34)) ? 'checked':''}} value="34" name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize34" value="34" name="size[]">
                                     <label class="custom-control-label" for="idsize34">Size 34</label>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                             <!-- size 35 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize35" {{($updated->updatedsoluong1->contains('m_size',35)) ? 'checked':''}} value="35" name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize35" value="35" name="size[]">
                                     <label class="custom-control-label" for="idsize35">Size 35</label>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                             <!-- size 36 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize36" {{($updated->updatedsoluong1->contains('m_size',36)) ? 'checked':''}} value="36" name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize36" value="36" name="size[]">
                                     <label class="custom-control-label" for="idsize36">Size 36</label>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                             <!-- size 37 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" {{($updated->updatedsoluong1->contains('m_size',37)) ? 'checked':''}} id="idsize37" value="37" name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize37" value="37" name="size[]">
                                     <label class="custom-control-label" for="idsize37">Size 37</label>
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                             <!-- size 38 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize38" {{($updated->updatedsoluong1->contains('m_size',38)) ? 'checked':''}} value="38" name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize38" value="38" name="size[]">
                                     <label class="custom-control-label" for="idsize38">Size 38</label>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                             <!-- size 39 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize39" value="39" {{($updated->updatedsoluong1->contains('m_size',39)) ? 'checked':''}} name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize39" value="39" name="size[]">
                                     <label class="custom-control-label" for="idsize39">Size 39</label>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                             <!-- size 40 -->
                             <div class="col-md-1">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="idsize40" {{($updated->updatedsoluong1->contains('m_size',40)) ? 'checked':''}} value="40" name="size[]">
+                                    <input type="checkbox" class="custom-control-input" id="idsize40" value="40" name="size[]">
                                     <label class="custom-control-label" for="idsize40">Size 40</label>
                                 </div>
                             </div>
