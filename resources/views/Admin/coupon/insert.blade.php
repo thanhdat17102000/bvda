@@ -8,6 +8,7 @@
     <script src="{{ asset('admin/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src=" {{ asset('admin/assets/libs/moment/moment.js') }}"></script>
     <script>
+        let error = ["coupon_name", "coupon_code", "coupon_time", "coupon_method", "coupon_expired", "coupon_value"];
         $("#datepicker-autoclose").datepicker({
                 format: "yyyy/mm/dd",
                 autoclose: !0,
@@ -28,10 +29,25 @@
                 success: function(response) {
                     console.log(response);
                     toastr.success('Thêm mã giảm giá thành công!')
+                    error.map((item) => {
+                        $(`.${item}`).empty();
+                    })
                     $('button[type=reset]').click();
                 },
                 error: function(error) {
                     console.error(error);
+                    ["coupon_name", "coupon_code", "coupon_time", "coupon_method", "coupon_expired", "coupon_value"].map((item) => {
+                        $(`.${item}`).empty();
+                    })
+                    let validate = error.responseJSON.errors;
+                    for (const key in validate) {
+                        console.log("key", key);
+                        let content = '';
+                        validate[key].map((item) => {
+                            content += `<li>${item}</li>`
+                        })
+                        $(`.${key}`).html(content)
+                    }
                     toastr.error('Lỗi thêm mã giảm giá!')
                 }
             });
@@ -54,6 +70,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control"
                                                     placeholder="Nhập tên mã giảm giá" name="coupon_name">
+                                                    <ul class="parsley-errors-list coupon_name">
+                                                    </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -61,6 +79,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập mã giảm giá"
                                                     name="coupon_code">
+                                                    <ul class="parsley-errors-list coupon_code">
+                                                    </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -68,6 +88,8 @@
                                             <div class="col-md-10">
                                                 <input type="number" class="form-control" placeholder="Nhập số lượng"
                                                     name="coupon_time">
+                                                    <ul class="parsley-errors-list coupon_time">
+                                                    </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -78,6 +100,8 @@
                                                     <option value="1">Giảm theo phần trăm</option>
                                                     <option value="2">Giảm theo số tiền</option>
                                                 </select>
+                                                <ul class="parsley-errors-list coupon_method">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -90,13 +114,17 @@
                                                         <span class="input-group-text"><i class="ti-calendar"></i></span>
                                                     </div>
                                                 </div>
+                                                <ul class="parsley-errors-list coupon_expired">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Giá trị mã</label>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control" placeholder="Nhập giá trị mã"
+                                                <input type="number" class="form-control" placeholder="Nhập giá trị mã"
                                                     name="coupon_value">
+                                                    <ul class="parsley-errors-list coupon_value">
+                                                    </ul>
                                             </div>
                                         </div>
                                         <div class="form-group text-right mb-0">

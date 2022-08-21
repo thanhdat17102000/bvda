@@ -8,7 +8,6 @@
         CKEDITOR.replace('m_content');
     </script>
     <script>
-
         const renderPost = () => {
             $.ajax({
                 type: "get",
@@ -16,6 +15,7 @@
                 success: function(response) {
                     $('input[name=m_title]').val(response.m_title);
                     $('input[name=m_slug]').val(response.m_slug);
+                    $('input[name=m_slug]').data('slug', response.m_slug);
                     CKEDITOR.instances.m_desc.setData(response.m_desc);
                     CKEDITOR.instances.m_content.setData(response.m_content);
                     $('input[name=m_meta_keyword]').val(response.m_meta_keyword);
@@ -36,7 +36,7 @@
                     });
                 },
                 error: function(error) {
-                    toastr.error('Lỗi lấy thông tin bài viết!', 'Vui lòng kiểm tra lại thông tin')
+                    toastr.error('Lỗi lấy thông tin bài viết!')
                 }
             });
         }
@@ -45,6 +45,7 @@
         $('.form-horizontal:first').submit(function(e) {
             e.preventDefault();
             let data = new FormData(this);
+            console.log($('input[name=m_slug]').data('slug'))
             data.set('m_desc', CKEDITOR.instances.m_desc.getData());
             data.set('m_content', CKEDITOR.instances.m_content.getData());
             $.ajax({
@@ -56,9 +57,28 @@
                 success: function(response) {
                     toastr.success('Sửa thành công!', 'Xem danh sách để kiểm tra'),
                         renderPost();
+                    ["m_title", "m_slug", "m_desc", "m_content", "m_meta_keyword", "m_meta_desc",
+                        "m_image"
+                    ].map((item) => {
+                        $(`.${item}`).empty();
+                    })
                 },
                 error: function(error) {
                     console.log(error);
+                    ["m_title", "m_slug", "m_desc", "m_content", "m_meta_keyword", "m_meta_desc",
+                        "m_image"
+                    ].map((item) => {
+                        $(`.${item}`).empty();
+                    })
+                    let validate = error.responseJSON.errors;
+                    for (const key in validate) {
+                        console.log("key", key);
+                        let content = '';
+                        validate[key].map((item) => {
+                            content += `<li>${item}</li>`
+                        })
+                        $(`.${key}`).html(content)
+                    }
                     toastr.error('Lỗi sửa bài viết!', 'Vui lòng kiểm tra lại thông tin')
                 }
             });
@@ -87,6 +107,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập tiêu đề"
                                                     name="m_title">
+                                                <ul class="parsley-errors-list m_title">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -94,18 +116,24 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập slug"
                                                     name="m_slug">
+                                                <ul class="parsley-errors-list m_slug">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Tóm tắt bài viết</label>
                                             <div class="col-md-10">
-                                                <textarea class="form-control" id="m_desc"  rows="5" placeholder="Nhập tóm tắt bài viết" name="m_desc"></textarea>
+                                                <textarea class="form-control" id="m_desc" rows="5" placeholder="Nhập tóm tắt bài viết" name="m_desc"></textarea>
+                                                <ul class="parsley-errors-list m_desc">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Nội dung bài viết</label>
                                             <div class="col-md-10">
                                                 <textarea class="form-control" id="m_content" rows="5" placeholder="Nhập nội dung bài viết" name="m_content"></textarea>
+                                                <ul class="parsley-errors-list m_content">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -113,6 +141,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập meta từ khóa"
                                                     name="m_meta_keyword">
+                                                <ul class="parsley-errors-list m_meta_keyword">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -120,6 +150,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập meta nội dung"
                                                     name="m_meta_desc">
+                                                <ul class="parsley-errors-list m_meta_desc">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -143,6 +175,8 @@
                                                 <div class="card-box">
                                                     <input type="file" name="m_image" class="dropify"
                                                         data-default-file="" />
+                                                    <ul class="parsley-errors-list m_image">
+                                                    </ul>
                                                 </div>
                                             </div><!-- end col -->
                                         </div>
