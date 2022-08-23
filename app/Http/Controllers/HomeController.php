@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function index() {
         $categories = CategoryModel::where('m_id_parent', 0)->get();
         $sliders = sliderModel::where('m_status', 1)->get();
-        $myProducts = product::where('m_status', 1)->get();
+        $myProducts = product::with('updatedsoluong1')->where('m_status', 1)->get();
         $myProductSells = product::where('m_status', 1)->orderBy('m_buy', 'DESC')->paginate(6);
         $blogs = Post::where('m_status', 1)->paginate(4);
         return view('Auth.home-compare.home_page', compact('categories','sliders','myProducts','myProductSells', 'blogs'));

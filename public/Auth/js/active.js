@@ -26,7 +26,8 @@
         $(".offcanvas-search-inner").addClass("show");
     });
 
-    $(".minicart-btn").on("click", function () {
+    $(".minicart-btn").on("click", function (e) {
+        e.preventDefault()
         $("body").addClass("fix");
         $(".minicart-inner").addClass("show");
     });
@@ -302,18 +303,18 @@
     $(".pro-qty").append('<span class="inc qtybtn">+</span>');
     $(".qtybtn").on("click", function () {
         var $button = $(this);
-        var oldValue = $button.parent().find("input").val();
-        if ($button.hasClass("inc")) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        $button.parent().find("input").val(newVal);
+        // var oldValue = $button.parent().find("input").val();
+        // if ($button.hasClass("inc")) {
+        //     var newVal = parseFloat(oldValue) + 1;
+        // } else {
+        //     // Don't allow decrementing below zero
+        //     if (oldValue > 0) {
+        //         var newVal = parseFloat(oldValue) - 1;
+        //     } else {
+        //         newVal = 0;
+        //     }
+        // }
+        // $button.parent().find("input").val(newVal);
 
         let quantity = $("input[name=quantity]").val();
         let newQty;

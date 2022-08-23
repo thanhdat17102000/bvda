@@ -110,7 +110,7 @@
                                         @endif
                                     </div>
                                     <div class="pro-size mb-20">
-                                        <h5 class="cat-title">Kích thước :</h5>
+                                        <h5 class="cat-title">Size :</h5>
                                         <select class="nice-select">
                                             @foreach($showsize as $shows)
                                             <option value="{{$shows->m_size}}">{{$shows->m_size}} - SL:{{$shows->m_quanti}}</option>

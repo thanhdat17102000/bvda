@@ -80,6 +80,7 @@ class Database extends Migration
             $table->double('m_price');
             $table->integer('m_quanti');
             $table->string('m_product_name', 255);
+            $table->integer('m_size');
             $table->foreign('m_id_order')->references('id')->on('t_order');
             $table->foreign('m_id_product')->references('id')->on('t_product');
             $table->timestamps();

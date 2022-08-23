@@ -52,7 +52,7 @@
                         }
                     }
                     $button.parent().find("input").val(newVal);
-                    $('.pro-subtotal span').text(`${(newVal * $('#price').data('price')).toLocaleString()}`)
+                    $button.parent().parent().next().html(`<span>${(newVal * $('#price').data('price')).toLocaleString()}</span>`)
                 });
 
                 $('.pro-remove').click(function(e) {

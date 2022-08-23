@@ -218,14 +218,6 @@
                             <span>Tổng</span>
                             <span><strong class="total-price"></strong></span>
                         </li>
-                        {{-- <li>
-                            <span>Eco Tax (-2.00)</span>
-                            <span><strong>$10.00</strong></span>
-                        </li>
-                        <li>
-                            <span>VAT (20%)</span>
-                            <span><strong>$60.00</strong></span>
-                        </li> --}}
                         <li class="total">
                             <span>Thành tiền</span>
                             <span><strong class="total-all"></strong></span>

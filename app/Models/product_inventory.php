@@ -12,4 +12,8 @@ class product_inventory extends Model
     protected $fillable = ['m_id_product','m_quanti','m_size'];
     protected $primaryKey = 'id';
     public $timestamps = false;
+    public function product()
+    {
+        return $this->belongsTo(product::class, 'm_id_product', 'id');
+    }
 }

@@ -467,7 +467,8 @@
                                         <p>{!! $myProductItem->m_short_description !!}</p>
                                         <div class="quantity-cart-box d-flex align-items-center mb-20">
                                             <div class="quantity">
-                                                <div class="pro-qty"><input type="text" name="quantity-display" value="1"></div>
+                                                <div class="pro-qty"><input type="text" name="quantity-display"
+                                                        value="1"></div>
                                             </div>
                                             <a href="cart.html" class="btn btn-default add-cart">Thêm vào giỏ hàng</a>
                                             <form action="" method="post" class="cart-info">
@@ -477,12 +478,18 @@
                                             </form>
                                         </div>
                                         <div class="availability mb-20">
-                                            <h5 class="cat-title">Tình trạng: </h5>
-                                            @if ($myProductItem->m_buy > 0)
+                                            <h5 class="cat-title">Size: </h5>
+                                            <select class="nice-select" style="width: 100px">
+                                                @foreach ($myProductItem->updatedsoluong1 as $shows)
+                                                    <option value="{{ $shows->m_size }}"><b>{{ $shows->m_size }}</b> - Số
+                                                        lượng: {{ $shows->m_quanti }}</option>
+                                                @endforeach
+                                            </select>
+                                            {{-- @if ($myProductItem->m_buy > 0)
                                                 <span>Còn hàng</span>
                                             @else
                                                 <span style="color:red">Hết hàng</span>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="share-icon">
                                             <h5 class="cat-title">Chia sẻ:</h5>
