@@ -55,7 +55,7 @@
                 contentType: false,
                 success: function(response) {
                     console.log(response);
-                    if (! response.isError) {
+                    if (!response.isError) {
                         renderCart();
                         toastr.success('',
                             'Thêm giỏ hàng thành công')
@@ -68,31 +68,7 @@
                 }
             });
         });
-
-        // $('#add-favourite').submit(function(e) {
-        //     e.preventDefault();
-        //     var idProduct = $('#idProduct').val();
-        //     console.log(idProduct);
-        //     var idProduct = $('input[name=idProductFavourite]').val()
-        //     console.log(idProduct);
-        //     let user_id = $(this).data('id');
-        //     console.log('user_id', user_id);
-        //     $.ajax({
-        //         type: "post",
-        //         url: "/product-favourite",
-        //         data: {
-        //             "_token": "{{ csrf_token() }}",
-        //             'idProduct': idProduct,
-        //         },
-        //         success: function(response) {
-        //             console.log(response);
-        //         },
-        //         error: function(error) {
-        //             console.log(error);
-        //         }
-        //     });
-        // });
-
+        
         $('.add-cart').click(function(e) {
             e.preventDefault();
             $(this).next('.cart-info').submit();
@@ -175,43 +151,6 @@
                             <!-- single sidebar end -->
 
                             <!-- single sidebar start -->
-                            <!-- <div class="sidebar-single">
-                                    <div class="sidebar-title">
-                                        <h3>màu</h3>
-                                    </div>
-                                    <div class="sidebar-body">
-                                        <ul class="color-list">
-                                            <li><a href="#">vàng <span>(05)</span></a></li>
-                                            <li><a href="#">xanh <span>(12)</span></a></li>
-                                            <li><a href="#">trắng <span>(14)</span></a></li>
-                                            <li><a href="#">đen <span>(20)</span></a></li>
-                                            <li><a href="#">xám <span>(08)</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div> -->
-                            <!-- single sidebar end -->
-
-                            <!-- single sidebar start -->
-                            <!-- <div class="sidebar-single">
-                                    <div class="sidebar-title">
-                                        <h3>Kích cỡ</h3>
-                                    </div>
-                                    <div class="sidebar-body">
-                                        <ul class="size-list">
-                                            <li><a href="#">size 33</a></li>
-                                            <li><a href="#">size 34</a></li>
-                                            <li><a href="#">size 35</a></li>
-                                            <li><a href="#">size 36</a></li>
-                                            <li><a href="#">size 37</a></li>
-                                            <li><a href="#">size 38</a></li>
-                                            <li><a href="#">size 39</a></li>
-                                            <li><a href="#">size 40</a></li>
-                                        </ul>
-                                    </div>
-                                </div> -->
-                            <!-- single sidebar end -->
-
-                            <!-- single sidebar start -->
                             <div class="sidebar-single">
                                 <div class="sidebar-banner">
                                     <a href="#">
@@ -259,8 +198,8 @@
 
                                             </div>
                                             <!-- <div class="product-amount">
-                                                    <button class="btn btn-primary" id="locsanpham">lọc</button>
-                                                </div> -->
+                                                            <button class="btn btn-primary" id="locsanpham">lọc</button>
+                                                        </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -287,34 +226,19 @@
                                                         href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ Str::length($showprd->m_product_name) > 10 ? Str::substr($showprd->m_product_name, 0, 15) . '...' : $showprd->m_product_name }}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    <span
-                                                        class="price-regular">{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</span>
-                                                    <span
-                                                        class="price-old"><del>{{ number_format($showprd->m_price, 0, ',', '.') }}VND</del></span>
+                                                    <div class="price-regular">
+                                                        {{ number_format($showprd->m_original_price) }} <sup>&#8363;</sup>
+                                                    </div>
+                                                    <div class="price-old"><del>{{ number_format($showprd->m_price) }}
+                                                            <sup>&#8363;</sup></del></div>
                                                 </div>
                                                 <div class="product-action-link">
                                                     <a href="javascript:void(0);" data-id="{{ $showprd->id }}"
                                                         id="product-favourite-{{ $showprd->id }}" data-toggle="tooltip"
                                                         title="Yên Thích"><i data-id="{{ $showprd->id }}"
                                                             class="ion-android-favorite-outline product-{{ $showprd->id }}"></i></a>
-                                                    {{-- @foreach ($list_favourite as $item)
-                                                @if ($item->id_product == $showprd->id)
-                                                    <a href="javascript:void(0);" class="active-favourite" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @elseif($item->id_product != $showprd->id)
-                                                    <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @else
-                                                <a href="javascript:void(0);" data-id="{{$showprd->id}}" id="product-favourite-{{$showprd->id}}" data-toggle="tooltip" title="Yên Thích"><i data-id="{{$showprd->id}}" class="ion-android-favorite-outline product-{{$showprd->id}}"></i></a>
-                                                @endif
-                                            @endforeach --}}
-
-                                                    <a href="#" class="add-cart" data-toggle="tooltip"
-                                                        title="Thêm Vào Giỏ Hàng"><i class="ion-bag"></i></a>
-                                                    <form action="" method="post" class="cart-info">
-                                                        @csrf
-                                                        <input type="hidden" name="quantity" value="1">
-                                                        <input type="hidden" name="productId"
-                                                            value="{{ $showprd->id }}">
-                                                    </form>
+                                                    <a href="#" title="Thêm Vào Giỏ Hàng" style="display: none"><i
+                                                            class="ion-bag"></i></a>
                                                     <a href="#" data-toggle="modal"
                                                         data-target="#quick_view{{ $showprd->id }}">
                                                         <span data-toggle="tooltip" title="Xem Nhanh"><i
@@ -340,16 +264,17 @@
                                                         href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ $showprd->m_product_name }}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    <span
-                                                        class="price-regular">{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</span>
-                                                    <span
-                                                        class="price-old"><del>{{ number_format($showprd->m_price, 0, ',', '.') }}VND</del></span>
+                                                    <div class="price-regular">
+                                                        {{ number_format($showprd->m_original_price) }} <sup>&#8363;</sup>
+                                                    </div>
+                                                    <div class="price-old"><del>{{ number_format($showprd->m_price) }}
+                                                            <sup>&#8363;</sup></del></div>
                                                 </div>
                                                 <p>{!! $showprd->m_short_description !!}</p>
                                                 <div class="product-link-2 position-static">
                                                     <a href="#" data-toggle="tooltip" title="Yêu Thích"><i
                                                             class="ion-android-favorite-outline"></i></a>
-                                                    <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏa"><i
+                                                    <a href="#" data-toggle="tooltip" title="Thêm Vào Giỏ"><i
                                                             class="ion-bag"></i></a>
                                                     <a href="#" data-toggle="modal"
                                                         data-target="#quick_view{{ $showprd->id }}">
@@ -414,17 +339,22 @@
                                             <span><a href="#">1 bình luận</a></span>
                                         </div>
                                         <div class="price-box">
-                                            <span
-                                                class="price-regular">{{ number_format($showprd->m_original_price, 0, ',', '.') }}VND</span>
-                                            <span
-                                                class="price-old"><del>{{ number_format($showprd->m_price, 0, ',', '.') }}VND</del></span>
+                                            <span class="price-regular">{{ number_format($showprd->m_original_price) }}
+                                                <sup>&#8363;</sup></span>
+                                            <span class="price-old"><del>{{ number_format($showprd->m_price) }}
+                                                    <sup>&#8363;</sup></del></span>
                                         </div>
                                         <p>{!! $showprd->m_short_description !!}</p>
                                         <div class="quantity-cart-box d-flex align-items-center mb-20">
                                             <div class="quantity">
                                                 <div class="pro-qty"><input type="text" value="1"></div>
                                             </div>
-                                            <a href="cart.html" class="btn btn-default">Thêm vào giỏa hàng</a>
+                                            <a href="#" class="btn btn-default add-cart">Thêm vào giỏ hàng</a>
+                                            <form action="" method="post" class="cart-info">
+                                                @csrf
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input type="hidden" name="productId" value="{{ $showprd->id }}">
+                                            </form>
                                         </div>
                                         <div class="availability mb-20">
                                             <h5 class="cat-title">Tình trạng: </h5>

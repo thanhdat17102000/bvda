@@ -88,8 +88,8 @@
                                         <span><a href="#">1 đánh giá</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="regular-price">{{number_format($showdetail->m_original_price, 0,',','.')}}VND</span>
-                                        <span class="old-price"><del>{{number_format($showdetail->m_price, 0,',','.')}}VND</del></span>
+                                        <div class="regular-price">{{number_format($showdetail->m_original_price)}} <sup>&#8363;</sup></div>
+                                        <div class="old-price"><del>{{number_format($showdetail->m_price)}} <sup>&#8363;</sup></del></div>
                                     </div>
                                     <p>{!!$showdetail->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
@@ -164,8 +164,8 @@
                                                         <ul>
                                                             <li>Thuộc sản phẩm : {{$showdetail->showdanhmuc->m_title}}</li>
                                                             <li>{{$showdetail->m_product_name}}</li>
-                                                            <li>Giá mặc định :{{number_format($showdetail->m_price,0,',','.')}}VND</li>
-                                                            <li>Giá giảm : {{number_format($showdetail->m_original_price,0,',','.')}}VND</li>
+                                                            <li>Giá mặc định :{{number_format($showdetail->m_price)}} <sup>&#8363;</sup></li>
+                                                            <li>Giá giảm : {{number_format($showdetail->m_original_price)}} <sup>&#8363;</sup></li>
                                                             <li>@if(isset($showdetail->updatedsoluong->m_quanti) && $showdetail->updatedsoluong->sum('m_quanti') > 0)
                                                                 <span>Còn hàng</span>
                                                                 @else
@@ -332,8 +332,8 @@
                                                     <a href="{{ route('productdetails', $showrelated->m_product_slug) }}">{{ Str::length($showrelated->m_product_name) > 10 ? Str::substr($showrelated->m_product_name, 0, 15) . '...' : $showrelated->m_product_name }}</a>
                                                 </h5>
                                                 <div class="price-box">
-                                                    <span class="price-regular">{{number_format($showrelated->m_price,0,',','.')}}VND</span>
-                                                    <span class="price-old"><del>{{number_format($showrelated->m_original_price,0,',','.')}}VND</del></span>
+                                                    <span class="price-regular">{{number_format($showrelated->m_price)}} <sup>&#8363;</sup></span>
+                                                    <span class="price-old"><del>{{number_format($showrelated->m_original_price)}} <sup>&#8363;</sup></del></span>
                                                 </div>
                                                 <div class="product-action-link">
                                                     <a href="#" data-toggle="tooltip" title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
@@ -395,8 +395,8 @@
                                         <span><a href="#">1 bình luận</a></span>
                                     </div>
                                     <div class="price-box">
-                                        <span class="price-regular">{{number_format($showrelated->m_original_price,0,',','.')}}VND</span>
-                                        <span class="price-old"><del>{{number_format($showrelated->m_price,0,',','.')}}VND</del></span>
+                                        <span class="price-regular">{{number_format($showrelated->m_original_price)}} <sup>&#8363;</sup></span>
+                                        <span class="price-old"><del>{{number_format($showrelated->m_price)}} <sup>&#8363;</sup></del></span>
                                     </div>
                                     <p>{!!$showrelated->m_short_description!!}</p>
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">

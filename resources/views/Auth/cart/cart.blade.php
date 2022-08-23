@@ -21,12 +21,10 @@
                                                 src="{{ asset('uploads') }}/${data[key].options.image}"
                                                 alt="Product" /></a></td>
                                     <td class="pro-title"><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">${data[key].name}</a></td>
-                                    <td class="pro-price" data-price="${data[key].price}"><span>${data[key].price.toLocaleString('en-US')}</span></td>
+                                    <td class="pro-price" id="price" data-price="${data[key].price}"><span>${data[key].price.toLocaleString('en-US')}</span></td>
                                     <td class="pro-quantity">
                                         <div class="pro-qty">
-                                            <span class="dec qtybtn">-</span>
                                             <input type="text" value="${data[key].qty}">
-                                            <span class="inc qtybtn">+</span>
                                         </div>
                                     </td>
                                     <td class="pro-subtotal"><span>${(data[key].price * data[key].qty).toLocaleString('en-US') }</span></td>
@@ -34,15 +32,28 @@
                                 </tr>`
                 }
                 $('.cart-content').html(content);
-                $('.pro-qty input').change(function(e) {
-                    let subtotal = Number($(this).val()) * Number($(this).parents('.pro-quantity').prev().data(
-                        'price'));
-                    $(this).parents('.pro-quantity').next('.pro-subtotal').text(subtotal.toLocaleString(
-                        'en-US'));
-                });
                 $('.subtotal-amount').text(subtotal)
                 $('.total-amount').text(total)
                 $('.tax').text(tax)
+
+                $(".pro-qty").prepend('<span class="dec qtybtn">-</span>');
+                $(".pro-qty").append('<span class="inc qtybtn">+</span>');
+                $(".qtybtn").on("click", function() {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find("input").val();
+                    if ($button.hasClass("inc")) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 0) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 0;
+                        }
+                    }
+                    $button.parent().find("input").val(newVal);
+                    $('.pro-subtotal span').text(`${(newVal * $('#price').data('price')).toLocaleString()}`)
+                });
 
                 $('.pro-remove').click(function(e) {
                     e.preventDefault();
@@ -65,16 +76,6 @@
                         }
                     });
                 });
-
-                $('.dec').click(function(e) {
-                    if ($(this).next().val() > 1) {
-                        $(this).next().val($(this).next().val() - 1)
-                    }
-                })
-
-                $('.inc').click(function(e) {
-                    $(this).prev().val(Number($(this).prev().val()) + 1)
-                })
             }
             renderCartTable();
             $('.cart-update').click(function(e) {
@@ -153,10 +154,6 @@
                             <!-- Cart Update Option -->
                             <div class="cart-update-option d-block d-md-flex justify-content-between">
                                 <div class="apply-coupon-wrapper">
-                                    {{-- <form action="#" method="post" class=" d-block d-md-flex">
-                                        <input type="text" placeholder="Nhập mã giảm giá" required />
-                                        <button class="btn">ÁP DỤNG</button>
-                                    </form> --}}
                                 </div>
                                 <div class="cart-update">
                                     <a href="#" class="btn">CẬP NHẬT GIỎ HÀNG</a>

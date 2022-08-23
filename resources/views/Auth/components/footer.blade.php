@@ -34,7 +34,7 @@
                                 </h3>
                                 <p>
                                     <span class="cart-quantity">${data[key].qty}<strong>&times;</strong></span>
-                                    <span class="cart-price">${data[key].price}</span>
+                                    <span class="cart-price">${data[key].price.toLocaleString()}</span>
                                 </p>
                             </div>
                             <button class="minicart-remove" data-id="${data[key].rowId}"><i class="ion-android-close"></i></button>
