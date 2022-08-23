@@ -282,7 +282,7 @@
                                 <div class="frontside">
                                     <div class="card">
                                         <div class="card-body text-center">
-                                            <p><img class=" img-fluid" src="{{asset('Auth/about-us/assets/images/team/pham-thanh-khuong.jpg')}}" alt="card image"></p> <br>
+                                            <p><img class=" img-fluid" src="{{asset('Auth/about-us/assets/images/team/nguyen-le-thanh-dat.jpg')}}" alt="card image"></p> <br>
                                             <h4 class="card-title">Nguyễn Lê Thành Đạt</h4>
                                             <p class="card-text">PS13413 - Thành viên</p> <br>
                                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>

@@ -62,7 +62,10 @@
                     <!-- Order Summary Details -->
                     <div class="col-lg-6">
                         <div class="order-summary-details">
-                            <h4 class="checkout-title">Chi tiết đơn</h4>
+                            @foreach ($order as $item)
+                            <h4 class="checkout-title">Chi tiết đơn #{{$item->id}}
+                            </h4>
+                            @endforeach
                             <div class="order-summary-content">
                                 <!-- Order Summary Table -->
                                 <div class="order-summary-table table-responsive text-center">
@@ -70,7 +73,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Sản phẩm</th>
-                                                <th>Tổng</th>
+                                                <th>Giá tiền</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -85,15 +88,6 @@
                                             @endforeach
                                         </tbody>
                                         <tfoot>
-                                            @foreach ($orderDetail as $item)
-                                            @php
-                                            $tongorder = $item->m_price * $item->m_quanti
-                                            @endphp
-                                                <tr>
-                                                    <td>Tổng tiền hàng</td>
-                                                    <td><strong>{{number_format($tongorder, 0, '.', '.')}} VNĐ</strong></td>
-                                                </tr>
-                                            @endforeach
                                             @foreach ($order as $item)
                                             <tr>
                                                 <td>Phí giao hàng</td>
@@ -108,13 +102,18 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Tổng đơn</td>
-                                                    <td><strong>{{number_format($item->m_total_price,0,'.','.')}} VNĐ</strong></td>
+                                                <td>Giảm giá</td>
+                                                <td>{{number_format($item->m_coupon, 0, '.', '.')}} VNĐ</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Tổng đơn</b></td>
+                                                    <td><b>{{number_format($item->m_total_price,0,'.','.')}} VNĐ</b></td>
                                             </tr>
                                             @endforeach
                                         </tfoot>
                                     </table>
                                 </div>
+                                
                                 <!-- Order Payment Method -->
                                 <div class="order-payment-method">
                                     <div class="single-payment-method show">

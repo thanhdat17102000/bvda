@@ -73,7 +73,7 @@
                                                 Tài khoản</a>
                                             <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>Lịch sử mua hàng</a>
                                             {{-- <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Lịch sử mua hàng</a> --}}
-                                            <a href="{{route('list-favourite')}}" data-toggle="tab"><i class="fa fa-heart"></i> Sản phẩm yêu thích</a>
+                                            <a href="{{route('list-favourite')}}"><i class="fa fa-heart"></i> Sản phẩm yêu thích</a>
                                             <a href="#address-edit" data-toggle="tab"><i class="fa fa-user"></i> Thông tin tài khoản</a>
                                             <a href="#account-info" data-toggle="tab"><i class="fa fa-key"></i>Đổi mật khẩu</a>
                                             <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Đăng xuất</a>

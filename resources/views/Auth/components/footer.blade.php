@@ -188,7 +188,7 @@
             <div class="offcanvas-search-box">
                 <form class="d-flex bdr-bottom w-100" action="{{route('search')}}" method="get">
                     @csrf
-                    <input type="text" name="keywork" placeholder="Search entire storage here...">
+                    <input type="text" name="keywork" placeholder="Tìm kiếm ...">
                     <button class="search-btn"><i class="ion-ios-search-strong"></i>Tìm kiếm</button>
                 </form>
             </div>

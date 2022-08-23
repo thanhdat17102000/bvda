@@ -39,7 +39,7 @@
                     $('input[name=email]').val(response.email);
                     $('input[name=phone]').val(response.phone);
                     $('input[name=m_address]').val(response.m_address);
-                    $('input[name=role]').val(response.role);
+                    $('select[name=role]').val(response.role);
                     // $('input[name=m_status]').val(response.m_status);
                     // response.m_status == 0 ? $('#hidden').prop("checked", true) : '';
                     $('.dropify').attr('data-default-file',
@@ -80,8 +80,9 @@
                         renderUser();
                 },
                 error: function(error) {
+                    
                     console.log(error);
-                    toastr.error('Lỗi sửa bài viết!', 'Vui lòng kiểm tra lại thông tin')
+                    toastr.error('Lỗi sửa tài khoản!', 'Vui lòng kiểm tra lại thông tin')
                 }
             });
         });
@@ -135,8 +136,12 @@
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control" placeholder="Quyền"
-                                                name="role">
+                                                {{-- <input type="text" class="form-control" placeholder="Quyền"
+                                                name="role"> --}}
+                                                <select class="browser-default custom-select" name="role" id="">
+                                                    <option value="0">Khách hàng</option>
+                                                    <option value="1">Quản trị viên</option>
+                                                </select>
                                             </div>
                                         </div>
                                         {{-- <div class="form-group row">

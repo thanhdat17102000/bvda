@@ -91,7 +91,7 @@
                             <td with='10%'>
                                 {{$row->updated_at->diffForHumans()}}
                             </td>
-                      
+                    
                             <td>
                                 @if($row->m_status ==1)
                                     <button class="statust btn btn-primary" data-order_id="{{$row->idbl}}" value="0">Duyệt</button>
@@ -170,7 +170,7 @@
                         <button type="submit" name="send_cmt" class="send_cmt btn btn-primary">GỬI</button>
                     </form>
                     @if(session('alert'))
-                       <section class="alert alert-success" >{{session('alert')}}</section>
+                    <section class="alert alert-success" >{{session('alert')}}</section>
                     @endif
                 </div>
                 <div class="modal-footer">

@@ -64,7 +64,7 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">Số lượng tồn kho</label>
                 <div class="col-sm-10" style="">
-                <a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">click để thêm size giày và số lượng tồn kho</a>                    @error('m_buy')
+                <a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Nhấp vào để thêm size giày và số lượng tồn kho</a>                    @error('m_buy')
                         <ul class="parsley-errors-list filled" id="parsley-id-11" aria-hidden="false">
                             <li class="parsley-required">{{$message}}</li>
                         </ul>

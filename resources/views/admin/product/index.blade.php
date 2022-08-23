@@ -89,7 +89,7 @@
             </div>
             <div class="col-md-3">
                 <button type="submit" class="btn btn-primary" id="btnlocsp">Lọc danh mục</button>
-                <button type="submit" class="btn btn-danger" id="btndeleteall">Delete All</button>
+                <button type="submit" class="btn btn-danger" id="btndeleteall">Xóa tất cả</button>
             </div>
         </div>
     <div class=" tablesaw-bar  tablesaw-all-cols-visible  tablesaw-mode-columntoggle">
@@ -157,7 +157,7 @@
                                                 @endif
                                             </div>
                                             <div class="form-group" style="text-align:center; margin:15px 0px 0px 0px">
-                                                <p><a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> xem thêm hình </a>
+                                                <p><a class="btn btn-primary waves-effect waves-light mr-1 collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Xem thêm hình </a>
                                                 </p>
                                             </div>
                                         </div>
@@ -172,7 +172,7 @@
                                                 <span>{{number_format($dt->m_price, 0, '.', '.')}} Vnđ</span>
                                             @endif
                                         </p>
-                                            <p><strong>Giá đã giảm: </strong><mark id="price-giamgia" data-id="{{$dt->m_original_price}}">{{number_format($dt->m_original_price, 0, '.', '.')}} Vnđ</mark></p>
+                                            <p><strong>Giá đã giảm: </strong><mark id="price-giamgia" data-id="{{$dt->m_original_price}}">{{number_format($dt->m_original_price, 0, '.', '.')}} VNĐ</mark></p>
                                             {{-- <p><strong>Ngày đăng sản phẩm: </strong><span>{{$dt->updated_at->diffForHumans()}}</span></p> --}}
                                             <p><strong>Số lượng tồn kho: </strong><span>{{$dt->updatedsoluong1->sum('m_quanti')}}</span> 
                                             |
@@ -292,7 +292,7 @@
             ev.preventDefault();
             var _href = $(this).attr('href');
             $('form#form-delete').attr('action',_href);
-            alertify.confirm('bạn muốn xóa sản phẩm này chứ ?', function(result){
+            alertify.confirm('Bạn muốn xóa sản phẩm này?', function(result){
                 if(result){
                     $('form#form-delete').submit();
                 }
@@ -358,7 +358,7 @@
                     priceold:priceold,
                 },
                 success:function(data){
-                        alert('thành công');
+                        alert('Cập nhật giá thành công!');
                         window.location.reload(true);
                 }
             });

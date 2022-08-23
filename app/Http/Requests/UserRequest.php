@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.max' => 'Tên quá dài',
+            'name.required' => 'Email không được để trống',
             'phone.required' => 'Số điện thoại qua dài!',
             'email.email' => 'Email không đúng định dạng ',
         ];

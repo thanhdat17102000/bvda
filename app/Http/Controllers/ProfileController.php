@@ -9,6 +9,8 @@ use App\Models\OrderDeTailModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Gloudemans\Tests\Shoppingcart\Fixtures\ProductModel;
+use App\Models\product;
 
 
 class ProfileController extends Controller
@@ -29,7 +31,7 @@ class ProfileController extends Controller
         $order = OrderModel::find($id);
         $order->m_status = "3";
         $order->update();
-        return redirect()->back()->with('alert_success', 'Cập nhật thông tin thành công.');
+        return redirect()->back()->with('alert_success', 'Hủy đơn hàng thành công');
     }
     // Cập nhật thông tin profile
     public function updateProfile(Request $request)

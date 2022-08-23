@@ -23,7 +23,7 @@
             for (let key in data) {
                 content += `<tr>
                                 <td><a href="{{ url('chi-tiet-san-pham') }}/${data[key].options.slug}">${data[key].name} <strong> × ${data[key].qty}</strong></a>
-                                </td>
+                                </td>7
                                 <td>${(data[key].price * data[key].qty).toLocaleString('en-US') }</td>
                             </tr>`
             }

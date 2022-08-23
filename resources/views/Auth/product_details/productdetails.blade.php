@@ -85,7 +85,7 @@
                                 <div class="product-details-des">
                                     <h3 class="pro-det-title" data-idmaloai="{{$showdetail->id}}">{{$showdetail->m_product_name}}</h3>
                                     <div class="pro-review">
-                                        <span><a href="#">1 đánh giá</a></span>
+                                        <span><a href="#"></a></span>
                                     </div>
                                     <div class="price-box">
                                         <div class="regular-price">{{number_format($showdetail->m_original_price)}} <sup>&#8363;</sup></div>
@@ -164,8 +164,8 @@
                                                         <ul>
                                                             <li>Thuộc sản phẩm : {{$showdetail->showdanhmuc->m_title}}</li>
                                                             <li>{{$showdetail->m_product_name}}</li>
-                                                            <li>Giá mặc định :{{number_format($showdetail->m_price)}} <sup>&#8363;</sup></li>
-                                                            <li>Giá giảm : {{number_format($showdetail->m_original_price)}} <sup>&#8363;</sup></li>
+                                                            <li>Giá mặc định : {{number_format($showdetail->m_price)}} VNĐ</li>
+                                                            <li>Giá giảm : {{number_format($showdetail->m_original_price)}} VNĐ</li>
                                                             <li>@if(isset($showdetail->updatedsoluong->m_quanti) && $showdetail->updatedsoluong->sum('m_quanti') > 0)
                                                                 <span>Còn hàng</span>
                                                                 @else
@@ -183,10 +183,12 @@
                                             <table class="table table-bordered">
                                                 <tbody>
                                                     <tr>
-                                                        <td>Tổng lượng tồn kho</td>
-                                                        @if(isset($showdetail->updatedsoluong->m_quanti))
-                                                        <td>{{$showdetail->updatedsoluong->sum('m_quanti')}}</td>
-                                                        @endif
+                                                        <td>Lượng tồn kho</td>
+                                                        <td>
+                                                            @foreach($showsize as $shows)
+                                                            - {{$shows->m_quanti}}
+                                                            @endforeach
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Kích thước</td>
@@ -228,7 +230,7 @@
                                                         </p>
                                                             @Auth
                                                                 @if($showcm->m_id_user == Auth::user()->id)
-                                                                    <a id="deletebl" data-iddelete="{{$showcm->idbl}}" style="float:right">xóa đánh giá</a>
+                                                                    <button class="btn" id="deletebl" data-iddelete="{{$showcm->idbl}}" style="float:right">Xóa đánh giá</button>
                                                                 @endif
                                                             @endauth
                                                         <!-- admin trả lời nếu có -->
@@ -290,7 +292,7 @@
                                                     @Auth
                                                     <button class="sqr-btn" type="submit" id="btnsubmitcomment" data-id="{{Auth::user()->id}}">Tiếp tục</button>
                                                     @else
-                                                    <button class="sqr-btn" type="submit" onclick="alert('vui lòng kiểm tra đăng nhập hoặc bạn chưa mua sản phẩm này !!!')">Tiếp tục</button>
+                                                    <button class="sqr-btn" type="submit" onclick="alert('Vui lòng kiểm tra đăng nhập hoặc bạn chưa mua sản phẩm này!')">Tiếp tục</button>
                                                     @endif
                                                     @endif
                                                 </div>
@@ -392,7 +394,7 @@
                                 <div class="product-details-des">
                                     <h3 class="pro-det-title">{{$showrelated->m_product_name}}</h3>
                                     <div class="pro-review">
-                                        <span><a href="#">1 bình luận</a></span>
+                                        <span><a href="#"></a></span>
                                     </div>
                                     <div class="price-box">
                                         <span class="price-regular">{{number_format($showrelated->m_original_price)}} <sup>&#8363;</sup></span>
@@ -453,10 +455,10 @@
             },
             success: function(data){
                 if(data){
-                    alert('Đánh giá thành công');
+                    alert('Đánh giá thành công!');
                     window.location.reload(true);
                 }else{
-                    alert('Đánh giá thất bại');
+                    alert('Đánh giá thất bại!');
                 }
             }
         })
@@ -474,10 +476,10 @@
             },
             success: function(data){
                 if(data){
-                    alert('xóa đánh giá thành công');
+                    alert('Bạn đã xóa đánh giá!');
                     window.location.reload(true);
                 }else{
-                    alert('xóa đánh giá thất bại');
+                    alert('Xóa đánh giá thất bại');
                 }
             }
         })

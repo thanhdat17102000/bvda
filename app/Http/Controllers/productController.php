@@ -229,12 +229,12 @@ class productController extends Controller
             ],
             [
                 'm_product_name.required' => 'Tên sản phẩm không để trống',
-                'm_short_description.required' => 'mô tả ngắn không để trống',
-                'm_short_description.max' => 'mô tả ngắn tối đa 255 ký tự',
-                'm_description.required' => 'mô tả không để trống',
-                'file_upload.max' => 'hình ảnh tối đa là 2000kb',
-                'm_price.required' => 'giá gốc không được để trống',
-                'm_original_price.required' => 'giá khuyến mãi không được để trống',
+                'm_short_description.required' => 'Mô tả ngắn không để trống',
+                'm_short_description.max' => 'Mô tả ngắn tối đa 255 ký tự',
+                'm_description.required' => 'Mô tả không để trống',
+                'file_upload.max' => 'Mình ảnh tối đa là 2000kb',
+                'm_price.required' => 'Giá gốc không được để trống',
+                'm_original_price.required' => 'Giá khuyến mãi không được để trống',
             ]
         );
         $data = $request->all();
@@ -283,9 +283,9 @@ class productController extends Controller
                     }
                     $updated->themsoluong()->sync($syncdatane);
                 }
-                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công.');
+                return redirect()->route('product.index')->with('alert_success', 'Sửa sản phẩm thành công.');
             }else{
-                return redirect()->route('product.index')->with('alert_success', 'sửa sản phẩm thành công. nhưng sản phẩm tồn kho và size vẫn đang được giữ nguyên.');
+                return redirect()->route('product.index')->with('alert_success', 'Sửa sản phẩm thành công. nhưng sản phẩm tồn kho và size vẫn đang được giữ nguyên.');
             }
         }
     }

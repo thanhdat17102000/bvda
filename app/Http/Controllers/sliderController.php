@@ -15,7 +15,7 @@ class sliderController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'quản lý slider',
+            'title' => 'Quản lý slider',
             'action' => 'quản lý slider'
         ];
         $datas = sliderModel::orderBy('id','asc')->search()->paginate(10);
@@ -30,7 +30,7 @@ class sliderController extends Controller
     public function create()
     {
         $data = [
-            'title' => 'quản lý slider',
+            'title' => 'Thêm slider',
             'action' => 'quản lý slider'
         ];
         return view('admin.slider.create', compact('data'));
@@ -54,9 +54,9 @@ class sliderController extends Controller
         [
             'm_subtitle.required' => 'Tên phụ đề không để trống',
             'm_title.required' => 'Tên tiêu đề không để trống',
-            'm_link.required' => 'link đường dẫn không để trống',
-            'm_description.required' => 'mô tả ngắn không để trống',
-            'file_upload.required' => 'hình ảnh không để trống'
+            'm_link.required' => 'Đường dẫn không để trống',
+            'm_description.required' => 'Mô tả ngắn không để trống',
+            'file_upload.required' => 'Hình ảnh không để trống'
         ]);
         $create = new sliderModel();
         $create->m_subtitle = $request->m_subtitle;
@@ -120,8 +120,8 @@ class sliderController extends Controller
         [
             'm_subtitle.required' => 'Tên phụ đề không để trống',
             'm_title.required' => 'Tên tiêu đề không để trống',
-            'm_link.required' => 'link đường dẫn không để trống',
-            'm_description.required' => 'mô tả ngắn không để trống',
+            'm_link.required' => 'Đường dẫn không để trống',
+            'm_description.required' => 'Mô tả ngắn không để trống',
         ]);
         $updated = sliderModel::find($id);
         $updated->m_subtitle = $request->m_subtitle;
@@ -144,7 +144,7 @@ class sliderController extends Controller
                 $updated->m_images = $file_name;
         }
         $updated->save();
-        return redirect()->route('slider.index')->with('alert_success', 'sửa slide thành công.');
+        return redirect()->route('slider.index')->with('alert_success', 'Cập nhật slide thành công!');
     }
 
     /**
@@ -161,6 +161,6 @@ class sliderController extends Controller
                 unlink($path);
         }
         $remove->delete();
-        return redirect()->route('slider.index')->with('alert_success', 'xóa slide thành công.');
+        return redirect()->route('slider.index')->with('alert_success', 'Xóa slide thành công.');
     }
 }
