@@ -57,6 +57,7 @@
                     console.log(response);
                     if (!response.isError) {
                         renderCart();
+                        $("input[name=quantity]").val(1);
                         toastr.success('',
                             'Thêm giỏ hàng thành công')
                     } else {
@@ -68,14 +69,26 @@
                 }
             });
         });
-        
+
         $('.add-cart').click(function(e) {
             e.preventDefault();
             $(this).next('.cart-info').submit();
         });
+
+        $('.nice-select.size').change(function(e) {
+            e.preventDefault();
+            $('input[name=sizeId]').val(this.value);
+            $('.add-cart').removeClass('disabled');
+        });
     </script>
 @endpush
 @section('content')
+    <style>
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    </style>
     <!-- main wrapper start -->
     <main>
         <!-- breadcrumb area start -->
@@ -198,8 +211,8 @@
 
                                             </div>
                                             <!-- <div class="product-amount">
-                                                            <button class="btn btn-primary" id="locsanpham">lọc</button>
-                                                        </div> -->
+                                                                        <button class="btn btn-primary" id="locsanpham">lọc</button>
+                                                                    </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -347,22 +360,35 @@
                                         <p>{!! $showprd->m_short_description !!}</p>
                                         <div class="quantity-cart-box d-flex align-items-center mb-20">
                                             <div class="quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
+                                                <div class="pro-qty"><input type="text" value="1"
+                                                        name="quantity"></div>
                                             </div>
-                                            <a href="#" class="btn btn-default add-cart">Thêm vào giỏ hàng</a>
+                                            <a href="#" class="btn btn-default add-cart disabled">Thêm vào giỏ
+                                                hàng</a>
                                             <form action="" method="post" class="cart-info">
                                                 @csrf
                                                 <input type="hidden" name="quantity" value="1">
                                                 <input type="hidden" name="productId" value="{{ $showprd->id }}">
+                                                <input type="hidden" name="sizeId">
                                             </form>
                                         </div>
                                         <div class="availability mb-20">
-                                            <h5 class="cat-title">Tình trạng: </h5>
-                                            @if ($showprd->m_buy > 0)
+                                            <h5 class="cat-title">Size: </h5>
+                                            <select class="nice-select size" style="width: 100px">
+                                                <option value="">Chọn size</option>
+                                                @foreach ($showprd->updatedsoluong1 as $shows)
+                                                    @if ($shows->m_quanti > 0)
+                                                        <option value="{{ $shows->id }}"><b>{{ $shows->m_size }}</b>
+                                                            - Số
+                                                            lượng: {{ $shows->m_quanti }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            {{-- @if ($showprd->m_buy > 0)
                                                 <span>Còn hàng</span>
                                             @else
                                                 <span style="color:red">Hết hàng</span>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                         <div class="share-icon">
                                             <h5 class="cat-title">Chia sẻ:</h5>

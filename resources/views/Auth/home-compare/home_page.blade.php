@@ -47,9 +47,7 @@
                     if (!response.isError) {
                         renderCart();
                         $("input[name=quantity]").val(1);
-                        $("input[name=quantity-display]").val(1);
-                        toastr.success('',
-                            'Thêm giỏ hàng thành công')
+                        toastr.success('', 'Thêm giỏ hàng thành công')
                     } else {
                         toastr.error('', response.message)
                     }
@@ -64,6 +62,12 @@
             e.preventDefault();
             $(this).next('.cart-info').submit();
         });
+
+        $('.nice-select.size').change(function(e) {
+            e.preventDefault();
+            $('input[name=sizeId]').val(this.value);
+            $('.add-cart').removeClass('disabled');
+        });
     </script>
 @endpush
 @section('title')
@@ -71,6 +75,12 @@
 @endsection
 
 @section('content')
+    <style>
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+    </style>
     <main>
         <!-- hero slider section start -->
         <section class="hero-slider">
@@ -182,11 +192,12 @@
                                                 href="{{ route('productdetails', $myProductItem->m_product_slug) }}">{{ $myProductItem->m_product_name }}</a>
                                         </h5>
                                         <div class="price-box">
-                                            <div class="price-regular">{{ number_format($myProductItem->m_price) }}
+                                            <div class="price-regular">
+                                                {{ number_format($myProductItem->m_original_price) }}
                                                 <sup>&#8363;</sup>
                                             </div>
                                             <div class="price-old">
-                                                <del>{{ number_format($myProductItem->m_original_price) }}
+                                                <del>{{ number_format($myProductItem->m_price) }}
                                                     <sup>&#8363;</sup></del>
                                             </div>
                                         </div>
@@ -286,10 +297,11 @@
                                             </h6>
                                             <div class="price-box">
                                                 <div class="price-regular">
-                                                    {{ number_format($myProductSellItem->m_price) }} <sup>&#8363;</sup>
+                                                    {{ number_format($myProductSellItem->m_original_price) }}
+                                                    <sup>&#8363;</sup>
                                                 </div>
                                                 <div class="price-old">
-                                                    <del>{{ number_format($myProductSellItem->m_original_price) }}
+                                                    <del>{{ number_format($myProductSellItem->m_price) }}
                                                         <sup>&#8363;</sup></del>
                                                 </div>
                                             </div>
@@ -460,22 +472,27 @@
                                         <p>{!! $myProductItem->m_short_description !!}</p>
                                         <div class="quantity-cart-box d-flex align-items-center mb-20">
                                             <div class="quantity">
-                                                <div class="pro-qty"><input type="text" name="quantity-display"
+                                                <div class="pro-qty"><input type="text" name="quantity"
                                                         value="1"></div>
                                             </div>
-                                            <a href="cart.html" class="btn btn-default add-cart">Thêm vào giỏ hàng</a>
+                                            <a href="" class="btn btn-default add-cart disabled">Thêm vào giỏ
+                                                hàng</a>
                                             <form action="" method="post" class="cart-info">
                                                 @csrf
                                                 <input type="hidden" name="quantity" value="1">
                                                 <input type="hidden" name="productId" value="{{ $myProductItem->id }}">
+                                                <input type="hidden" name="sizeId">
                                             </form>
                                         </div>
                                         <div class="availability mb-20">
                                             <h5 class="cat-title">Size: </h5>
-                                            <select class="nice-select" style="width: 100px">
+                                            <select class="nice-select size" style="width: 100px">
+                                                <option value="">Chọn size</option>
                                                 @foreach ($myProductItem->updatedsoluong1 as $shows)
-                                                    <option value="{{ $shows->m_size }}"><b>{{ $shows->m_size }}</b> - Số
-                                                        lượng: {{ $shows->m_quanti }}</option>
+                                                    @if ($shows->m_quanti > 0)
+                                                        <option value="{{ $shows->id }}"><b>{{ $shows->m_size }}</b>
+                                                            - Số lượng: {{ $shows->m_quanti }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                             {{-- @if ($myProductItem->m_buy > 0)
