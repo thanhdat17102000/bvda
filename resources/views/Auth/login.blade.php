@@ -67,7 +67,7 @@
                                         <div class="remember-meta">
                                             <div class="custom-control">
                                                 <input style="width: 20px" class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                <label class="" for="rememberMe">{{ __('Ghi nhớ tài khoản!') }}</label>
+                                                <label class="form-check-label" for="rememberMe">{{ __('Ghi nhớ tài khoản!') }}</label>
                                             </div>
                                         </div>
                                         @if (Route::has('password.request'))

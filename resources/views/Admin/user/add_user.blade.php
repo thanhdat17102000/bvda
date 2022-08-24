@@ -31,23 +31,24 @@
         $('.form-horizontal').submit(function(e) {
             e.preventDefault();
             let data = new FormData(this);
-            data.set('m_desc', CKEDITOR.instances.m_desc.getData());
-            data.set('m_content', CKEDITOR.instances.m_content.getData());
-              $.ajax({
-                url: '{{ url('api/user') }}',
+            console.log(data)
+            // data.set('m_desc', CKEDITOR.instances.m_desc.getData());
+            // data.set('m_content', CKEDITOR.instances.m_content.getData());
+            $.ajax({
+                url: '{{ url('api/user/') }}',
                 type: 'post',
                 data,
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    console.log(response);
-                    $(':reset').click();
-                    $('.dropify-clear:first').click();
-                    toastr.success('Thêm thành công!', 'Xem danh sách để kiểm tra')
+                    console.log("post", response);
+                    toastr.success('Sửa thành công!', 'Xem danh sách để kiểm tra'),
+                        renderUser();
                 },
                 error: function(error) {
+                    
                     console.log(error);
-                    toastr.error('Lỗi thêm bài viết!', 'Vui lòng kiểm tra lại thông tin')
+                    toastr.error('Lỗi sửa tài khoản!', 'Vui lòng kiểm tra lại thông tin')
                 }
             });
         });
@@ -68,33 +69,45 @@
                                 <div class="p-2">
                                     <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post">
                                         @csrf
-                                        <input type="hidden" value="{{Auth::id()}}" name="m_id_user">
+                                        <input type="hidden" value="" name="id">
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Họ và tên</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập họ và tên"
-                                                    name="m_title">
+                                                    name="name">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Email</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập email"
-                                                    name="m_slug">
+                                                    name="email">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Mật Khẩu</label>
+                                            <div class="col-md-10">
+                                                <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu khẩu"
+                                                    name="password">
+                                                <input class="mt-2" type="checkbox" onclick="showPass()"> Hiện mật khẩu
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Số điện thoại</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập số điện thoại"
-                                                    name="m_meta_keyword">
+                                                    name="phone">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-2 col-form-label">Phân quyền</label>
+                                            <label class="col-md-2 col-form-label">Role</label>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control" placeholder="Nhập quyền"
-                                                    name="m_meta_desc">
+                                                {{-- <input type="text" class="form-control" placeholder="Quyền"
+                                                name="role"> --}}
+                                                <select class="browser-default custom-select" name="role" id="">
+                                                    <option value="0">Khách hàng</option>
+                                                    <option value="1">Quản trị viên</option>
+                                                </select>
                                             </div>
                                         </div>
                                         {{-- <div class="form-group row">
@@ -116,7 +129,7 @@
                                             <label class="col-md-2 col-form-label">Avatar</label>
                                             <div class="col-md-4">
                                                 <div class="card-box">
-                                                    <input type="file" name="m_image" class="dropify"
+                                                    <input type="file" name="m_avatar" class="dropify"
                                                         data-default-file="" />
                                                 </div>
                                             </div><!-- end col -->

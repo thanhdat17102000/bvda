@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserControllerApi extends Controller
@@ -31,7 +32,25 @@ class UserControllerApi extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->phone = $request->phone;
+            $user->m_address = $request->m_address;
+            $user->role = $request->role;
+            $get_image = $request->file('m_avatar');
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.', $get_name_image));
+            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+            $get_image->move('uploads/avatar', $new_image);
+            $user->m_avatar = $new_image;
+            $user->save();
+            return ['data' => $user, 'isError' => false, 'message' => "Thêm tài khoản thành công!"];
+        } catch (\Exception $exception) {
+            throw new HttpException(400, "Invalid data - {$exception->getMessage()}");
+        }
     }
 
     /**

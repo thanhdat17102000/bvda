@@ -33,6 +33,9 @@ class ProfileController extends Controller
         $order->update();
         return redirect()->back()->with('alert_success', 'Hủy đơn hàng thành công');
     }
+    public function productDetail($id){
+        
+    }
     // Cập nhật thông tin profile
     public function updateProfile(Request $request)
     {

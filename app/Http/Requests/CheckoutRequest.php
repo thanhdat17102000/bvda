@@ -26,7 +26,7 @@ class CheckoutRequest extends FormRequest
         return [
             'm_name' => ['required', 'string', 'between:5,30'],
             'm_email' => ['required', 'email:rfc,dns'],
-            'm_phone' => ['required', 'regex:/(84|0[3|9|8|7|5|2])+([0-9]{8})\b/', 'unique:t_order,m_phone'],
+            'm_phone' => ['required', 'regex:/(84|0[3|9|8|7|5|2])+([0-9]{8})\b/'],
             'province_nice-select' => ['required'],
             'district_nice-select' => ['required'],
             'ward_nice-select' => ['required'],
@@ -43,7 +43,6 @@ class CheckoutRequest extends FormRequest
             'm_email.required' => 'Email không để trống !',
             'm_email.email' => 'Email không đúng định dạng !',
             'm_phone.regex' => 'Số điện thoại không đúng định dạng !',
-            'm_phone.unique' => 'Số điện thoại không được trùng !',
             'm_phone.required' => 'Số điện thoại không được để trống !',
             'province_nice-select.required' => 'Tỉnh thành phố không được bỏ trống !',
             'district_nice-select.required' => 'Quận huyện không được bỏ trống !',

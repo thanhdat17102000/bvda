@@ -226,8 +226,8 @@
                                 <img src="{{ URL::asset('Auth/img/banner/banner-1.jpg') }}" alt="banner-image">
                             </a>
                             <div class="banner-text">
-                                <h5 class="banner-subtitle">GIÀY THỂ THAO</h5>
-                                <h3 class="banner-title">GIẢM GIÁ 20%<br>CHO NAM GIỚI THỂ THAO</h3>
+                                <h5 class="banner-subtitle"></h5>
+                                <h3 class="banner-title"><br></h3>
                             </div>
                         </div>
                     </div>
@@ -237,8 +237,8 @@
                                 <img src="{{ URL::asset('Auth/img/banner/banner-2.jpg') }}" alt="banner-image">
                             </a>
                             <div class="banner-text">
-                                <h5 class="banner-subtitle">GIÀY THỂ THAO</h5>
-                                <h3 class="banner-title">GIẢM GIÁ 20%<br>CHO NỮ GIỚI THỂ THAO</h3>
+                                <h5 class="banner-subtitle"></h5>
+                                <h3 class="banner-title"><br></h3>
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@
                 <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-5">
                         <div class="product-banner">
-                            <a href="#">
+                            <a href="/product_list">
                                 <img src="{{ URL::asset('Auth/img/banner/banner-3.jpg') }}" alt="product banner">
                             </a>
                         </div>
@@ -292,13 +292,6 @@
                                                     <del>{{ number_format($myProductSellItem->m_original_price) }}
                                                         <sup>&#8363;</sup></del>
                                                 </div>
-                                            </div>
-                                            <div class="ratings">
-                                                <span><i class="ion-android-star"></i></span>
-                                                <span><i class="ion-android-star"></i></span>
-                                                <span><i class="ion-android-star"></i></span>
-                                                <span><i class="ion-android-star"></i></span>
-                                                <span><i class="ion-android-star"></i></span>
                                             </div>
                                             <div class="product-link-2">
                                                 <a href="javascript:void(0);" data-id="{{ $myProductSellItem->id }}"

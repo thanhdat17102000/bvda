@@ -82,7 +82,7 @@
                                             $tong = $item->m_price * $item->m_quanti
                                             @endphp
                                                 <tr>
-                                                    <td><a href="#">{{$item->m_product_name}} <strong>* {{$item->m_quanti}} </strong></a></td>
+                                                    <td><a href="/chi-tiet-san-pham/{$id}">{{$item->m_product_name}} <strong>* {{$item->m_quanti}} </strong></a></td>
                                                     <td>{{number_format($tong, 0, '.', '.')}} VNĐ</td>
                                                 </tr>
                                             @endforeach
