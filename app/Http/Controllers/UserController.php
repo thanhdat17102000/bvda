@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Validator;
 
 
 class UserController extends Controller
@@ -57,14 +58,22 @@ class UserController extends Controller
                 $updated->password = Hash::make($data['matkhaumoi']);
                 if($updated->save()){
                     echo 'Đổi mật khẩu thành công!';
-                }       
+                }  
             }
+            elseif($data['matkhaumoi'] !== $data['xacnhanmatkhau']){
+                return back()->alert('Mật khẩu không khớp!');
+            }
+        }
+        else{
+            return back() ->with('message', 'Current Password Error !')
+            ->withInput();
         }
     }
     public function doithongtinadmin(Request $request){
         $id = $request->id;
         $data = $request->all();
         $updated = accountModel::find($id);
+        $updated->name = $data['name'];
         if($file = $request->file('avatar')){
             $ext= $request->avatar->getClientOriginalName();
             $data['avatar'] = time().'-'.'avatar.'.$ext;
@@ -131,6 +140,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|max:55',
+            'phone' => ['required','regex:/^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/'],
+            'm_address'=> 'required',
+        ],[
+            'name.required' => 'Họ và tên không được bỏ trống!',
+            'name.max'=> 'Họ và tên quá dài!',
+            'phone.regex' => 'Số điện thoại không đúng định dạng',
+            'phone.required' => 'Số điện thoại không được bỏ trống!',
+            'm_address.required' => 'Địa chỉ không được bỏ trống!'
+        ]);
         $updated = accountModel::find($id);
         if($file = $request->file('avatar')){
             $ext= $request->avatar->getClientOriginalName();
@@ -138,6 +158,7 @@ class UserController extends Controller
             $file->move('uploads/avatar', $file_name);
             $updated->m_avatar = $file_name;
         }
+        $updated->name = $request->name;
         $updated->email = $request->email;
         $updated->phone = $request->phone;
         $updated->m_address = $request->m_address;

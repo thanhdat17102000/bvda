@@ -231,7 +231,7 @@
                             </a>
                             <ul class="nav-second-level mm-collapse" aria-expanded="false">
                                 <li><a href="/admintrator/user">Danh sách tài khoản</a></li>
-                                {{-- <li><a href="{{ route('add_user') }}">Thêm tài khoản</a></li> --}}
+                                <li><a href="{{ route('add_user') }}">Thêm tài khoản</a></li>
                             </ul>
                         </li>
                         <li>

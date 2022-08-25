@@ -68,7 +68,7 @@ class ProfileController extends Controller
                 $updated->password = Hash::make($data['matkhaumoi']);
                 if($updated->save()){
                     echo 'Đổi mật khẩu thành công!';
-                }       
+                }
             }
         }
     }

@@ -25,17 +25,22 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:150',
-            'phone' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
-            'email' => 'email|required',
+            'phone' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10',
+            'email' => 'email|required|unique:t_user',
             'm_address' => 'required|string|max:500',
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'Email không được để trống',
+            'name.required' => 'Email không được để trống!',
+            'name.string' => 'Tên phải là chuỗi!',
+            'name.max' => 'Tên quá dài!',
+            'phone.regex'=> 'Số điện thoại phải 10 số',
             'phone.required' => 'Số điện thoại qua dài!',
             'email.email' => 'Email không đúng định dạng ',
+            'email,required'=> 'Email không được bỏ trống!',
+            'email.unique' => 'Email đã được đăng ký!',
         ];
     }
 }

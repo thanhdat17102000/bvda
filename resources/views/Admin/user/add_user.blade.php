@@ -42,16 +42,43 @@
                 contentType: false,
                 success: function(response) {
                     console.log("post", response);
-                    toastr.success('Sửa thành công!', 'Xem danh sách để kiểm tra'),
-                        renderUser();
+                    $(':reset').click();
+                    $('.dropify-clear:first').click();
+                    toastr.success('Thêm thành công!'),
+                        ["name", "email", "phone", "m_address"
+                        ].map((item) => {
+                            $(`.${item}`).empty();
+                        })
                 },
                 error: function(error) {
-                    
-                    console.log(error);
-                    toastr.error('Lỗi sửa tài khoản!', 'Vui lòng kiểm tra lại thông tin')
+                    console.error(error);
+                    ["name", "email", "phone", "m_address"
+                    ].map((item) => {
+                        $(`.${item}`).empty();
+                    })
+                    let validate = error.responseJSON.errors;
+                    for (const key in validate) {
+                        console.log("key", key);
+                        let content = '';
+                        validate[key].map((item) => {
+                            content += `<li>${item}</li>`
+                        })
+                        $(`.${key}`).html(content)
+                    }
+                    toastr.error('Lỗi thêm tài khoản!')
                 }
             });
         });
+    </script>
+    <script>
+        function showPass() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+        }
     </script>
 @endpush
 @push('styles')
@@ -75,6 +102,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập họ và tên"
                                                     name="name">
+                                                <ul class="parsley-errors-list name">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -82,6 +111,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập email"
                                                     name="email">
+                                                <ul class="parsley-errors-list email">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -97,6 +128,17 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập số điện thoại"
                                                     name="phone">
+                                                <ul class="parsley-errors-list phone">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Địa chỉ</label>
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" placeholder="Nhập địa chỉ"
+                                                    name="m_address">
+                                                <ul class="parsley-errors-list m_address">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">

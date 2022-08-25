@@ -292,7 +292,7 @@
             var name = $('#idMK').val();
             var phone = $('#phone').val();
             var m_address = $('#address').val();
-var email = $('#email').val();
+            var email = $('#email').val();
             var _token = $('input[name="_token"]').val();
 
             $.ajax({

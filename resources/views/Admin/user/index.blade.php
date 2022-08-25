@@ -79,6 +79,7 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade show active" id="home1">
                             <center> - Đổi mật khẩu - </center>
+                            {{$errors}}
                         <form method="post" action="{{route('profile.update', Auth::user()->id)}}">
                             @csrf @method('PUT')
                             <div class="form-group">
@@ -106,19 +107,34 @@
                             @csrf @method('PUT')
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Họ và Tên</label>
-                                <input type="text" class="form-control" id="idadmin" value="{{Auth::user()->name}}">
+                                <input type="text" class="form-control" id="name" name="name" value="{{Auth::user()->name}}">
+                                @error('name')
+                                <span class="text-danger">
+                                    {{$message}}
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" value="{{Auth::user()->email}}" placeholder="nhập số điện thoại">
+                                <input type="text" class="form-control" id="email" name="email" value="{{Auth::user()->email}}" placeholder="Nhập địa chỉ email">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Số điện thoại</label>
-                                <input type="number" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}" min="0" placeholder="nhập số điện thoại">
+                                <input type="number" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}" min="0" placeholder="Nhập số điện thoại">
+                                @error('phone')
+                                <span class="text-danger">
+                                    {{$message}}
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" name="m_address" value="{{Auth::user()->m_address}}" placeholder="nhập địa chỉ">
+                                <input type="text" class="form-control" id="address" name="m_address" value="{{Auth::user()->m_address}}" placeholder="Nhập địa chỉ">
+                                @error('address')
+                                <span class="text-danger">
+                                    {{$message}}
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Avatar</label>
@@ -236,6 +252,8 @@
                     if(data = 'thanhcong'){
                         alertify.success('Cập nhật mật khẩu thành công');
                     }
+                    else
+                        alertify.success('Vui lòng kiểm tra mật khẩu xác nhận!');
                 }
             })
         });
