@@ -43,10 +43,11 @@ class CartControllerApi extends Controller
         $quantity = $request->quantity;
         $data['id'] = $id;
         $data['qty'] = $quantity;
-        $data['price'] = $product->m_price;
+        $data['price'] = $product->m_original_price;
         $data['name'] = $product->m_product_name;
         $data['options']['image'] = $product->m_picture ? json_decode($product->m_picture)[0] : '';
         $data['options']['slug'] = $product->m_product_slug;
+        $data['options']['sizeId'] = $request->sizeId;
         $data['weight'] = 0;
         $result = Cart::add($data);
         return ["isError" => false, "message" => "Thêm giỏ hàng thành công", "data" => $result];

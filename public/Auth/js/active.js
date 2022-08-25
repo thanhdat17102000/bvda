@@ -330,8 +330,6 @@
         }
 
         $("input[name=quantity]").val(newQty);
-        console.log('oss');
-        $('.pro-subtotal span').text('qweqweqw')
     });
 
     // Checkout Page accordion
