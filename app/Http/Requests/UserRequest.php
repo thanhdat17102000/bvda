@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,9 +25,10 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:150',
-            'phone' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:10',
-            'email' => 'email|required|unique:t_user',
+            'phone' => 'required|regex:/(84|0[3|9|8|7|5|2])+([0-9]{8})\b/',
+            'email' => 'email|required',
             'm_address' => 'required|string|max:500',
+            'm_avatar' => 'required'
         ];
     }
     public function messages()
@@ -37,10 +38,11 @@ class UserRequest extends FormRequest
             'name.string' => 'Tên phải là chuỗi!',
             'name.max' => 'Tên quá dài!',
             'phone.regex'=> 'Số điện thoại phải 10 số',
-            'phone.required' => 'Số điện thoại qua dài!',
+            'phone.required' => 'Số điện thoại không được bỏ trống!',
             'email.email' => 'Email không đúng định dạng ',
-            'email,required'=> 'Email không được bỏ trống!',
-            'email.unique' => 'Email đã được đăng ký!',
-        ];
+            'email.required'=> 'Email không được bỏ trống!',  
+            'm_address.required' => 'Địa chỉ không được bỏ trống!',
+            'm_avatar.required' => 'Thêm hình ảnh!'
+    ];
     }
 }

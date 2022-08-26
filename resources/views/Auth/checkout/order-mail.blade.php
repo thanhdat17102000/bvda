@@ -182,13 +182,7 @@
                                                                 <tr>
                                                                     <td style="padding-right: 0px;padding-left: 0px;"
                                                                         align="center">
-
-                                                                        <img align="center" border="0"
-                                                                            src="https://img.bayengage.com/assets/1637555671487-logo-placeholder.jpg"
-                                                                            alt="Image" title="Image"
-                                                                            style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 196px;"
-                                                                            width="196" />
-
+                                                                    <h1>Kingdom Sneakers</h1>
                                                                     </td>
                                                                 </tr>
                                                             </table>

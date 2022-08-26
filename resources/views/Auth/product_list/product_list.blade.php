@@ -236,7 +236,7 @@
                                             <div class="product-content">
                                                 <h5 class="product-name">
                                                     <a
-                                                        href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ Str::length($showprd->m_product_name) > 10 ? Str::substr($showprd->m_product_name, 0, 15) . '...' : $showprd->m_product_name }}</a>
+                                                        href="{{ route('productdetails', $showprd->m_product_slug) }}">{{ Str::length($showprd->m_product_name) > 30 ? Str::substr($showprd->m_product_name, 0, 30) . '...' : $showprd->m_product_name }}</a>
                                                 </h5>
                                                 <div class="price-box">
                                                     <div class="price-regular">

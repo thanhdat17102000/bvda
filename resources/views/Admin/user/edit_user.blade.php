@@ -56,9 +56,6 @@
                         }
                     });
                 },
-                error: function(error) {
-                    toastr.error('Lỗi lấy thông tin tài khoản!', 'Vui lòng kiểm tra lại thông tin')
-                }
             });
         }
         renderUser();
@@ -80,9 +77,21 @@
                         renderUser();
                 },
                 error: function(error) {
-                    
-                    console.log(error);
-                    toastr.error('Lỗi sửa tài khoản!', 'Vui lòng kiểm tra lại thông tin')
+                    console.error(error);
+                    ["name", "phone", "m_address","m_avatar"
+                    ].map((item) => {
+                        $(`.${item}`).empty();
+                    })
+                    let validate = error.responseJSON.errors;
+                    for (const key in validate) {
+                        console.log("key", key);
+                        let content = '';
+                        validate[key].map((item) => {
+                            content += `<li>${item}</li>`
+                        })
+                        $(`.${key}`).html(content)
+                    }
+                    toastr.error('Lỗi sửa tài khoản!')
                 }
             });
         });
@@ -110,6 +119,8 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập họ và tên"
                                                 name="name">
+                                                <ul class="parsley-errors-list name">
+                                                </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -117,20 +128,26 @@
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập email"
                                                     name="email">
+                                                    <ul class="parsley-errors-list email">
+                                                    </ul>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Số điện thoại</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập số điện thoại"
-                                                name="phone">                                            
+                                                name="phone">   
+                                                <ul class="parsley-errors-list phone">
+                                                </ul>                                         
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 col-form-label">Địa chỉ</label>
                                             <div class="col-md-10">
                                                 <input type="text" class="form-control" placeholder="Nhập địa chỉ"
-                                                name="m_address">                                            
+                                                name="m_address">  
+                                                <ul class="parsley-errors-list m_address">
+                                                </ul>                                          
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -165,6 +182,8 @@
                                                 <div class="card-box">
                                                     <input type="file" name="m_avatar" class="dropify"
                                                         data-default-file="" />
+                                                        <ul class="parsley-errors-list m_avatar">
+                                                        </ul>
                                                 </div>
                                             </div><!-- end col -->
                                         </div>
